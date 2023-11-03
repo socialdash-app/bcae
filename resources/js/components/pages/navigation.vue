@@ -107,12 +107,10 @@ const init = () => {
     let update = function (angle) {
         if (timeout) clearTimeout(timeout);
         currentRotation += angle;
-        if (currentRotation >= 360) {
-            currentRotation = 360;
-            return;
+        if (currentRotation > rotates[rotates.length - 1].deg) {
+            currentRotation = rotates[rotates.length - 1].deg;
         } else if (currentRotation < 0) {
             currentRotation = 0;
-            return;
         }
 
         timeout = setTimeout(() => {
