@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+    bcae-redis:
+        image: 'redis:alpine'
+        container_name: bcae-redis
+        restart: unless-stopped
+        ports:
+            - ${REDIS_PORT}:6379
+        command: redis-server --requirepass ${REDIS_PASSWORD}
+        volumes:
+            - bcae-redis-data:/data
+    bcae-mongo:
+        image: 'mongo'
+        container_name: bcae-mongo
+        restart: unless-stopped
+        volumes:
+            - bcae-mongodb-data:/data/mongo
+        ports:
+            - ${DB_PORT}:27017
+        command: [ --auth ]
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${DB_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+volumes:
+    bcae-redis-data:
+    bcae-mongodb-data:
