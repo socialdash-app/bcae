@@ -1,5 +1,5 @@
 <template>
-    <main class="w-screen h-screen flex items-center">
+    <main class="w-screen overflow-hidden h-screen flex items-center">
         <Transition name="fade" mode="out-in">
             <keep-alive>
                 <component :is="component"></component>
@@ -13,7 +13,7 @@ import {reactive, onMounted, shallowRef} from "vue";
 
 const props = defineProps([]);
 
-const component = shallowRef('navigation');
+const component = shallowRef('the-election');
 
 const data = reactive({});
 

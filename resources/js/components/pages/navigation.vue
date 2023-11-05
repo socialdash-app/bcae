@@ -73,6 +73,9 @@ const init = () => {
 // build boxes
     let boxes = [];
     let descriptions = [];
+    let boxHeight = window.innerHeight * 0.4;
+
+    console.log(boxHeight)
     data.forEach((d) => {
         let description = document.createElement("div");
         description.className = "description grow-0 p-10 w-full flex items-center justify-center shrink-0";
@@ -81,7 +84,9 @@ const init = () => {
         descriptions.push(description);
 
         let box = document.createElement("li");
-        box.className = "box w-[400px] h-[400px] list-none absolute cursor-pointer border-gray-400  border-2 p-6 flex justify-center rounded";
+        box.className = "box list-none absolute cursor-pointer border-gray-400  border-2 p-6 flex justify-center rounded";
+        box.style.height = boxHeight + 'px';
+        box.style.width = boxHeight + 'px';
         box.innerHTML = d.icon;
         ul.appendChild(box);
         boxes.push(box);
@@ -97,7 +102,7 @@ const init = () => {
             deg: rotate,
             box: box.innerText
         });
-        let translateX = 900;
+        let translateX = window.innerHeight;
         box.style.transform = `rotate(${rotate}deg) translateY(-${translateX}px)`;
     });
 
