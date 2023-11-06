@@ -112,9 +112,22 @@ onMounted(() => {
         triggers.forEach((trigger) => {
             trigger.animations = {};
             trigger.hasTriggered = false;
+            trigger.isTriggering = false;
             Object.keys(trigger).forEach((key) => {
                 if (!['targets', 'scrollTrigger', 'animations'].includes(key)) {
                     trigger.animations[key] = trigger[key]
+                }
+            })
+            trigger.anime = anime({
+                targets: trigger.targets,
+                ...trigger.animations,
+                autoplay: false,
+                begin: (_) => {
+                    trigger.isTriggering = true;
+                },
+                complete: (_) => {
+                    trigger.isTriggering = false;
+                    trigger.hasTriggered = !trigger.hasTriggered
                 }
             })
             let triggerRect = trigger.scrollTrigger.trigger.getBoundingClientRect();
@@ -133,23 +146,17 @@ onMounted(() => {
             }
             trigger.endScrollPosition = end[1];
             trigger.endTriggerOffset = triggerRect.top + triggerRect.height * getScrollOffset(end[0]);
-            // trigger.scrollerOffset =
         })
         let scrollerHeight = element.getBoundingClientRect().height;
-        element.addEventListener('scroll', (e) => {
-            triggers.filter((trigger) => {
+        element.addEventListener('scroll', (_) => {
+            triggers.forEach((trigger) => {
                 let startScrollerOffset = element.scrollTop + scrollerHeight * getScrollOffset(trigger.startScrollPosition);
                 let endScrollerOffset = element.scrollTop + scrollerHeight * getScrollOffset(trigger.endScrollPosition);
+                if (trigger.startTriggerOffset <= startScrollerOffset && endScrollerOffset >= trigger.endTriggerOffset) {
+                    
+                }
                 return trigger.startTriggerOffset <= startScrollerOffset && endScrollerOffset >= trigger.endTriggerOffset
-            }).forEach((trigger) => {
-                let a = anime({
-                    targets: trigger.targets,
-                    ...trigger.animations,
-                    autoplay: false,
-                })
-                trigger.hasTriggered ? a.reverse() : a.play();
-                trigger.hasTriggered = !trigger.hasTriggered;
-            });
+            })
         })
     }
 
