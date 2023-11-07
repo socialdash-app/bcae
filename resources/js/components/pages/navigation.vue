@@ -138,13 +138,7 @@ const init = () => {
                     descriptions[currentBox.index].getBoundingClientRect().width,
                 behavior: "smooth"
             });
-            // anime({
-            //   targets: descriptionContainer,
-            //   scrollLeft:
-            //     descriptions[currentBox.index].getBoundingClientRect().left - 40,
-            //   duration: 50,
-            //   easing: "linear"
-            // });
+            currentRotation = currentBox.deg;
         }, 400);
         anime({
             targets: ul,
