@@ -54,16 +54,7 @@ const init = () => {
 
 }
 onMounted(() => {
-    init()
-
-    let prevRatio = 0.0;
-
-    const intersectionCallback = (entries) => {
-        entries.forEach((entry) => {
-            prevRatio = entry.intersectionRatio;
-            console.log(entry, entry.intersectionRatio)
-        });
-    }
+    // init()
     let container = document.getElementById('container')
     let divs = container.querySelectorAll('.trigger');
     let triggers = [
@@ -74,6 +65,8 @@ onMounted(() => {
                 trigger: divs[0],
                 start: 'top 3%',
                 end: 'bottom 30%',
+                lerp: true,
+                // debug: true,
             }
         },
         {
@@ -82,7 +75,8 @@ onMounted(() => {
             scrollTrigger: {
                 trigger: divs[1],
                 start: 'top 40%',
-                end: 'bottom center'
+                end: 'bottom center',
+                lerp: true,
             }
         },
         {
@@ -92,6 +86,7 @@ onMounted(() => {
                 trigger: divs[2],
                 start: 'top 60%',
                 end: 'bottom 80%',
+                lerp: true,
             }
         }
     ]
@@ -122,6 +117,12 @@ onMounted(() => {
         return marker;
     }
 
+    function lerp(start, end, current) {
+        let distance = Math.abs(end - start);
+        let currentDist = Math.max(end - current, 0);
+        return 1.0 - Math.min(currentDist / distance, 1);
+    }
+
     let scrollTrigger = (element, triggers) => {
         triggers.forEach((trigger) => {
             trigger.animations = {};
@@ -131,24 +132,26 @@ onMounted(() => {
             trigger.scrollTrigger.actions ??= 'play none none reset';
             trigger.scrollTrigger.actions = trigger.scrollTrigger.actions.split(' ');
             if (trigger.scrollTrigger.actions.length < 4) {
-                throw new Error('Actions attribute should have four values. e.g, "play none none none"');
+                throw new Error('Actions attribute should have four values. e.g, "play none none reset"');
             }
             Object.keys(trigger).forEach((key) => {
                 if (!['targets', 'scrollTrigger', 'animations'].includes(key)) {
                     trigger.animations[key] = trigger[key]
                 }
             })
+            if (trigger.scrollTrigger.lerp) {
+                trigger.animations.easing = 'linear'
+            }
             trigger.anime = anime({
                 targets: trigger.targets,
                 ...trigger.animations,
                 autoplay: false,
-                begin: (_) => {
+                update: (_) => {
                     trigger.isTriggering = true;
                 },
             })
 
             const triggerAction = (action) => {
-                // console.log(action)
                 switch (action) {
                     case 'play':
                         if (trigger.anime.reversed) trigger.anime.reverse();
@@ -169,25 +172,24 @@ onMounted(() => {
                 }
             }
 
-            trigger._onEnter = (a) => {
-                console.log('enter')
-                if (trigger.scrollTrigger.onEnter) trigger.scrollTrigger.onEnter(a);
-                triggerAction(trigger.scrollTrigger.actions[0])
+            trigger._onEnter = (trigger, progress) => {
+                console.log('enter', trigger.anime.duration, progress)
+                if (trigger.scrollTrigger.onEnter) trigger.scrollTrigger.onEnter(trigger, progress);
+                trigger.scrollTrigger.lerp ? trigger.anime.seek(trigger.anime.duration * progress) : triggerAction(trigger.scrollTrigger.actions[0])
             }
-            trigger._onLeave = (a) => {
-                console.log('leave')
-                if (trigger.scrollTrigger.onLeave) trigger.scrollTrigger.onLeave(a);
+            trigger._onLeave = (trigger, progress) => {
+                if (trigger.scrollTrigger.onLeave) trigger.scrollTrigger.onLeave(trigger, progress);
                 triggerAction(trigger.scrollTrigger.actions[1])
             }
 
-            trigger._onEnterBack = (a) => {
-                console.log('enter back')
-                if (trigger.scrollTrigger.onEnterBack) trigger.scrollTrigger.onEnterBack(a);
-                triggerAction(trigger.scrollTrigger.actions[2])
+            trigger._onEnterBack = (trigger, progress) => {
+                console.log('enter back', trigger.anime.duration, progress)
+                if (trigger.scrollTrigger.onEnterBack) trigger.scrollTrigger.onEnterBack(trigger, progress);
+                trigger.scrollTrigger.lerp ? trigger.anime.seek(trigger.anime.duration * progress) : triggerAction(trigger.scrollTrigger.actions[2])
             }
-            trigger._onLeaveBack = (a) => {
+            trigger._onLeaveBack = (trigger, progress) => {
                 console.log('leave back')
-                if (trigger.scrollTrigger.onLeaveBack) trigger.scrollTrigger.onLeaveBack(a);
+                if (trigger.scrollTrigger.onLeaveBack) trigger.scrollTrigger.onLeaveBack(trigger, progress);
                 triggerAction(trigger.scrollTrigger.actions[3])
             }
 
@@ -208,14 +210,16 @@ onMounted(() => {
             trigger.endScrollPosition = end[1];
             trigger.endTriggerOffset = triggerRect.top + triggerRect.height * getScrollOffset(end[0]);
 
+            trigger.animationTriggerStartOffset = trigger.startTriggerOffset - element.clientHeight * getScrollOffset(trigger.startScrollPosition);
+            trigger.animationTriggerEndOffset = trigger.endTriggerOffset - element.clientHeight * getScrollOffset(trigger.endScrollPosition);
 
             // debug offsets
             if (trigger.scrollTrigger.debug) {
                 element.style.position = 'relative';
-                trigger.scrollTrigger.startOffsetMarker = createMarker('5px', '20px', '#ff4949', trigger.startTriggerOffset + 'px');
-                trigger.scrollTrigger.endOffsetMarker = createMarker('5px', '20px', '#49deff', trigger.endTriggerOffset + 'px');
-                trigger.scrollTrigger.trigger.appendChild(trigger.scrollTrigger.startOffsetMarker)
-                trigger.scrollTrigger.trigger.appendChild(trigger.scrollTrigger.endOffsetMarker)
+                trigger.scrollTrigger.startTriggerOffsetMarker = createMarker('5px', '20px', '#ff4949', trigger.startTriggerOffset + 'px');
+                trigger.scrollTrigger.endTriggerOffsetMarker = createMarker('5px', '20px', '#49deff', trigger.endTriggerOffset + 'px');
+                trigger.scrollTrigger.trigger.appendChild(trigger.scrollTrigger.startTriggerOffsetMarker)
+                trigger.scrollTrigger.trigger.appendChild(trigger.scrollTrigger.endTriggerOffsetMarker)
                 trigger.scrollTrigger.startScrollerOffsetMarker = createMarker('5px', '24px', '#ff4949', element.clientHeight * getScrollOffset(trigger.startScrollPosition) + 'px', '0px', 'absolute');
                 trigger.scrollTrigger.endScrollerOffsetMarker = createMarker('5px', '24px', '#49deff', element.clientHeight * getScrollOffset(trigger.endScrollPosition) + 'px', '0px', 'absolute');
                 trigger.scrollTrigger.trigger.appendChild(trigger.scrollTrigger.startScrollerOffsetMarker)
@@ -235,8 +239,10 @@ onMounted(() => {
                     trigger.scrollTrigger.endScrollerOffsetMarker.style.top = endScrollerOffset + 'px';
                 }
                 // console.log([startScrollerOffset, endScrollerOffset], [trigger.startTriggerOffset, trigger.endTriggerOffset], trigger.isActive)
-                if (startScrollerOffset >= trigger.startTriggerOffset && !trigger.isActive && endScrollerOffset < trigger.endTriggerOffset) {
-                    isVerticalScrolling ? trigger._onEnter(trigger) : trigger._onEnterBack(trigger);
+                if (startScrollerOffset >= trigger.startTriggerOffset && (trigger.scrollTrigger.lerp || !trigger.isActive) && endScrollerOffset <= trigger.endTriggerOffset) {
+                    let progress = lerp(trigger.animationTriggerStartOffset, trigger.animationTriggerEndOffset, element.scrollTop);
+                    if (progress > 0.99 || progress < 0.09) progress = Math.round(progress);
+                    isVerticalScrolling ? trigger._onEnter(trigger, progress) : trigger._onEnterBack(trigger, progress);
                     trigger.isActive = true
                     return;
                 }
