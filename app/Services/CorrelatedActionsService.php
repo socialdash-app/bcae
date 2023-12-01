@@ -3,9 +3,15 @@
 namespace App\Services;
 
 use App\Models\CorrelatedActions\Disinformation\FactCheckedContent;
+use App\Models\CorrelatedActions\Protest;
 
 class CorrelatedActionsService
 {
+    public static function getProtestData(): \Illuminate\Database\Eloquent\Collection
+    {
+        return Protest::all();
+    }
+
     public static function getDisinformationData(): array
     {
         // get contents

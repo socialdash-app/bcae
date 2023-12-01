@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="overflow:hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -13,6 +13,6 @@
     @inertiaHead
 </head>
 <body>
-   @inertia
+@inertia
 </body>
 </html>

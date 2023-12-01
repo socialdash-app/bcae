@@ -1,16 +1,20 @@
 import './bootstrap';
+import 'vue-common-components/dist/style.css'
 
-import { createApp, h, defineAsyncComponent } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3';
+import {createApp, h, defineAsyncComponent, defineComponent} from 'vue'
+import {createInertiaApp} from '@inertiajs/vue3';
 import {Toaster} from 'js-utils';
 import {DatePicker} from "v-calendar";
+import Highcharts from 'highcharts'
+
+window.Highcharts = Highcharts;
 
 await createInertiaApp({
     resolve: name => {
         const pages = import.meta.glob('./components/**/*.vue', {eager: true})
         return pages[`./components/${name}.vue`];
     },
-    async setup({ el, App, props, plugin }) {
+    async setup({el, App, props, plugin}) {
         const toasterEle = document.createElement('div');
         toasterEle.style.top = 'auto';
         toasterEle.style.bottom = '2vh';

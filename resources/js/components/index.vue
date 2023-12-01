@@ -1,21 +1,32 @@
 <template>
-    <main class="w-screen overflow-hidden h-screen flex items-center">
-        <Transition name="fade" mode="out-in">
-            <keep-alive>
-                <component :is="component"></component>
-            </keep-alive>
-        </Transition>
+    <main class="w-screen font-poppins overflow-y-scroll overflow-x-hidden h-screen flex items-center flex-col">
+        <!--        <component :is="component"></component>-->
+        <home/>
+        <chronicle/>
+        <!--        <the-election/>-->
+        <!--        <the-military/>-->
+        <!--        <prominent-events/>-->
+        <!--        <party-actions/>-->
+        <!--        <correlated-actions/>-->
     </main>
 </template>
 
 <script setup>
 import {reactive, onMounted, shallowRef} from "vue";
+import TheElection from "./pages/the-election.vue";
+import Chronicle from "./pages/chronicle.vue";
+import ProminentEvents from "./pages/prominent-events/prominent-events.vue";
+import Home from "./pages/home.vue";
+import TheMilitary from "./pages/the-military.vue";
+import CorrelatedActions from "./pages/correlated-actions/correlated-actions.vue";
+import PartyActions from "./pages/party-actions/party-actions.vue";
 
 const props = defineProps([]);
 
-const component = shallowRef('the-election');
+const component = shallowRef('CorrelatedActions');
 
 const data = reactive({});
+
 
 onMounted(() => {
     // setTimeout(() => {

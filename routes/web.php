@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 
 \App\Http\Controllers\CorrelatedActionsController::routes();
+
+\App\Http\Controllers\ProminentEventsController::routes();
+
+\App\Http\Controllers\PartyActionsController::routes();

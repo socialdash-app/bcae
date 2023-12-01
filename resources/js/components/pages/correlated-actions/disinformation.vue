@@ -1,6 +1,6 @@
 <template>
     <div class="w-full p-12 h-full flex relative">
-        <div class="w-7/12 h-full fixed" id="container">
+        <div class="w-7/12 h-full absolute" id="disinformation-container">
         </div>
         <div class="w-7/12 h-full">
         </div>
@@ -37,13 +37,10 @@
 <script setup>
 import {reactive, onMounted} from "vue";
 import * as d3 from 'd3';
-import scrollama from 'scrollama'
 
 const props = defineProps([]);
 
 const data = reactive({});
-
-const scroller = new scrollama();
 
 const init = (element, data) => {
     let validPropagandists = data.validPropagandists;
@@ -103,59 +100,59 @@ const init = (element, data) => {
 
     let isInitial = true;
 
-    const steps = {
-        0: {
-            onStepEnter: (data) => {
-                svg.selectAll('circle').transition().style('opacity', 1)
-            },
-        }, 1: {
-            onStepEnter: (data) => {
-                svg.selectAll('circle').transition().style('opacity', (_, index) => {
-                    return Math.floor(Math.random() * 2) ? 0.2 : 1
-                })
-            }
-        },
-        2: {
-            onStepEnter: (data) => {
-                svg.selectAll('circle').transition().style('opacity', (_, index) => {
-                    return Math.floor(Math.random() * 2) ? 0.2 : 1
-                })
-            }
-        },
-        3: {
-            onStepEnter: (data) => {
-                svg.selectAll('circle').transition().style('opacity', (_, index) => {
-                    return Math.floor(Math.random() * 2) ? 0.2 : 1
-                })
-            }
-        },
-        4: {
-            onStepEnter: (data) => {
-                svg.selectAll('circle').transition().style('opacity', (_, index) => {
-                    return Math.floor(Math.random() * 2) ? 0.2 : 1
-                })
-            }
-        }
-    }
-
-    scroller
-        .setup({
-            step: ".content",
-            progress: true,
-        }).onStepProgress((response) => {
-        // console.log('step', response)
-    }).onStepEnter((response) => {
-        if (isInitial) {
-            isInitial = false;
-            return;
-        }
-        steps[response.index].onStepEnter(response);
-    })
+    // const steps = {
+    //     0: {
+    //         onStepEnter: (data) => {
+    //             svg.selectAll('circle').transition().style('opacity', 1)
+    //         },
+    //     }, 1: {
+    //         onStepEnter: (data) => {
+    //             svg.selectAll('circle').transition().style('opacity', (_, index) => {
+    //                 return Math.floor(Math.random() * 2) ? 0.2 : 1
+    //             })
+    //         }
+    //     },
+    //     2: {
+    //         onStepEnter: (data) => {
+    //             svg.selectAll('circle').transition().style('opacity', (_, index) => {
+    //                 return Math.floor(Math.random() * 2) ? 0.2 : 1
+    //             })
+    //         }
+    //     },
+    //     3: {
+    //         onStepEnter: (data) => {
+    //             svg.selectAll('circle').transition().style('opacity', (_, index) => {
+    //                 return Math.floor(Math.random() * 2) ? 0.2 : 1
+    //             })
+    //         }
+    //     },
+    //     4: {
+    //         onStepEnter: (data) => {
+    //             svg.selectAll('circle').transition().style('opacity', (_, index) => {
+    //                 return Math.floor(Math.random() * 2) ? 0.2 : 1
+    //             })
+    //         }
+    //     }
+    // }
+    //
+    // scroller
+    //     .setup({
+    //         step: ".content",
+    //         progress: true,
+    //     }).onStepProgress((response) => {
+    //     // console.log('step', response)
+    // }).onStepEnter((response) => {
+    //     if (isInitial) {
+    //         isInitial = false;
+    //         return;
+    //     }
+    //     steps[response.index].onStepEnter(response);
+    // })
 }
 
 onMounted(() => {
     axios.post('/correlated-actions/disinformation').then((res) => {
-        init(document.getElementById('container'), res.data)
+        init(document.getElementById('disinformation-container'), res.data)
     })
 
 })
