@@ -1,5 +1,5 @@
 <template>
-    <div class="w-7/12 h-screen my-[10vh] pt-12 flex flex-col" id="party-action-youtube-video">
+    <div class="w-7/12 h-screen flex flex-col" id="party-action-youtube-video">
         <h1 class="w-full font-semibold text-2xl">USDP demands to hold joint election with UEC and military</h1>
         <div class="w-full gap-x-6 mt-8 flex">
             <div class="w-4/12 rounded-lg h-full p-6 tracking-wider leading-relaxed text-gray-700 bg-pink-300">

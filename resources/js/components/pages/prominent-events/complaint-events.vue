@@ -1,17 +1,18 @@
 <template>
-    <div id="complaint-events"
-         class="w-full  overflow-visible text-gray-700 mt-[25vh] relative flex flex-col items-center">
-        <div class="pointer-events-none w-full"
-             id="complaint-events-trigger"
-             :style="{height: `${complaints.length * 400}px`}"></div>
-        <div @click="expandArticle(index)"
-             v-for="(complaint, index) in complaints"
-             style="will-change: transform;height: 400px;"
-             :id="`complaint-${index}`"
-             class="complaint overflow-y-auto cursor-pointer absolute border bg-green-300 rounded p-10 w-6/12"
-             :style="{transform: `translate3d(${ index % 2 === 0 ? 400: -400}px,${index * 800}px,0)`}">
-            <h1 class="font-semibold text-2xl">{{ complaint.title }}</h1>
-            <p class="mt-6">{{ truncate(complaint.description, 800) }}</p>
+    <div id="complaint-events-trigger"
+         class="w-full overflow-visible text-gray-700 relative flex flex-col items-center">
+        <div class="w-full flex flex-col items-center mt-[20vh]"
+             id="complaint-events-pinner"
+             :style="{height: `${complaints.length * 300}px`}">
+            <div @click="expandArticle(index)"
+                 v-for="(complaint, index) in complaints"
+                 style="will-change: transform;height: 400px;"
+                 :id="`complaint-${index}`"
+                 class="complaint overflow-y-auto cursor-pointer absolute border bg-green-300 rounded p-10 w-6/12"
+                 :style="{transform: `translate3d(${ index % 2 === 0 ? 400: -400}px,${index * 800}px,0)`}">
+                <h1 class="font-semibold text-2xl">{{ complaint.title }}</h1>
+                <p class="mt-6">{{ truncate(complaint.description, 800) }}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -128,15 +129,13 @@ onMounted(() => {
         translateX: 0,
         translateY: 0,
         delay: (el, index) => index * 2000,
-        duration: 5000,
+        duration: complaintBoxes.length * 2000,
         scrollTrigger: {
             trigger: document.querySelector('#complaint-events-trigger'),
-            debug: true,
             lerp: true,
-            duration: complaintBoxes.length * 2000,
-            start: 'top center',
-            end: 'bottom bottom',
-            pin: '#complaint-events',
+            start: 'top top',
+            end: '120% bottom',
+            pin: '#complaint-events-pinner',
         }
     }];
 

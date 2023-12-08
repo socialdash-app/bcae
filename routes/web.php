@@ -22,3 +22,5 @@ Route::get('/', function () {
 \App\Http\Controllers\ProminentEventsController::routes();
 
 \App\Http\Controllers\PartyActionsController::routes();
+
+\App\Http\Controllers\TheMilitaryController::routes();

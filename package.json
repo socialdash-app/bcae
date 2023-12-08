@@ -30,6 +30,7 @@
         "scrollama": "^3.2.0",
         "v-calendar": "^3.1.2",
         "vue-common-components": "github:w99910/vue-common-components",
-        "vue-common-directives": "github:w99910/vue-common-directives"
+        "vue-common-directives": "github:w99910/vue-common-directives",
+        "vue-screen-utils": "^1.0.0-beta.13"
     }
 }

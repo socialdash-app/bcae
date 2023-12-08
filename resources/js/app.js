@@ -1,5 +1,7 @@
 import './bootstrap';
-import 'vue-common-components/dist/style.css'
+import 'vue-common-components/dist/style.css';
+import 'v-calendar/style.css';
+
 
 import {createApp, h, defineAsyncComponent, defineComponent} from 'vue'
 import {createInertiaApp} from '@inertiajs/vue3';

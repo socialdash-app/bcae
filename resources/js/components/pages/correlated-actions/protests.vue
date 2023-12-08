@@ -15,12 +15,12 @@
             </div>
         </div>
         <div class="w-1/2 py-10 gap-y-24 flex flex-col z-10">
-            <div class="trigger w-full border rounded bg-gray-200 h-[40vh]"></div>
-            <div class="trigger w-full border rounded bg-gray-200 h-[40vh] relative">
-              
+            <div class="protest-trigger w-full border rounded bg-gray-200 h-[40vh]"></div>
+            <div class="protest-trigger w-full border rounded bg-gray-200 h-[40vh] relative">
+
             </div>
-            <div class="trigger w-full border rounded bg-gray-200 h-[40vh]"></div>
-            <div class="trigger w-full border rounded bg-gray-200 h-[40vh]"></div>
+            <div class="protest-trigger w-full border rounded bg-gray-200 h-[40vh]"></div>
+            <div class="protest-trigger w-full border rounded bg-gray-200 h-[40vh]"></div>
         </div>
     </div>
 </template>
@@ -180,14 +180,14 @@ const plotPoints = (startDate, endDate) => {
 
 const listenTriggers = () => {
     let container = document.getElementById('protests')
-    let divs = container.querySelectorAll('.trigger');
+    let divs = container.querySelectorAll('.protest-trigger');
 
     let triggers = [];
     dateIntervals.forEach((dateInterval, index) => {
         triggers.push({
             scrollTrigger: {
                 trigger: divs[index],
-                start: index === 0 ? 'top top' : 'top center',
+                start: index === divs.length - 1 ? 'top 60%' : 'top top',
                 end: 'bottom top',
                 // debug: index === 0,
                 onEnter: () => {

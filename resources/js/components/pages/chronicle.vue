@@ -1,6 +1,6 @@
 <template>
-    <div id="chronicle-trigger" class="w-9/12">
-        <div id="chronicle" class="w-full h-screen flex items-center justify-between">
+    <div id="chronicle-trigger" class="w-full flex relative flex-col items-center">
+        <div id="chronicle" class="w-9/12 sticky top-0 left-0 h-screen flex items-center justify-between">
             <div class="w-5/12 h-4/6 relative overflow-hidden">
                 <div class="box w-full absolute h-5/6"
                      :style="{transform: `translateX(${index * 120}%)`}"
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-full h-[300vh]">
+        <div class="w-full h-[400vh]">
 
         </div>
     </div>
@@ -59,20 +59,7 @@ const descriptions = [{
 
 onMounted(() => {
     new AnimeScrollTrigger(document.querySelector('main'), [{
-        targets: '.box',
-        translateX: (el, index) => {
-            return -(descriptions.length - 1 - index) * 100 + '%';
-        },
-        scrollTrigger: {
-            trigger: '#chronicle-trigger',
-            start: 'top center',
-            end: 'bottom bottom',
-            debug: true,
-            pin: '#chronicle',
-            lerp: true,
-        }
-    }, {
-        targets: '.title',
+        targets: '#chronicle .box',
         translateX: (el, index) => {
             return -(descriptions.length - 1 - index) * 100 + '%';
         },
@@ -83,19 +70,33 @@ onMounted(() => {
             // debug: true,
             lerp: true,
         }
-    }, {
-        targets: '.description',
-        translateX: (el, index) => {
-            return -(descriptions.length - 1 - index) * 100 + '%';
-        },
-        scrollTrigger: {
-            trigger: '#chronicle-trigger',
-            start: 'top center',
-            end: 'bottom bottom',
-            // debug: true,
-            lerp: true,
+    },
+        {
+            targets: '#chronicle .title',
+            translateX: (el, index) => {
+                return -(descriptions.length - 1 - index) * 100 + '%';
+            },
+            scrollTrigger: {
+                trigger: '#chronicle-trigger',
+                start: 'top center',
+                end: 'bottom bottom',
+                // debug: true,
+                lerp: true,
+            }
+        }, {
+            targets: '#chronicle .description',
+            translateX: (el, index) => {
+                return -(descriptions.length - 1 - index) * 100 + '%';
+            },
+            scrollTrigger: {
+                trigger: '#chronicle-trigger',
+                start: 'top center',
+                end: 'bottom bottom',
+                // debug: true,
+                lerp: true,
+            }
         }
-    }])
+    ])
 })
 </script>
 

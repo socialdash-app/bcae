@@ -3,11 +3,12 @@
         <!--        <component :is="component"></component>-->
         <home/>
         <chronicle/>
-        <!--        <the-election/>-->
-        <!--        <the-military/>-->
-        <!--        <prominent-events/>-->
-        <!--        <party-actions/>-->
-        <!--        <correlated-actions/>-->
+        <the-election/>
+        <the-military/>
+        <prominent-events/>
+        <party-actions/>
+        <correlated-actions/>
+        <beginning-of-the-end/>
     </main>
 </template>
 
@@ -17,13 +18,14 @@ import TheElection from "./pages/the-election.vue";
 import Chronicle from "./pages/chronicle.vue";
 import ProminentEvents from "./pages/prominent-events/prominent-events.vue";
 import Home from "./pages/home.vue";
-import TheMilitary from "./pages/the-military.vue";
+import TheMilitary from "./pages/the-military/the-military.vue";
 import CorrelatedActions from "./pages/correlated-actions/correlated-actions.vue";
 import PartyActions from "./pages/party-actions/party-actions.vue";
+import BeginningOfTheEnd from "./pages/beginning-of-the-end/beginning-of-the-end.vue";
 
 const props = defineProps([]);
 
-const component = shallowRef('CorrelatedActions');
+const component = shallowRef('beginning-of-the-end');
 
 const data = reactive({});
 

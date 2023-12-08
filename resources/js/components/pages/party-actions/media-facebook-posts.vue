@@ -1,16 +1,17 @@
 <template>
-    <div id="party-facebook-media-posts"
-         class="w-full overflow-visible text-white mt-[20vh] relative flex flex-col items-center">
-        <div class="pointer-events-none w-full"
-             id="complaint-events-trigger"
-             :style="{height: `${articles.length * 600 * 0.5}px`}"></div>
-        <div v-for="(article, index) in articles"
-             style="will-change: transform;height: 600px;"
-             :id="`party-facebook-media-post-${index}`"
-             class="party-facebook-media-post overflow-y-auto text-white cursor-pointer absolute border bg-gray-600 rounded p-10 w-6/12"
-             :style="{transform: `translateX(${index * 20}px) translateY(${index * 20}px)`, zIndex: -index}">
-            <h1 class="font-semibold text-2xl">{{ article.title }}</h1>
-            <p class="mt-6">{{ truncate(article.description, 800) }}</p>
+    <div id="party-facebook-media-posts-trigger"
+         :style="{height: articles.length * 600 + 'px'}"
+         class="w-full relative text-white flex shrink-0 flex-col items-center">
+        <div class="w-full flex flex-col items-center mt-[20vh]"
+             id="party-facebook-media-posts">
+            <div v-for="(article, index) in articles"
+                 style="will-change: transform;height: 600px;"
+                 :id="`party-facebook-media-post-${index}`"
+                 class="party-facebook-media-post overflow-y-auto text-white cursor-pointer absolute border bg-gray-600 rounded p-10 w-6/12"
+                 :style="{transform: `translateX(${index * 20}px) translateY(${index * 20}px)`, zIndex: -index}">
+                <h1 class="font-semibold text-2xl">{{ article.title }}</h1>
+                <p class="mt-6">{{ truncate(article.description, 800) }}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -65,22 +66,22 @@ onMounted(() => {
             duration: (el, index) => (index + 1) * duration * 0.5,
         }, {
             value: (el, index) => {
-                return index !== articles.length - 1 ? document.querySelector('main').scrollTop - articleRect.top - articleRect.height - 10 : -articleRect.height * 0.7;
+                return index !== articles.length - 1 ? document.querySelector('main').scrollTop - articleRect.top - articleRect.height - 10 : 0;
             },
         }],
         scrollTrigger: {
-            trigger: document.querySelector('#complaint-events-trigger'),
+            trigger: document.querySelector('#party-facebook-media-posts-trigger'),
             // debug: true,
             lerp: true,
-            start: 'top center',
-            end: 'bottom center',
-            pin: '#party-facebook-media-posts',
+            start: 'top top',
+            end: 'bottom 90%',
+            pin: '#party-facebook-media-posts'
         }
     }];
 
     setTimeout(() => {
         new AnimeScrollTrigger(document.querySelector('main'), animations)
-    }, 300)
+    }, 1200)
 })
 </script>
 

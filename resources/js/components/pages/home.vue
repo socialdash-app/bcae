@@ -1,7 +1,7 @@
 <template>
-    <div id="trigger" class="flex relative flex-col w-10/12 items-center">
+    <div id="home-trigger" class="flex relative flex-col w-screen items-center">
         <div id="home"
-             class="w-full sticky top-0 z-[-10] py-10 md:py-0 left-0 overflow-hidden tracking-wide h-screen leading-relaxed text-gray-800 justify-between md:justify-center flex md:!flex-row flex-col items-center">
+             class="w-full sticky top-0 left-0 py-10 md:py-0 overflow-hidden tracking-wide h-screen leading-relaxed text-gray-800 justify-between md:justify-center flex md:!flex-row flex-col items-center">
             <div id="home-text" class="w-11/12 md:w-5/12 relative h-4/6 flex flex-col overflow-hidden">
                 <div class="h-2/6 w-full shrink-0"></div>
                 <h1 class="title sticky top-0 bg-white z-10 uppercase font-bold text-4xl xl:text-7xl">
@@ -41,31 +41,61 @@
             </div>
             <div class="absolute bottom-0">
                 <div id="card1"
-                     style="z-index: 1;transform: perspective(1000px) rotateY(-45deg) translateY(300px) translateX(-90%);"
+                     style="z-index: 100;transform: perspective(1000px) rotateY(-45deg) translateY(300px) translateX(-90%);"
                      class="absolute opacity-0 w-16 h-28 left-1/2 border bg-emerald-300"></div>
                 <div id="card2"
-                     style="z-index: 1;transform: perspective(1000px) rotateY(-45deg) translateY(320px) translateX(-100%);"
+                     style="z-index: 100;transform: perspective(1000px) rotateY(-45deg) translateY(320px) translateX(-100%);"
                      class="absolute opacity-0 w-16 h-28 left-1/2 border bg-red-400"></div>
-                <svg id="box" width="559" class="transform"
-                     height="482"
-                     viewBox="0 0 559 482"
-                     preserveAspectRatio="xMidYMin slice"
-                     style="overflow: visible"
-                     fill="none"
+                <svg id="box" height="100%" stroke-miterlimit="10"
+                     class="w-[35vw] h-full"
+                     style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;"
+                     viewBox="0 0 687 620" width="100%" xml:space="preserve"
                      xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <path id="front" d="M0 61.5L308 107V482L0 436.5V61.5Z" fill="#C5C5C5"/>
-                        <path id="right" d="M308 107.5L559 45.5L558.5 420.5L308 481V107.5Z" fill="#5D5D5D"/>
-                        <path id="top" d="M251 0L559 45.5L308.5 107.5L0 61.5L251 0Z" fill="#E9E9E9"/>
-                        <path id="hole" d="M259 41L309.5 48.5L299 52L247 44.5L259 41Z" fill="#C2C2C2"/>
-                    </g>
+                    <clipPath id="ArtboardFrame">
+                        <rect height="620" width="687" x="0" y="0"/>
+                    </clipPath>
+                    <g clip-path="url(#ArtboardFrame)" id="Layer-1">
+                        <g opacity="1" id="Group 1">
+                            <g opacity="1" id="Box">
+                             <path d="M30 97.5L470.85 135.24L470.85 620L30 582.27L30 97.5Z" fill="#3395ff"
+                                   fill-rule="nonzero"
+                                   opacity="1"
+                                   stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"
+                                   id="Rectangle 5"/>
+                                <path d="M470.85 135.24L657.07 43.95L657.07 528.72L470.85 620L470.85 135.24Z"
+                                      fill="#3395ff" fill-rule="nonzero"
+                                      opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="round"
+                                      stroke-width="1"
+                                      id="Rectangle 6"/>
+                            </g>
+                            <g opacity="1" id="Cover">
+                                 <path d="M204 5.68434e-14L687 41.4L483 141.4L0 100L204 5.68434e-14Z" fill="#3395ff"
+                                       fill-rule="nonzero"
+                                       opacity="1"
+                                       stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"
+                                       id="Rectangle 1"/>
+                                <path d="M0 100L483 141.4L483 200L0 158.6L0 100Z" fill="#3395ff" fill-rule="nonzero"
+                                      opacity="1"
+                                      stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"
+                                      id="Rectangle 2"/>
+                                <path d="M483 141.4L687 41.4L687 100L483 200L483 141.4Z" fill="#3395ff"
+                                      fill-rule="nonzero" opacity="1"
+                                      stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"
+                                      id="Rectangle 3"/>
+                            </g>
+                            <path d="M248 60.72L446.87 77.76L439.41 80.68L240.134 63.61L248 60.72Z" fill="#3395ff"
+                                  fill-rule="nonzero"
+                                  opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="round"
+                                  stroke-width="1"
+                                  id="Rectangle 2"/>
+                        </g>
+                     </g>
                 </svg>
             </div>
         </div>
         <div class="w-full h-[300vh]">
 
         </div>
-
     </div>
 </template>
 
@@ -173,20 +203,22 @@ const carousel = (elements, initialIndex = 0, duration = 3000) => {
     return this;
 }
 
-function lerp(start, end, current) {
-    let distance = Math.abs(end - start);
-    let currentDist = Math.max(end - current, 0);
-    return 1 - Math.min(currentDist / distance, 1);
-}
-
 const trigger = () => {
     const body = document.getElementById('home-text');
     const bodyHeight = body.getBoundingClientRect().height;
     const bodyScrollHeight = body.scrollHeight;
     new AnimeScrollTrigger(document.querySelector('main'), [
+        // {
+        //     scrollTrigger: {
+        //         trigger: '#home-trigger',
+        //         start: '5% top',
+        //         end: 'bottom bottom',
+        //         pin: '#home'
+        //     }
+        // },
         {
             scrollTrigger: {
-                trigger: '#trigger',
+                trigger: '#home-trigger',
                 start: 'top top',
                 end: '50% bottom',
                 lerp: true,
@@ -198,11 +230,10 @@ const trigger = () => {
         {
             targets: '#box',
             translateY: ['100%', '50%'],
-            // translateX: ['-50%', '-50%'],
             opacity: 1,
             duration: 1000,
             scrollTrigger: {
-                trigger: '#trigger',
+                trigger: '#home-trigger',
                 start: '30% bottom',
                 end: 'bottom bottom',
                 lerp: true,
@@ -228,7 +259,7 @@ const trigger = () => {
             },
             duration: 1000,
             scrollTrigger: {
-                trigger: '#trigger',
+                trigger: '#home-trigger',
                 start: '60% bottom',
                 end: 'bottom bottom',
                 lerp: true,

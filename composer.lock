@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b29232f65624d67dc87831e008189b7",
+    "content-hash": "d5bdd20cf3ec2de4f64ad14f00b301da",
     "packages": [
         {
             "name": "brick/math",
@@ -6849,6 +6849,47 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "zlt/laravel-google-doc",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/w99910/laravel-google-doc.git",
+                "reference": "900319438857b829a2e6c1816a6f7d5cb06a9f75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/w99910/laravel-google-doc/zipball/900319438857b829a2e6c1816a6f7d5cb06a9f75",
+                "reference": "900319438857b829a2e6c1816a6f7d5cb06a9f75",
+                "shasum": ""
+            },
+            "require": {
+                "google/apiclient": "^2.12.1",
+                "php": "^7.4|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zlt\\LaravelGoogleDoc\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zaw Lin Tun",
+                    "email": "zawlintun@utycc.edu.mm"
+                }
+            ],
+            "description": "Google Doc Service For Laravel",
+            "support": {
+                "issues": "https://github.com/w99910/laravel-google-doc/issues",
+                "source": "https://github.com/w99910/laravel-google-doc/tree/v0.0.1"
+            },
+            "time": "2022-01-22T15:08:49+00:00"
         },
         {
             "name": "zlt/laravel-google-sheet",
