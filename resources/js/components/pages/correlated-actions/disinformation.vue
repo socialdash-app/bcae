@@ -16,7 +16,7 @@
                 publishing
                 software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         </div>
-        <div class="w-10/12 h-screen sticky top-12" id="disinformation-container">
+        <div class="w-10/12 h-screen sticky top-24" id="disinformation-container">
         </div>
         <div class="flex flex-col relative w-full items-center" id="disinformation-trigger">
             <div
@@ -148,6 +148,7 @@ const visualization = {
         this.settings.svg.selectAll('circle')
             .transition()
             .duration(500)
+            .delay((_, i) => Math.max(i * 1, 50))
             .style('opacity', 1)
             .easeVarying((_) => d3.easeExpIn)
     },

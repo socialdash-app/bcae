@@ -1,18 +1,18 @@
 <template>
     <div id="party-facebook-media-posts-trigger"
-         :style="{height: articles.length * 600 + 'px'}"
-         class="w-full relative text-white flex shrink-0 flex-col items-center">
-        <div class="w-full flex flex-col items-center mt-[20vh]"
+         class="w-full relative text-white flex flex-col items-center">
+        <div class="w-full flex flex-col h-screen sticky top-0 items-center justify-center"
              id="party-facebook-media-posts">
             <div v-for="(article, index) in articles"
                  style="will-change: transform;height: 600px;"
                  :id="`party-facebook-media-post-${index}`"
-                 class="party-facebook-media-post overflow-y-auto text-white cursor-pointer absolute border bg-gray-600 rounded p-10 w-6/12"
+                 class="party-facebook-media-post overflow-y-auto text-gray-800 cursor-pointer absolute border bg-[#E9A498] rounded p-10 w-6/12"
                  :style="{transform: `translateX(${index * 20}px) translateY(${index * 20}px)`, zIndex: -index}">
                 <h1 class="font-semibold text-2xl">{{ article.title }}</h1>
                 <p class="mt-6">{{ truncate(article.description, 800) }}</p>
             </div>
         </div>
+        <div :style="{height: articles.length * 600 + 'px'}"></div>
     </div>
 </template>
 
@@ -75,7 +75,6 @@ onMounted(() => {
             lerp: true,
             start: 'top top',
             end: 'bottom 90%',
-            pin: '#party-facebook-media-posts'
         }
     }];
 

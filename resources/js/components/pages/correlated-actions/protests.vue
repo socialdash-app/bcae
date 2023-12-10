@@ -1,6 +1,6 @@
 <template>
-    <div id="protests" class="w-10/12 flex relative justify-evenly">
-        <div class="w-5/12 h-[100vh] py-10 sticky top-0 left-0 flex flex-col items-center overflow-hidden">
+    <div id="protests" class="w-10/12 flex relative pt-14 justify-evenly">
+        <div class="w-5/12 h-[90vh] py-10 sticky top-24 left-0 flex flex-col items-center overflow-hidden">
             <svg id="protests-map" class="w-full h-full">
                 <g class="map" fill="#b3b3b3" stroke="black" stroke-width="0.01"></g>
                 <g class="protests" fill="orange" stroke="black" stroke-width="0.01"></g>

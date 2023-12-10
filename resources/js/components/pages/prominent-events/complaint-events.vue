@@ -1,9 +1,8 @@
 <template>
     <div id="complaint-events-trigger"
-         class="w-full overflow-visible text-gray-700 relative flex flex-col items-center">
-        <div class="w-full flex flex-col items-center mt-[20vh]"
-             id="complaint-events-pinner"
-             :style="{height: `${complaints.length * 300}px`}">
+         class="w-full text-gray-700 relative flex flex-col items-center">
+        <div class="w-full flex flex-col sticky justify-center top-0 h-screen items-center"
+             id="complaint-events-pinner">
             <div @click="expandArticle(index)"
                  v-for="(complaint, index) in complaints"
                  style="will-change: transform;height: 400px;"
@@ -13,6 +12,9 @@
                 <h1 class="font-semibold text-2xl">{{ complaint.title }}</h1>
                 <p class="mt-6">{{ truncate(complaint.description, 800) }}</p>
             </div>
+        </div>
+        <div :style="{height: `${complaints.length * 400}px`}">
+
         </div>
     </div>
 </template>
@@ -134,8 +136,7 @@ onMounted(() => {
             trigger: document.querySelector('#complaint-events-trigger'),
             lerp: true,
             start: 'top top',
-            end: '120% bottom',
-            pin: '#complaint-events-pinner',
+            end: 'bottom bottom',
         }
     }];
 

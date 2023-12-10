@@ -1,14 +1,13 @@
 <template>
     <main class="w-screen font-poppins overflow-y-scroll overflow-x-hidden h-screen flex items-center flex-col">
-        <!--        <component :is="component"></component>-->
-        <home/>
-        <chronicle/>
-        <the-election/>
-        <the-military/>
-        <prominent-events/>
-        <party-actions/>
+        <!--        <home/>-->
+        <!--        <chronicle/>-->
+        <!--        <the-election/>-->
+        <!--        <prominent-events/>-->
+        <!--        <party-actions/>-->
+        <!--        <the-military/>-->
         <correlated-actions/>
-        <beginning-of-the-end/>
+        <!--        <beginning-of-the-end/>-->
     </main>
 </template>
 

@@ -39,7 +39,8 @@ onMounted(() => {
         Highcharts.chart('party-accusations-facebook-posts', {
             chart: {
                 type: 'packedbubble',
-                height: '800px'
+                height: '800px',
+                backgroundColor: '#EBFFE0',
             },
             title: {
                 text: 'Parties post election complaints on Facebook',

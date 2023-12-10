@@ -40,7 +40,8 @@ onMounted(() => {
         console.log(data, nodes)
         Highcharts.chart('uec-accusations', {
             chart: {
-                height: '800px'
+                height: '800px',
+                backgroundColor: '#EBFFE0',
             },
             title: {
                 text: 'Complaint to UEC'
