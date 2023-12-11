@@ -25,13 +25,13 @@
 import {reactive, onMounted} from "vue";
 import protestSvg from "../../../assets/protest-svg.js";
 import voteSvg from "../../../assets/vote-svg.js";
+import AnimeScrollTrigger from "../../../../../../scrollanime/index.js";
 
 const props = defineProps([]);
 
 const data = reactive({})
 
 onMounted(() => {
-
 })
 </script>
 

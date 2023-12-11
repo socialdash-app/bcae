@@ -187,7 +187,7 @@ const listenTriggers = () => {
         triggers.push({
             scrollTrigger: {
                 trigger: divs[index],
-                start: index === divs.length - 1 ? 'top 60%' : 'top top',
+                start: index === divs.length - 1 ? 'top 80%' : 'top top',
                 end: 'bottom top',
                 // debug: index === 0,
                 onEnter: () => {

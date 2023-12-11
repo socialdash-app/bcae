@@ -69,7 +69,6 @@ let init = () => {
         }, {
             value: (_, index) => {
                 let val = transformXValues[cards.length - 1 - index];
-                console.log(index, val)
                 return val;
             },
             duration: (_, index) => Math.max(transitionDuration, (cards.length - index) * transitionDuration),
@@ -87,7 +86,9 @@ let init = () => {
     }])
 }
 onMounted(() => {
-    init();
+    setTimeout(() => {
+        init();
+    }, 500)
 })
 </script>
 

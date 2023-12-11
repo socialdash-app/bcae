@@ -1,6 +1,24 @@
 <template>
-    <div id="chronicle-trigger" class="w-full flex relative flex-col items-center">
-        <div id="chronicle" class="w-9/12 sticky top-0 left-0 h-screen flex items-center justify-between">
+    <div id="chronicle-trigger" class="w-full bg-[#fff562] flex relative flex-col items-center">
+        <div class="w-full flex justify-between bg-[#fff562] z-[100] h-24 items-center px-20 sticky top-0 left-0">
+            <h1 class="text-xl font-semibold">Chronicle</h1>
+            <div class="relative flex items-center justify-center">
+                <svg width="60" height="60" viewBox="0 0 60 60">
+                    <circle id="chronicle-progress-indicator" stroke-dashoffset="160" stroke-dasharray="160" r="25"
+                            fill="none" stroke-width="8"
+                            stroke="#FF7F00" cx="30"
+                            cy="30"></circle>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="lucide absolute w-7 h-7 lucide-history">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M12 7v5l4 2"/>
+                </svg>
+            </div>
+        </div>
+        <div id="chronicle" class="w-9/12 sticky top-24 left-0 h-screen flex items-center justify-between">
             <div class="w-5/12 h-4/6 relative overflow-hidden">
                 <div class="chronicle-illustration w-full absolute h-5/6"
                      :style="{transform: `translateX(${index * 120}%)`}"
@@ -57,7 +75,7 @@ const descriptions = [{
 
 const translateMultiplier = 120;
 
-onMounted(() => {
+const init = () => {
     let chronicleIllustrations = document.querySelectorAll('.chronicle-illustration');
     let chronicleContents = document.querySelectorAll('.chronicle-content');
     let animations = [];
@@ -123,7 +141,22 @@ onMounted(() => {
                 }, 10)
             }
         }
+    }, {
+        targets: '#chronicle-progress-indicator',
+        strokeDashoffset: 0,
+        scrollTrigger: {
+            trigger: '#chronicle-trigger',
+            start: 'top top',
+            end: 'bottom bottom',
+            lerp: true,
+        }
     }])
+}
+
+onMounted(() => {
+    setTimeout(() => {
+        init()
+    }, 500)
 })
 </script>
 

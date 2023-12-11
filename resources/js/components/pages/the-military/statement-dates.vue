@@ -74,7 +74,6 @@ const data = reactive({
 
 
 axios.post('the-military/statements').then((res) => {
-    console.log(res.data)
     Object.values(res.data).forEach((d) => {
         let dateSplit = d['date'].split(' ')
         let time = /^(\d)(\d)/.test(dateSplit[1]) ? dateSplit[1] : '0' + dateSplit[1];
@@ -117,8 +116,6 @@ axios.post('the-military/statements').then((res) => {
             customData: data.regularStatements
         }
     ]
-
-    console.log(data)
 
     data.loading = false;
 })

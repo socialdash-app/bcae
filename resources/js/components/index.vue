@@ -6,7 +6,7 @@
         <!--        <prominent-events/>-->
         <!--        <party-actions/>-->
         <!--        <the-military/>-->
-        <correlated-actions/>
+        <!--        <correlated-actions/>-->
         <!--        <beginning-of-the-end/>-->
     </main>
 </template>

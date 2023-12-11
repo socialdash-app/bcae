@@ -13,14 +13,12 @@
                 </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="lucide absolute w-7 h-7 lucide-vote">
-                    <path d="m9 12 2 2 4-4"/>
-                    <path d="M5 7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v12H5V7Z"/>
-                    <path d="M22 19H2"/>
+                     class="lucide absolute w-7 h-7 lucide-shield">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
                 </svg>
             </div>
         </div>
-        <div class="shrink-0 w-screen h-screen"></div>
+        <military-intro/>
         <four-statements/>
         <statement-dates/>
     </div>
@@ -32,6 +30,7 @@ import {onMounted} from "vue";
 import StatementDates from "./statement-dates.vue";
 import FourStatements from "./four-statements.vue";
 import AnimeScrollTrigger from 'anime-scrolltrigger'
+import MilitaryIntro from "./military-intro.vue";
 
 const props = defineProps([]);
 
