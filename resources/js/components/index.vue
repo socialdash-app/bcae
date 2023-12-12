@@ -1,14 +1,15 @@
 <template>
-    <main class="w-screen font-poppins overflow-y-scroll overflow-x-hidden h-screen flex items-center flex-col">
-        <!--        <home/>-->
-        <!--        <chronicle/>-->
-        <!--        <the-election/>-->
-        <!--        <prominent-events/>-->
-        <!--        <party-actions/>-->
-        <!--        <the-military/>-->
-        <!--        <correlated-actions/>-->
-        <!--        <beginning-of-the-end/>-->
-    </main>
+  <main class="w-screen font-poppins overflow-y-auto overflow-x-hidden h-screen flex items-center flex-col">
+    <!--    <navigation/>-->
+    <home/>
+    <chronicle/>
+    <the-election/>
+    <prominent-events/>
+    <party-actions/>
+    <the-military/>
+    <correlated-actions/>
+    <beginning-of-the-end/>
+  </main>
 </template>
 
 <script setup>
@@ -21,6 +22,7 @@ import TheMilitary from "./pages/the-military/the-military.vue";
 import CorrelatedActions from "./pages/correlated-actions/correlated-actions.vue";
 import PartyActions from "./pages/party-actions/party-actions.vue";
 import BeginningOfTheEnd from "./pages/beginning-of-the-end/beginning-of-the-end.vue";
+import Navigation from "./pages/navigation.vue";
 
 const props = defineProps([]);
 
@@ -30,23 +32,23 @@ const data = reactive({});
 
 
 onMounted(() => {
-    // setTimeout(() => {
-    //     component.value = 'accusation';
-    //     setTimeout(() => {
-    //         component.value = 'navigation';
-    //     }, 4000)
-    // }, 4000)
+  // setTimeout(() => {
+  //     component.value = 'accusation';
+  //     setTimeout(() => {
+  //         component.value = 'navigation';
+  //     }, 4000)
+  // }, 4000)
 })
 </script>
 
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 </style>
