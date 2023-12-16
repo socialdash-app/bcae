@@ -33,8 +33,9 @@ onMounted(() => {
             translateY: '0',
             scrollTrigger: {
                 trigger: '#military-intro',
-                start: 'top top',
+                start: 'top center',
                 end: 'center center',
+                smooth: true,
                 lerp: true,
             }
         }, {
@@ -43,7 +44,8 @@ onMounted(() => {
             scrollTrigger: {
                 trigger: '#military-intro',
                 start: 'center center',
-                end: '90% bottom',
+                end: 'bottom bottom',
+                smooth: true,
                 lerp: true,
             }
         }, {

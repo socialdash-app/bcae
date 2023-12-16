@@ -74,6 +74,7 @@ let init = () => {
             duration: (_, index) => Math.max(transitionDuration, (cards.length - index) * transitionDuration),
         }],
         scrollTrigger: {
+            smooth: true,
             trigger: trigger,
             pin: '#four-statements-pinner',
             lerp: true,

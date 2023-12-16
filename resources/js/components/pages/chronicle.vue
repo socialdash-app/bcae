@@ -1,8 +1,8 @@
 <template>
     <div id="chronicle-trigger" class="w-full bg-[#fff562] flex relative flex-col items-center">
-        <div class="w-full flex justify-between bg-[#fff562] z-[100] h-24 items-center px-20 sticky top-0 left-0">
+        <div class="w-full flex justify-between z-[100] h-24 items-center px-20 sticky top-0 left-0">
             <h1 class="text-xl font-semibold">Chronicle</h1>
-            <div class="relative flex items-center justify-center">
+            <div id="t" class="relative flex items-center justify-center">
                 <svg width="60" height="60" viewBox="0 0 60 60">
                     <circle id="chronicle-progress-indicator" stroke-dashoffset="160" stroke-dasharray="160" r="25"
                             fill="none" stroke-width="8"
@@ -18,26 +18,26 @@
                 </svg>
             </div>
         </div>
-        <div id="chronicle" class="w-9/12 sticky top-24 left-0 h-screen flex items-center justify-between">
-            <div class="w-5/12 h-4/6 relative overflow-hidden">
+        <div id="chronicle" class="w-9/12 relative flex justify-between">
+            <div class="w-5/12 h-[60vh] sticky overflow-hidden top-24 left-0">
                 <div class="chronicle-illustration w-full absolute h-5/6"
                      :style="{transform: `translateX(${index * 120}%)`}"
                      :class="description.bg" v-for="(description,index) in descriptions">
-
                 </div>
             </div>
-            <div class="w-5/12 relative h-4/6 flex flex-col overflow-hidden">
-                <div :style="{transform: `translateY(${index * 120}%)`}"
-                     class="flex absolute chronicle-content h-full rounded border shrink-0 gap-y-4 p-6 bg-gray-100 flex-col overflow-hidden w-full"
-                     v-for="(description,index) in descriptions">
+            <div class="w-5/12 flex flex-col">
+                <div
+                    class="flex chronicle-content h-[60vh] rounded border shrink-0 gap-y-4 p-6 bg-gray-100 flex-col w-full"
+                    :style="{marginBottom: index !== descriptions.length - 1 ? '24rem':'0'}"
+                    v-for="(description,index) in descriptions">
                     <h1 class="w-full font-semibold text-4xl">
                         {{ description.title }}</h1>
                     <p class="w-full text-gray-700">{{ description.description }}</p>
                 </div>
-            </div>
-        </div>
-        <div class="w-full h-[400vh]">
+                <div class="shrink-0" style="height: 30vh">
 
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -81,76 +81,93 @@ const init = () => {
     let animations = [];
     let stopPercentages = [];
     let duration = 1500;
+    let t = [];
     let divider = 100 / descriptions.length;
     for (let i = 0; i <= descriptions.length - 1; i++) {
-        animations.push([{
-            targets: chronicleIllustrations,
-            duration: duration,
-            easing: 'easeOutQuart',
-            translateX: (el, index) => {
-                return i === descriptions.length - 1 && index === i ? 0 : Math.max(-translateMultiplier, index * translateMultiplier - translateMultiplier * i) + '%';
+        animations.push({
+            scrollTrigger: {
+                trigger: chronicleContents[i],
+                start: 'top 20%',
+                end: 'bottom 20%',
+                onEnter: () => {
+                    anime({
+                        targets: chronicleIllustrations,
+                        easing: 'easeOutQuart',
+                        duration: duration,
+                        translateX: (el, index) => {
+                            return i === descriptions.length - 1 && index === i ? 0 : Math.max(-translateMultiplier, index * translateMultiplier - translateMultiplier * i) + '%';
+                        }
+                    })
+                },
+                onEnterBack: () => {
+                    anime({
+                        targets: chronicleIllustrations,
+                        easing: 'easeOutQuart',
+                        duration: duration,
+                        translateX: (el, index) => {
+                            return i === descriptions.length - 1 && index === i ? 0 : Math.max(-translateMultiplier, index * translateMultiplier - translateMultiplier * i) + '%';
+                        }
+                    })
+                }
             }
-        }, {
-            targets: chronicleContents,
-            duration: duration,
-            easing: 'easeOutQuart',
-            translateY: (el, index) => {
-                return i === descriptions.length - 1 && index === i ? 0 : Math.max(-translateMultiplier, index * translateMultiplier - translateMultiplier * i) + '%';
-            }
-        }])
-        stopPercentages.push(i * divider);
-        // let animation = {
-        //     illustrations: {
-        //         translateX: [],
-        //     },
-        //     contents: {
-        //         translateY: [],
-        //     }
-        // };
-        // for (let j = 0; j <= descriptions.length - 1; j++) {
-        //     animation.illustrations.translateX.push(i === descriptions.length - 1 && j === i ? 0 : Math.max(-translateMultiplier, j * translateMultiplier - translateMultiplier * i) + '%')
-        //     animation.contents.translateY.push(i === descriptions.length - 1 && j === i ? 0 : Math.max(-translateMultiplier, j * translateMultiplier - translateMultiplier * i) + '%')
-        // }
-        // animations.push(animation)
+        })
+        t.push(Object.assign({}, window.getComputedStyle(chronicleIllustrations[i])));
     }
 
-    let timeout;
-    let currentIndex = 0;
-    new AnimeScrollTrigger(document.querySelector('main'), [{
-        scrollTrigger: {
-            trigger: '#chronicle-trigger',
-            start: 'top top',
-            end: 'bottom bottom',
-            // debug: true,
-            lerp: true,
-            onUpdate: (_, progress) => {
-                if (timeout) clearTimeout(timeout);
-                timeout = setTimeout(() => {
-                    let percentage = Math.round(progress * 100);
-                    let ps = stopPercentages.filter((p) => percentage > p);
-                    if (ps.length > 0) {
-                        let index = ps.length - 1;
-                        if (index !== currentIndex) {
-                            currentIndex = index;
-                            let animes = animations[currentIndex];
-                            animes.forEach((animation) => {
-                                anime(animation)
-                            })
-                        }
-                    }
-                }, 10)
-            }
-        }
-    }, {
+    let b = anime({
+        targets: t,
+        height: '400px',
+        width: '400px',
+        autoplay: false,
+    })
+
+    animations.push({
         targets: '#chronicle-progress-indicator',
         strokeDashoffset: 0,
+        // easing: 'easeOutBounce',
         scrollTrigger: {
+            smooth: true,
             trigger: '#chronicle-trigger',
             start: 'top top',
             end: 'bottom bottom',
             lerp: true,
+            onUpdate: (_, progress) => {
+                // b.seek(b.duration * progress);
+                // let animation = {};
+                // b.animations.forEach((a) => {
+                //     if (!animation[a.property]) {
+                //         animation[a.property] = [];
+                //     }
+                //     animation[a.property][a.animatable.id] = a.currentValue;
+                // })
+                // let c = {};
+                // Object.keys(animation).forEach((g)=>{
+                //     c[g] = (_,index) => animation[g][index];
+                // })
+                // a.animations.forEach((animation) => {
+                //     console.log(animation)
+                // })
+            }
         }
-    }])
+    })
+
+    // scaleX(), skewY(), skewX(), scaleY(), translateX(), translateY()
+    // anime({
+    //     targets: '.lucide-history',
+    //     translateY: 10,
+    //     translateX: 11,
+    //     scaleX: 30,
+    //     scaleY: 31,
+    //     skewX: 22,
+    //     skewY: 11,
+    //     // transform: 'matrix(1, 0, 0, 1, 20, 10)',
+    //     autoplay: true,
+    //     complete: () => {
+    //         console.log(window.getComputedStyle(document.querySelector('.lucide-history')).transform)
+    //     }
+    // })
+
+    new AnimeScrollTrigger(document.querySelector('main'), animations)
 }
 
 onMounted(() => {

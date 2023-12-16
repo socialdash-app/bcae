@@ -11,7 +11,7 @@ import Highcharts from 'highcharts'
 
 window.Highcharts = Highcharts;
 
-await createInertiaApp({
+createInertiaApp({
     resolve: name => {
         const pages = import.meta.glob('./components/**/*.vue', {eager: true})
         return pages[`./components/${name}.vue`];
