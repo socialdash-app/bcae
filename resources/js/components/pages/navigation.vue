@@ -96,11 +96,11 @@ const init = () => {
     let boxes = [];
     let icons = [];
     let descriptions = [];
-    let boxHeight = window.innerHeight * 0.35;
+    let boxHeight = window.innerHeight * 0.4;
 
     data.forEach((d) => {
         let description = document.createElement("div");
-        description.className = "description grow-0 p-10 w-full flex items-center justify-center shrink-0";
+        description.className = "description text-sm py-4  sm:!text-base  flex sm:items-center grow-0 sm:p-10 w-full shrink-0";
         description.innerText = d.description;
         descriptionContainer.appendChild(description);
         descriptions.push(description);
@@ -193,8 +193,8 @@ const init = () => {
             deg: rotate,
             box: box.innerText
         });
-        box.style.transform = `rotate(${rotate}deg) translateY(-${window.innerHeight * 0.8}px)`;
-        icons[i].style.transform = `rotate(${rotate}deg) translateY(-${window.innerHeight * 0.4}px)`;
+        box.style.transform = `rotate(${rotate}deg) translateY(-${window.innerWidth > 400 ? window.innerHeight * 0.8 : window.innerHeight * 0.95}px)`;
+        icons[i].style.transform = `rotate(${rotate}deg) translateY(-${window.innerWidth > 400 ? window.innerHeight * 0.4 : window.innerHeight * 0.58}px)`;
         let progress = i / boxes.length;
         box.addEventListener('click', (e) => {
             if (isDragging) {
