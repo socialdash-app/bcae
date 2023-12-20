@@ -1,8 +1,9 @@
 <template>
-    <main class="w-screen font-poppins overflow-y-auto overflow-x-hidden h-screen flex items-center flex-col">
+    <main
+        class="w-screen overscroll-none h-screen  font-poppins overflow-y-auto overflow-x-hidden flex items-center flex-col">
         <navigation/>
-        <!--    <home/>-->
-        <!--        <chronicle/>-->
+        <home/>
+        <chronicle/>
         <!--    <the-election/>-->
         <!--    <prominent-events/>-->
         <!--        <party-actions/>-->
@@ -28,10 +29,17 @@ const props = defineProps([]);
 
 const component = shallowRef('beginning-of-the-end');
 
-const data = reactive({});
+const data = reactive({
+    height: '400',
+});
 
+const paddingBottom = screen.height - window.innerHeight
+
+const height = window.innerHeight
 
 onMounted(() => {
+    // data.height = window.innerHeight + '';
+    // alert(window.visualViewport.height + window.innerHeight + ' ' + +' ' + window.screen.availHeight + ' ' + window.screen.height + ' ' + document.getElementById('navigation-container').getBoundingClientRect().height)
     // setTimeout(() => {
     //     component.value = 'accusation';
     //     setTimeout(() => {

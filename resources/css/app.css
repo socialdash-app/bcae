@@ -5,7 +5,8 @@
 @tailwind utilities;
 
 @layer components {
-    html{
+    html {
         @apply font-poppins antialiased leading-relaxed text-gray-800 tracking-wide;
     }
+
 }

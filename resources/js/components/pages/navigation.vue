@@ -1,17 +1,19 @@
 <template>
     <div id="navigation"
          class="flex w-screen relative bg-[#BC6B60] items-center justify-start flex-col">
-        <div class="h-screen w-screen sticky top-0 overflow-hidden flex flex-col items-center shrink-0">
-            <div id="description-container" class="w-11/12 sm:w-10/12 2xl:w-8/12 h-[300px] flex overflow-hidden">
-
+        <div id="navigation-container"
+             :style="{height: height + 'px'}"
+             class="w-screen sticky top-0 overflow-hidden flex flex-col items-center shrink-0">
+            <div id="description-container" class="w-11/12 sm:w-10/12 2xl:w-8/12 h-[50vh] flex overflow-hidden">
             </div>
-            <ul id="boxes" class="w-[300px] h-[300px] absolute bottom-[-600px] flex justify-center items-center">
+            <ul id="boxes"
+                class="w-[300px] h-[70vh] absolute bottom-[-100%] flex justify-center items-center">
             </ul>
-            <ul id="icons" class="w-[300px] h-[300px] absolute bottom-[-500px] flex justify-center items-center">
+            <ul id="icons"
+                class="w-[300px] h-[70vh] absolute bottom-[-100%] flex justify-center items-center">
             </ul>
         </div>
-        <div class="shrink-0" :style="{height: data.length * 600 + 'px'}">
-
+        <div class="shrink-0" :style="{ height: data.length * 600 + 'px' }">
         </div>
     </div>
 </template>
@@ -24,6 +26,10 @@ import AnimeScrollTrigger from 'anime-scrolltrigger'
 // import Hammer from 'hammerjs'
 
 const props = defineProps([]);
+
+const height = window.innerHeight;
+
+// console.log(paddingBottom, window.screen.height, window.innerHeight)
 
 let data = [
     {
@@ -96,7 +102,7 @@ const init = () => {
     let boxes = [];
     let icons = [];
     let descriptions = [];
-    let boxHeight = window.innerHeight * 0.4;
+    let boxHeight = window.innerHeight * 0.35;
 
     data.forEach((d) => {
         let description = document.createElement("div");
@@ -166,8 +172,6 @@ const init = () => {
             });
             currentRotation = currentBox.deg;
         }, 800);
-        // ul.style.transform = `rotateZ(${-currentRotation}deg)`;
-        // iconContainer.style.transform = `rotateZ(${-currentRotation}deg)`
         anime({
             targets: ul,
             rotateZ: -currentRotation,
@@ -184,7 +188,7 @@ const init = () => {
         });
     };
 
-// let boxes = document.querySelectorAll("li");
+    // let boxes = document.querySelectorAll("li");
 
     boxes.forEach((box, i) => {
         let rotate = i * deg;
@@ -193,8 +197,8 @@ const init = () => {
             deg: rotate,
             box: box.innerText
         });
-        box.style.transform = `rotate(${rotate}deg) translateY(-${window.innerWidth > 400 ? window.innerHeight * 0.8 : window.innerHeight * 0.95}px)`;
-        icons[i].style.transform = `rotate(${rotate}deg) translateY(-${window.innerWidth > 400 ? window.innerHeight * 0.4 : window.innerHeight * 0.58}px)`;
+        box.style.transform = `rotate(${rotate}deg) translateY(-${(window.innerHeight) * 0.85}px)`;
+        icons[i].style.transform = `rotate(${rotate}deg) translateY(-${(window.innerHeight) * 0.63}px)`;
         let progress = i / boxes.length;
         box.addEventListener('click', (e) => {
             if (isDragging) {
@@ -206,28 +210,10 @@ const init = () => {
                 scrollTop: progress * height,
                 easing: 'easeOutQuart'
             })
-            // document.querySelector('main').scrollTo({
-            //     top: progress * height,
-            //     behavior: 'smooth',
-            // })
-            // update(rotate - currentRotation)
         })
     }, false);
 
 
-    // document.addEventListener("wheel", function (e) {
-    //     update(e.deltaY * 0.1);
-    // }, false);
-
-    // new WheelGesture(document, (e) => {
-    //     console.log(e.elapsedTime)
-    //     update(e.direction[1] * 5)
-    //     console.log('wheel')
-    // })
-    // document.getElementById('navigation').addEventListener('scroll', (e) => {
-    //     console.log(e)
-    // })
-    let t;
     new AnimeScrollTrigger(document.querySelector('main'), [{
         scrollTrigger: {
             trigger: '#navigation',
@@ -240,22 +226,13 @@ const init = () => {
         }
     }])
     //
-    ul.querySelectorAll("li").forEach((li) => {
-        const gesture = new DragGesture(li, (state) => {
-            isDragging = true;
-            update(currentRotation - (state.direction[0] < 0 ? -1 : 1) * 0.3)
-        }, {
-            threshold: 0.05,
-            axis: 'x'
-        })
-        // const hammertime = new Hammer(li);
-        // hammertime.on("panleft", (e) => {
-        //     update(e.deltaX * 0.1);
-        // });
-        // hammertime.on("panright", (e) => {
-        //     update(e.deltaX * 0.1);
-        // });
-    });
+    new DragGesture(ul, (state) => {
+        isDragging = true;
+        update(currentRotation - (state.direction[0] < 0 ? -1 : 1) * 3)
+    }, {
+        threshold: 0.05,
+        axis: 'x'
+    })
 
 
 }

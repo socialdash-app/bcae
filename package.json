@@ -21,7 +21,7 @@
         "@turf/rewind": "^6.5.0",
         "@use-gesture/vanilla": "^10.3.0",
         "anime-scrolltrigger": "file:../scrollanime",
-        "animejs": "^3.2.1",
+        "animejs": "^3.2.2",
         "d3": "^7.8.5",
         "gsap": "^3.12.2",
         "hammerjs": "^2.0.8",
