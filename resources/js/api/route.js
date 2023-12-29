@@ -2,7 +2,7 @@ import {reactive, shallowRef} from "vue";
 
 export default {
     data: reactive({
-        component: 'navigation',
+        component: 'home',
     }),
     changeTo: function (name) {
         this.data.component = name;

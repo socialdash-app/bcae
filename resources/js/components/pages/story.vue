@@ -25,10 +25,14 @@ const props = defineProps([]);
 
 const data = reactive({})
 
-let currentScrollOffset = 0;
-onMounted(() => {
+const headers = [{
+    name: 'chronicle',
+    primaryColor: '#fff562',
+    secondaryColor: '#FF7F00',
+    icon: '',
+}]
 
-})
+let currentScrollOffset = 0;
 
 onDeactivated(() => {
     currentScrollOffset = document.querySelector('main').scrollTop;

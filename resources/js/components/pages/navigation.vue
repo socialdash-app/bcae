@@ -1,9 +1,10 @@
 <template>
     <div id="navigation"
          :style="{height: height + 'px'}"
-         class="flex shrink-0 w-screen overflow-y-auto overflow-x-hidden relative bg-[#BC6B60] items-center justify-start flex-col">
+         class="flex shrink-0 w-screen overflow-y-auto overflow-x-hidden bg-[#BC6B60] items-center justify-start flex-col">
         <div id="navigation-container"
-             class="w-screen sticky h-full top-0 overflow-hidden flex flex-col items-center shrink-0">
+             :style="{height: height + 'px'}"
+             class="w-screen sticky top-0 overflow-hidden flex flex-col items-center shrink-0">
             <div id="description-container" class="w-11/12 sm:w-10/12 2xl:w-8/12 h-[50vh] flex overflow-hidden">
             </div>
             <ul id="boxes"
@@ -13,7 +14,11 @@
                 class="w-[300px] h-[70vh] absolute bottom-[-100%] flex justify-center items-center">
             </ul>
         </div>
-        <div id="navigation-trigger" class="shrink-0" :style="{ height: data.length * 600 + 'px' }">
+        <div class="shrink-0 absolute -z-10 w-full" id="navigation-trigger"
+             :style="{ height: data.length * height + 'px' }">
+
+        </div>
+        <div class="shrink-0" :style="{ height: data.length * height + 'px' }">
         </div>
     </div>
 </template>
@@ -28,6 +33,7 @@ const props = defineProps([]);
 
 const height = window.innerHeight;
 
+const boxHeight = height / 2;
 // console.log(paddingBottom, window.screen.height, window.innerHeight)
 
 let data = [
@@ -99,7 +105,7 @@ const init = () => {
 
     data.forEach((d) => {
         let description = document.createElement("div");
-        description.className = "description text-4xl font-bevietnampro font-bold items-center justify-center  py-4   flex sm:items-center grow-0 sm:p-10 w-full shrink-0";
+        description.className = "description text-2xl sm:text-4xl font-bevietnampro font-bold text-center items-center justify-center  py-4   flex sm:items-center grow-0 sm:p-10 w-full shrink-0";
         description.innerText = d.description;
         descriptionContainer.appendChild(description);
         descriptions.push(description);
@@ -127,6 +133,7 @@ const init = () => {
     let currentRotation = 0;
     let deg = 360 / (boxes.length + 1);
     let isDragging = false;
+
 
     let width = descriptionContainer.getBoundingClientRect().width * (boxes.length + 1);
 
@@ -199,8 +206,11 @@ const init = () => {
             deg: rotate,
             box: box.innerText
         });
-        box.style.transform = `rotate(${rotate}deg) translateY(-${(window.innerHeight) * 0.85}px)`;
-        icons[i].style.transform = `rotate(${rotate}deg) translateY(-${(window.innerHeight) * 0.63}px)`;
+        // console.log(i * (boxHeight / 2) / Math.tan(deg), (window.innerHeight) * 0.85)
+        box.style.transform = `rotate(${rotate}deg) translateY(-${(window.innerHeight) * 0.95}px)`;
+        icons[i].style.transform = `rotate(${rotate}deg) translateY(-${(window.innerHeight) * 0.7}px)`;
+        // box.style.transform = `rotate(${rotate}deg) translateY(${(boxHeight / 2) / Math.tan(deg)}px)`;
+        // icons[i].style.transform = `rotate(${rotate}deg) translateY(-${(window.innerHeight) * 0.63}px)`;
         let progress = i / boxes.length;
         box.addEventListener('click', (e) => {
             if (isDragging) {
@@ -223,6 +233,7 @@ const init = () => {
             end: 'bottom bottom',
             lerp: true,
             onUpdate: (_, progress) => {
+                console.log(progress)
                 update(progress * deg * data.length)
             }
         }
@@ -240,9 +251,7 @@ const init = () => {
 }
 
 onMounted(() => {
-    setTimeout(() => {
-        init()
-    }, 600)
+    init()
 })
 </script>
 

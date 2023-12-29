@@ -1,11 +1,11 @@
 <template>
     <div id="parent" class="flex font-poppins flex-col w-full">
         <!--        <navigation/>-->
-        <!--        <Transition name="fade" mode="out-in">-->
-        <KeepAlive>
-            <component :is="route.data.component"/>
-        </KeepAlive>
-        <!--        </Transition>-->
+        <Transition name="fade" mode="out-in">
+            <KeepAlive>
+                <component :is="route.data.component"/>
+            </KeepAlive>
+        </Transition>
     </div>
 
 </template>
@@ -33,14 +33,11 @@ onMounted(() => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-    transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+    transition: all 0.8s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-.fade-enter-from {
-    transform: scale(0.8) translateY(-120%);
-}
-
+.fade-enter-from,
 .fade-leave-to {
-    transform: scale(0.8) translateY(-120%);
+    opacity: 0;
 }
 </style>

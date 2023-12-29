@@ -1,6 +1,7 @@
 <template>
     <div id="home"
          :style="{height: height + 'px'}"
+         style="background-color: #111827"
          class="flex relative overflow-y-auto overflow-x-hidden shrink-0 flex-col w-screen">
         <div id="home-container"
              class="w-full sticky z-20 shrink-0 top-0 left-0 py-10 md:py-0 overflow-hidden tracking-wide h-full leading-relaxed text-gray-800 justify-between md:justify-center flex md:!flex-row flex-col items-center">
@@ -8,8 +9,13 @@
                 <div class="h-32 w-full shrink-0">
 
                 </div>
-                <h1 class="title sticky top-0 bg-white z-10 uppercase font-bold text-4xl xl:text-7xl">
-                    Before the coup <br> After the election
+                <h1 class="sticky title top-0 bg-[#111827] z-10 uppercase text-[#E8544E] font-bold text-4xl xl:text-7xl">
+                    <span class="home-title inline-block pr-4 opacity-0 ">Before </span>
+                    <span class="home-title inline-block pr-4 opacity-0 ">the </span>
+                    <span class="home-title inline-block pr-4 opacity-0 ">coup </span> <br>
+                    <span class="home-title inline-block pr-4 opacity-0 ">After </span>
+                    <span class="home-title inline-block pr-4 opacity-0 ">the </span>
+                    <span class="home-title inline-block pr-4 opacity-0 ">election</span>
                 </h1>
                 <div class="h-4/6 w-full shrink-0"></div>
                 <div class="flex flex-col relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
@@ -39,61 +45,72 @@
                 </div>
 
             </div>
-            <div class="w-11/12 md:w-5/12 h-2/6 md:h-full bg-gray-700">
+            <div class="w-11/12 md:w-5/12 h-2/6 md:h-full flex items-end justify-end ">
+                <img class="h-[80vh] z-10 home-illustration opacity-0" src="assets/vote_hand.png" alt="vote"/>
+                <img class="h-[70vh] -ml-40 home-illustration opacity-0" src="assets/protest_hand.png" alt="protest"/>
             </div>
             <div class="absolute bottom-0 z-20">
-                <!--                <div id="card1"-->
-                <!--                     style="z-index: 100;transform: perspective(1000px) rotateY(-45deg) translateY(300px) translateX(-90%);"-->
-                <!--                     class="absolute opacity-0 w-16 h-28 left-1/2 border bg-emerald-300"></div>-->
-                <!--                <div id="card2"-->
-                <!--                     style="z-index: 100;transform: perspective(1000px) rotateY(-45deg) translateY(320px) translateX(-100%);"-->
-                <!--                     class="absolute opacity-0 w-16 h-28 left-1/2 border bg-red-400"></div>-->
-                <!--                <svg id="box" height="100%" stroke-miterlimit="10"-->
-                <!--                     class="w-[35vw] h-full"-->
-                <!--                     style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;"-->
-                <!--                     viewBox="0 0 687 620" width="100%" xml:space="preserve"-->
-                <!--                     xmlns="http://www.w3.org/2000/svg">-->
-                <!--                    <clipPath id="ArtboardFrame">-->
-                <!--                        <rect height="620" width="687" x="0" y="0"/>-->
-                <!--                    </clipPath>-->
-                <!--                    <g clip-path="url(#ArtboardFrame)" id="Layer-1">-->
-                <!--                        <g opacity="1" id="Group 1">-->
-                <!--                            <g opacity="1" id="Box">-->
-                <!--                             <path d="M30 97.5L470.85 135.24L470.85 620L30 582.27L30 97.5Z" fill="#3395ff"-->
-                <!--                                   fill-rule="nonzero"-->
-                <!--                                   opacity="1"-->
-                <!--                                   stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"-->
-                <!--                                   id="Rectangle 5"/>-->
-                <!--                                <path d="M470.85 135.24L657.07 43.95L657.07 528.72L470.85 620L470.85 135.24Z"-->
-                <!--                                      fill="#3395ff" fill-rule="nonzero"-->
-                <!--                                      opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="round"-->
-                <!--                                      stroke-width="1"-->
-                <!--                                      id="Rectangle 6"/>-->
-                <!--                            </g>-->
-                <!--                            <g opacity="1" id="Cover">-->
-                <!--                                 <path d="M204 5.68434e-14L687 41.4L483 141.4L0 100L204 5.68434e-14Z" fill="#3395ff"-->
-                <!--                                       fill-rule="nonzero"-->
-                <!--                                       opacity="1"-->
-                <!--                                       stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"-->
-                <!--                                       id="Rectangle 1"/>-->
-                <!--                                <path d="M0 100L483 141.4L483 200L0 158.6L0 100Z" fill="#3395ff" fill-rule="nonzero"-->
-                <!--                                      opacity="1"-->
-                <!--                                      stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"-->
-                <!--                                      id="Rectangle 2"/>-->
-                <!--                                <path d="M483 141.4L687 41.4L687 100L483 200L483 141.4Z" fill="#3395ff"-->
-                <!--                                      fill-rule="nonzero" opacity="1"-->
-                <!--                                      stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"-->
-                <!--                                      id="Rectangle 3"/>-->
-                <!--                            </g>-->
-                <!--                            <path d="M248 60.72L446.87 77.76L439.41 80.68L240.134 63.61L248 60.72Z" fill="#3395ff"-->
-                <!--                                  fill-rule="nonzero"-->
-                <!--                                  opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="round"-->
-                <!--                                  stroke-width="1"-->
-                <!--                                  id="Rectangle 2"/>-->
-                <!--                        </g>-->
-                <!--                     </g>-->
-                <!--                </svg>-->
-                <canvas class="w-[70vw] h-full" id="canvas" width="100%" height="100%"></canvas>
+                <svg class="h-[50vh] overflow-visible transform translate-y-full" id="Ballot" width="687" height="839"
+                     viewBox="0 0 687 839" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <g id="Ballot initial 1">
+                        <g id="Clip path group">
+                            <mask id="mask0_11_2455" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0"
+                                  y="219" width="687" height="620">
+                                <g id="ArtboardFrame">
+                                    <path id="Vector" d="M687 219H0V839H687V219Z" fill="white"/>
+                                </g>
+                            </mask>
+                            <g mask="url(#mask0_11_2455)">
+                                <g id="Layer-1">
+                                    <g id="Group">
+                                        <g id="Group_2">
+                                            <path id="Vector_2" d="M30 316.5L470.85 354.24V839L30 801.27V316.5Z"
+                                                  fill="#3395FF" stroke="black" stroke-miterlimit="10"
+                                                  stroke-linejoin="round"/>
+                                            <path id="Vector_3"
+                                                  d="M470.85 354.24L657.07 262.95V747.72L470.85 839V354.24Z"
+                                                  fill="#3395FF" stroke="black" stroke-miterlimit="10"
+                                                  stroke-linejoin="round"/>
+                                        </g>
+                                        <g id="Group_3">
+                                            <path id="Vector_4" d="M204 219L687 260.4L483 360.4L0 319L204 219Z"
+                                                  fill="#3395FF" stroke="black" stroke-miterlimit="10"
+                                                  stroke-linejoin="round"/>
+                                            <path id="Vector_5" d="M0 319L483 360.4V419L0 377.6V319Z" fill="#3395FF"
+                                                  stroke="black" stroke-miterlimit="10" stroke-linejoin="round"/>
+                                            <path id="Vector_6" d="M483 360.4L687 260.4V319L483 419V360.4Z"
+                                                  fill="#3395FF" stroke="black" stroke-miterlimit="10"
+                                                  stroke-linejoin="round"/>
+                                        </g>
+                                        <path id="Vector_7"
+                                              d="M248.001 279.72L446.871 296.76L439.411 299.68L240.135 282.61L248.001 279.72Z"
+                                              fill="#3395FF" stroke="black" stroke-miterlimit="10"
+                                              stroke-linejoin="round"/>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                        <mask id="mask1_11_2455" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-657" y="-813"
+                              width="2207" height="1113">
+                            <path id="card mask"
+                                  d="M208.5 260L253.5 283L437 298.5L525.5 260L1055 271.5L1347 181L1548.5 -197L1469 -620.5L991.5 -812.5H54.5L-656.5 -731V-394V-43L-541 217L-208 260H120H208.5Z"
+                                  fill="#D9D9D9" stroke="black"/>
+                        </mask>
+                        <g mask="url(#mask1_11_2455)">
+                            <rect
+                                @click="route.changeTo('navigation')"
+                                style="cursor: pointer; -webkit-transform: rotateY(45deg); transform: rotateY(45deg); -webkit-transform-origin: center; transform-origin: center"
+                                id="card1" x="268" y="400" width="175" height="220"
+                                fill="#6BCAFF"/>
+                            <rect
+                                @click="route.changeTo('story')"
+                                style="cursor: pointer; -webkit-transform: rotateY(45deg); transform: rotateY(45deg); -webkit-transform-origin: center; transform-origin: center"
+                                id="card2" x="263" y="420" width="175" height="220"
+                                fill="#FF7474"/>
+                        </g>
+                    </g>
+                </svg>
             </div>
         </div>
         <div class="w-full h-[300vh] shrink-0">
@@ -214,36 +231,36 @@ const carousel = (elements, initialIndex = 0, duration = 3000) => {
 }
 
 const trigger = () => {
-    const r = new rive.Rive({
-        src: "assets/test.riv",
-        // Or the path to a public Rive asset
-        // src: '/public/example.riv',
-        canvas: document.getElementById("canvas"),
-        autoplay: true,
-        shouldDisableRiveListeners: false,
-        animations: 'Timeline 1',
-        stateMachines: 'State Machine 1',
-        automaticallyHandleEvents: true,
-        onLoad: () => {
-            r.resizeDrawingSurfaceToCanvas();
-            r.on(rive.EventType.RiveEvent, (riveEvent) => {
-                switch (riveEvent.data.name) {
-                    case "hover_exit":
-                        document.body.style.cursor = 'default';
-                        break;
-                    case "hovering":
-                        document.body.style.cursor = 'pointer';
-                        break;
-                    case "click_navigation":
-                        route.changeTo('navigation');
-                        break;
-                    case "click_get_started":
-                        route.changeTo('story');
-                        break;
-                }
-            })
-        },
-    });
+    // const r = new rive.Rive({
+    //     src: "assets/test.riv",
+    //     // Or the path to a public Rive asset
+    //     // src: '/public/example.riv',
+    //     canvas: document.getElementById("canvas"),
+    //     autoplay: true,
+    //     shouldDisableRiveListeners: false,
+    //     animations: 'Timeline 1',
+    //     stateMachines: 'State Machine 1',
+    //     automaticallyHandleEvents: true,
+    //     onLoad: () => {
+    //         r.resizeDrawingSurfaceToCanvas();
+    //         r.on(rive.EventType.RiveEvent, (riveEvent) => {
+    //             switch (riveEvent.data.name) {
+    //                 case "hover_exit":
+    //                     document.body.style.cursor = 'default';
+    //                     break;
+    //                 case "hovering":
+    //                     document.body.style.cursor = 'pointer';
+    //                     break;
+    //                 case "click_navigation":
+    //                     route.changeTo('navigation');
+    //                     break;
+    //                 case "click_get_started":
+    //                     route.changeTo('story');
+    //                     break;
+    //             }
+    //         })
+    //     },
+    // });
 
     const body = document.getElementById('home-text');
     const bodyHeight = body.getBoundingClientRect().height;
@@ -275,50 +292,86 @@ const trigger = () => {
             }
         },
         {
-
+            targets: '#Ballot',
+            translateY: ['100%', '30%'],
             scrollTrigger: {
                 trigger: '#home-trigger',
-                start: '50% bottom',
+                start: '40% bottom',
                 end: 'bottom bottom',
                 lerp: true,
-                onUpdate: (_, progress) => {
-                    // r.scrub('Timeline 1', Math.min(progress * 2, 1.999));
-                }
+                // smooth: true,
             }
-        }
-        // }, {
-        //     targets: ['#card1', '#card2'],
-        //     translateY: '-50px',
-        //     opacity: [0, 1],
-        //     rotateY: '180deg',
-        //     translateX: [{
-        //         value: (el, index) => {
-        //             return index ? -90 : 180;
-        //         },
-        //         delay: 500,
-        //     }],
-        //     width: {
-        //         value: '25%',
-        //         delay: 500,
-        //     },
-        //     height: {
-        //         value: '40%',
-        //         delay: 500,
-        //     },
-        //     // duration: 1000,
-        //     scrollTrigger: {
-        //         trigger: '#home-trigger',
-        //         start: '60% bottom',
-        //         end: 'bottom bottom',
-        //         lerp: true,
-        //         // smooth: true,
-        //     }
-        // },
+        }, {
+            targets: ['#card2', '#card1'],
+            rotateY: 0,
+            y: -300,
+            x: [{
+                value: (el, index) => {
+                    return index ? -200 : 600;
+                },
+                delay: 1000,
+            }],
+            height: [{
+                value: 400,
+                delay: 1000,
+            }],
+            width: [{
+                value: 350,
+                delay: 1000,
+            }],
+            scrollTrigger: {
+                trigger: '#home-trigger',
+                start: '60% bottom',
+                end: 'bottom bottom',
+                lerp: true,
+                // smooth: true,
+            }
+        },
     ]);
 }
 let currentScrollOffset = 0;
 onMounted(() => {
-    trigger();
+
+    anime({
+        targets: '.home-title',
+        delay: anime.stagger(100),
+        duration: 1000,
+        opacity: 1,
+        translateY: ['100%', '0%'],
+        easing: 'easeOutQuart',
+        complete: () => {
+            anime({
+                targets: '#home',
+                background: '#fff',
+                easing: 'easeOutQuart',
+                duration: 1000,
+            })
+
+            anime({
+                targets: '.title',
+                background: '#fff',
+                easing: 'easeOutQuart',
+                duration: 1000,
+            })
+
+            anime({
+                targets: '.home-title',
+                color: '#131313',
+                easing: 'easeOutQuart',
+                duration: 1000,
+            })
+
+            anime({
+                targets: '.home-illustration',
+                opacity: 1,
+                delay: 400,
+                easing: 'easeOutQuart',
+                duration: 1000,
+            })
+
+            trigger();
+        }
+    })
 })
 
 onDeactivated(() => {
@@ -332,4 +385,7 @@ onActivated(() => {
 
 <style scoped>
 
+.home-title {
+    transform: translateY(100%);
+}
 </style>

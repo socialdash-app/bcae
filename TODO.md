@@ -1,7 +1,7 @@
 ## BCAE
 
 - [ ] set single background for all sections in story.
-- [ ] slide text along with cards in navigation
+- [x] slide text along with cards in navigation
 - [ ] make single status bar for all sections
 - [ ] make sure that scrollTrigger loads correctly for all sections
 - [ ] find animation for switching pages.
