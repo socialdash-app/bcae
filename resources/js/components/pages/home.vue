@@ -1,13 +1,17 @@
 <template>
-    <div id="home-trigger" class="flex relative flex-col w-screen items-center">
-        <div id="home"
-             class="w-full sticky top-0 left-0 py-10 md:py-0 overflow-hidden tracking-wide h-screen leading-relaxed text-gray-800 justify-between md:justify-center flex md:!flex-row flex-col items-center">
+    <div id="home"
+         :style="{height: height + 'px'}"
+         class="flex relative overflow-y-auto overflow-x-hidden shrink-0 flex-col w-screen">
+        <div id="home-container"
+             class="w-full sticky z-20 shrink-0 top-0 left-0 py-10 md:py-0 overflow-hidden tracking-wide h-full leading-relaxed text-gray-800 justify-between md:justify-center flex md:!flex-row flex-col items-center">
             <div id="home-text" class="w-11/12 md:w-5/12 relative h-4/6 flex flex-col overflow-hidden">
-                <div class="h-2/6 w-full shrink-0"></div>
+                <div class="h-32 w-full shrink-0">
+
+                </div>
                 <h1 class="title sticky top-0 bg-white z-10 uppercase font-bold text-4xl xl:text-7xl">
                     Before the coup <br> After the election
                 </h1>
-                <div class="h-3/6 w-full shrink-0"></div>
+                <div class="h-4/6 w-full shrink-0"></div>
                 <div class="flex flex-col relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
                     <p class="description w-full text-gray-600">Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
@@ -24,89 +28,95 @@
                         dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
                         labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
                         exercitationem ullam corporis suscipit laboriosam</p>
-                    <h1 class="font-semibold text-xl mt-40">Another Subtitle</h1>
-                    <p class="description w-full mt-4 text-gray-600">Sed ut perspiciatis unde omnis iste natus error sit
-                        voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                        voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-                        eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                        dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
-                        labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-                        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-                        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-                        consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                    <h1 class="font-semibold text-xl mt-40">Interaction and navigation guide</h1>
+                    <p class="description w-full mt-4 text-gray-600">BCAE story is linear and you can scroll vertically
+                        to walk through the story. You can jump to any section in carousel page which can be accessed by
+                        clicking on the section icon in the top-right corner. You can also interact with different
+                        elements in the page. A blinking (i) icon indicates that you can interact with an element, and
+                        it will disappear once you do so. You can click on a static (i) icon to see more information
+                        about an element. Interactable texts are enclosed in [text-box] and you can see more information
+                        by clicking on them.</p>
                 </div>
+
             </div>
             <div class="w-11/12 md:w-5/12 h-2/6 md:h-full bg-gray-700">
             </div>
-            <div class="absolute bottom-0">
-                <div id="card1"
-                     style="z-index: 100;transform: perspective(1000px) rotateY(-45deg) translateY(300px) translateX(-90%);"
-                     class="absolute opacity-0 w-16 h-28 left-1/2 border bg-emerald-300"></div>
-                <div id="card2"
-                     style="z-index: 100;transform: perspective(1000px) rotateY(-45deg) translateY(320px) translateX(-100%);"
-                     class="absolute opacity-0 w-16 h-28 left-1/2 border bg-red-400"></div>
-                <svg id="box" height="100%" stroke-miterlimit="10"
-                     class="w-[35vw] h-full"
-                     style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;"
-                     viewBox="0 0 687 620" width="100%" xml:space="preserve"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <clipPath id="ArtboardFrame">
-                        <rect height="620" width="687" x="0" y="0"/>
-                    </clipPath>
-                    <g clip-path="url(#ArtboardFrame)" id="Layer-1">
-                        <g opacity="1" id="Group 1">
-                            <g opacity="1" id="Box">
-                             <path d="M30 97.5L470.85 135.24L470.85 620L30 582.27L30 97.5Z" fill="#3395ff"
-                                   fill-rule="nonzero"
-                                   opacity="1"
-                                   stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"
-                                   id="Rectangle 5"/>
-                                <path d="M470.85 135.24L657.07 43.95L657.07 528.72L470.85 620L470.85 135.24Z"
-                                      fill="#3395ff" fill-rule="nonzero"
-                                      opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="round"
-                                      stroke-width="1"
-                                      id="Rectangle 6"/>
-                            </g>
-                            <g opacity="1" id="Cover">
-                                 <path d="M204 5.68434e-14L687 41.4L483 141.4L0 100L204 5.68434e-14Z" fill="#3395ff"
-                                       fill-rule="nonzero"
-                                       opacity="1"
-                                       stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"
-                                       id="Rectangle 1"/>
-                                <path d="M0 100L483 141.4L483 200L0 158.6L0 100Z" fill="#3395ff" fill-rule="nonzero"
-                                      opacity="1"
-                                      stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"
-                                      id="Rectangle 2"/>
-                                <path d="M483 141.4L687 41.4L687 100L483 200L483 141.4Z" fill="#3395ff"
-                                      fill-rule="nonzero" opacity="1"
-                                      stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"
-                                      id="Rectangle 3"/>
-                            </g>
-                            <path d="M248 60.72L446.87 77.76L439.41 80.68L240.134 63.61L248 60.72Z" fill="#3395ff"
-                                  fill-rule="nonzero"
-                                  opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="round"
-                                  stroke-width="1"
-                                  id="Rectangle 2"/>
-                        </g>
-                     </g>
-                </svg>
+            <div class="absolute bottom-0 z-20">
+                <!--                <div id="card1"-->
+                <!--                     style="z-index: 100;transform: perspective(1000px) rotateY(-45deg) translateY(300px) translateX(-90%);"-->
+                <!--                     class="absolute opacity-0 w-16 h-28 left-1/2 border bg-emerald-300"></div>-->
+                <!--                <div id="card2"-->
+                <!--                     style="z-index: 100;transform: perspective(1000px) rotateY(-45deg) translateY(320px) translateX(-100%);"-->
+                <!--                     class="absolute opacity-0 w-16 h-28 left-1/2 border bg-red-400"></div>-->
+                <!--                <svg id="box" height="100%" stroke-miterlimit="10"-->
+                <!--                     class="w-[35vw] h-full"-->
+                <!--                     style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;"-->
+                <!--                     viewBox="0 0 687 620" width="100%" xml:space="preserve"-->
+                <!--                     xmlns="http://www.w3.org/2000/svg">-->
+                <!--                    <clipPath id="ArtboardFrame">-->
+                <!--                        <rect height="620" width="687" x="0" y="0"/>-->
+                <!--                    </clipPath>-->
+                <!--                    <g clip-path="url(#ArtboardFrame)" id="Layer-1">-->
+                <!--                        <g opacity="1" id="Group 1">-->
+                <!--                            <g opacity="1" id="Box">-->
+                <!--                             <path d="M30 97.5L470.85 135.24L470.85 620L30 582.27L30 97.5Z" fill="#3395ff"-->
+                <!--                                   fill-rule="nonzero"-->
+                <!--                                   opacity="1"-->
+                <!--                                   stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"-->
+                <!--                                   id="Rectangle 5"/>-->
+                <!--                                <path d="M470.85 135.24L657.07 43.95L657.07 528.72L470.85 620L470.85 135.24Z"-->
+                <!--                                      fill="#3395ff" fill-rule="nonzero"-->
+                <!--                                      opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="round"-->
+                <!--                                      stroke-width="1"-->
+                <!--                                      id="Rectangle 6"/>-->
+                <!--                            </g>-->
+                <!--                            <g opacity="1" id="Cover">-->
+                <!--                                 <path d="M204 5.68434e-14L687 41.4L483 141.4L0 100L204 5.68434e-14Z" fill="#3395ff"-->
+                <!--                                       fill-rule="nonzero"-->
+                <!--                                       opacity="1"-->
+                <!--                                       stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"-->
+                <!--                                       id="Rectangle 1"/>-->
+                <!--                                <path d="M0 100L483 141.4L483 200L0 158.6L0 100Z" fill="#3395ff" fill-rule="nonzero"-->
+                <!--                                      opacity="1"-->
+                <!--                                      stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"-->
+                <!--                                      id="Rectangle 2"/>-->
+                <!--                                <path d="M483 141.4L687 41.4L687 100L483 200L483 141.4Z" fill="#3395ff"-->
+                <!--                                      fill-rule="nonzero" opacity="1"-->
+                <!--                                      stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"-->
+                <!--                                      id="Rectangle 3"/>-->
+                <!--                            </g>-->
+                <!--                            <path d="M248 60.72L446.87 77.76L439.41 80.68L240.134 63.61L248 60.72Z" fill="#3395ff"-->
+                <!--                                  fill-rule="nonzero"-->
+                <!--                                  opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="round"-->
+                <!--                                  stroke-width="1"-->
+                <!--                                  id="Rectangle 2"/>-->
+                <!--                        </g>-->
+                <!--                     </g>-->
+                <!--                </svg>-->
+                <canvas class="w-[70vw] h-full" id="canvas" width="100%" height="100%"></canvas>
             </div>
         </div>
-        <div class="w-full h-[300vh]">
+        <div class="w-full h-[300vh] shrink-0">
+
+        </div>
+        <div id="home-trigger" class="w-full absolute h-[500vh] shrink-0">
 
         </div>
     </div>
 </template>
 
 <script setup>
-import {reactive, onMounted} from "vue";
+import {reactive, onMounted, onDeactivated, onActivated} from "vue";
 import anime from "animejs";
 import AnimeScrollTrigger from 'anime-scrolltrigger';
+import route from "../../api/route.js";
+import * as rive from "@rive-app/canvas";
 
 const props = defineProps([]);
 
 const data = reactive({});
+
+const height = window.innerHeight;
 
 const descriptions = [{
     title: 'We are the one',
@@ -204,72 +214,119 @@ const carousel = (elements, initialIndex = 0, duration = 3000) => {
 }
 
 const trigger = () => {
+    const r = new rive.Rive({
+        src: "assets/test.riv",
+        // Or the path to a public Rive asset
+        // src: '/public/example.riv',
+        canvas: document.getElementById("canvas"),
+        autoplay: true,
+        shouldDisableRiveListeners: false,
+        animations: 'Timeline 1',
+        stateMachines: 'State Machine 1',
+        automaticallyHandleEvents: true,
+        onLoad: () => {
+            r.resizeDrawingSurfaceToCanvas();
+            r.on(rive.EventType.RiveEvent, (riveEvent) => {
+                switch (riveEvent.data.name) {
+                    case "hover_exit":
+                        document.body.style.cursor = 'default';
+                        break;
+                    case "hovering":
+                        document.body.style.cursor = 'pointer';
+                        break;
+                    case "click_navigation":
+                        route.changeTo('navigation');
+                        break;
+                    case "click_get_started":
+                        route.changeTo('story');
+                        break;
+                }
+            })
+        },
+    });
+
     const body = document.getElementById('home-text');
     const bodyHeight = body.getBoundingClientRect().height;
     const bodyScrollHeight = body.scrollHeight;
-    new AnimeScrollTrigger(document.querySelector('main'), [
+    let timeout = null;
+    new AnimeScrollTrigger(document.getElementById('home'), [
         // {
         //     scrollTrigger: {
         //         trigger: '#home-trigger',
-        //         start: '5% top',
+        //         start: 'top top',
         //         end: 'bottom bottom',
-        //         pin: '#home'
+        //         pin: '#home-container'
         //     }
         // },
         {
             scrollTrigger: {
                 trigger: '#home-trigger',
                 start: 'top top',
-                end: '50% bottom',
+                end: '70% bottom',
                 lerp: true,
                 onUpdate: (_, progress) => {
-                    body.scrollTop = progress * (bodyHeight + bodyScrollHeight);
+                    anime({
+                        targets: body,
+                        scrollTop: progress * (bodyHeight + bodyScrollHeight),
+                        easing: 'easeOutQuart',
+                        duration: 400,
+                    })
                 }
             }
         },
         {
-            targets: '#box',
-            translateY: ['100%', '50%'],
-            opacity: 1,
-            duration: 1000,
+
             scrollTrigger: {
                 trigger: '#home-trigger',
-                start: '30% bottom',
+                start: '50% bottom',
                 end: 'bottom bottom',
                 lerp: true,
+                onUpdate: (_, progress) => {
+                    // r.scrub('Timeline 1', Math.min(progress * 2, 1.999));
+                }
             }
-        }, {
-            targets: ['#card1', '#card2'],
-            translateY: '-50px',
-            opacity: [0, 1],
-            rotateY: '180deg',
-            translateX: [{
-                value: (el, index) => {
-                    return index ? -90 : 180;
-                },
-                delay: 500,
-            }],
-            width: {
-                value: '25%',
-                delay: 500,
-            },
-            height: {
-                value: '40%',
-                delay: 500,
-            },
-            duration: 1000,
-            scrollTrigger: {
-                trigger: '#home-trigger',
-                start: '60% bottom',
-                end: 'bottom bottom',
-                lerp: true,
-            }
-        },
+        }
+        // }, {
+        //     targets: ['#card1', '#card2'],
+        //     translateY: '-50px',
+        //     opacity: [0, 1],
+        //     rotateY: '180deg',
+        //     translateX: [{
+        //         value: (el, index) => {
+        //             return index ? -90 : 180;
+        //         },
+        //         delay: 500,
+        //     }],
+        //     width: {
+        //         value: '25%',
+        //         delay: 500,
+        //     },
+        //     height: {
+        //         value: '40%',
+        //         delay: 500,
+        //     },
+        //     // duration: 1000,
+        //     scrollTrigger: {
+        //         trigger: '#home-trigger',
+        //         start: '60% bottom',
+        //         end: 'bottom bottom',
+        //         lerp: true,
+        //         // smooth: true,
+        //     }
+        // },
     ]);
 }
-
+let currentScrollOffset = 0;
 onMounted(() => {
     trigger();
+})
+
+onDeactivated(() => {
+    currentScrollOffset = document.querySelector('#home').scrollTop;
+})
+
+onActivated(() => {
+    document.querySelector('#home').scrollTop = currentScrollOffset;
 })
 </script>
 

@@ -8,6 +8,9 @@ import {createInertiaApp} from '@inertiajs/vue3';
 import {Toaster} from 'js-utils';
 import {DatePicker} from "v-calendar";
 import Highcharts from 'highcharts'
+import Home from "./components/pages/home.vue";
+import Navigation from "./components/pages/navigation.vue";
+import Story from "./components/pages/story.vue";
 
 window.Highcharts = Highcharts;
 
@@ -33,6 +36,10 @@ createInertiaApp({
         //     // let componentPath = component.replace('./components/', '').replace('.vue', '');
         //     app.component(componentName, defineAsyncComponent(() => components[component]()))
         // }
+
+        app.component('home', Home);
+        app.component('navigation', Navigation);
+        app.component('story', Story);
 
         app.component('DatePicker', DatePicker)
 

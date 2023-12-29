@@ -1,33 +1,20 @@
 <template>
-    <main
-        class="w-screen overscroll-none h-screen  font-poppins overflow-y-auto overflow-x-hidden flex items-center flex-col">
-        <navigation/>
-        <home/>
-        <chronicle/>
-        <!--    <the-election/>-->
-        <!--    <prominent-events/>-->
-        <!--        <party-actions/>-->
-        <!--        <the-military/>-->
-        <!--    <correlated-actions/>-->
-        <!--    <beginning-of-the-end/>-->
-    </main>
+    <div id="parent" class="flex font-poppins flex-col w-full">
+        <!--        <navigation/>-->
+        <!--        <Transition name="fade" mode="out-in">-->
+        <KeepAlive>
+            <component :is="route.data.component"/>
+        </KeepAlive>
+        <!--        </Transition>-->
+    </div>
+
 </template>
 
 <script setup>
 import {reactive, onMounted, shallowRef} from "vue";
-import TheElection from "./pages/the-election.vue";
-import Chronicle from "./pages/chronicle.vue";
-import ProminentEvents from "./pages/prominent-events/prominent-events.vue";
-import Home from "./pages/home.vue";
-import TheMilitary from "./pages/the-military/the-military.vue";
-import CorrelatedActions from "./pages/correlated-actions/correlated-actions.vue";
-import PartyActions from "./pages/party-actions/party-actions.vue";
-import BeginningOfTheEnd from "./pages/beginning-of-the-end/beginning-of-the-end.vue";
-import Navigation from "./pages/navigation.vue";
+import route from "../api/route.js";
 
 const props = defineProps([]);
-
-const component = shallowRef('beginning-of-the-end');
 
 const data = reactive({
     height: '400',
@@ -40,23 +27,20 @@ const height = window.innerHeight
 onMounted(() => {
     // data.height = window.innerHeight + '';
     // alert(window.visualViewport.height + window.innerHeight + ' ' + +' ' + window.screen.availHeight + ' ' + window.screen.height + ' ' + document.getElementById('navigation-container').getBoundingClientRect().height)
-    // setTimeout(() => {
-    //     component.value = 'accusation';
-    //     setTimeout(() => {
-    //         component.value = 'navigation';
-    //     }, 4000)
-    // }, 4000)
 })
 </script>
 
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s ease;
+    transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-.fade-enter-from,
+.fade-enter-from {
+    transform: scale(0.8) translateY(-120%);
+}
+
 .fade-leave-to {
-    opacity: 0;
+    transform: scale(0.8) translateY(-120%);
 }
 </style>
