@@ -20,13 +20,31 @@ export const chronicle = `<svg xmlns="http://www.w3.org/2000/svg" width="24" hei
 
 export const theElection = ` <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="lucide absolute w-7 h-7 lucide-vote">
+                     class="lucide w-full h-full lucide-vote">
                     <path d="m9 12 2 2 4-4"/>
                     <path d="M5 7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v12H5V7Z"/>
                     <path d="M22 19H2"/>
                 </svg>`
-export const prominentEvents = ``
-export const partyActions = ``
-export const theMilitary = ``
-export const correlatedActions = ``
-export const beginningOfTheEnd = ``
+
+export const prominentEvents = `<svg class="w-full h-full" width="42" height="42" viewBox="0 0 42 42" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12.25 24.5V21H29.75V24.5H12.25ZM12.25 31.5V28H24.5V31.5H12.25ZM8.75 38.5C7.7875 38.5 6.96325 38.157 6.27725 37.471C5.59125 36.785 5.24884 35.9613 5.25 35L5.25 10.5C5.25 9.5375 5.593 8.71325 6.279 8.02725C6.965 7.34125 7.78867 6.99883 8.75 7H10.5V3.5L14 3.5V7H28V3.5L31.5 3.5V7H33.25C34.2125 7 35.0368 7.343 35.7228 8.029C36.4088 8.715 36.7512 9.53867 36.75 10.5V35C36.75 35.9625 36.407 36.7868 35.721 37.4728C35.035 38.1587 34.2113 38.5012 33.25 38.5H8.75ZM8.75 35H33.25V17.5H8.75V35Z"
+                                fill="#041D02"/>
+                        </svg>`
+export const partyActions = ` <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide w-full h-full lucide-vote">
+                            <path d="m9 12 2 2 4-4"/>
+                            <path d="M5 7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v12H5V7Z"/>
+                            <path d="M22 19H2"/>
+                        </svg>`
+export const theMilitary = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide w-full h-full lucide-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>`
+export const correlatedActions = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide w-full h-full lucide-route">
+                            <circle cx="6" cy="19" r="3"/>
+                            <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/>
+                            <circle cx="18" cy="5" r="3"/>
+                        </svg>`
+export const beginningOfTheEnd = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide w-full h-full lucide-alert-circle"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>`

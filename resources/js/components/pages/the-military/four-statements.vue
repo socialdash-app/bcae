@@ -79,17 +79,14 @@ let init = () => {
             pin: '#four-statements-pinner',
             lerp: true,
             start: 'top top',
-            end: 'bottom bottom',
-            onUpdate: (_, progress) => {
-                // console.log(progress)
-            }
+            end: 'bottom center',
         },
     }])
 }
 onMounted(() => {
     setTimeout(() => {
         init();
-    }, 500)
+    }, 2000)
 })
 </script>
 

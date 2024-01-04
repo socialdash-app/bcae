@@ -1,13 +1,14 @@
 <template>
     <div style="height: 200vh;" id="military-intro" class="w-10/12 relative flex flex-col items-center">
-        <div id="military-intro-pinner" class="relative h-screen flex w-8/12 flex-col justify-center items-center">
-            <h1 style="transform: translateY(50vh)" class="text-7xl military-intro-title font-semibold">
+        <div id="military-intro-pinner"
+             class="relative h-[50vh] flex w-8/12 flex-col justify-center items-center">
+            <h1 style="transform: translateY(200px)" class="opacity-0 text-7xl military-intro-title font-semibold">
                 Military’s
                 Interference
                 in
                 the election</h1>
-            <p style="transform: translateY(50vh)"
-               class="w-full mt-24 tracking-wider military-intro-content leading-relaxed">
+            <p style="transform: translateY(200px)"
+               class="w-full mt-24 tracking-wider opacity-0  military-intro-content leading-relaxed">
                 Lorem ipsum dolor sit amet consectetur. Nulla eget massa etiam odio faucibus hac sed cursus faucibus.
                 Volutpat praesent tempus placerat vitae. Proin fringilla non dignissim est mi risus vitae. Duis neque
                 eget dui vel. Aliquet adipiscing sapien nulla vel faucibus neque risus arcu. Non et eu non id.
@@ -31,6 +32,7 @@ onMounted(() => {
         new AnimeScrollTrigger(document.querySelector('main'), [{
             targets: '.military-intro-title',
             translateY: '0',
+            opacity: 1,
             scrollTrigger: {
                 trigger: '#military-intro',
                 start: 'top center',
@@ -41,10 +43,11 @@ onMounted(() => {
         }, {
             targets: '.military-intro-content',
             translateY: '0',
+            opacity: 1,
             scrollTrigger: {
                 trigger: '#military-intro',
                 start: 'center center',
-                end: 'bottom bottom',
+                end: 'bottom 90%',
                 smooth: true,
                 lerp: true,
             }
@@ -56,7 +59,7 @@ onMounted(() => {
                 pin: '#military-intro-pinner',
             }
         }])
-    }, 500)
+    }, 2000)
 })
 </script>
 

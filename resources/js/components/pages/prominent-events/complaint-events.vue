@@ -142,7 +142,7 @@ onMounted(() => {
 
     setTimeout(() => {
         new AnimeScrollTrigger(document.querySelector('main'), animations)
-    }, 300)
+    }, 2000)
 
     document.addEventListener("click", (e) => {
         if (!currentExpandedArticle) return;

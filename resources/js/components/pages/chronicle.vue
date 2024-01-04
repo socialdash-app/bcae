@@ -1,23 +1,5 @@
 <template>
-    <div id="chronicle-trigger" class="w-full bg-[#fff562] flex relative flex-col items-center">
-        <div class="w-full flex justify-between z-[100] h-24 items-center px-20 sticky top-0 left-0">
-            <h1 class="text-xl font-semibold">Chronicle</h1>
-            <div id="t" class="relative flex items-center justify-center">
-                <svg width="60" height="60" viewBox="0 0 60 60">
-                    <circle id="chronicle-progress-indicator" stroke-dashoffset="160" stroke-dasharray="160" r="25"
-                            fill="none" stroke-width="8"
-                            stroke="#FF7F00" cx="30"
-                            cy="30"></circle>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="lucide absolute w-7 h-7 lucide-history">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                    <path d="M3 3v5h5"/>
-                    <path d="M12 7v5l4 2"/>
-                </svg>
-            </div>
-        </div>
+    <div id="chronicle-trigger" class="w-full pt-24 flex relative bg-[#fff562] flex-col items-center">
         <div id="chronicle" class="w-9/12 relative flex justify-between">
             <div class="w-5/12 h-[60vh] sticky overflow-hidden top-24 left-0">
                 <div class="chronicle-illustration w-full absolute h-5/6"
@@ -46,6 +28,7 @@
 import {reactive, onMounted} from "vue";
 import AnimeScrollTrigger from 'anime-scrolltrigger'
 import anime from "animejs";
+import route from "../../api/route.js";
 
 const props = defineProps([]);
 
@@ -114,23 +97,24 @@ const init = () => {
         t.push(Object.assign({}, window.getComputedStyle(chronicleIllustrations[i])));
     }
 
-    let b = anime({
-        targets: t,
-        height: '400px',
-        width: '400px',
-        autoplay: false,
-    })
-
     animations.push({
-        targets: '#chronicle-progress-indicator',
+        targets: '#header-chronicle circle',
         strokeDashoffset: 0,
         // easing: 'easeOutBounce',
         scrollTrigger: {
             smooth: true,
             trigger: '#chronicle-trigger',
             start: 'top top',
-            end: 'bottom bottom',
+            end: 'bottom top',
             lerp: true,
+            onEnter: () => {
+                route.changeSectionHeader(0)
+                console.log('enter chronicle')
+            },
+            onEnterBack: () => {
+                route.changeSectionHeader(0)
+                console.log('enter back chronicle');
+            },
             onUpdate: (_, progress) => {
                 // b.seek(b.duration * progress);
                 // let animation = {};
@@ -173,7 +157,7 @@ const init = () => {
 onMounted(() => {
     setTimeout(() => {
         init()
-    }, 500)
+    }, 2000)
 })
 </script>
 

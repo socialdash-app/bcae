@@ -212,8 +212,11 @@ onMounted(() => {
         colors = d3.scaleLinear()
             .domain(range)
             .range(["#084CFB", "#F99500"]);
-        init();
-        listenTriggers()
+        setTimeout(() => {
+            init();
+            listenTriggers()
+        }, 2000)
+
     })
 })
 </script>

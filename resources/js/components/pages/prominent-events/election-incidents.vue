@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full p-10 flex flex-col gap-6">
+    <div class="w-full p-10 flex flex-col gap-6 h-screen">
         <h1 class="w-full text-center font-bold text-3xl">Election Incidents</h1>
         <div class="w-full mt-8 mb-12 flex gap-x-8 justify-center items-center">
             <div class="flex items-center gap-x-4">

@@ -1,23 +1,5 @@
 <template>
-    <div id="the-election" class="w-full items-center flex flex-col bg-[#F9E2F0] relative">
-        <div class="w-full flex justify-between bg-[#F9E2F0] z-[100] h-24 items-center px-20 sticky top-0 left-0">
-            <h1 class="text-xl font-semibold">Advance Votes for {{ data.currentHluttaw }} Hluttaw</h1>
-            <div class="relative flex items-center justify-center">
-                <svg width="60" height="60" viewBox="0 0 60 60">
-                    <circle id="circular-progress-indicator" stroke-dashoffset="160" stroke-dasharray="160" r="25"
-                            fill="none" stroke-width="8"
-                            stroke="#F788BF" cx="30"
-                            cy="30"></circle>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="lucide absolute w-7 h-7 lucide-vote">
-                    <path d="m9 12 2 2 4-4"/>
-                    <path d="M5 7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v12H5V7Z"/>
-                    <path d="M22 19H2"/>
-                </svg>
-            </div>
-        </div>
+    <div id="the-election" class="w-full bg-[#F9E2F0] py-10 items-center flex flex-col relative">
         <div class="w-full flex relative justify-evenly">
             <div class="w-4/12 h-[85vh] sticky top-24 left-0 flex flex-col overflow-hidden">
                 <svg id="map">
@@ -56,6 +38,7 @@ import {onMounted, reactive} from 'vue';
 import * as d3 from 'd3';
 import {PopOver} from "vue-common-components";
 import AnimeScrollTrigger from "anime-scrolltrigger";
+import route from "../../api/route.js";
 
 let zoomIntoRegion, resetZoom;
 
@@ -146,50 +129,56 @@ const init = () => {
                 zoomIntoRegion(d.properties.ST)
             });
     });
-
-
 }
 onMounted(() => {
-    init()
-    let container = document.getElementById('the-election')
-    let divs = container.querySelectorAll('.trigger');
-    let indicator = container.querySelector('#circular-progress-indicator')
-    let triggers = [
-        {
-            targets: divs[1],
-            easing: 'linear',
-            scrollTrigger: {
-                trigger: divs[1],
-                start: 'top 40%',
-                end: 'bottom center',
-                lerp: true,
-                onEnter: () => {
-                    console.log('enter')
-                    zoomIntoRegion('Kachin')
-                },
-                onEnterBack: () => console.log('enter back'),
-                onLeaveBack: () => {
-                    resetZoom();
+    setTimeout(() => {
+        init()
+        let container = document.getElementById('the-election')
+        let divs = container.querySelectorAll('.trigger');
+        let triggers = [
+            {
+                targets: divs[1],
+                easing: 'linear',
+                scrollTrigger: {
+                    trigger: divs[1],
+                    start: 'top 40%',
+                    end: 'bottom center',
+                    lerp: true,
+                    onEnter: () => {
+                        console.log('enter')
+                        zoomIntoRegion('Kachin')
+                    },
+                    onEnterBack: () => console.log('enter back'),
+                    onLeaveBack: () => {
+                        resetZoom();
+                    }
+                }
+            },
+            {
+                targets: '#header-the-election circle',
+                strokeDashoffset: 0,
+                scrollTrigger: {
+                    trigger: container,
+                    start: 'top top',
+                    end: 'bottom top',
+                    lerp: true,
+                    smooth: true,
+                    onEnter: () => {
+                        route.changeSectionHeader(1)
+                        console.log('enter election')
+                    },
+                    onEnterBack: () => {
+                        route.changeSectionHeader(1)
+                        console.log('enter back election');
+                    },
                 }
             }
-        },
-        {
-            targets: indicator,
-            strokeDashoffset: 0,
-            scrollTrigger: {
-                trigger: container,
-                start: 'top top',
-                end: 'bottom bottom',
-                lerp: true,
-                onUpdate: (_, progress) => {
-                    console.log(progress)
-                }
-            }
-        }
-    ]
+        ]
 
 
-    new AnimeScrollTrigger(document.querySelector('main'), triggers);
+        new AnimeScrollTrigger(document.querySelector('main'), triggers);
+    }, 2000)
+
 })
 
 </script>

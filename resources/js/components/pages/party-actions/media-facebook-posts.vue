@@ -1,6 +1,6 @@
 <template>
     <div id="party-facebook-media-posts-trigger"
-         class="w-full relative text-white flex flex-col items-center">
+         class="w-full relative text-white flex flex-col items-center" :style="{height: articles.length * 600 + 'px'}">
         <div class="w-full flex flex-col h-screen sticky top-0 items-center justify-center"
              id="party-facebook-media-posts">
             <div v-for="(article, index) in articles"
@@ -63,15 +63,15 @@ onMounted(() => {
         }],
         translateY: [{
             value: 0,
-            duration: (el, index) => (index + 1) * duration * 0.5,
+            duration: (el, index) => (index + 1) * duration,
         }, {
             value: (el, index) => {
                 return index !== articles.length - 1 ? document.querySelector('main').scrollTop - articleRect.top - articleRect.height - 10 : 0;
             },
+            duration: (el, index) => (index + 1) * duration,
         }],
         scrollTrigger: {
             trigger: document.querySelector('#party-facebook-media-posts-trigger'),
-            // debug: true,
             lerp: true,
             start: 'top top',
             end: 'bottom 90%',
@@ -80,7 +80,7 @@ onMounted(() => {
 
     setTimeout(() => {
         new AnimeScrollTrigger(document.querySelector('main'), animations)
-    }, 1200)
+    }, 2000)
 })
 </script>
 

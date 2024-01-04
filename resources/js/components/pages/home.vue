@@ -19,7 +19,7 @@
                 </h1>
                 <div class="h-4/6 w-full shrink-0"></div>
                 <div class="flex flex-col relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
-                    <p class="description w-full text-gray-600">Lorem Ipsum is simply dummy text of the printing and
+                    <p class="description w-full text-gray-700">Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
                         1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
                         book. It has survived not only five centuries, but also the leap into electronic typesetting,
@@ -35,7 +35,7 @@
                         labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
                         exercitationem ullam corporis suscipit laboriosam</p>
                     <h1 class="font-semibold text-xl mt-40">Interaction and navigation guide</h1>
-                    <p class="description w-full mt-4 text-gray-600">BCAE story is linear and you can scroll vertically
+                    <p class="description w-full mt-4 text-gray-700">BCAE story is linear and you can scroll vertically
                         to walk through the story. You can jump to any section in carousel page which can be accessed by
                         clicking on the section icon in the top-right corner. You can also interact with different
                         elements in the page. A blinking (i) icon indicates that you can interact with an element, and
@@ -43,11 +43,23 @@
                         about an element. Interactable texts are enclosed in [text-box] and you can see more information
                         by clicking on them.</p>
                 </div>
-
             </div>
             <div class="w-11/12 md:w-5/12 h-2/6 md:h-full flex items-end justify-end ">
-                <img class="h-[80vh] z-10 home-illustration opacity-0" src="assets/vote_hand.png" alt="vote"/>
-                <img class="h-[70vh] -ml-40 home-illustration opacity-0" src="assets/protest_hand.png" alt="protest"/>
+                <img style="transform-origin: center bottom; transform: scale(1);"
+                     class="h-[80vh] z-10 home-illustration opacity-0"
+                     src="assets/vote_hand.png" alt="vote"/>
+                <img style="transform-origin: center bottom; transform: scale(0.8);"
+                     class="h-[70vh] -ml-44 home-illustration opacity-0"
+                     src="assets/protest_hand.png" alt="protest"/>
+            </div>
+            <div id="scroll-down-indicator" class="fixed  bottom-8 opacity-0 gap-y-6 flex flex-col items-center">
+                <h1 class="text-xl">Scroll Down</h1>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="lucide lucide-mouse">
+                    <rect x="5" y="2" width="14" height="20" rx="7"/>
+                    <path d="M12 6v4"/>
+                </svg>
             </div>
             <div class="absolute bottom-0 z-20">
                 <svg class="h-[50vh] overflow-visible transform translate-y-full" id="Ballot" width="687" height="839"
@@ -127,7 +139,6 @@ import {reactive, onMounted, onDeactivated, onActivated} from "vue";
 import anime from "animejs";
 import AnimeScrollTrigger from 'anime-scrolltrigger';
 import route from "../../api/route.js";
-import * as rive from "@rive-app/canvas";
 
 const props = defineProps([]);
 
@@ -231,56 +242,47 @@ const carousel = (elements, initialIndex = 0, duration = 3000) => {
 }
 
 const trigger = () => {
-    // const r = new rive.Rive({
-    //     src: "assets/test.riv",
-    //     // Or the path to a public Rive asset
-    //     // src: '/public/example.riv',
-    //     canvas: document.getElementById("canvas"),
-    //     autoplay: true,
-    //     shouldDisableRiveListeners: false,
-    //     animations: 'Timeline 1',
-    //     stateMachines: 'State Machine 1',
-    //     automaticallyHandleEvents: true,
-    //     onLoad: () => {
-    //         r.resizeDrawingSurfaceToCanvas();
-    //         r.on(rive.EventType.RiveEvent, (riveEvent) => {
-    //             switch (riveEvent.data.name) {
-    //                 case "hover_exit":
-    //                     document.body.style.cursor = 'default';
-    //                     break;
-    //                 case "hovering":
-    //                     document.body.style.cursor = 'pointer';
-    //                     break;
-    //                 case "click_navigation":
-    //                     route.changeTo('navigation');
-    //                     break;
-    //                 case "click_get_started":
-    //                     route.changeTo('story');
-    //                     break;
-    //             }
-    //         })
-    //     },
-    // });
 
     const body = document.getElementById('home-text');
     const bodyHeight = body.getBoundingClientRect().height;
     const bodyScrollHeight = body.scrollHeight;
     let timeout = null;
     new AnimeScrollTrigger(document.getElementById('home'), [
-        // {
-        //     scrollTrigger: {
-        //         trigger: '#home-trigger',
-        //         start: 'top top',
-        //         end: 'bottom bottom',
-        //         pin: '#home-container'
-        //     }
-        // },
         {
+            targets: '.home-illustration',
+            // translateX: [{
+            //     value: (_, index) => index === 0 ? 300 : -200,
+            //     delay: 1000,
+            // }],
+            scale: [{
+                value: (_, index) => index === 0 ? 0.7 : 1.1,
+                // delay: 1000,
+            }],
+            zIndex: (_, index) => index === 0 ? -10 : 10,
+            translateY: [0, 0],
             scrollTrigger: {
                 trigger: '#home-trigger',
-                start: 'top top',
+                start: '1% top',
                 end: '70% bottom',
                 lerp: true,
+                onLeaveBack: () => {
+                    anime({
+                        targets: '#scroll-down-indicator',
+                        easing: 'easeOutQuart',
+                        opacity: 1,
+                        translateY: [100, 0],
+                        duration: 1000,
+                    })
+                },
+                onEnter: () => {
+                    anime({
+                        targets: '#scroll-down-indicator',
+                        easing: 'easeOutQuart',
+                        opacity: 0,
+                        translateY: [0, 100],
+                        duration: 1000,
+                    })
+                },
                 onUpdate: (_, progress) => {
                     anime({
                         targets: body,
@@ -302,8 +304,11 @@ const trigger = () => {
                 // smooth: true,
             }
         }, {
-            targets: ['#card2', '#card1'],
-            rotateY: 0,
+            targets: ['#card1', '#card2'],
+            rotateY: [{
+                value: 180,
+                delay: 1000,
+            }],
             y: -300,
             x: [{
                 value: (el, index) => {
@@ -312,11 +317,11 @@ const trigger = () => {
                 delay: 1000,
             }],
             height: [{
-                value: 400,
+                value: 350,
                 delay: 1000,
             }],
             width: [{
-                value: 350,
+                value: 300,
                 delay: 1000,
             }],
             scrollTrigger: {
@@ -330,8 +335,8 @@ const trigger = () => {
     ]);
 }
 let currentScrollOffset = 0;
-onMounted(() => {
 
+const init = () => {
     anime({
         targets: '.home-title',
         delay: anime.stagger(100),
@@ -362,16 +367,27 @@ onMounted(() => {
             })
 
             anime({
+                targets: '#scroll-down-indicator',
+                easing: 'easeOutQuart',
+                opacity: 1,
+                translateY: [100, 0],
+                duration: 100,
+            })
+
+            anime({
                 targets: '.home-illustration',
                 opacity: 1,
-                delay: 400,
+                translateY: [100, 0],
+                delay: (_, index) => index * 400,
                 easing: 'easeOutQuart',
                 duration: 1000,
             })
-
             trigger();
         }
     })
+}
+onMounted(() => {
+    init();
 })
 
 onDeactivated(() => {

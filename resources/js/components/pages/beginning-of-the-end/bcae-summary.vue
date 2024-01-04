@@ -1,6 +1,6 @@
 <template>
     <div id="summary" class="w-full flex justify-center relative" :style="{height:300 + 'vh'}">
-        <div id="summary-pinner" class="w-10/12 p-10 h-screen text-white flex flex-col gap-y-12">
+        <div id="summary-pinner" class="w-10/12 mt-24 p-10 h-screen text-white flex flex-col gap-y-12">
             <h1 class="text-xl font-semibold">Summary</h1>
             <div class="summary-header flex items-center font-semibold  w-full justify-between">
                 <div class="overflow-hidden w-2/12 relative h-28 text-6xl flex flex-col">
@@ -211,7 +211,6 @@ onMounted(() => {
         // })
         // animations.push(animation)
     }
-    console.log(stopPercentages)
     let currentIndex = 0;
     let timeout = null;
     setTimeout(() => {
@@ -241,7 +240,7 @@ onMounted(() => {
                 }
             }
         }])
-    }, 1200)
+    }, 2000)
 })
 </script>
 

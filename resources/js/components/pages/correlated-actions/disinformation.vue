@@ -212,7 +212,9 @@ onMounted(() => {
             }
         })
     })
-    new AnimeScrollTrigger(main, animations)
+    setTimeout(() => {
+        new AnimeScrollTrigger(main, animations)
+    }, 2000)
 })
 </script>
 

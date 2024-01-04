@@ -1,5 +1,5 @@
 <template>
-    <div class="w-7/12 py-10 h-full relative flex items-center justify-center">
+    <div class="w-7/12 py-10 h-screen relative flex items-center justify-center">
         <div id="party-accusations-facebook-posts" class="w-full md:px-0 px-2 flex h-full items-center justify-center">
         </div>
     </div>

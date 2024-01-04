@@ -95,7 +95,7 @@ const init = () => {
 
     let navigation = document.getElementById('navigation');
 
-    let height = navigation.getBoundingClientRect().height - window.innerHeight;
+    let height = (data.length * window.innerHeight) - window.innerHeight;
 
     // build boxes
     let boxes = [];
@@ -135,7 +135,7 @@ const init = () => {
     let isDragging = false;
 
 
-    let width = descriptionContainer.getBoundingClientRect().width * (boxes.length + 1);
+    let width = descriptionContainer.getBoundingClientRect().width * boxes.length;
 
     let update = function (angle) {
         if (timeout) clearTimeout(timeout);
@@ -177,7 +177,7 @@ const init = () => {
         }, 800);
         anime({
             targets: descriptionContainer,
-            scrollLeft: (currentRotation / 360) * width,
+            scrollLeft: (currentRotation / (360 - deg)) * width,
             duration: 400,
             easing: "easeOutQuart"
         })
@@ -212,15 +212,18 @@ const init = () => {
         // box.style.transform = `rotate(${rotate}deg) translateY(${(boxHeight / 2) / Math.tan(deg)}px)`;
         // icons[i].style.transform = `rotate(${rotate}deg) translateY(-${(window.innerHeight) * 0.63}px)`;
         let progress = i / boxes.length;
+
         box.addEventListener('click', (e) => {
             if (isDragging) {
                 isDragging = false;
                 return;
             }
+            console.log(progress)
             anime({
-                targets: document.querySelector('main'),
+                targets: navigation,
                 scrollTop: progress * height,
-                easing: 'easeOutQuart'
+                easing: 'easeOutQuart',
+                duration: 600,
             })
         })
     }, false);
@@ -239,19 +242,21 @@ const init = () => {
         }
     }])
     //
+    ul.style.touchAction = 'none'
     new DragGesture(ul, (state) => {
+        console.log('drag')
         isDragging = true;
         update(currentRotation - (state.direction[0] < 0 ? -1 : 1) * 3)
     }, {
         threshold: 0.05,
         axis: 'x'
     })
-
-
 }
 
 onMounted(() => {
-    init()
+    setTimeout(() => {
+        init()
+    }, 1000)
 })
 </script>
 

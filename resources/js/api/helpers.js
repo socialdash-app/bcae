@@ -17,3 +17,16 @@ export function convertHex(hexCode, opacity = 1) {
 
     return 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
 }
+
+export function separateWordByDash(string) {
+    let split = string.split(' ');
+    let final = '';
+    split.forEach((v, index) => {
+        // final += v.substring(0, 1).toUpperCase() + v.substring(1, v.length);
+        final += v.toLowerCase();
+        if (index !== split.length - 1) {
+            final += '-';
+        }
+    })
+    return final;
+}

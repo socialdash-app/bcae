@@ -7,7 +7,7 @@
             <div v-for="(article,index) in articles"
                  class="beginning-of-the-end-media-post-title absolute font-semibold text-2xl"
                  style="color:#E8544E; -webkit-text-fill-color: #E8544E; transform-origin: 0 0; width: 600px; text-align: right"
-                 :style="{transform : `translateX(-60px) translateY(${(index + 1) * 600}px) rotate(-90deg)`,}">
+                 :style="{transform : `translateX(-60px) translateY(${(index + 1) * 600}px) rotate(-90deg)`, opacity: index === 0 ? 1: 0.4}">
                 {{ article.title }}
             </div>
             <div
@@ -66,23 +66,20 @@ const translateDistance = 20;
 
 const data = reactive({})
 const articles = [{
-    dateTime: '2/1/2021 2:51:12',
-    author: 'John',
+    dateTime: '2/1/2021 2:51:25',
+    author: 'Myo Yan Naung Thein',
     title: 'First Post Related To Coup',
-    description: 'Lorem ipsum dolor sit amet consectetur. Faucibus pellentesque purus pellentesque congue suspendisse integer dapibus ac. Tellus pellentesque sed vel tincidunt erat rhoncus commodo dui. Pharetra faucibus arcu blandit mauris sagittis donec felis. Hac pellentesque faucibus tristique hendrerit vitae velit. A ornare mattis a egestas praesent integer fermentum mi amet. Accumsan at odio ornare morbi duis urna id bibendum lectus....',
+    description: '"Emergency Tip" If your Internet connection is down, you can use your phone to connect to each other through a mesh network. Available Mesh Network Apps are: "FireChat" for android and apple iOS; "The Serval Mesh" for android; "Signal Offline Messenger" for android; "Vojer" for apple iOS; "Bridgefy" for android and apple iOS; and "Briar" for android. Here is an example of "Bridgefy" app. You can use the "Bridgefy" app in case of sudden internet outage. This app was used by pro-revolutionaries during the Hong Kong protests. Its advantage is that it can send text messages via bluetooth without internet connection, which is very useful. The Chinese Government\'s advanced technology could not prevent the use of this apk during the protests in Hong Kong. Using this apk, you can connect up to 100 meters (about 330 feet) from one phone to another. If there is a telephone within every 100 meters, and by connecting, it can be connect to even the most distant places. You can use this apk to send individual messages or you can share your message to everyone nearby with the Broadcast function. That app can be used on both iPhone and Android. We encourage you to download and install it because it need internet connection for first time to log in. You can easily search and download it in Play Store or App Store by typing "Bridgefy". (Note: We want you to start using it while you have access to use the internet). Here is the link: https://www.facebook.com/100005014158392/posts/1763764217134033/?d=n',
 }, {
-    dateTime: '31/2/2021 1:51:12',
-    author: 'Doe',
+    dateTime: '2/1/2021 3:43:03',
+    author: 'လူငယ့်အသံလူငယ့်ဟန',
     title: 'First Post About Coup',
-    description: 'orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n' +
-        'Why do we use it?\n' +
-        '\n' +
-        'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n'
+    description: "Shan State Planning and Finance Minister U Soe Nyunt Lwin was reportedly taken away; Cann't contact with Government offices in Nay Pyi Taw; Phone lines have been cut off."
 }, {
-    dateTime: '2/1/2021 2:51:12',
-    author: 'Sammy',
+    dateTime: '2/1/2021 5:44:52',
+    author: 'DVB TV News',
     title: 'First Media Post About Coup',
-    description: 'Lorem ipsum dolor sit amet consectetur. Faucibus pellentesque purus pellentesque congue suspendisse integer dapibus ac. Tellus pellentesque sed vel tincidunt erat rhoncus commodo dui. Pharetra faucibus arcu blandit mauris sagittis donec felis. Hac pellentesque faucibus tristique hendrerit vitae velit. A ornare mattis a egestas praesent integer fermentum mi amet. Accumsan at odio ornare morbi duis urna id bibendum lectus....',
+    description: 'Tatmadaw seizes power, detains all the chief ministers of states and regions. The Tatmadaw seized power earlier this morning and detained all the chief ministers of the states and regions, including the Yangon Region chief minister.',
 },]
 onMounted(() => {
     let duration = 1000;
@@ -112,6 +109,9 @@ onMounted(() => {
                 targets: articleTitles,
                 duration: duration,
                 easing: 'easeOutQuart',
+                opacity: (el, index) => {
+                    return index === i ? 1 : 0.4;
+                },
                 translateY: (el, index) => {
                     return titleTranslateY[Math.max(index + startIndex - i, 0)]
                 }
@@ -212,7 +212,7 @@ onMounted(() => {
                 pin: '#beginning-of-the-end-media-posts-pinner',
             }
         }])
-    }, 1200)
+    }, 2000)
 })
 </script>
 

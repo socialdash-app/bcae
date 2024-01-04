@@ -1,5 +1,5 @@
 <template>
-    <div class="w-7/12 py-10 mt-10 h-full relative flex items-center justify-center">
+    <div class="w-7/12 h-screen py-10 mt-10 relative flex items-center justify-center">
         <span
             class="absolute top-1/2 -left-6 md:text-md text-sm md:-left-12 z-10 -rotate-90 transform -translate-y-full">Complaint</span>
         <span

@@ -1,9 +1,9 @@
 <template>
-    <div id="parent" class="flex font-poppins flex-col w-full">
+    <div id="main-container" class="flex font-poppins flex-col w-full">
         <!--        <navigation/>-->
-        <Transition name="fade" mode="out-in">
+        <Transition :name="currentAnimationName">
             <KeepAlive>
-                <component :is="route.data.component"/>
+                <component :key="route.data.component" :is="route.data.component"/>
             </KeepAlive>
         </Transition>
     </div>
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import {reactive, onMounted, shallowRef} from "vue";
+import {reactive, onMounted, shallowRef, computed} from "vue";
 import route from "../api/route.js";
 
 const props = defineProps([]);
@@ -20,24 +20,68 @@ const data = reactive({
     height: '400',
 });
 
+const currentAnimationName = computed(() => {
+    return route.data.component === 'navigation' ? 'load-carousel' : 'switch';
+})
+
 const paddingBottom = screen.height - window.innerHeight
 
 const height = window.innerHeight
 
 onMounted(() => {
-    // data.height = window.innerHeight + '';
-    // alert(window.visualViewport.height + window.innerHeight + ' ' + +' ' + window.screen.availHeight + ' ' + window.screen.height + ' ' + document.getElementById('navigation-container').getBoundingClientRect().height)
+    // setTimeout(() => {
+    //     route.changeTo('navigation')
+    // }, 1000)
 })
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: all 0.8s cubic-bezier(0.33, 1, 0.68, 1);
+.load-carousel-enter-active,
+.load-carousel-leave-active {
+    position: absolute;
+    transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.load-carousel-enter-from,
+.load-carousel-leave-to {
     opacity: 0;
+    transform: translateY(100%);
+}
+
+.switch-enter-active {
+    position: absolute;
+    animation: enter 2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.switch-leave-active {
+    position: absolute;
+    animation: leave 2s cubic-bezier(0.5, 0, 0.75, 0);
+}
+
+@keyframes enter {
+    0% {
+        opacity: 0.0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes leave {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.8);
+    }
 }
 </style>
