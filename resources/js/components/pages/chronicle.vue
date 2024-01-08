@@ -9,18 +9,18 @@
                         <div :class="description.bg" class="h-5/6 w-full">
 
                         </div>
-                        <div class="flex flex-col -mb-6">
-                            <span class="h-8 w-2 bg-black"></span>
-                            <h1 class="text-2xl font-bold -mb-4">{{ description.title }}</h1>
-                        </div>
                     </div>
                 </div>
+                <div :style="{transform: `translateX(${index * 120}%)`}"
+                     class="flex chronicle-year-indicator absolute w-full flex-col -mt-4"
+                     v-for="(description,index) in descriptions">
+                    <span class="h-7 w-1 bg-black"></span>
+                    <h1 class="text-2xl font-semibold -mb-4">{{ description.title }}</h1>
+                </div>
                 <div class="absolute -left-[42%] bottom-0 w-screen py-1 bg-black">
-
                 </div>
             </div>
-
-            <div class="w-5/12 flex flex-col">
+            <div class="w-5/12 flex flex-col z-10">
                 <div
                     class="flex chronicle-content h-[60vh] rounded border shrink-0 gap-y-4 p-6 bg-black text-white flex-col w-full"
                     :style="{marginBottom: index !== descriptions.length - 1 ? '24rem':'0'}"
@@ -30,7 +30,6 @@
                     <p class="w-full text-white">{{ description.description }}</p>
                 </div>
                 <div class="shrink-0" style="height: 30vh">
-
                 </div>
             </div>
         </div>
@@ -73,6 +72,7 @@ const translateMultiplier = 120;
 
 const init = () => {
     let chronicleIllustrations = document.querySelectorAll('.chronicle-illustration');
+    let chronicleYearIndicators = document.querySelectorAll('.chronicle-year-indicator');
     let chronicleContents = document.querySelectorAll('.chronicle-content');
     let animations = [];
     let stopPercentages = [];
@@ -100,6 +100,14 @@ const init = () => {
                             delay: duration / 3,
                         }]
                     })
+                    anime({
+                        targets: chronicleYearIndicators,
+                        easing: 'easeOutQuart',
+                        duration: duration,
+                        translateX: (el, index) => {
+                            return i === descriptions.length - 1 && index === i ? 0 : Math.max(-translateMultiplier, index * translateMultiplier - translateMultiplier * i) + '%';
+                        },
+                    })
                 },
                 onEnterBack: () => {
                     anime({
@@ -116,6 +124,14 @@ const init = () => {
                             return index === i ? 1 : 0;
                         },
                     })
+                    anime({
+                        targets: chronicleYearIndicators,
+                        easing: 'easeOutQuart',
+                        duration: duration,
+                        translateX: (el, index) => {
+                            return i === descriptions.length - 1 && index === i ? 0 : Math.max(-translateMultiplier, index * translateMultiplier - translateMultiplier * i) + '%';
+                        },
+                    })
                 }
             }
         })
@@ -125,7 +141,6 @@ const init = () => {
     animations.push({
         targets: '#header-chronicle circle',
         strokeDashoffset: 0,
-        // easing: 'easeOutBounce',
         scrollTrigger: {
             smooth: true,
             trigger: '#chronicle-trigger',
@@ -140,27 +155,8 @@ const init = () => {
                 route.changeSectionHeader(0)
                 console.log('enter back chronicle');
             },
-            onUpdate: (_, progress) => {
-            }
         }
     })
-
-    // scaleX(), skewY(), skewX(), scaleY(), translateX(), translateY()
-    // anime({
-    //     targets: '.lucide-history',
-    //     translateY: 10,
-    //     translateX: 11,
-    //     scaleX: 30,
-    //     scaleY: 31,
-    //     skewX: 22,
-    //     skewY: 11,
-    //     // transform: 'matrix(1, 0, 0, 1, 20, 10)',
-    //     autoplay: true,
-    //     complete: () => {
-    //         console.log(window.getComputedStyle(document.querySelector('.lucide-history')).transform)
-    //     }
-    // })
-
     new AnimeScrollTrigger(document.querySelector('main'), animations)
 }
 

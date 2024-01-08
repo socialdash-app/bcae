@@ -16,7 +16,6 @@
         </div>
         <div class="shrink-0 absolute -z-10 w-full" id="navigation-trigger"
              :style="{ height: data.length * height + 'px' }">
-
         </div>
         <div class="shrink-0" :style="{ height: data.length * height + 'px' }">
         </div>
