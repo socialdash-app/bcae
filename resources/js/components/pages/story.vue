@@ -30,12 +30,12 @@
             </div>
         </div>
         <chronicle/>
-        <the-election/>
-        <prominent-events/>
-        <party-actions/>
-        <the-military/>
-        <correlated-actions/>
-        <beginning-of-the-end/>
+        <!--        <the-election/>-->
+        <!--        <prominent-events/>-->
+        <!--        <party-actions/>-->
+        <!--        <the-military/>-->
+        <!--        <correlated-actions/>-->
+        <!--        <beginning-of-the-end/>-->
     </main>
 </template>
 

@@ -24,7 +24,6 @@ onMounted(() => {
     axios.post('party-actions/uec-accusations').then((res) => {
         let data = [];
         let nodes = [];
-        console.log(res.data)
         Object.keys(res.data).forEach((partyName, key) => {
             data.push(...res.data[partyName].map((r) => {
                 r.color = getPartyColor(r.from)

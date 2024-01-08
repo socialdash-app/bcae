@@ -35,7 +35,7 @@ onMounted(() => {
             opacity: 1,
             scrollTrigger: {
                 trigger: '#military-intro',
-                start: 'top center',
+                start: 'top top',
                 end: 'center center',
                 smooth: true,
                 lerp: true,

@@ -19,6 +19,6 @@
 - [ ] ( !important ) party signatures in party actions
 - [ ] make sure that scrollTrigger loads correctly for all sections
 - [ ] find animation for switching pages.
-- [ ] substitute real content/data with current dummy data.
-- [ ] separate data into json format and host them in cdn. Use them as data source.
+- [ ] replace real content/data with current dummy data.
+- [ ] load data into json format and host them in cdn. Use them as data source.
 - [ ] deploy it for live testing.

@@ -13,6 +13,9 @@
     <script type="module" src="http://192.168.1.111:5173/@@vite/client"></script>
     <script type="module" src="http://192.168.1.111:5173/resources/js/app.js"></script>
     <link rel="stylesheet" href="http://192.168.1.111:5173/resources/css/app.css"></link>
+    {{--    <script type="module" src="http://192.168.110.239:5173/@@vite/client"></script>--}}
+    {{--    <script type="module" src="http://192.168.110.239:5173/resources/js/app.js"></script>--}}
+    {{--    <link rel="stylesheet" href="http://192.168.110.239:5173/resources/css/app.css"/>--}}
     @inertiaHead
 </head>
 <body>
