@@ -4,7 +4,7 @@
             <h1 class="text-3xl font-bold">The Election</h1>
         </div>
         <div class="w-full flex md:!flex-row flex-col items-center md:!items-start relative justify-evenly">
-            <div class="w-11/12 md:!w-4/12 h-[85vh] sticky top-24 left-0 flex flex-col overflow-hidden">
+            <div id="map-container" class="w-11/12 md:!w-4/12 h-[85vh] sticky top-24 z-[1001] flex flex-col overflow-hidden">
                 <button @click="resetZoom" v-show="data.isDrilldown"
                     class="absolute flex z-10 items-center gap-x-2 top-4 left-4 px-4 py-2 border rounded bg-white">
                     <span> Reset Map</span>
@@ -17,7 +17,7 @@
                 </button>
                 <svg id="map">
                 </svg>
-                <div class="flex flex-col absolute bottom-0 left-0 gap-y-4">
+                <div v-show="!data.loading" class="flex flex-col absolute bottom-0 left-0 gap-y-4">
                     <button @click="switchHluttawType('PyiThu')" class="w-48 h-12 rounded border bg-[#F2B5B4]">Pyithu
                         Hluttaw
                     </button>
@@ -26,7 +26,7 @@
                     </button>
                 </div>
             </div>
-            <div id="election-result-detail" class="fixed border-gray-800 z-[1000] bg-[#FFC3E0] p-4 rounded border"
+            <div id="election-result-detail" class="fixed border-gray-800 z-[1002] bg-[#FFC3E0] p-4 rounded border"
                 v-show="data.hoverRegion">
                 <h1 class="font-semibold text-lg">{{ data.details.title }}</h1>
                 <table>
@@ -39,6 +39,7 @@
                 </table>
             </div>
             <div class="w-11/12 md:!w-1/2 flex flex-col z-10">
+                <div class="trigger mb-[90%] md:!mb-[50%] w-full border rounded-lg h-[100vh]"></div>
                 <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-[#FFC3E0] h-[40vh]"></div>
                 <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-[#FFC3E0] h-[40vh] relative">
 
@@ -55,6 +56,7 @@ import * as d3 from 'd3';
 import { PopOver } from "vue-common-components";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import route from "../../api/route.js";
+import anime from 'animejs';
 import { placeElementRelativeToScreen } from "../../api/helpers.js";
 
 let results = {}, zoomIntoRegion, path, resetZoom, g, g1, amyoThaFeatures, pyiThuFeatures, currentRegion;
@@ -67,8 +69,10 @@ const data = reactive({
     details: {
         title: '',
         contents: [],
-    }
+    },
+    loading: true,
 });
+
 
 const getPartyColor = (party) => {
     switch (party) {
@@ -246,6 +250,7 @@ const init = () => {
                 }, 100)
             });
     });
+    data.loading = false;
 }
 
 
@@ -302,22 +307,54 @@ const drawSubregions = (features) => {
 
 onMounted(() => {
     setTimeout(() => {
+        const mapContainer = document.getElementById('map-container');
+        const mapContainerRect = mapContainer.getBoundingClientRect();
+        const mapTranslateXWidth = (window.innerWidth * 0.5) - mapContainerRect.left - (0.5 * mapContainerRect.width);
+        anime({
+            targets: mapContainer,
+            translateX: mapTranslateXWidth,
+            duration:0,
+        })
         d3.json('assets/bcae-results.json').then((res) => {
             results = res;
             Object.keys(results).forEach((hlutaw) => {
                 results[hlutaw].mapData.detailData = [...Object.values(results[hlutaw].mapData.detailData)].flat(1)
             })
-            console.log(results)
             init()
         })
         let container = document.getElementById('the-election')
         let divs = container.querySelectorAll('.trigger');
         let triggers = [
             {
-                targets: divs[1],
-                easing: 'linear',
                 scrollTrigger: {
-                    trigger: divs[1],
+                    trigger: divs[0],
+                    start: 'bottom center',
+                    end: 'bottom -10%',
+                    debug: true,
+                    onEnter: () => {
+                        anime({
+                            targets: mapContainer,
+                            translateX: [mapTranslateXWidth,0],
+                            // left: ['50%','0%'],
+                            duration: 1000,
+                            easing: 'easeOutExpo',
+                        })
+                    },
+                    onLeaveBack:()=>{
+                        anime({
+                            targets: mapContainer,
+                            translateX: [0,mapTranslateXWidth],
+                            // left: ['0%', '50%'],
+                            duration: 1000,
+                            easing: 'easeOutExpo',
+                        })
+                    },
+                }
+            },
+            {
+                targets: divs[2],
+                scrollTrigger: {
+                    trigger: divs[2],
                     start: 'top 40%',
                     end: 'bottom center',
                     lerp: true,
@@ -357,7 +394,6 @@ onMounted(() => {
         ]
         new AnimeScrollTrigger(document.querySelector('main'), triggers);
     }, 2000)
-
 })
 
 </script>
