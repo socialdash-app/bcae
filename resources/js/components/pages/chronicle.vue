@@ -4,31 +4,33 @@
             <h1 class="text-3xl font-bold">Chronicles</h1>
         </div>
         <div id="chronicle"
-             class="w-11/12 pt-24 items-center md:!items-start md:!w-9/12 md:!flex-row flex-col flex justify-between">
+            class="w-11/12 pt-24 items-center md:!items-start md:!w-9/12 md:!flex-row flex-col flex justify-between">
             <div class="w-11/12 md:!w-5/12 h-[50vh] md:!h-[60vh] sticky top-24 left-0">
                 <div class="relative w-full h-full">
                     <div class="justify-between chronicle-illustration flex flex-col w-full absolute h-full"
-                         :style="{transform: `translateX(${index * 120}%)`, opacity: index === 0? 1: 0}"
-                         v-for="(description,index) in descriptions">
+                        :style="{ transform: `translateX(${index * 120}%)`, opacity: index === 0 ? 1 : 0 }"
+                        v-for="(description, index) in descriptions">
                         <div :class="description.bg" class="h-5/6 w-full">
 
                         </div>
                     </div>
                 </div>
-                <div :style="{transform: `translateX(${index * 120}%)`}"
+                <!-- <div :style="{transform: `translateX(${index * 120}%)`}"
                      class="flex chronicle-year-indicator absolute w-full flex-col -mt-4"
                      v-for="(description,index) in descriptions">
                     <span class="h-7 w-1 bg-black"></span>
                     <h1 class="text-2xl font-semibold -mb-4">{{ description.title }}</h1>
-                </div>
-                <div class="absolute -left-[9.9%] md:!-left-[42%] bottom-0 w-screen py-1 bg-black">
-                </div>
+                </div> -->
+                <!-- <div class="absolute -left-[9.9%] md:!-left-[42%] bottom-0 w-screen py-1 bg-black">
+                </div> -->
+                <svg id="timeline" class="absolute top-0 overflow-visible">
+
+                </svg>
             </div>
             <div class="w-full md:!w-5/12 flex flex-col z-10">
-                <div
-                    class="flex chronicle-content rounded border shrink-0 gap-y-4 px-4 py-6 md:!px-8 md:!py-12 bg-black text-white flex-col w-full"
-                    :style="{marginBottom: index !== descriptions.length - 1 ? '24rem':'0'}"
-                    v-for="(description,index) in descriptions">
+                <div class="flex chronicle-content rounded border shrink-0 gap-y-4 px-4 py-6 md:!px-8 md:!py-12 bg-black text-white flex-col w-full"
+                    :style="{ marginBottom: index !== descriptions.length - 1 ? '24rem' : '0' }"
+                    v-for="(description, index) in descriptions">
                     <p class="w-full text-white">{{ description.description }}</p>
                 </div>
                 <div class="shrink-0 md:h-[60vh] h-[30vh]">
@@ -39,10 +41,11 @@
 </template>
 
 <script setup>
-import {reactive, onMounted} from "vue";
+import { reactive, onMounted } from "vue";
 import AnimeScrollTrigger from 'anime-scrolltrigger'
 import anime from "animejs";
 import route from "../../api/route.js";
+import { scaleUtc, axisBottom, select, utcYear, easeQuadOut } from 'd3';
 
 const props = defineProps([]);
 
@@ -74,14 +77,52 @@ const translateMultiplier = 120;
 
 const init = () => {
     let chronicleIllustrations = document.querySelectorAll('.chronicle-illustration');
-    let chronicleYearIndicators = document.querySelectorAll('.chronicle-year-indicator');
+    // let chronicleYearIndicators = document.querySelectorAll('.chronicle-year-indicator');
     let chronicleContents = document.querySelectorAll('.chronicle-content');
     let animations = [];
     let stopPercentages = [];
     let duration = 1500;
     let t = [];
     let divider = 100 / descriptions.length;
+
+    // init year indicator 
+    const illustrationRect = document.querySelector('.chronicle-illustration').getBoundingClientRect();
+    const width = illustrationRect.width;
+    const height = illustrationRect.height;
+    const svg = select('svg#timeline');
+    svg.attr('width', descriptions.length * width)
+    svg.attr('height', height);
+    const x = scaleUtc()
+        .domain([new Date('1956'), new Date(descriptions[descriptions.length - 1].title)])
+        .range([10, descriptions.length * width * 4]);
+     const initialTranslateX =  x(new Date('1957'));
+     console.log(initialTranslateX)
+    const gx = svg.append("g")
+        .attr("transform", `translate(-${initialTranslateX},${height})`)
+        .call(axisBottom(x).ticks(utcYear).tickPadding(10).tickFormat((d, i) => {
+            if (descriptions.filter((datum) => d.getFullYear().toString() === datum.title).length > 0) {
+                return d.getFullYear();
+            }
+            return null;
+        }));
+
+    gx.selectAll('text').attr('font-size', '20px').attr('font-weight', 'bold')
+    gx.selectAll("g.tick line")
+        .attr("y2", function (d) {
+            if (descriptions.filter((datum) => d.getFullYear().toString() === datum.title).length > 0) {
+                return 10;
+            }
+            return 5;
+        })
+        .attr('stroke-width', function (d) {
+            if (descriptions.filter((datum) => d.getFullYear().toString() === datum.title).length > 0) {
+                return 4;
+            }
+            return 1;
+        });
+
     for (let i = 0; i <= descriptions.length - 1; i++) {
+        let translateX = x(new Date(descriptions[i].title));
         animations.push({
             scrollTrigger: {
                 trigger: chronicleContents[i],
@@ -102,14 +143,7 @@ const init = () => {
                             delay: duration / 3,
                         }]
                     })
-                    anime({
-                        targets: chronicleYearIndicators,
-                        easing: 'easeOutQuart',
-                        duration: duration,
-                        translateX: (el, index) => {
-                            return i === descriptions.length - 1 && index === i ? 0 : Math.max(-translateMultiplier, index * translateMultiplier - translateMultiplier * i) + '%';
-                        },
-                    })
+                    gx.transition().duration(750).ease(easeQuadOut).attr('transform',`translate(-${translateX},${height})`)
                 },
                 onEnterBack: () => {
                     anime({
@@ -126,14 +160,7 @@ const init = () => {
                             return index === i ? 1 : 0;
                         },
                     })
-                    anime({
-                        targets: chronicleYearIndicators,
-                        easing: 'easeOutQuart',
-                        duration: duration,
-                        translateX: (el, index) => {
-                            return i === descriptions.length - 1 && index === i ? 0 : Math.max(-translateMultiplier, index * translateMultiplier - translateMultiplier * i) + '%';
-                        },
-                    })
+                    gx.transition().duration(750).ease(easeQuadOut).attr('transform',`translate(-${translateX},${height})`)
                 }
             }
         })
@@ -151,11 +178,9 @@ const init = () => {
             lerp: true,
             onEnter: () => {
                 route.changeSectionHeader(0)
-                console.log('enter chronicle')
             },
             onEnterBack: () => {
                 route.changeSectionHeader(0)
-                console.log('enter back chronicle');
             },
         }
     })
@@ -163,12 +188,11 @@ const init = () => {
 }
 
 onMounted(() => {
-    setTimeout(() => {
-        init()
-    }, 2000)
+    // setTimeout(() => {
+    init()
+    // }, 2000)
+
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

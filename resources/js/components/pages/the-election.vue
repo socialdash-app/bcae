@@ -5,39 +5,36 @@
         </div>
         <div class="w-full flex md:!flex-row flex-col items-center md:!items-start relative justify-evenly">
             <div class="w-11/12 md:!w-4/12 h-[85vh] sticky top-24 left-0 flex flex-col overflow-hidden">
-                <button @click="resetZoom"
-                        v-show="data.isDrilldown"
-                        class="absolute flex z-10 items-center gap-x-2 top-4 left-4 px-4 py-2 border rounded bg-white">
+                <button @click="resetZoom" v-show="data.isDrilldown"
+                    class="absolute flex z-10 items-center gap-x-2 top-4 left-4 px-4 py-2 border rounded bg-white">
                     <span> Reset Map</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="lucide w-4 h-4 lucide-undo-2">
-                        <path d="M9 14 4 9l5-5"/>
-                        <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/>
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide w-4 h-4 lucide-undo-2">
+                        <path d="M9 14 4 9l5-5" />
+                        <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11" />
                     </svg>
                 </button>
                 <svg id="map">
-                    <g class="map" fill="#b3b3b3" stroke="black" stroke-width="0.01"></g>
-                    <g class="details" fill="orange" stroke="black" stroke-width="0.01"></g>
                 </svg>
                 <div class="flex flex-col absolute bottom-0 left-0 gap-y-4">
-                    <button @click="switchHluttawType('PyiThu')"
-                            class="w-48 h-12 rounded border bg-[#F2B5B4]">Pyithu Hluttaw
+                    <button @click="switchHluttawType('PyiThu')" class="w-48 h-12 rounded border bg-[#F2B5B4]">Pyithu
+                        Hluttaw
                     </button>
-                    <button @click="switchHluttawType('Amyothar')"
-                            class="w-48 h-12 rounded border bg-[#F788BF]">Amyothar Hluttaw
+                    <button @click="switchHluttawType('Amyothar')" class="w-48 h-12 rounded border bg-[#F788BF]">Amyothar
+                        Hluttaw
                     </button>
                 </div>
             </div>
             <div id="election-result-detail" class="fixed border-gray-800 z-[1000] bg-[#FFC3E0] p-4 rounded border"
-                 v-show="data.hoverRegion">
+                v-show="data.hoverRegion">
                 <h1 class="font-semibold text-lg">{{ data.details.title }}</h1>
                 <table>
                     <tbody>
-                    <tr class=" flex items-center text-sm" :class="{'font-medium': index === 0}"
-                        v-for="(content,index) in data.details.contents">
-                        <td class="p-2 w-4/12" v-for="c in content">{{ c }}</td>
-                    </tr>
+                        <tr class=" flex items-center text-sm" :class="{ 'font-medium': index === 0 }"
+                            v-for="(content, index) in data.details.contents">
+                            <td class="p-2 w-4/12" v-for="c in content">{{ c }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -50,16 +47,15 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script setup>
-import {onMounted, reactive} from 'vue';
+import { onMounted, reactive } from 'vue';
 import * as d3 from 'd3';
-import {PopOver} from "vue-common-components";
+import { PopOver } from "vue-common-components";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import route from "../../api/route.js";
-import {placeElementRelativeToScreen} from "../../api/helpers.js";
+import { placeElementRelativeToScreen } from "../../api/helpers.js";
 
 let results = {}, zoomIntoRegion, path, resetZoom, g, g1, amyoThaFeatures, pyiThuFeatures, currentRegion;
 
@@ -139,6 +135,11 @@ const init = () => {
     let detailBox = document.getElementById('election-result-detail');
     svg.attr('width', width);
     svg.attr('height', height);
+    let upperGroup = svg
+        .append('g')
+        .attr("transform", "translate(" + 0 + "," + 0+ ")")
+        .append('g')
+
     Promise.all([
         d3.json('/assets/states-and-regions.json'),
         d3.json('/assets/pyithu-lowerhouse.json'),
@@ -151,15 +152,27 @@ const init = () => {
 
         let zoom = d3.zoom();
 
-        g = d3.select('#map g.map');
-        g1 = d3.select('#map g.details');
+        g = upperGroup
+            .append('g')
+            .attr('class', 'map')
+            .attr('stroke', 'black')
+            .attr('stroke-width', '0.01')
+            .attr('fill', '#b3b3b3');
+        // class="map" fill = "#b3b3b3" stroke = "black" stroke - width="0.01"
+        g1 = upperGroup
+            .append('g')
+            .attr('class', 'details')
+            .attr('stroke', 'black')
+            .attr('stroke-width', '0.01')
+            .attr('fill', 'orange');
 
         zoom.on('zoom', (e) => {
-            svg.attr('transform', e.transform)
+            console.log(e.transform)
+            upperGroup.attr('transform', e.transform)
         })
 
         resetZoom = () => {
-            svg.transition().duration(750).call(zoom.transform,
+            upperGroup.transition().duration(750).call(zoom.transform,
                 d3.zoomIdentity.translate(0, 0).scale(1))
             if (g1.selectAll('null')) {
                 g1.selectAll('path').remove();
@@ -177,6 +190,12 @@ const init = () => {
             }
         })
 
+        document.querySelector('main').addEventListener('scroll', () => {
+            if (data.hoverRegion) {
+                data.hoverRegion = null;
+            }
+        })
+
         zoomIntoRegion = (region) => {
             currentRegion = region;
             let currentFeatures = getCurrentFeatures()
@@ -185,9 +204,9 @@ const init = () => {
                 features: currentFeatures,
             }));
             let scale = 1.5;
-            svg.transition().duration(750).call(
+            upperGroup.transition().duration(750).call(
                 zoom.transform,
-                d3.zoomIdentity.translate((width / 2 - center[0]) * scale, (height / 2 - center[1]) * scale).scale(scale))
+                d3.zoomIdentity.translate((width / 2 - center[0] * scale), (height / 2 - center[1] * scale)).scale(scale))
             drawSubregions(currentFeatures)
             data.isDrilldown = true;
             data.hoverRegion = null;
@@ -343,6 +362,4 @@ onMounted(() => {
 
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

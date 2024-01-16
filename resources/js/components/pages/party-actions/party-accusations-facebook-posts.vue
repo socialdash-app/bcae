@@ -9,21 +9,17 @@
             anim id est laborum.</p>
         <div id="party-accusations-facebook-posts" class="w-full md:px-0 px-2 flex h-full items-center justify-center">
         </div>
-        <div id="party-accusations-tooltip" style="visibility: hidden; display: none; position: fixed"
-             class="border p-2 border-gray-600 w-96 bg-white rounded">
+        <div :class="{'cursor-pointer': rdata.url}" @click="openUrl" id="party-accusations-tooltip" style="visibility: hidden; display: none; position: fixed"
+            class="border text-sm p-2 border-gray-600 w-96 bg-white rounded">
 
         </div>
     </div>
 </template>
 
-<script setup>
-import packedbubble from 'highcharts/highcharts-more';
-
-packedbubble(Highcharts);
-
-import {reactive, onMounted} from "vue";
+<script setup>  
+import { reactive, onMounted } from "vue";
 import settings from "../../../api/settings.js";
-import {convertHex, placeElementRelativeToScreen} from "../../../api/helpers.js";
+import { convertHex, placeElementRelativeToScreen } from "../../../api/helpers.js";
 import getPartyColor from "../../../api/getPartyColor.js";
 import * as d3 from "d3";
 import truncate from "../../../api/truncate.js";
@@ -31,6 +27,15 @@ import truncate from "../../../api/truncate.js";
 const props = defineProps([]);
 
 let isHovering = false;
+
+const rdata = reactive({
+    url: '',
+})
+
+const openUrl = ()=>{
+    if(!rdata.url)return;
+    window.open(rdata.url,'_blank')
+}
 
 const init = (data) => {
     let container = document.getElementById('party-accusations-facebook-posts');
@@ -69,6 +74,14 @@ const init = (data) => {
             isHovering = false;
         }
     })
+
+    document.querySelector('main').addEventListener('scroll',()=>{
+        if(isHovering){
+              tooltip.style('display', 'none')
+                .style('visibility', 'hidden')
+            isHovering = false; 
+        }
+    })
     // use this information to add rectangles:
     svg
         .selectAll("rect")
@@ -94,10 +107,12 @@ const init = (data) => {
         .style('cursor', 'pointer')
         .on('mouseenter', function (e, d) {
             tooltip
-                .text(truncate(d.data.message, 100))
+                .text(truncate(d.data.message_en ?? d.data.message, 100))
                 .style('display', 'initial')
                 .style('top', e.clientY + 'px')
                 .style('left', e.clientX + 'px')
+
+            rdata.url = d.data.postUrl;
 
             placeElementRelativeToScreen(tooltip.node(), true).then(() => {
                 tooltip.style('visibility', 'initial')
@@ -165,6 +180,4 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -51,40 +51,38 @@ export const headers = [{
 
 export default {
     data: reactive({
-        component: 'story',
+        component: "story",
     }),
     changeTo: function (name) {
         this.data.component = name;
     },
-    scrollTo: function (section) {
-
-    },
+    scrollTo: function (section) {},
     changeSectionHeader: function (index) {
         let translateYOffsets = [];
         for (let i = 0; i < headers.length; i++) {
-            translateYOffsets.push((i * 100) - (index * 100));
+            translateYOffsets.push(i * 100 - index * 100);
         }
         if (window && window.innerWidth < 768) {
             anime({
-                targets: '.header',
+                targets: ".header",
                 background: headers[index].primaryColor,
                 duration: 600,
-                easing: 'easeOutQuart',
-            })
+                easing: "easeOutQuart",
+            });
         }
 
         anime({
-            targets: '.header-title',
+            targets: ".header-title",
             translateY: (el, index) => translateYOffsets[index],
-            easing: 'easeOutQuart',
+            easing: "easeOutQuart",
             duration: 600,
-        })
+        });
         anime({
-            targets: '.header-icon',
+            targets: ".header-icon",
             translateY: (el, index) => translateYOffsets[index],
-            easing: 'easeOutQuart',
+            easing: "easeOutQuart",
             duration: 600,
-        })
-    }
-}
+        });
+    },
+};
 
