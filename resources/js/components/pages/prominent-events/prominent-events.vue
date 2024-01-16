@@ -1,7 +1,9 @@
 <template>
-    <div id="prominent-events" class="relative bg-[#F1FFF0]" style="margin-top: 10px;">
-        <!--        <div class="w-full flex justify-between z-[100] h-24 items-center px-20 sticky top-0 left-0">-->
-        <!--            <h1 class="text-xl font-semibold">Prominent Events</h1>-->
+    <div id="prominent-events" class="relative bg-[#F1FFF0] w-full flex items-center flex-col"
+         style="margin-top: 10px;">
+        <div class="sticky pl-12 top-14 w-11/12 z-[100]">
+            <h1 class="text-3xl font-bold">Prominent events</h1>
+        </div>
         <!--            <div class="relative flex items-center justify-center">-->
         <!--                <svg width="60" height="60" viewBox="0 0 60 60">-->
         <!--                    <circle id="prominent-events-progress-indicator" stroke-dashoffset="160" stroke-dasharray="160"-->
@@ -17,7 +19,6 @@
         <!--                                fill="#041D02"/>-->
         <!--                        </svg>-->
         <!--            </div>-->
-        <!--        </div>-->
         <election-incidents/>
         <complaint-events/>
     </div>

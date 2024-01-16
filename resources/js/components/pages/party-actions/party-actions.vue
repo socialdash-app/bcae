@@ -1,10 +1,10 @@
 <template>
     <div id="party-actions"
          class="w-full flex-col flex items-center py-2 bg-[#EBFFE0]">
-        <!--        <party-accusations-facebook-posts/>-->
-        <!--        <media-facebook-posts/>-->
-        <!--        <youtube-video/>-->
-        <!--        <uec-accusation/>-->
+        <party-accusations-facebook-posts/>
+        <media-facebook-posts/>
+        <youtube-video/>
+        <uec-accusation/>
         <party-signatures/>
     </div>
 </template>

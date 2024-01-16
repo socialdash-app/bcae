@@ -94,7 +94,6 @@ const init = () => {
             end: 'bottom bottom',
             lerp: true,
             onUpdate: (_, progress) => {
-                console.log(progress)
                 anime({
                     targets: scroller,
                     scrollLeft: progress * scroller.scrollWidth,

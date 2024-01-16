@@ -1,6 +1,13 @@
 <template>
     <div id="main-container" class="flex font-poppins flex-col w-full">
         <!--        <navigation/>-->
+        <div
+            class="w-full md:!bg-transparent header py-4 flex justify-between  z-[100] px-4 md:!px-20 fixed top-0 left-0">
+            <div class="logo flex w-full gap-x-2 items-center">
+                <img class="w-8 h-8 md:!w-12 md:!h-12" src="assets/logo.png" alt="logo"/>
+                <h1 class="font-bevietnampro text-[#5309dd] font-bold text-lg md:text-2xl">Social Dash</h1>
+            </div>
+        </div>
         <Transition :name="currentAnimationName">
             <KeepAlive>
                 <component :key="route.data.component" :is="route.data.component"/>
@@ -12,7 +19,7 @@
 
 <script setup>
 import {reactive, onMounted, shallowRef, computed} from "vue";
-import route from "../api/route.js";
+import route, {headers} from "../api/route.js";
 
 const props = defineProps([]);
 
@@ -21,7 +28,7 @@ const data = reactive({
 });
 
 const currentAnimationName = computed(() => {
-    return route.data.component === 'navigation' ? 'load-carousel' : 'switch';
+    return route.data.component === 'story' ? 'switch' : 'load-carousel';
 })
 
 const paddingBottom = screen.height - window.innerHeight

@@ -36,7 +36,7 @@ onMounted(() => {
                 color: getPartyColor(partyName)
             })
         })
-        console.log(data, nodes)
+        // console.log(data, nodes)
         Highcharts.chart('uec-accusations', {
             chart: {
                 height: '800px',

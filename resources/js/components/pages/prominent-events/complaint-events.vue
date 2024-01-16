@@ -29,9 +29,6 @@ import {onClickOutside} from "js-utils";
 const props = defineProps([]);
 
 const complaints = [{
-    title: '19 Parties complaints blah blah...',
-    description: 'Lorem ipsum dolor sit amet consectetur. Faucibus pellentesque purus pellentesque congue suspendisse integer dapibus ac. Tellus pellentesque sed vel tincidunt erat rhoncus commodo dui. Pharetra faucibus arcu blandit mauris sagittis donec felis. Hac pellentesque faucibus tristique hendrerit vitae velit. A ornare mattis a egestas praesent integer fermentum mi amet. Accumsan at odio ornare morbi duis urna id bibendum lectus....',
-}, {
     title: 'On 11.1.2021 blah blah...',
     description: 'orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n' +
         'Why do we use it?\n' +

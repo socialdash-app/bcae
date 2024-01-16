@@ -1,7 +1,11 @@
 <template>
-    <div id="chronicle-trigger" class="w-full pt-24 flex relative bg-[#FFF21F] flex-col items-center">
-        <div id="chronicle" class="w-9/12 flex justify-between">
-            <div class="w-5/12 h-[60vh] sticky top-24 left-0">
+    <div id="chronicle-trigger" class="w-full flex relative bg-[#FFF21F] flex-col items-center">
+        <div class="sticky pl-12 top-14 w-11/12 z-[100]">
+            <h1 class="text-3xl font-bold">Chronicles</h1>
+        </div>
+        <div id="chronicle"
+             class="w-11/12 pt-24 items-center md:!items-start md:!w-9/12 md:!flex-row flex-col flex justify-between">
+            <div class="w-11/12 md:!w-5/12 h-[50vh] md:!h-[60vh] sticky top-24 left-0">
                 <div class="relative w-full h-full">
                     <div class="justify-between chronicle-illustration flex flex-col w-full absolute h-full"
                          :style="{transform: `translateX(${index * 120}%)`, opacity: index === 0? 1: 0}"
@@ -17,19 +21,17 @@
                     <span class="h-7 w-1 bg-black"></span>
                     <h1 class="text-2xl font-semibold -mb-4">{{ description.title }}</h1>
                 </div>
-                <div class="absolute -left-[42%] bottom-0 w-screen py-1 bg-black">
+                <div class="absolute -left-[9.9%] md:!-left-[42%] bottom-0 w-screen py-1 bg-black">
                 </div>
             </div>
-            <div class="w-5/12 flex flex-col z-10">
+            <div class="w-full md:!w-5/12 flex flex-col z-10">
                 <div
-                    class="flex chronicle-content h-[60vh] rounded border shrink-0 gap-y-4 p-6 bg-black text-white flex-col w-full"
+                    class="flex chronicle-content rounded border shrink-0 gap-y-4 px-4 py-6 md:!px-8 md:!py-12 bg-black text-white flex-col w-full"
                     :style="{marginBottom: index !== descriptions.length - 1 ? '24rem':'0'}"
                     v-for="(description,index) in descriptions">
-                    <h1 class="w-full font-semibold text-4xl">
-                        {{ description.title }}</h1>
                     <p class="w-full text-white">{{ description.description }}</p>
                 </div>
-                <div class="shrink-0" style="height: 30vh">
+                <div class="shrink-0 md:h-[60vh] h-[30vh]">
                 </div>
             </div>
         </div>
@@ -83,7 +85,7 @@ const init = () => {
         animations.push({
             scrollTrigger: {
                 trigger: chronicleContents[i],
-                start: 'top 20%',
+                start: 'top center',
                 end: 'bottom 20%',
                 onEnter: () => {
                     anime({

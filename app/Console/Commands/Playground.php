@@ -27,5 +27,10 @@ class Playground extends Command
     public function handle()
     {
         dd(CorrelatedActionsService::getDisinformationData());
+
+        $data = [];
+        Type::all()->each(function ($type) use (&$data) {
+            $data[$type->name] = $type->formattedMapData;
+        });
     }
 }

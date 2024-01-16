@@ -1,15 +1,14 @@
 <template>
     <div id="home"
          :style="{height: height + 'px'}"
-         style="background-color: #111827"
-         class="flex relative overflow-y-auto overflow-x-hidden shrink-0 flex-col w-screen">
+         class="flex relative items-center bg-[#111827] overflow-y-auto overflow-x-hidden shrink-0 flex-col w-screen">
         <div id="home-container"
-             class="w-full sticky z-20 shrink-0 top-0 left-0 py-10 md:py-0 overflow-hidden tracking-wide h-full leading-relaxed text-gray-800 justify-between md:justify-center flex md:!flex-row flex-col items-center">
-            <div id="home-text" class="w-11/12 md:w-5/12 relative h-4/6 flex flex-col overflow-hidden">
+             class="w-full sticky z-20 shrink-0 top-0 left-0 py-10 md:py-0 overflow-hidden tracking-wide h-full leading-relaxed text-gray-800 justify-between md:!justify-center flex md:!flex-row flex-col items-center">
+            <div id="home-text" class="w-11/12 md:w-6/12 relative h-4/6 flex flex-col overflow-hidden">
                 <div class="h-32 w-full shrink-0">
 
                 </div>
-                <h1 class="sticky title top-0 bg-[#111827] z-10 uppercase text-[#E8544E] font-bold text-4xl xl:text-7xl">
+                <h1 class="sticky title whitespace-nowrap top-0 bg-[#111827] z-10 uppercase text-[#E8544E] font-bold text-4xl xl:text-7xl">
                     <span class="home-title inline-block pr-4 opacity-0 ">Before </span>
                     <span class="home-title inline-block pr-4 opacity-0 ">the </span>
                     <span class="home-title inline-block pr-4 opacity-0 ">coup </span> <br>
@@ -19,22 +18,24 @@
                 </h1>
                 <div class="h-4/6 w-full shrink-0"></div>
                 <div class="flex flex-col relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
-                    <p class="description w-full text-gray-700">Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-                        1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-                        book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-                        Aldus PageMaker including versions of Lorem Ipsum. Sed ut perspiciatis unde omnis iste natus
-                        error sit
-                        voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                        voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-                        eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                        dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
-                        labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-                        exercitationem ullam corporis suscipit laboriosam</p>
-                    <h1 class="font-semibold text-xl mt-40">Interaction and navigation guide</h1>
+                    <p class="description w-full text-gray-700">On the 1st of February 2021 when Vice President Myint
+                        Swe became an Acting President and declared on state-owned media that the results of the
+                        November 2020 general election were invalid, instating a one-year state of emergency, and
+                        handing control of the executive, legislative, and judicial branches of government to the
+                        commander in chief of the armed forces, Senior General Min Aung Hlaing. After years of living
+                        under military rule, the people's hopes for democracy that had been glowing since 2010 were
+                        dashed. The coup has also brought economic turmoil, wiping out modest gains in poverty reduction
+                        made over the past decade. But, this coup was not the first time for Myanmar; it was preceded by
+                        many military coups since 1958.
+                        <br>
+                        Before the coup d'état, the military and other political parties repeatedly announced that the
+                        election was unfair. Do you think the 2020 general election is not fair? Do you want to know the
+                        incidents that happened during the period before the coup and after the election?
+                        In BCAE, you can explore election results, actions of related organizations or parties,
+                        prominent events, and other announcements both before the coup and after the election. BCAE
+                        covered data from social media pages of officials and newsrooms.
+                    </p>
+                    <h1 class="font-semibold text-xl mt-40 description">Interaction and navigation guide</h1>
                     <p class="description w-full mt-4 text-gray-700">BCAE story is linear and you can scroll vertically
                         to walk through the story. You can jump to any section in carousel page which can be accessed by
                         clicking on the section icon in the top-right corner. You can also interact with different
@@ -49,7 +50,7 @@
                      class="h-[80vh] z-10 home-illustration opacity-0"
                      src="assets/vote_hand.png" alt="vote"/>
                 <img style="transform-origin: center bottom; transform: scale(0.8);"
-                     class="h-[70vh] -ml-44 home-illustration opacity-0"
+                     class="h-[70vh] home-illustration opacity-0"
                      src="assets/protest_hand.png" alt="protest"/>
             </div>
             <div id="scroll-down-indicator" class="fixed  bottom-8 opacity-0 gap-y-6 flex flex-col items-center">
@@ -146,103 +147,7 @@ const data = reactive({});
 
 const height = window.innerHeight;
 
-const descriptions = [{
-    title: 'We are the one',
-    description: ''
-}, {
-    title: 'We are the two',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. '
-},
-    {
-        title: 'We are the three',
-        description: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text.'
-    }, {
-        title: 'We are the four',
-        description: '"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"'
-    }];
-
-const carousel = (elements, initialIndex = 0, duration = 3000) => {
-    let stop = false;
-    if (elements.length === 0) throw new Error('Empty items')
-    let currentIndex = initialIndex ?? 0;
-
-    let timeout = null;
-
-    const computePosition = (elements, index) => {
-        // if currentIndex, default 0;
-        if (index === currentIndex) {
-            return 0;
-        }
-
-        let beforeIndex = (currentIndex - 1 + elements.length) % elements.length;
-        // if before current index
-        if (index === beforeIndex) {
-            return -elements[index].getBoundingClientRect().height;
-        }
-        let nextIndex = (currentIndex + 1) % elements.length
-        // if next index,
-        if (index === nextIndex) {
-            return elements[currentIndex].getBoundingClientRect().height;
-        }
-
-        let el = elements[index];
-        let styles = window.getComputedStyle(el);
-        let matrix = new WebKitCSSMatrix(styles.transform);
-        return matrix.m42 - elements[currentIndex].getBoundingClientRect().height;
-    }
-    const computePositions = () => {
-        let positions = [];
-
-        elements.forEach((element, index) => {
-            positions.push(computePosition(elements, index))
-        })
-
-        return positions;
-    }
-
-    const animate = function (duration) {
-        let positions = computePositions();
-        anime({
-            targets: elements,
-            duration: duration ?? 1000,
-            easing: 'easeOutQuart',
-            translateY: (el, index) => {
-                return positions[index];
-            },
-            opacity: [
-                {
-                    value: (el, index) => {
-                        if (currentIndex === index) {
-                            return 1;
-                        }
-                        return 0;
-                    },
-                    easing: 'linear',
-                    duration: 50,
-                },
-            ]
-        })
-        currentIndex = (currentIndex + 1) % elements.length;
-    }
-
-    animate(0);
-
-    const loop = () => {
-        if (!timeout) {
-            timeout = setTimeout(() => {
-                animate();
-                timeout = null;
-            }, duration)
-        }
-        requestAnimationFrame(loop.bind(this))
-    };
-
-    loop();
-    return this;
-}
-
 const trigger = () => {
-
     const body = document.getElementById('home-text');
     const bodyHeight = body.getBoundingClientRect().height;
     const bodyScrollHeight = body.scrollHeight;
@@ -258,7 +163,7 @@ const trigger = () => {
                 value: (_, index) => index === 0 ? 0.7 : 1.1,
                 // delay: 1000,
             }],
-            zIndex: (_, index) => index === 0 ? -10 : 10,
+            // zIndex: (_, index) => index === 0 ? -10 : 10,
             translateY: [0, 0],
             scrollTrigger: {
                 trigger: '#home-trigger',
@@ -281,6 +186,30 @@ const trigger = () => {
                         opacity: 0,
                         translateY: [0, 100],
                         duration: 1000,
+                    })
+                },
+                onLeave: () => {
+                    anime({
+                        targets: ['.home-illustration', '.description'],
+                        filter: `blur(2px)`,
+                        easing: 'easeOutQuart',
+                        duration: 500,
+                        update: function (anim) {
+                            console.log(anim)
+                            // targetElm.style.filter = 'blur(' + 20 * anim.progress / 100 + 'px)'
+                        }
+                    })
+                },
+                onEnterBack: () => {
+                    anime({
+                        targets: ['.home-illustration', '.description'],
+                        filter: `blur(0px)`,
+                        easing: 'easeOutQuart',
+                        duration: 500,
+                        update: function (anim) {
+                            console.log(anim)
+                            // targetElm.style.filter = 'blur(' + 20 * anim.progress / 100 + 'px)'
+                        }
                     })
                 },
                 onUpdate: (_, progress) => {
@@ -329,8 +258,9 @@ const trigger = () => {
                 start: '60% bottom',
                 end: 'bottom bottom',
                 lerp: true,
+
                 // smooth: true,
-            }
+            },
         },
     ]);
 }
@@ -361,7 +291,7 @@ const init = () => {
 
             anime({
                 targets: '.home-title',
-                color: '#131313',
+                color: '#111827',
                 easing: 'easeOutQuart',
                 duration: 1000,
             })
@@ -395,7 +325,10 @@ onDeactivated(() => {
 })
 
 onActivated(() => {
-    document.querySelector('#home').scrollTop = currentScrollOffset;
+    document.querySelector('#home').scrollTo({
+        top: currentScrollOffset,
+        behavior: "smooth"
+    });
 })
 </script>
 
