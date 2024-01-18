@@ -37,7 +37,7 @@ export const headers = [{
         icon: theMilitary,
         secondaryColor: '#ffb976',
     }, {
-        name: 'Correlated Actions',
+        name: 'Correlated Events',
         primaryColor: '#FDF4E9',
         icon: correlatedActions,
         secondaryColor: '#A65628',
@@ -56,7 +56,8 @@ export default {
     changeTo: function (name) {
         this.data.component = name;
     },
-    scrollTo: function (section) {},
+    scrollTo: function (section) {
+    },
     changeSectionHeader: function (index) {
         let translateYOffsets = [];
         for (let i = 0; i < headers.length; i++) {

@@ -16,7 +16,7 @@
                 publishing
                 software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         </div>
-        <div class="w-10/12 h-screen sticky top-24" id="disinformation-container">
+        <div class="w-10/12 z-10 h-screen sticky top-24" id="disinformation-container">
         </div>
         <div class="flex flex-col relative w-full items-center" id="disinformation-trigger">
             <div
@@ -40,19 +40,84 @@
                 </p>
             </div>
         </div>
+        <div id="disinformation-detail-viewer"
+             class="fixed -translate-x-full bg-white gap-y-2 overflow-y-auto flex flex-col py-4 px-6 shadow-2xl left-0 top-0 z-[1000] border border-gray-300 w-[80vw] md:!w-[40vw] 2xl:!w-[30vw]"
+             :style="{height: height+'px'}">
+            <button @click="toggleDetailViewerVisibility" class="outline-none self-end">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="lucide w-8 h-8 lucide-x-circle">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="m15 9-6 6"/>
+                    <path d="m9 9 6 6"/>
+                </svg>
+            </button>
+            <div class="flex items-center w-full gap-x-2">
+                <h1 class="font-semibold text-xl">{{ data.username ?? data.id }}</h1>
+                <span class="text-sm px-2 py-1 text-white rounded"
+                      :class="data.type === 'page' ? 'bg-blue-400': 'bg-red-400'">{{ data.type }}</span>
+            </div>
+            <div class="flex items-center w-full gap-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="lucide w-4 h-4 lucide-link">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+                <a :href="data.url"
+                   target="_blank"
+                   class="underline decoration-blue-400 font-semibold text-blue-400">{{ data.platform }}</a>
+            </div>
+            <div class="p-4 rounded border border-2 my-2 bg-gray-100 flex flex-col" v-for="content in data.contents">
+                <a target="_blank" :href="content.url"
+                   class="font-semibold text-blue-400 underline text-lg">{{ content.title }}</a>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <span class="text-sm px-2 py-1 text-white rounded bg-blue-400">Platform: {{
+                            content.platform
+                        }}</span>
+                    <span class="text-sm px-2 py-1 text-white rounded bg-orange-400">Topic: {{ content.topic }}</span>
+                    <span class="text-sm px-2 py-1 text-white rounded bg-red-400">Date: {{ content.date }}</span>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
-import {reactive, onMounted} from "vue";
+import {onMounted, reactive} from "vue";
 import * as d3 from 'd3';
+import {PopOver} from "vue-common-components";
 import AnimeScrollTrigger from 'anime-scrolltrigger';
+import anime from "animejs";
+import {onClickOutside} from "js-utils";
 
 const props = defineProps([]);
 
 let disinformationData = [];
 
-const data = reactive({});
+const height = window.innerHeight
+
+const data = reactive({
+    contents: [],
+    type: null,
+    url: null,
+    platform: null,
+    username: null,
+    id: null,
+});
+
+let showViewer = false;
+
+const toggleDetailViewerVisibility = () => {
+    anime({
+        targets: '#disinformation-detail-viewer',
+        translateX: showViewer ? ['0%', '-100%'] : ['-100%', '0%'],
+        easing: 'easeOutQuart',
+        duration: 600,
+    })
+    showViewer = !showViewer;
+}
+
 
 const visualization = {
     data: [],
@@ -102,7 +167,20 @@ const visualization = {
                     .attr('fill', color(currentItem.count / maxCount))
                     .attr('cx', (j * this.settings.radius * 2) + this.settings.margin.left + j * this.settings.gap)
                     .attr('cy', this.settings.height)
-                    .style('opacity', 0);
+                    .style('opacity', 0)
+                    .style('cursor', 'pointer')
+                    .on('click', () => {
+                        data.url = currentItem.url;
+                        data.contents = currentItem.contents;
+                        data.platform = currentItem.platform;
+                        data.id = currentItem.id;
+                        data.type = currentItem.type;
+                        if (!showViewer) {
+                            setTimeout(() => {
+                                toggleDetailViewerVisibility();
+                            }, 100)
+                        }
+                    });
                 if (currentItemIndex === this.settings.total) {
                     break;
                 }
@@ -154,18 +232,32 @@ const visualization = {
     },
 }
 
-axios.post('/correlated-actions/disinformation').then((res) => {
-    Object.keys(res.data.validPropagandists).forEach((propagandist) => {
-        visualization.data.push({
-            id: propagandist,
-            count: res.data.validPropagandists[propagandist].length,
-            contents: res.data.validPropagandists[propagandist],
-        })
-    });
-    visualization.data.sort((a, b) => a.count >= b.count ? -1 : 1) // sort descending
+fetch('assets/data/disinformation.json').then(async (res) => {
+    visualization.data = await res.json();
 })
-
+// axios.post('/correlated-events/disinformation').then((res) => {
+//     console.log(res.data.validPropagandists)
+// Object.keys(res.data.validPropagandists).forEach((propagandist) => {
+//     visualization.data.push({
+//         id: propagandist,
+//         count: res.data.validPropagandists[propagandist].length,
+//         type: res.data.validPropagandists[propagandist][0].type,
+//         url: res.data.validPropagandists[propagandist][0].url,
+//         username: res.data.validPropagandists[propagandist][0].username,
+//         platform: res.data.validPropagandists[propagandist][0].platform,
+//         contents: res.data.validPropagandists[propagandist].map((content) => content.article),
+//         // type:
+//     })
+// });
+// visualization.data.sort((a, b) => a.count >= b.count ? -1 : 1)
+// console.log(JSON.stringify(visualization.data))
+// })
 onMounted(() => {
+    onClickOutside(document.getElementById('disinformation-detail-viewer'), (e) => {
+        if (showViewer && e.target.tagName !== 'circle') {
+            toggleDetailViewerVisibility();
+        }
+    })
     let main = document.querySelector('main');
     let disinformationContainer = document.getElementById('disinformation-container');
     let animations = [{
@@ -177,7 +269,6 @@ onMounted(() => {
                 if (!visualization.settings.svg) {
                     visualization.init(disinformationContainer)
                 }
-
                 visualization.start()
             },
             onLeaveBack: () => {

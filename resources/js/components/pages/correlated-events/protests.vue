@@ -15,12 +15,12 @@
             </div>
         </div>
         <div class="w-1/2 py-10 gap-y-24 flex flex-col z-10">
-            <div class="protest-trigger w-full border rounded bg-gray-200 h-[40vh]"></div>
-            <div class="protest-trigger w-full border rounded bg-gray-200 h-[40vh] relative">
+            <div class="protest-trigger mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh]"></div>
+            <div class="protest-trigger mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh] relative">
 
             </div>
-            <div class="protest-trigger w-full border rounded bg-gray-200 h-[40vh]"></div>
-            <div class="protest-trigger w-full border rounded bg-gray-200 h-[40vh]"></div>
+            <div class="protest-trigger mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh]"></div>
+            <div class="protest-trigger mb-[55%] w-full border rounded bg-gray-200 h-[40vh]"></div>
         </div>
     </div>
 </template>
@@ -187,15 +187,13 @@ const listenTriggers = () => {
         triggers.push({
             scrollTrigger: {
                 trigger: divs[index],
-                start: index === divs.length - 1 ? 'top 80%' : 'top top',
-                end: 'bottom top',
+                start: 'top 80%',
+                end: 'bottom center',
                 // debug: index === 0,
                 onEnter: () => {
-                    console.log('enter', dateInterval)
                     plotPoints(new Date(dateInterval.startDate), new Date(dateInterval.endDate))
                 },
                 onEnterBack: () => {
-                    console.log('enter back', dateInterval)
                     plotPoints(new Date(dateInterval.startDate), new Date(dateInterval.endDate))
                 }
             }
@@ -205,9 +203,9 @@ const listenTriggers = () => {
 }
 
 onMounted(() => {
-    axios.post('correlated-actions/protests').then((res) => {
-        protests = res.data;
-        // console.log(protests)
+
+    fetch('assets/data/protests.json').then(async (res) => {
+        protests = await res.json();
         let range = [d3.min(protests, (protest) => parseInt(protest.numberOfPeople)), d3.max(protests, (protest) => parseInt(protest.numberOfPeople))];
         colors = d3.scaleLinear()
             .domain(range)
@@ -216,7 +214,6 @@ onMounted(() => {
             init();
             listenTriggers()
         }, 2000)
-
     })
 })
 </script>

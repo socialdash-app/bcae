@@ -4,15 +4,16 @@
             <h1 class="text-3xl font-bold">The Election</h1>
         </div>
         <div class="w-full flex md:!flex-row flex-col items-center md:!items-start relative justify-evenly">
-            <div id="map-container" class="w-11/12 md:!w-4/12 h-[85vh] sticky top-24 z-[1001] flex flex-col overflow-hidden">
+            <div id="map-container"
+                 class="w-11/12 md:!w-4/12 h-[85vh] sticky top-24 z-[1001] flex flex-col overflow-hidden">
                 <button @click="resetZoom" v-show="data.isDrilldown"
-                    class="absolute flex z-10 items-center gap-x-2 top-4 left-4 px-4 py-2 border rounded bg-white">
+                        class="absolute flex z-10 items-center gap-x-2 top-4 left-4 px-4 py-2 border rounded bg-white">
                     <span> Reset Map</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide w-4 h-4 lucide-undo-2">
-                        <path d="M9 14 4 9l5-5" />
-                        <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11" />
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="lucide w-4 h-4 lucide-undo-2">
+                        <path d="M9 14 4 9l5-5"/>
+                        <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/>
                     </svg>
                 </button>
                 <svg id="map">
@@ -21,20 +22,21 @@
                     <button @click="switchHluttawType('PyiThu')" class="w-48 h-12 rounded border bg-[#F2B5B4]">Pyithu
                         Hluttaw
                     </button>
-                    <button @click="switchHluttawType('Amyothar')" class="w-48 h-12 rounded border bg-[#F788BF]">Amyothar
+                    <button @click="switchHluttawType('Amyothar')" class="w-48 h-12 rounded border bg-[#F788BF]">
+                        Amyothar
                         Hluttaw
                     </button>
                 </div>
             </div>
             <div id="election-result-detail" class="fixed border-gray-800 z-[1002] bg-[#FFC3E0] p-4 rounded border"
-                v-show="data.hoverRegion">
+                 v-show="data.hoverRegion">
                 <h1 class="font-semibold text-lg">{{ data.details.title }}</h1>
                 <table>
                     <tbody>
-                        <tr class=" flex items-center text-sm" :class="{ 'font-medium': index === 0 }"
-                            v-for="(content, index) in data.details.contents">
-                            <td class="p-2 w-4/12" v-for="c in content">{{ c }}</td>
-                        </tr>
+                    <tr class=" flex items-center text-sm" :class="{ 'font-medium': index === 0 }"
+                        v-for="(content, index) in data.details.contents">
+                        <td class="p-2 w-4/12" v-for="c in content">{{ c }}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -51,13 +53,13 @@
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue';
+import {onMounted, reactive} from 'vue';
 import * as d3 from 'd3';
-import { PopOver } from "vue-common-components";
+import {PopOver} from "vue-common-components";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import route from "../../api/route.js";
 import anime from 'animejs';
-import { placeElementRelativeToScreen } from "../../api/helpers.js";
+import {placeElementRelativeToScreen} from "../../api/helpers.js";
 
 let results = {}, zoomIntoRegion, path, resetZoom, g, g1, amyoThaFeatures, pyiThuFeatures, currentRegion;
 
@@ -141,7 +143,7 @@ const init = () => {
     svg.attr('height', height);
     let upperGroup = svg
         .append('g')
-        .attr("transform", "translate(" + 0 + "," + 0+ ")")
+        .attr("transform", "translate(" + 0 + "," + 0 + ")")
         .append('g')
 
     Promise.all([
@@ -313,7 +315,7 @@ onMounted(() => {
         anime({
             targets: mapContainer,
             translateX: mapTranslateXWidth,
-            duration:0,
+            duration: 0,
         })
         d3.json('assets/bcae-results.json').then((res) => {
             results = res;
@@ -334,18 +336,16 @@ onMounted(() => {
                     onEnter: () => {
                         anime({
                             targets: mapContainer,
-                            translateX: [mapTranslateXWidth,0],
-                            // left: ['50%','0%'],
-                            duration: 1000,
+                            translateX: [mapTranslateXWidth, 0],
+                            duration: 1500,
                             easing: 'easeOutExpo',
                         })
                     },
-                    onLeaveBack:()=>{
+                    onLeaveBack: () => {
                         anime({
                             targets: mapContainer,
-                            translateX: [0,mapTranslateXWidth],
-                            // left: ['0%', '50%'],
-                            duration: 1000,
+                            translateX: [0, mapTranslateXWidth],
+                            duration: 1500,
                             easing: 'easeOutExpo',
                         })
                     },
@@ -382,11 +382,9 @@ onMounted(() => {
                         route.changeSectionHeader(1)
                     },
                     onLeave: () => {
-                        console.log('leave', data.hoverRegion)
                         if (data.hoverRegion) data.hoverRegion = null;
                     },
                     onLeaveBack: () => {
-                        console.log('leave back', data.hoverRegion)
                         if (data.hoverRegion) data.hoverRegion = null;
                     }
                 }

@@ -246,6 +246,7 @@ const init = () => {
 }
 
 onMounted(() => {
+    // set timeout to wait animation to finish
     setTimeout(() => {
         init()
     }, 1000)

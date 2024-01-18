@@ -31,8 +31,8 @@
 
                     </div>
                 </div>
-                <div class="h-4/6 border-b">
-                    {{ article.description }}
+                <div :title="article.description" class="h-4/6 border-b">
+                    {{ truncate(article.description, 600) }}
                 </div>
                 <div class="flex h-1/6 items-center w-full justify-between">
                     <div class="flex items-center justify-center w-4/12 gap-x-2">

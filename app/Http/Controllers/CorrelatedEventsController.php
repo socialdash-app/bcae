@@ -6,11 +6,11 @@ use App\Models\CorrelatedActions\Protest;
 use App\Services\CorrelatedActionsService;
 use Illuminate\Support\Facades\Route;
 
-class CorrelatedActionsController
+class CorrelatedEventsController
 {
     public static function routes(): void
     {
-        Route::group(['prefix' => 'correlated-actions'], function () {
+        Route::group(['prefix' => 'correlated-events'], function () {
             Route::post('protests', [static::class, 'getProtestData']);
             Route::post('disinformation', [static::class, 'disinformation']);
         });

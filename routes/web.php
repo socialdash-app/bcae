@@ -17,7 +17,7 @@ Route::get('/', function () {
     return \Inertia\Inertia::render('index');
 });
 
-\App\Http\Controllers\CorrelatedActionsController::routes();
+\App\Http\Controllers\CorrelatedEventsController::routes();
 
 \App\Http\Controllers\ProminentEventsController::routes();
 

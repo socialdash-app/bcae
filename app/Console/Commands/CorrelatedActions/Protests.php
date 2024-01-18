@@ -13,7 +13,7 @@ class Protests extends Command
      *
      * @var string
      */
-    protected $signature = 'correlated-actions:protests';
+    protected $signature = 'correlated-events:protests';
 
     /**
      * The console command description.

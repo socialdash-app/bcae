@@ -1,11 +1,11 @@
 <template>
-    <div id="correlated-actions"
+    <div id="correlated-events"
          class="w-full flex-col flex relative items-center py-2 bg-[#FDF4E9]">
         <!--        <div class="w-full flex justify-between z-[100] h-24 items-center px-20 sticky top-0 left-0">-->
         <!--            <h1 class="text-xl font-semibold">Party Actions</h1>-->
         <!--            <div class="relative flex items-center justify-center">-->
         <!--                <svg width="60" height="60" viewBox="0 0 60 60">-->
-        <!--                    <circle id="correlated-actions-progress-indicator" stroke-dashoffset="160" stroke-dasharray="160"-->
+        <!--                    <circle id="correlated-events-progress-indicator" stroke-dashoffset="160" stroke-dasharray="160"-->
         <!--                            r="25"-->
         <!--                            fill="none" stroke-width="8"-->
         <!--                            stroke="#A65628" cx="30"-->
@@ -39,10 +39,10 @@ const data = reactive({})
 onMounted(() => {
     setTimeout(() => {
         new AnimeScrollTrigger(document.querySelector('main'), [{
-            targets: '#header-correlated-actions circle',
+            targets: '#header-correlated-events circle',
             strokeDashoffset: 0,
             scrollTrigger: {
-                trigger: '#correlated-actions',
+                trigger: '#correlated-events',
                 start: 'top top',
                 end: 'bottom top',
                 lerp: true,
