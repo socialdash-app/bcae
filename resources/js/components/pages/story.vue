@@ -1,16 +1,18 @@
 <template>
     <main :style="{ height: height + 'px' }"
           class="w-screen overscroll-none leading-7 shrink-0  overflow-y-auto overflow-x-hidden flex items-center flex-col">
-        <div class="fixed right-20 top-6 flex z-20 items-center justify-center">
-            <div class="absolute w-10 h-10 flex items-center justify-center">
-                <svg :id="'header-' + separateWordByDash(header.name)" :style="{ zIndex: index }" class="absolute"
-                     v-for="(header, index) in headers" width="60" height="60" viewBox="0 0 60 60">
+        <div class="fixed right-6 md:right-20 top-5 md:top-6 flex z-[100] items-center justify-center">
+            <div class="absolute w-10 md:!w-14 h-10 md:!h-14 flex items-center justify-center">
+                <svg :id="'header-' + separateWordByDash(header.name)" :style="{ zIndex: index }"
+                     class="absolute w-full h-full"
+                     v-for="(header, index) in headers" width="100%" height="100%" viewBox="0 0 60 60">
                     <circle stroke-dashoffset="160" stroke-dasharray="160" r="25" fill="none" stroke-width="8"
                             :stroke="header.secondaryColor" cx="30" cy="30"></circle>
                 </svg>
             </div>
-            <div class="relative w-7 h-7 overflow-hidden">
-                <span class="w-full header-icon h-full absolute" :style="{ transform: `translateY(${index * 100}%)` }"
+            <div class="relative w-5 md:!w-7 h-5 md:!h-7 overflow-hidden">
+                <span class="w-full header-icon h-full absolute"
+                      :style="{ transform: `translateY(${index * 100}%)` }"
                       v-for="(header, index) in headers" v-html="header.icon"></span>
             </div>
         </div>

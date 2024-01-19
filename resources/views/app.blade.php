@@ -10,10 +10,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>Document</title>
-    @vite(['resources/js/app.js','resources/css/app.css'])
-    {{-- <script type="module" src="http://192.168.1.111:5173/@@vite/client"></script>
+    {{--    @vite(['resources/js/app.js','resources/css/app.css'])--}}
+    <script type="module" src="http://192.168.1.111:5173/@@vite/client"></script>
     <script type="module" src="http://192.168.1.111:5173/resources/js/app.js"></script>
-    <link rel="stylesheet" href="http://192.168.1.111:5173/resources/css/app.css"/> --}}
+    <link rel="stylesheet" href="http://192.168.1.111:5173/resources/css/app.css"/>
     {{--       <script type="module" src="http://192.168.110.234:5173/@@vite/client"></script>--}}
     {{--       <script type="module" src="http://192.168.110.234:5173/resources/js/app.js"></script>--}}
     {{--       <link rel="stylesheet" href="http://192.168.110.234:5173/resources/css/app.css"/>--}}

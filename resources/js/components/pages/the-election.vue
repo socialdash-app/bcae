@@ -41,7 +41,7 @@
                 </table>
             </div>
             <div class="w-11/12 md:!w-1/2 flex flex-col z-10">
-                <div class="trigger mb-[90%] md:!mb-[50%] w-full border rounded-lg h-[100vh]"></div>
+                <div class="trigger mb-[90%] md:!mb-[50%] w-full rounded-lg h-[100vh]"></div>
                 <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-[#FFC3E0] h-[40vh]"></div>
                 <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-[#FFC3E0] h-[40vh] relative">
 

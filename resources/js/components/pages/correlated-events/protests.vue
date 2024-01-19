@@ -1,6 +1,7 @@
 <template>
-    <div id="protests" class="w-10/12 flex relative pt-14 justify-evenly">
-        <div class="w-5/12 h-[90vh] py-10 sticky top-24 left-0 flex flex-col items-center overflow-hidden">
+    <div id="protests" class="w-10/12 flex md:!flex-row flex-col items-center md:!items-start relative justify-evenly">
+        <div id="protests-map-container"
+             class="w-5/12 h-[90vh] py-10 sticky top-24 z-[1001] flex flex-col items-center overflow-hidden">
             <svg id="protests-map" class="w-full h-full">
                 <g class="map" fill="#b3b3b3" stroke="black" stroke-width="0.01"></g>
                 <g class="protests" fill="orange" stroke="black" stroke-width="0.01"></g>
@@ -15,12 +16,13 @@
             </div>
         </div>
         <div class="w-1/2 py-10 gap-y-24 flex flex-col z-10">
-            <div class="protest-trigger mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh]"></div>
-            <div class="protest-trigger mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh] relative">
+            <div class="protest-map-trigger mb-[90%] md:!mb-[50%] w-full rounded-lg h-[100vh]"></div>
+            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh]"></div>
+            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh] relative">
 
             </div>
-            <div class="protest-trigger mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh]"></div>
-            <div class="protest-trigger mb-[55%] w-full border rounded bg-gray-200 h-[40vh]"></div>
+            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh]"></div>
+            <div class="mb-[55%] w-full border rounded bg-gray-200 h-[40vh]"></div>
         </div>
     </div>
 </template>
@@ -30,6 +32,7 @@ import {reactive, onMounted} from "vue";
 import * as d3 from "d3";
 import {PopOver} from "vue-common-components";
 import AnimeScrollTrigger from 'anime-scrolltrigger'
+import anime from "animejs";
 
 const props = defineProps([]);
 
@@ -180,30 +183,71 @@ const plotPoints = (startDate, endDate) => {
 
 const listenTriggers = () => {
     let container = document.getElementById('protests')
-    let divs = container.querySelectorAll('.protest-trigger');
-
-    let triggers = [];
-    dateIntervals.forEach((dateInterval, index) => {
-        triggers.push({
+    const mapContainer = document.getElementById('protests-map-container');
+    const mapContainerRect = mapContainer.getBoundingClientRect();
+    const mapTranslateXWidth = (window.innerWidth * 0.5) - mapContainerRect.left - (0.5 * mapContainerRect.width);
+    anime({
+        targets: mapContainer,
+        translateX: mapTranslateXWidth,
+        duration: 0,
+    })
+    let triggers = [
+        {
             scrollTrigger: {
-                trigger: divs[index],
-                start: 'top 80%',
-                end: 'bottom center',
-                // debug: index === 0,
+                trigger: '.protest-map-trigger',
+                start: 'bottom center',
+                end: 'bottom -10%',
+                debug: true,
                 onEnter: () => {
-                    plotPoints(new Date(dateInterval.startDate), new Date(dateInterval.endDate))
+                    anime({
+                        targets: mapContainer,
+                        translateX: [mapTranslateXWidth, 0],
+                        duration: 1500,
+                        easing: 'easeOutExpo',
+                    })
                 },
-                onEnterBack: () => {
-                    plotPoints(new Date(dateInterval.startDate), new Date(dateInterval.endDate))
+                onLeaveBack: () => {
+                    anime({
+                        targets: mapContainer,
+                        translateX: [0, mapTranslateXWidth],
+                        duration: 1500,
+                        easing: 'easeOutExpo',
+                    })
+                },
+            }
+        },
+        {
+            scrollTrigger: {
+                trigger: '#protests',
+                start: 'top top',
+                end: 'bottom bottom',
+                lerp: true,
+                onUpdate: (_, progress) => {
+                    console.log(progress)
                 }
             }
-        })
-    })
+        },
+    ];
+    // dateIntervals.forEach((dateInterval, index) => {
+    //     triggers.push({
+    //         scrollTrigger: {
+    //             trigger: divs[index],
+    //             start: 'top 80%',
+    //             end: 'bottom center',
+    //             // debug: index === 0,
+    //             onEnter: () => {
+    //                 plotPoints(new Date(dateInterval.startDate), new Date(dateInterval.endDate))
+    //             },
+    //             onEnterBack: () => {
+    //                 plotPoints(new Date(dateInterval.startDate), new Date(dateInterval.endDate))
+    //             }
+    //         }
+    //     })
+    // })
     new AnimeScrollTrigger(document.querySelector('main'), triggers)
 }
 
 onMounted(() => {
-
     fetch('assets/data/protests.json').then(async (res) => {
         protests = await res.json();
         let range = [d3.min(protests, (protest) => parseInt(protest.numberOfPeople)), d3.max(protests, (protest) => parseInt(protest.numberOfPeople))];
