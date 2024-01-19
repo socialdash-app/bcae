@@ -33,7 +33,7 @@
                 <h1 class="font-semibold text-lg">{{ data.details.title }}</h1>
                 <table>
                     <tbody>
-                    <tr class=" flex items-center text-sm" :class="{ 'font-medium': index === 0 }"
+                    <tr class=" flex items-center text-sm" :class="{ 'font-medium border-b': index === 0 }"
                         v-for="(content, index) in data.details.contents">
                         <td class="p-2 w-4/12" v-for="c in content">{{ c }}</td>
                     </tr>
@@ -42,11 +42,11 @@
             </div>
             <div class="w-11/12 md:!w-1/2 flex flex-col z-10">
                 <div class="trigger mb-[90%] md:!mb-[50%] w-full rounded-lg h-[100vh]"></div>
-                <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-[#FFC3E0] h-[40vh]"></div>
-                <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-[#FFC3E0] h-[40vh] relative">
+                <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh]"></div>
+                <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh] relative">
 
                 </div>
-                <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-[#FFC3E0] h-[40vh]"></div>
+                <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh]"></div>
             </div>
         </div>
     </div>
@@ -330,7 +330,7 @@ onMounted(() => {
             {
                 scrollTrigger: {
                     trigger: divs[0],
-                    start: 'bottom center',
+                    start: 'bottom 60%',
                     end: 'bottom -10%',
                     debug: true,
                     onEnter: () => {
@@ -338,7 +338,7 @@ onMounted(() => {
                             targets: mapContainer,
                             translateX: [mapTranslateXWidth, 0],
                             duration: 1500,
-                            easing: 'easeOutExpo',
+                            easing: 'easeOutQuart',
                         })
                     },
                     onLeaveBack: () => {
@@ -346,7 +346,7 @@ onMounted(() => {
                             targets: mapContainer,
                             translateX: [0, mapTranslateXWidth],
                             duration: 1500,
-                            easing: 'easeOutExpo',
+                            easing: 'easeOutQuart',
                         })
                     },
                 }

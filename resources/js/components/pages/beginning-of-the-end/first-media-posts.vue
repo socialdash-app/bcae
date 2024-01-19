@@ -1,26 +1,29 @@
 <template>
     <div id="beginning-of-the-end-media-posts"
          class="w-full overflow-visible text-white relative flex flex-col items-center"
-         :style="{height: `${articles.length * 1200}px`}">
-        <div id="beginning-of-the-end-media-posts-pinner" class="z-10 mt-[10vh] w-6/12 absolute flex flex-col"
-             style="height: 600px;">
+         :style="{height: `${height * articles.length}px`}">
+        <div id="beginning-of-the-end-media-posts-pinner"
+             class="z-10 shrink-0 w-10/12 sticky top-24 md:w-6/12 flex flex-col">
             <div v-for="(article,index) in articles"
-                 class="beginning-of-the-end-media-post-title absolute font-semibold text-2xl"
-                 style="color:#E8544E; -webkit-text-fill-color: #E8544E; transform-origin: 0 0; width: 600px; text-align: right"
-                 :style="{transform : `translateX(-60px) translateY(${(index + 1) * 600}px) rotate(-90deg)`, opacity: index === 0 ? 1: 0.4}">
+                 class="beginning-of-the-end-media-post-title absolute font-semibold  text-xl md:text-2xl"
+                 style="color:#E8544E; -webkit-text-fill-color: #E8544E; transform-origin: 0 0; text-align: right"
+                 :style="{width: boxHeight + 'px', transform : `translateX(-${translateDistance * 3}px) translateY(${(index + 1) * boxHeight}px) rotate(-90deg)`, opacity: index === 0 ? 1: 0.4}">
                 {{ article.title }}
             </div>
             <div
                 :id="'beginning-of-the-end-media-post-'+index"
                 v-for="(article,index) in articles"
-                class="beginning-of-the-end-media-post w-full justify-between h-full p-10 border-[#E8544E] border flex-col  bg-gray-800 flex absolute overflow-visible"
+                class="beginning-of-the-end-media-post w-full justify-between p-4 md:p-10 border-[#E8544E] border flex-col  bg-gray-800 flex absolute overflow-visible"
                 style="will-change: transform"
-                :style="{zIndex: -index ,transform: `translateX(${index * translateDistance}px) translateY(${index * translateDistance}px)`}">
-                <div class="flex justify-between h-1/6 w-full">
+                :style="{
+                    zIndex: -index,
+                    height: boxHeight +'px',
+                    transform: `translateX(${index * translateDistance}px) translateY(${index * translateDistance}px)`}">
+                <div class="flex justify-between w-full">
                     <div class="flex">
                         <div v-html="avatar" class="w-12 h-12 mr-6"></div>
-                        <div class="flex flex-col gap-y-2">
-                            <p class="text-xl font-semibold">{{ article.author }}</p>
+                        <div class="flex flex-col">
+                            <p class="text-lg md:text-xl font-semibold">{{ article.author }}</p>
                             <div class="flex items-center gap-x-2">
                                 <time>{{ article.dateTime }}</time>
                                 <div v-html="earth" class="w-5 h-5 mb-1 text-white"></div>
@@ -32,7 +35,7 @@
                     </div>
                 </div>
                 <div :title="article.description" class="h-4/6 border-b">
-                    {{ truncate(article.description, 600) }}
+                    {{ truncate(article.description, width > 768 ? 600 : 300) }}
                 </div>
                 <div class="flex h-1/6 items-center w-full justify-between">
                     <div class="flex items-center justify-center w-4/12 gap-x-2">
@@ -62,7 +65,12 @@ import {avatar, comment, earth, like, more, share} from "../../../assets/icons.j
 
 const props = defineProps([]);
 
-const translateDistance = 20;
+
+const width = window.innerWidth;
+const height = window.innerHeight;
+
+const boxHeight = width > 768 ? height * 0.6 : height * 0.8;
+const translateDistance = width > 768 ? 20 : 10;
 
 const data = reactive({})
 const articles = [{
@@ -81,14 +89,15 @@ const articles = [{
     title: 'First Media Post About Coup',
     description: 'Tatmadaw seizes power, detains all the chief ministers of states and regions. The Tatmadaw seized power earlier this morning and detained all the chief ministers of the states and regions, including the Yangon Region chief minister.',
 },]
+
 onMounted(() => {
     let duration = 1000;
     let articles = document.querySelectorAll('.beginning-of-the-end-media-post');
     let articleRect = articles[0].getBoundingClientRect();
     let articleTitles = document.querySelectorAll('.beginning-of-the-end-media-post-title');
-    let titleTranslateY = [0, 600, 1200, 1800];
-    let postTranslateX = [0, 0, 20, 40];
-    let postTranslateY = [-document.querySelector('main').scrollTop - articleRect.top - articleRect.height - 10, 0, 20, 40];
+    let titleTranslateY = [0, boxHeight, boxHeight * 2, boxHeight * 3];
+    let postTranslateX = [0, 0, translateDistance, translateDistance * 2];
+    let postTranslateY = [-document.querySelector('main').scrollTop - articleRect.top - articleRect.height - 10, 0, translateDistance, translateDistance * 2];
     let animations = [];
     let divider = Math.round(100 / articles.length);
     let stopPercentages = [];
@@ -134,51 +143,6 @@ onMounted(() => {
         // })
         // animations.push(animation)
     }
-    // animations = [
-    // {
-    //     targets: articles,
-    //     translateX: [{
-    //         value: 0,
-    //         duration: (el, index) => (index + 1) * duration,
-    //     }],
-    //     translateY: [{
-    //         value: 0,
-    //         duration: (el, index) => (index + 1) * duration,
-    //     }, {
-    //         value: (el, index) => {
-    //             return index !== articles.length - 1 ? document.querySelector('main').scrollTop - articleRect.top - articleRect.height - 10 : 0;
-    //         },
-    //     }],
-    //     easing: 'linear',
-    //     scrollTrigger: {
-    //         trigger: document.querySelector('#beginning-of-the-end-media-posts'),
-    //         debug: true,
-    //         // lerp: true,
-    //         start: 'top top',
-    //         end: 'bottom bottom',
-    //         pin: '#beginning-of-the-end-media-posts-pinner',
-    //         actions: 'play none none reverse',
-    //     }
-    // },
-    // {
-    // targets: '.beginning-of-the-end-media-post-title',
-    // opacity: [{
-    //     value: 1,
-    // }, {
-    //     value: 0,
-    //     delay: (el, index) => (index + 1) * duration * 0.5,
-    // }],
-    // translateY: [{
-    //     value: (el, index) => {
-    //         return index !== articles.length - 1 ? 0 : 600;
-    //     },
-    //     duration: (el, index) => (index + 1) * duration,
-    // }, {
-    //     value: (el, index) => {
-    //         return index !== articles.length - 1 ? document.querySelector('main').scrollTop - articleRect.top - articleRect.height - 10 : 600;
-    //     },
-    // }],
-    // }];
 
     let currentIndex = -1;
 
@@ -188,7 +152,6 @@ onMounted(() => {
         new AnimeScrollTrigger(document.querySelector('main'), [{
             scrollTrigger: {
                 trigger: document.querySelector('#beginning-of-the-end-media-posts'),
-                // debug: true,
                 lerp: true,
                 onUpdate: (_, progress) => {
                     if (timeout) clearTimeout(timeout);
@@ -209,7 +172,6 @@ onMounted(() => {
                 },
                 start: 'top top',
                 end: 'bottom bottom',
-                pin: '#beginning-of-the-end-media-posts-pinner',
             }
         }])
     }, 2000)

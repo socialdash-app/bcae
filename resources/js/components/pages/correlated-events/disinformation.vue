@@ -158,7 +158,6 @@ const visualization = {
         do {
             for (let j = 0; j < this.settings.columns; j++) {
                 let currentItem = this.data[currentItemIndex];
-                currentItemIndex++;
                 this.settings.svg.append('circle')
                     .attr('r', this.settings.radius)
                     .attr('stroke', 'black')
@@ -166,6 +165,7 @@ const visualization = {
                     .attr('data-count', currentItem.count)
                     .attr('data-topics', [...new Set(currentItem.contents.map((content) => content.topic))].join(', '))
                     .attr('data-fact_checkers', [...new Set(currentItem.contents.map((content) => content.fact_checker))].join(', '))
+                    .attr('data-cy', Math.floor(currentItemIndex / this.settings.columns) * this.settings.radius * 2 + Math.floor(currentItemIndex / this.settings.columns) * this.settings.gap + this.settings.margin.top)
                     .attr('fill', color(currentItem.count / maxCount))
                     .attr('cx', (j * this.settings.radius * 2) + extraSpace * .5 + this.settings.radius + j * this.settings.gap)
                     .attr('cy', this.settings.height)
@@ -181,6 +181,7 @@ const visualization = {
                             }, 100)
                         }
                     });
+                currentItemIndex++;
                 if (currentItemIndex === this.settings.total) {
                     break;
                 }
@@ -200,8 +201,9 @@ const visualization = {
             .duration(200)
             .delay((_, i) => Math.floor(i / this.settings.columns) * 100)
             .style('opacity', 1)
-            .attr('cy', (_, i) => {
-                return (Math.floor(i / this.settings.columns) * this.settings.radius * 2) + Math.floor(i / this.settings.columns) * this.settings.gap + this.settings.margin.top
+            .attr('cy', function () {
+                return d3.select(this).attr('data-cy')
+                // return (Math.floor(i / this.settings.columns) * this.settings.radius * 2) + Math.floor(i / this.settings.columns) * this.settings.gap + this.settings.margin.top
             })
             .easeVarying((_) => d3.easeExpOut)
     },
@@ -223,8 +225,9 @@ const visualization = {
                 let data = d3.select(this).node().dataset[attribute];
                 return !(data.includes(value) || data === value);
             })
-            .attr('cy', (_, i) => {
-                return (Math.floor(i / this.settings.columns) * this.settings.radius * 2) + Math.floor(i / this.settings.columns) * this.settings.gap + this.settings.margin.top
+            .attr('cy', function (_, i) {
+                return d3.select(this).attr('data-cy')
+                // return (Math.floor(i / this.settings.columns) * this.settings.radius * 2) + Math.floor(i / this.settings.columns) * this.settings.gap + this.settings.margin.top
             })
             .transition()
             .duration(500)
@@ -233,8 +236,8 @@ const visualization = {
     },
     resetHighlight: function () {
         this.settings.svg.selectAll('circle')
-            .attr('cy', (_, i) => {
-                return (Math.floor(i / this.settings.columns) * this.settings.radius * 2) + Math.floor(i / this.settings.columns) * this.settings.gap + this.settings.margin.top
+            .attr('cy', function () {
+                return d3.select(this).attr('data-cy')
             })
             .transition()
             .duration(500)

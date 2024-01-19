@@ -1,77 +1,41 @@
 <template>
-    <div id="summary" class="w-full flex justify-center relative" :style="{height:300 + 'vh'}">
-        <div id="summary-pinner" class="w-10/12 mt-24 p-10 h-screen text-white flex flex-col gap-y-12">
-            <h1 class="text-xl font-semibold">Summary</h1>
-            <div class="summary-header flex items-center font-semibold  w-full justify-between">
-                <div class="overflow-hidden w-2/12 relative h-28 text-6xl flex flex-col">
-                    <p :style="{transform: `translateY(${index * 150}%)`}" v-for="(_,index) in data"
-                       class="absolute text-4xl pb-12 summary-index"> 0{{ index }}</p>
-                </div>
-                <div class="flex w-4/12 gap-y-8 flex-col">
-                    <div class="overflow-hidden h-32 relative text-6xl font-bold">
-                        <h1 class="summary-title pb-12 h-28 text-[#E8544E] absolute"
-                            :style="{transform: `translateY(${index * 150}%)`}"
-                            v-for="(datum,index) in data">
-                            {{ datum.name }}</h1>
-                    </div>
-                    <div class="overflow-hidden relative h-28">
-                        <h1 class="summary-description absolute pb-12"
-                            :style="{transform: `translateY(${index * 150}%)`}"
-                            v-for="(datum,index) in data">
-                            {{ datum.description }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div id="summary-data-table" class="w-full flex flex-col">
-                <div class="w-full h-16 border-t border-b py-4 relative overflow-hidden">
-                    <div v-for="(datum,index) in data"
-                         :style="{transform: `translateY(${index * 150}%)`}"
-                         class="w-full first-row absolute flex pb-12 items-center justify-between">
-                        <div :class="{'text-center': i === 1,'text-right': i===2}"
-                             class="w-4/12"
-                             v-for="(value,i) in datum.data[0]" v-if="datum.data[0]">
-                            {{ value }}
+    <div id="summary" class="w-full flex items-center justify-center">
+        <div class="w-10/12 flex flex-col pt-24  items-center relative">
+            <h1 class="text-3xl text-white w-10/12 sticky top-24 self-start font-bold">Summary</h1>
+            <div :id="`summary-${index}`" class="w-full p-10 shrink-0 mt-10 relative" v-for="(datum,index) in data"
+                 :style="{height: 2 * height + 'px'}">
+                <div class="sticky top-32 w-full py-10 flex flex-col">
+                    <div class="w-full flex justify-between">
+                        <h1 :style="{transform: `translateY(${height}px)`}"
+                            class="text-5xl summary-index transform inline-block text-white font-bold">
+                            0{{ index + 1 }}
+                        </h1>
+                        <div class="flex flex-col w-5/12 text-white">
+                            <h1 :style="{transform: `translateY(${height}px)`}"
+                                class="text-5xl summary-title transform inline-block font-bold text-[#E8544E]">
+                                {{ datum.name }}
+                            </h1>
+                            <p :style="{transform: `translateY(${height}px)`}"
+                               class="mt-4 summary-description transform inline-block translate-y-full">
+                                {{ datum.description }}</p>
                         </div>
                     </div>
-                </div>
-                <div class="w-full h-16 border-b py-4 relative overflow-hidden">
-                    <div v-for="(datum,index) in data"
-                         :style="{transform: `translateY(${index * 150}%)`}"
-                         class="w-full second-row  absolute flex pb-12 items-center justify-between">
-                        <div :class="{'text-center': i === 1,'text-right': i===2}"
-                             class="w-4/12"
-                             v-for="(value,i) in datum.data[1]" v-if="datum.data[1]">
-                            {{ value }}
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full h-16 border-b py-4 relative overflow-hidden">
-                    <div v-for="(datum,index) in data"
-                         :style="{transform: `translateY(${index * 150}%)`}"
-                         class="w-full third-row absolute flex pb-12 items-center justify-between">
-                        <div :class="{'text-center': i === 1,'text-right': i===2}"
-                             class="w-4/12"
-                             v-for="(value,i) in datum.data[2]" v-if="datum.data[2]">
-                            {{ value }}
-                        </div>
-                    </div>
-                </div>
-                <div class=" w-full h-16 border-b py-4 relative overflow-hidden">
-                    <div v-for="(datum,index) in data"
-                         :style="{transform: `translateY(${index * 150}%)`}"
-                         class="w-full fourth-row absolute flex pb-12 items-center justify-between">
-                        <div :class="{'text-center': i === 1,'text-right': i===2}"
-                             class="w-4/12"
-                             v-for="(value,i) in datum.data[3]" v-if="datum.data[3]">
-                            {{ value }}
+                    <div class="text-white w-full mt-8">
+                        <div v-for="(properties,index) in datum.data" class="w-full border-t summary-data flex"
+                             :class="{'border-b':index === datum.data.length - 1}"
+                             :style="{transform: `translateY(${height}px)`}">
+                            <div class="py-4 w-4/12"
+                                 :class="{
+                                'text-right': j=== 2,
+                                'text-transparent via-[#E8544E] bg-gradient-to-r bg-clip-text from-white to-[#E8544E]': j=== 0}"
+                                 v-for="(property,j) in properties">
+                                {{ property }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--        <div id="summary-trigger">-->
-
-        <!--        </div>-->
     </div>
 </template>
 
@@ -85,6 +49,8 @@ const props = defineProps([]);
 // const reactiveData = reactive({
 //     current
 // })
+
+const height = window.innerHeight;
 
 const data = [{
     name: 'Election Results',
@@ -128,73 +94,10 @@ const data = [{
 }]
 
 onMounted(() => {
+    // translate
     let duration = 1500;
-    let summaryIndexes = document.querySelectorAll('.summary-index')
-    let summaryTitles = document.querySelectorAll('.summary-title')
-    let summaryDescriptions = document.querySelectorAll('.summary-description')
-    let firstRows = document.querySelectorAll('#summary .first-row')
-    let secondRows = document.querySelectorAll('#summary .second-row')
-    let thirdRows = document.querySelectorAll('#summary .third-row')
-    let fourthRows = document.querySelectorAll('#summary .fourth-row')
-    let stopPercentages = [];
     let animations = [];
-    let divider = 100 / summaryIndexes.length;
-    let translatePercentages = [-150, 0, 150, 300, 450, 600];
-    let startIndex = 1;
-    for (let i = 0; i < summaryIndexes.length; i++) {
-        animations.push([
-            {
-                targets: summaryIndexes,
-                duration: duration,
-                easing: 'easeOutQuart',
-                translateY: (el, index) => {
-                    return translatePercentages[Math.max(index + startIndex - i, 0)];
-                }
-            }, {
-                targets: summaryTitles,
-                duration: duration,
-                easing: 'easeOutQuart',
-                translateY: (el, index) => {
-                    return translatePercentages[Math.max(index + startIndex - i, 0)]
-                }
-            }, {
-                targets: summaryDescriptions,
-                duration: duration,
-                easing: 'easeOutQuart',
-                translateY: (el, index) => {
-                    return translatePercentages[Math.max(index + startIndex - i, 0)]
-                }
-            }, {
-                targets: firstRows,
-                duration: duration,
-                easing: 'easeOutQuart',
-                translateY: (el, index) => {
-                    return translatePercentages[Math.max(index + startIndex - i, 0)]
-                }
-            }, {
-                targets: secondRows,
-                duration: duration,
-                easing: 'easeOutQuart',
-                translateY: (el, index) => {
-                    return translatePercentages[Math.max(index + startIndex - i, 0)]
-                }
-            }, {
-                targets: thirdRows,
-                duration: duration,
-                easing: 'easeOutQuart',
-                translateY: (el, index) => {
-                    return translatePercentages[Math.max(index + startIndex - i, 0)]
-                }
-            }, {
-                targets: fourthRows,
-                duration: duration,
-                easing: 'easeOutQuart',
-                translateY: (el, index) => {
-                    return translatePercentages[Math.max(index + startIndex - i, 0)]
-                }
-            },
-        ])
-        stopPercentages.push(i * divider);
+    for (let i = 0; i < data.length; i++) {
         // let animation = {
         //     titles: {
         //         translateY: [],
@@ -204,6 +107,20 @@ onMounted(() => {
         //         translateY: [],
         //     }
         // };
+        let datum = data[i];
+        let summaryId = `summary-${i}`
+        animations.push({
+            targets: [`#${summaryId} .summary-index`, `#${summaryId} .summary-title`, `#${summaryId} .summary-description`, `#${summaryId} .summary-data`],
+            translateY: '0px',
+            easing: 'easeOutQuart',
+            delay: (_, index) => index * 200,
+            scrollTrigger: {
+                trigger: `#${summaryId}`,
+                start: 'top center',
+                end: 'bottom bottom',
+                lerp: true,
+            },
+        })
         // articles.forEach((article, index) => {
         //     animation.titles.translateY.push(titleTranslateY[Math.max(index + startIndex - i, 0)]);
         //     animation.posts.translateY.push(postTranslateY[Math.max(index + startIndex - i, 0)])
@@ -214,32 +131,7 @@ onMounted(() => {
     let currentIndex = 0;
     let timeout = null;
     setTimeout(() => {
-        new AnimeScrollTrigger(document.querySelector('main'), [{
-            scrollTrigger: {
-                trigger: document.querySelector('#summary'),
-                lerp: true,
-                start: 'top top',
-                end: 'bottom bottom',
-                pin: '#summary-pinner',
-                onUpdate: (_, progress) => {
-                    if (timeout) clearTimeout(timeout);
-                    timeout = setTimeout(() => {
-                        let percentage = Math.round(progress * 100);
-                        let ps = stopPercentages.filter((p) => percentage > p);
-                        if (ps.length > 0) {
-                            let index = ps.length - 1;
-                            if (index !== currentIndex) {
-                                currentIndex = index;
-                                let animes = animations[currentIndex];
-                                animes.forEach((animation) => {
-                                    anime(animation)
-                                })
-                            }
-                        }
-                    }, 10)
-                }
-            }
-        }])
+        new AnimeScrollTrigger(document.querySelector('main'), animations)
     }, 2000)
 })
 </script>

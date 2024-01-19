@@ -1,7 +1,8 @@
 <template>
     <div id="protests" class="w-10/12 flex md:!flex-row flex-col items-center md:!items-start relative justify-evenly">
         <div id="protests-map-container"
-             class="w-5/12 h-[90vh] py-10 sticky top-24 z-[1001] flex flex-col items-center overflow-hidden">
+             :style="{height: height * 0.90 - 24 + 'px'}"
+             class="w-11/12 pb-12 md:pb-0 md:w-5/12 sticky top-24 flex flex-col items-center overflow-hidden">
             <svg id="protests-map" class="w-full h-full">
                 <g class="map" fill="#b3b3b3" stroke="black" stroke-width="0.01"></g>
                 <g class="protests" fill="orange" stroke="black" stroke-width="0.01"></g>
@@ -15,14 +16,14 @@
                 </div>
             </div>
         </div>
-        <div class="w-1/2 py-10 gap-y-24 flex flex-col z-10">
+        <div class="w-11/12 md:w-1/2 py-10 gap-y-24 flex flex-col z-10">
             <div class="protest-map-trigger mb-[90%] md:!mb-[50%] w-full rounded-lg h-[100vh]"></div>
-            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh]"></div>
-            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh] relative">
+            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-white h-[40vh]"></div>
+            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-white h-[40vh] relative">
 
             </div>
-            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-gray-200 h-[40vh]"></div>
-            <div class="mb-[55%] w-full border rounded bg-gray-200 h-[40vh]"></div>
+            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-white h-[40vh]"></div>
+            <div class="mb-[55%] w-full border rounded bg-white h-[40vh]"></div>
         </div>
     </div>
 </template>
@@ -34,6 +35,7 @@ import {PopOver} from "vue-common-components";
 import AnimeScrollTrigger from 'anime-scrolltrigger'
 import anime from "animejs";
 
+const height = window.innerHeight;
 const props = defineProps([]);
 
 let protests = [];
@@ -42,16 +44,17 @@ let protests = [];
 let protestPoints = null;
 let projection = null;
 let colors = null;
-
-let dateIntervals = [{
-    startDate: '2020-11-01', endDate: '2020-11-15',
-}, {
-    startDate: '2020-11-01', endDate: '2020-11-30',
-}, {
-    startDate: '2020-11-01', endDate: '2020-12-30',
-}, {
-    startDate: '2020-11-01', endDate: '2021-01-30',
-}]
+let startDate = new Date('2020-11-01');
+let endDate = new Date('2021-01-30');
+let diffInDays = 15;
+let dateIntervals = (() => {
+    let start = (new Date(startDate))
+    start.setDate(startDate.getDate() - 1);
+    let end = (new Date(endDate))
+    end.setDate(endDate.getDate() + 1);
+    return d3.timeDays(start, end, diffInDays);
+})();
+let currentIndex = 0;
 
 const computeYPos = (offset) => {
     let innerHeight = window.innerHeight;
@@ -84,7 +87,7 @@ const init = () => {
             .style("stroke-width", "1")
             .style("stroke", "#313131");
 
-        plotPoints(new Date(dateIntervals[0].startDate), new Date(dateIntervals[0].endDate))
+        plotPoints(new Date(dateIntervals[0]), new Date(dateIntervals[1]))
     });
 }
 
@@ -195,7 +198,7 @@ const listenTriggers = () => {
         {
             scrollTrigger: {
                 trigger: '.protest-map-trigger',
-                start: 'bottom center',
+                start: 'bottom 60%',
                 end: 'bottom -10%',
                 debug: true,
                 onEnter: () => {
@@ -223,27 +226,18 @@ const listenTriggers = () => {
                 end: 'bottom bottom',
                 lerp: true,
                 onUpdate: (_, progress) => {
-                    console.log(progress)
+                    let index = Math.round(progress * (dateIntervals.length - 1));
+                    console.log(index, currentIndex)
+                    if (index !== currentIndex) {
+                        const endDate = dateIntervals[index]
+                        plotPoints(new Date(startDate), endDate)
+                        currentIndex = index;
+                    }
+
                 }
             }
         },
     ];
-    // dateIntervals.forEach((dateInterval, index) => {
-    //     triggers.push({
-    //         scrollTrigger: {
-    //             trigger: divs[index],
-    //             start: 'top 80%',
-    //             end: 'bottom center',
-    //             // debug: index === 0,
-    //             onEnter: () => {
-    //                 plotPoints(new Date(dateInterval.startDate), new Date(dateInterval.endDate))
-    //             },
-    //             onEnterBack: () => {
-    //                 plotPoints(new Date(dateInterval.startDate), new Date(dateInterval.endDate))
-    //             }
-    //         }
-    //     })
-    // })
     new AnimeScrollTrigger(document.querySelector('main'), triggers)
 }
 
