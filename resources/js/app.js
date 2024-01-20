@@ -9,7 +9,7 @@ import {Toaster} from 'js-utils';
 import {DatePicker} from "v-calendar";
 import Highcharts from 'highcharts'
 import Home from "./components/pages/home.vue";
-import Navigation from "./components/pages/navigation.vue";
+import Explore from "./components/pages/explore.vue";
 import Story from "./components/pages/story.vue";
 
 window.Highcharts = Highcharts;
@@ -38,7 +38,7 @@ createInertiaApp({
         // }
 
         app.component('home', Home);
-        app.component('navigation', Navigation);
+        app.component('explore', Explore);
         app.component('story', Story);
 
         app.component('DatePicker', DatePicker)

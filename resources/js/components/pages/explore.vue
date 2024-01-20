@@ -175,7 +175,7 @@ const init = () => {
             let index = currentBox.deg / deg;
             let progress = index / boxes.length;
             anime({
-                targets: navigation,
+                targets: explore,
                 scrollTop: progress * height,
                 easing: 'easeOutQuart',
                 duration: 400,

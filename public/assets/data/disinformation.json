@@ -1,7 +1,7 @@
 [
     {
         "id": "100051466667778",
-        "count": 7,
+        "count": 6,
         "type": "Person",
         "url": "https://www.facebook.com/permalink.php?story_fbid=241346107590943&id=100051466667778",
         "username": "100051466667778",
@@ -40,15 +40,6 @@
                 "date": "1-Jan-2021",
                 "title": "ရွေးကောက်ပွဲနိုင်ခဲ့တဲ့ ကိုယ်စားလှယ် ၂၀၀ ဝန်းကျင် NLD ပါတီက နှုတ်ထွက်မယ်လို့ သတင်းမှားဖြန့်",
                 "url": "https://myanmar.factcrescendo.com/fact-check-200-elected-party-members-to-resign-from-nld/",
-                "platform": "Facebook",
-                "topic": "Election"
-            },
-            {
-                "id": "FTFC0000124",
-                "fact_checker": "BOOM Myanmar",
-                "date": "15-Jan-2021",
-                "title": "မဲကိစ္စနဲ့ပတ်သက်ပြီး UEC ကို ဦးတည်တိုက်ခိုက်တဲ့ သတင်းအတုတွေဖြန့်ဝေ\r\n",
-                "url": "https://www.boommyanmar.com/fake-news/fake-news-that-the-warrant-was-confirmed-and-the-uec-leaders-resigned-11566",
                 "platform": "Facebook",
                 "topic": "Election"
             },
@@ -339,52 +330,6 @@
         ]
     },
     {
-        "id": "100005191127845",
-        "count": 4,
-        "type": "Person",
-        "url": "https://www.facebook.com/permalink.php?story_fbid=1644675682382120&id=100005191127845",
-        "username": "100005191127845",
-        "platform": "Facebook",
-        "contents": [
-            {
-                "id": "FTFC0000101",
-                "fact_checker": "Fact Crescendo",
-                "date": "11-Jan-2021",
-                "title": "ဧရာဝတီတိုင်းမှာ ကိုဗစ်မျိုးစိပ်အသစ်တွေ့ရှိတယ်ဆိုတာ မဟုတ်ပါ",
-                "url": "https://myanmar.factcrescendo.com/fact-check-new-strain-of-coronavirus-found-in-ayeyarwaddy-region/",
-                "platform": "Facebook",
-                "topic": "Health"
-            },
-            {
-                "id": "FTFC0000103",
-                "fact_checker": "BOOM Myanmar",
-                "date": "4-Jan-2021",
-                "title": "ဆက်တိုက်ဖြန့်ဝေတဲ့ တပ်မတော်က ယာယီအာဏာသိမ်းတယ်ဆိုတဲ့ သတင်းအမှား",
-                "url": "https://www.boommyanmar.com/fake-news/false-news-that-the-military-has-seized-power-temporarily-11391",
-                "platform": "Facebook",
-                "topic": "Military"
-            },
-            {
-                "id": "FTFC0000192",
-                "fact_checker": "BOOM Myanmar",
-                "date": "30-Jan-2021",
-                "title": "NLD က အာဏာသိမ်းချင်သိမ်းလို့ ပြောခဲ့တယ်ဆိုတဲ့ သတင်းအမှား",
-                "url": "https://www.boommyanmar.com/fake-news/false-news-between-nld-and-military-distributed-by-goshal-lay-account-11770",
-                "platform": "Facebook",
-                "topic": "Election"
-            },
-            {
-                "id": "FTFC0000192",
-                "fact_checker": "BOOM Myanmar",
-                "date": "30-Jan-2021",
-                "title": "NLD က အာဏာသိမ်းချင်သိမ်းလို့ ပြောခဲ့တယ်ဆိုတဲ့ သတင်းအမှား",
-                "url": "https://www.boommyanmar.com/fake-news/false-news-between-nld-and-military-distributed-by-goshal-lay-account-11770",
-                "platform": "Facebook",
-                "topic": "Election"
-            }
-        ]
-    },
-    {
         "id": "100056144584846",
         "count": 4,
         "type": "Person",
@@ -523,39 +468,39 @@
         ]
     },
     {
-        "id": "100045960293022",
+        "id": "100005191127845",
         "count": 3,
         "type": "Person",
-        "url": "https://www.facebook.com/366950567353052/posts/703651693682936",
-        "username": "100045960293022",
+        "url": "https://www.facebook.com/permalink.php?story_fbid=1644675682382120&id=100005191127845",
+        "username": "100005191127845",
         "platform": "Facebook",
         "contents": [
             {
-                "id": "FTFC0000398",
-                "fact_checker": "AFP",
-                "date": "19-Jan-2021",
-                "title": "This photo shows a demonstration against Facebook in Myanmar in October 2018",
-                "url": "https://factcheck.afp.com/photo-shows-demonstration-against-facebook-myanmar-october-2018",
+                "id": "FTFC0000101",
+                "fact_checker": "Fact Crescendo",
+                "date": "11-Jan-2021",
+                "title": "ဧရာဝတီတိုင်းမှာ ကိုဗစ်မျိုးစိပ်အသစ်တွေ့ရှိတယ်ဆိုတာ မဟုတ်ပါ",
+                "url": "https://myanmar.factcrescendo.com/fact-check-new-strain-of-coronavirus-found-in-ayeyarwaddy-region/",
                 "platform": "Facebook",
-                "topic": "Other"
+                "topic": "Health"
             },
             {
-                "id": "FTFC0000398",
-                "fact_checker": "AFP",
-                "date": "19-Jan-2021",
-                "title": "This photo shows a demonstration against Facebook in Myanmar in October 2018",
-                "url": "https://factcheck.afp.com/photo-shows-demonstration-against-facebook-myanmar-october-2018",
+                "id": "FTFC0000103",
+                "fact_checker": "BOOM Myanmar",
+                "date": "4-Jan-2021",
+                "title": "ဆက်တိုက်ဖြန့်ဝေတဲ့ တပ်မတော်က ယာယီအာဏာသိမ်းတယ်ဆိုတဲ့ သတင်းအမှား",
+                "url": "https://www.boommyanmar.com/fake-news/false-news-that-the-military-has-seized-power-temporarily-11391",
                 "platform": "Facebook",
-                "topic": "Other"
+                "topic": "Military"
             },
             {
-                "id": "FTFC0000398",
-                "fact_checker": "AFP",
-                "date": "19-Jan-2021",
-                "title": "This photo shows a demonstration against Facebook in Myanmar in October 2018",
-                "url": "https://factcheck.afp.com/photo-shows-demonstration-against-facebook-myanmar-october-2018",
+                "id": "FTFC0000192",
+                "fact_checker": "BOOM Myanmar",
+                "date": "30-Jan-2021",
+                "title": "NLD က အာဏာသိမ်းချင်သိမ်းလို့ ပြောခဲ့တယ်ဆိုတဲ့ သတင်းအမှား",
+                "url": "https://www.boommyanmar.com/fake-news/false-news-between-nld-and-military-distributed-by-goshal-lay-account-11770",
                 "platform": "Facebook",
-                "topic": "Other"
+                "topic": "Election"
             }
         ]
     },
@@ -819,62 +764,6 @@
         ]
     },
     {
-        "id": "105558937884853",
-        "count": 2,
-        "type": "Page",
-        "url": "https://www.facebook.com/716830631816695/posts/1676146615885087",
-        "username": "105558937884853",
-        "platform": "Facebook",
-        "contents": [
-            {
-                "id": "FTFC0000392",
-                "fact_checker": "AFP",
-                "date": "8-Dec-2020",
-                "title": "These ‘anti-virus’ cards are ineffective in preventing Covid-19 infection, experts say",
-                "url": "https://factcheck.afp.com/these-anti-virus-cards-are-ineffective-preventing-covid-19-infection-experts-say",
-                "platform": "Facebook",
-                "topic": "Health"
-            },
-            {
-                "id": "FTFC0000392",
-                "fact_checker": "AFP",
-                "date": "8-Dec-2020",
-                "title": "These ‘anti-virus’ cards are ineffective in preventing Covid-19 infection, experts say",
-                "url": "https://factcheck.afp.com/these-anti-virus-cards-are-ineffective-preventing-covid-19-infection-experts-say",
-                "platform": "Facebook",
-                "topic": "Health"
-            }
-        ]
-    },
-    {
-        "id": "100009546630085",
-        "count": 2,
-        "type": "Person",
-        "url": "https://www.facebook.com/2741348162819639/posts/2820307594923695",
-        "username": "thal.tone.1",
-        "platform": "Facebook",
-        "contents": [
-            {
-                "id": "FTFC0000392",
-                "fact_checker": "AFP",
-                "date": "8-Dec-2020",
-                "title": "These ‘anti-virus’ cards are ineffective in preventing Covid-19 infection, experts say",
-                "url": "https://factcheck.afp.com/these-anti-virus-cards-are-ineffective-preventing-covid-19-infection-experts-say",
-                "platform": "Facebook",
-                "topic": "Health"
-            },
-            {
-                "id": "FTFC0000392",
-                "fact_checker": "AFP",
-                "date": "8-Dec-2020",
-                "title": "These ‘anti-virus’ cards are ineffective in preventing Covid-19 infection, experts say",
-                "url": "https://factcheck.afp.com/these-anti-virus-cards-are-ineffective-preventing-covid-19-infection-experts-say",
-                "platform": "Facebook",
-                "topic": "Health"
-            }
-        ]
-    },
-    {
         "id": "100046366745855",
         "count": 2,
         "type": "Person",
@@ -1009,34 +898,6 @@
                 "date": "18-Nov-2020",
                 "title": "မရေတွက်ရသေးတဲ့ မဲလေးသောင်းကျော်ဖမ်းမိတယ်ဆိုတဲ့သတင်းအမှား",
                 "url": "https://www.boommyanmar.com/fake-news/fake-news-that-more-than-40000-unregistered-votes-were-seized-10697",
-                "platform": "Facebook",
-                "topic": "Election"
-            }
-        ]
-    },
-    {
-        "id": "100057421863060",
-        "count": 2,
-        "type": "Person",
-        "url": "https://www.facebook.com/groups/1804522986367832/permalink/1859253680894762/?_rdc=2&_rdr",
-        "username": "100057421863060",
-        "platform": "Facebook",
-        "contents": [
-            {
-                "id": "FTFC0000298",
-                "fact_checker": "Fact Crescendo",
-                "date": "8-Nov-2020",
-                "title": "လက်ရှိပါတီအလိုက် လူကြိုက်များမှုမှာ USDP ကထိပ်ဆုံးလို့ ခန့်မှန်းတယ်ဆိုပြီး သတင်းမှားဖြန့်",
-                "url": "https://myanmar.factcrescendo.com/fact-check-misleading-claim-on-usdp-top-on-voters-favouritism/",
-                "platform": "Facebook",
-                "topic": "Election"
-            },
-            {
-                "id": "FTFC0000298",
-                "fact_checker": "Fact Crescendo",
-                "date": "8-Nov-2020",
-                "title": "လက်ရှိပါတီအလိုက် လူကြိုက်များမှုမှာ USDP ကထိပ်ဆုံးလို့ ခန့်မှန်းတယ်ဆိုပြီး သတင်းမှားဖြန့်",
-                "url": "https://myanmar.factcrescendo.com/fact-check-misleading-claim-on-usdp-top-on-voters-favouritism/",
                 "platform": "Facebook",
                 "topic": "Election"
             }
@@ -1379,34 +1240,6 @@
         ]
     },
     {
-        "id": "100018119446256",
-        "count": 2,
-        "type": "",
-        "url": "https://www.facebook.com/100018119446256/videos/pcb.768633793750595/768633383750636",
-        "username": "100018119446256",
-        "platform": "Facebook",
-        "contents": [
-            {
-                "id": "FTFC0000114",
-                "fact_checker": "AFP",
-                "date": "12-Jan-2021",
-                "title": "This video circulated online in reports about an Ethiopian Airlines crash in 1996",
-                "url": "https://factcheck.afp.com/video-circulated-online-reports-about-ethiopian-airlines-crash-1996",
-                "platform": "Facebook",
-                "topic": "Other"
-            },
-            {
-                "id": "FTFC0000114",
-                "fact_checker": "AFP",
-                "date": "12-Jan-2021",
-                "title": "This video circulated online in reports about an Ethiopian Airlines crash in 1996",
-                "url": "https://factcheck.afp.com/video-circulated-online-reports-about-ethiopian-airlines-crash-1996",
-                "platform": "Facebook",
-                "topic": "Other"
-            }
-        ]
-    },
-    {
         "id": "101262754959264",
         "count": 2,
         "type": "Page",
@@ -1491,34 +1324,6 @@
         ]
     },
     {
-        "id": "100052479190891",
-        "count": 2,
-        "type": "Person",
-        "url": "https://www.facebook.com/groups/217985212264265/permalink/796870011042446",
-        "username": "soewin.zaw.5473",
-        "platform": "Facebook",
-        "contents": [
-            {
-                "id": "FTFC0000100",
-                "fact_checker": "Fact Crescendo",
-                "date": "9-Jan-2021",
-                "title": "“သူခိုး”အမည်နဲ့ ဝတ္ထုစာအုပ်အတွက် ဦးသိန်းထွန်းဦးက တရားစွဲ မယ်ဆိုတာမဟုတ်ပါ",
-                "url": "https://myanmar.factcrescendo.com/fact-check-usdp-spokesperson-to-sue-comic-book-writer-for-his-book-name/",
-                "platform": "Facebook",
-                "topic": "Other"
-            },
-            {
-                "id": "FTFC0000100",
-                "fact_checker": "Fact Crescendo",
-                "date": "9-Jan-2021",
-                "title": "“သူခိုး”အမည်နဲ့ ဝတ္ထုစာအုပ်အတွက် ဦးသိန်းထွန်းဦးက တရားစွဲ မယ်ဆိုတာမဟုတ်ပါ",
-                "url": "https://myanmar.factcrescendo.com/fact-check-usdp-spokesperson-to-sue-comic-book-writer-for-his-book-name/",
-                "platform": "Facebook",
-                "topic": "Other"
-            }
-        ]
-    },
-    {
         "id": "100043873800579",
         "count": 2,
         "type": "Person",
@@ -1541,34 +1346,6 @@
                 "date": "8-Nov-2020",
                 "title": "ပဲခူးမှာ NLD ရွေးကောက်ပွဲအောင်နိုင်ရေး ဆိုင်းဘုတ်ကို နိုဝင်ဘာ ၇ ရက်အထိ မဖြုတ်ဘူးလို့ သတင်းမှားဖြန့်",
                 "url": "https://myanmar.factcrescendo.com/fact-check-did-false-claim-on-nld-election-campaign-signboards-were-not-put-down-in-time-in-bago/",
-                "platform": "Facebook",
-                "topic": "Election"
-            }
-        ]
-    },
-    {
-        "id": "100023910490835",
-        "count": 2,
-        "type": "Person",
-        "url": "https://www.facebook.com/julyjuly55/posts/902665317207143",
-        "username": "julyjuly55",
-        "platform": "Facebook",
-        "contents": [
-            {
-                "id": "FTFC0000098",
-                "fact_checker": "Fact Crescendo",
-                "date": "8-Jan-2021",
-                "title": "လွှတ်တော်ကိုယ်စားလှယ်တွေ လွှတ်တော်မတက်ရင် ထောင်ကျနိုင်လား- မဟုတ်ပါ",
-                "url": "https://myanmar.factcrescendo.com/fact-check-elected-mps-can-be-jailed-for-not-attending-a-parliament-section/",
-                "platform": "Facebook",
-                "topic": "Election"
-            },
-            {
-                "id": "FTFC0000098",
-                "fact_checker": "Fact Crescendo",
-                "date": "8-Jan-2021",
-                "title": "လွှတ်တော်ကိုယ်စားလှယ်တွေ လွှတ်တော်မတက်ရင် ထောင်ကျနိုင်လား- မဟုတ်ပါ",
-                "url": "https://myanmar.factcrescendo.com/fact-check-elected-mps-can-be-jailed-for-not-attending-a-parliament-section/",
                 "platform": "Facebook",
                 "topic": "Election"
             }
@@ -1767,34 +1544,6 @@
                 "url": "https://myanmar.factcrescendo.com/wetlet-township-election-commission-destroyed-2020-ballot-papers-along-with-2015-ballots/",
                 "platform": "Facebook",
                 "topic": "Election"
-            }
-        ]
-    },
-    {
-        "id": "100059815580964",
-        "count": 2,
-        "type": "Person",
-        "url": "https://www.facebook.com/groups/407383260428146/permalink/450973362735802",
-        "username": "သူရ-စစ္ဟိန္",
-        "platform": "Facebook",
-        "contents": [
-            {
-                "id": "FTFC0000040",
-                "fact_checker": "Fact Crescendo",
-                "date": "21-Dec-2020",
-                "title": "ဇန်နဝါရီ ၁ ရက်မှာ လက်ရှိအစိုးရသက်တမ်းကုန်ပြီး ကာ/ချုပ်က ၂ လအုပ်ချုပ်မယ်လို့ သတင်းမှားဖြန့်",
-                "url": "https://myanmar.factcrescendo.com/fact-check-misleading-claim-on-government-term-ends-and-military-role/",
-                "platform": "Facebook",
-                "topic": "Government"
-            },
-            {
-                "id": "FTFC0000040",
-                "fact_checker": "Fact Crescendo",
-                "date": "21-Dec-2020",
-                "title": "ဇန်နဝါရီ ၁ ရက်မှာ လက်ရှိအစိုးရသက်တမ်းကုန်ပြီး ကာ/ချုပ်က ၂ လအုပ်ချုပ်မယ်လို့ သတင်းမှားဖြန့်",
-                "url": "https://myanmar.factcrescendo.com/fact-check-misleading-claim-on-government-term-ends-and-military-role/",
-                "platform": "Facebook",
-                "topic": "Government"
             }
         ]
     },
@@ -2079,30 +1828,40 @@
         ]
     },
     {
-        "id": "100055428580603",
-        "count": 2,
+        "id": "100045960293022",
+        "count": 1,
         "type": "Person",
-        "url": "https://www.facebook.com/groups/813300442751973/permalink/859042774844406",
-        "username": "100055428580603",
+        "url": "https://www.facebook.com/366950567353052/posts/703651693682936",
+        "username": "100045960293022",
         "platform": "Facebook",
         "contents": [
             {
-                "id": "FTFC0000001",
-                "fact_checker": "BOOM Myanmar",
-                "date": "30-Nov-2020",
-                "title": "ရွေး/ကော် ကိုဒေါ်အောင်ဆန်းစုကြည်ကြိမ်းမောင်းတယ်ဆိုတဲ့သတင်းအမှား",
-                "url": "https://www.boommyanmar.com/fake-news/fake-video-about-aung-san-suu-kyi-threatened-the-union-election-commission-to-win-election-10912",
+                "id": "FTFC0000398",
+                "fact_checker": "AFP",
+                "date": "19-Jan-2021",
+                "title": "This photo shows a demonstration against Facebook in Myanmar in October 2018",
+                "url": "https://factcheck.afp.com/photo-shows-demonstration-against-facebook-myanmar-october-2018",
                 "platform": "Facebook",
-                "topic": "Election"
-            },
+                "topic": "Other"
+            }
+        ]
+    },
+    {
+        "id": "105558937884853",
+        "count": 1,
+        "type": "Page",
+        "url": "https://www.facebook.com/716830631816695/posts/1676146615885087",
+        "username": "105558937884853",
+        "platform": "Facebook",
+        "contents": [
             {
-                "id": "FTFC0000001",
-                "fact_checker": "BOOM Myanmar",
-                "date": "30-Nov-2020",
-                "title": "ရွေး/ကော် ကိုဒေါ်အောင်ဆန်းစုကြည်ကြိမ်းမောင်းတယ်ဆိုတဲ့သတင်းအမှား",
-                "url": "https://www.boommyanmar.com/fake-news/fake-video-about-aung-san-suu-kyi-threatened-the-union-election-commission-to-win-election-10912",
+                "id": "FTFC0000392",
+                "fact_checker": "AFP",
+                "date": "8-Dec-2020",
+                "title": "These ‘anti-virus’ cards are ineffective in preventing Covid-19 infection, experts say",
+                "url": "https://factcheck.afp.com/these-anti-virus-cards-are-ineffective-preventing-covid-19-infection-experts-say",
                 "platform": "Facebook",
-                "topic": "Election"
+                "topic": "Health"
             }
         ]
     },
@@ -11582,6 +11341,139 @@
                 "date": "25-Nov-2020",
                 "title": "ရွေးကောက်ပွဲမသမာမှု အထူးစုံစမ်းရေးအဖွဲ့ ဖွဲ့စည်းလိုက်ပြီဆိုသော ထုတ်ပြန်ချက် အတု",
                 "url": "https://www.realornotmm.info/2020/11/25/fake_statment_of_establishing_special_commission_to_investigate_voter-fraud_by_uec/",
+                "platform": "Facebook",
+                "topic": "Election"
+            }
+        ]
+    },
+    {
+        "id": "100009546630085",
+        "count": 1,
+        "type": "Person",
+        "url": "https://www.facebook.com/2741348162819639/posts/2820307594923695",
+        "username": "thal.tone.1",
+        "platform": "Facebook",
+        "contents": [
+            {
+                "id": "FTFC0000392",
+                "fact_checker": "AFP",
+                "date": "8-Dec-2020",
+                "title": "These ‘anti-virus’ cards are ineffective in preventing Covid-19 infection, experts say",
+                "url": "https://factcheck.afp.com/these-anti-virus-cards-are-ineffective-preventing-covid-19-infection-experts-say",
+                "platform": "Facebook",
+                "topic": "Health"
+            }
+        ]
+    },
+    {
+        "id": "100057421863060",
+        "count": 1,
+        "type": "Person",
+        "url": "https://www.facebook.com/groups/1804522986367832/permalink/1859253680894762/?_rdc=2&_rdr",
+        "username": "100057421863060",
+        "platform": "Facebook",
+        "contents": [
+            {
+                "id": "FTFC0000298",
+                "fact_checker": "Fact Crescendo",
+                "date": "8-Nov-2020",
+                "title": "လက်ရှိပါတီအလိုက် လူကြိုက်များမှုမှာ USDP ကထိပ်ဆုံးလို့ ခန့်မှန်းတယ်ဆိုပြီး သတင်းမှားဖြန့်",
+                "url": "https://myanmar.factcrescendo.com/fact-check-misleading-claim-on-usdp-top-on-voters-favouritism/",
+                "platform": "Facebook",
+                "topic": "Election"
+            }
+        ]
+    },
+    {
+        "id": "100018119446256",
+        "count": 1,
+        "type": "",
+        "url": "https://www.facebook.com/100018119446256/videos/pcb.768633793750595/768633383750636",
+        "username": "100018119446256",
+        "platform": "Facebook",
+        "contents": [
+            {
+                "id": "FTFC0000114",
+                "fact_checker": "AFP",
+                "date": "12-Jan-2021",
+                "title": "This video circulated online in reports about an Ethiopian Airlines crash in 1996",
+                "url": "https://factcheck.afp.com/video-circulated-online-reports-about-ethiopian-airlines-crash-1996",
+                "platform": "Facebook",
+                "topic": "Other"
+            }
+        ]
+    },
+    {
+        "id": "100052479190891",
+        "count": 1,
+        "type": "Person",
+        "url": "https://www.facebook.com/groups/217985212264265/permalink/796870011042446",
+        "username": "soewin.zaw.5473",
+        "platform": "Facebook",
+        "contents": [
+            {
+                "id": "FTFC0000100",
+                "fact_checker": "Fact Crescendo",
+                "date": "9-Jan-2021",
+                "title": "“သူခိုး”အမည်နဲ့ ဝတ္ထုစာအုပ်အတွက် ဦးသိန်းထွန်းဦးက တရားစွဲ မယ်ဆိုတာမဟုတ်ပါ",
+                "url": "https://myanmar.factcrescendo.com/fact-check-usdp-spokesperson-to-sue-comic-book-writer-for-his-book-name/",
+                "platform": "Facebook",
+                "topic": "Other"
+            }
+        ]
+    },
+    {
+        "id": "100023910490835",
+        "count": 1,
+        "type": "Person",
+        "url": "https://www.facebook.com/julyjuly55/posts/902665317207143",
+        "username": "julyjuly55",
+        "platform": "Facebook",
+        "contents": [
+            {
+                "id": "FTFC0000098",
+                "fact_checker": "Fact Crescendo",
+                "date": "8-Jan-2021",
+                "title": "လွှတ်တော်ကိုယ်စားလှယ်တွေ လွှတ်တော်မတက်ရင် ထောင်ကျနိုင်လား- မဟုတ်ပါ",
+                "url": "https://myanmar.factcrescendo.com/fact-check-elected-mps-can-be-jailed-for-not-attending-a-parliament-section/",
+                "platform": "Facebook",
+                "topic": "Election"
+            }
+        ]
+    },
+    {
+        "id": "100059815580964",
+        "count": 1,
+        "type": "Person",
+        "url": "https://www.facebook.com/groups/407383260428146/permalink/450973362735802",
+        "username": "သူရ-စစ္ဟိန္",
+        "platform": "Facebook",
+        "contents": [
+            {
+                "id": "FTFC0000040",
+                "fact_checker": "Fact Crescendo",
+                "date": "21-Dec-2020",
+                "title": "ဇန်နဝါရီ ၁ ရက်မှာ လက်ရှိအစိုးရသက်တမ်းကုန်ပြီး ကာ/ချုပ်က ၂ လအုပ်ချုပ်မယ်လို့ သတင်းမှားဖြန့်",
+                "url": "https://myanmar.factcrescendo.com/fact-check-misleading-claim-on-government-term-ends-and-military-role/",
+                "platform": "Facebook",
+                "topic": "Government"
+            }
+        ]
+    },
+    {
+        "id": "100055428580603",
+        "count": 1,
+        "type": "Person",
+        "url": "https://www.facebook.com/groups/813300442751973/permalink/859042774844406",
+        "username": "100055428580603",
+        "platform": "Facebook",
+        "contents": [
+            {
+                "id": "FTFC0000001",
+                "fact_checker": "BOOM Myanmar",
+                "date": "30-Nov-2020",
+                "title": "ရွေး/ကော် ကိုဒေါ်အောင်ဆန်းစုကြည်ကြိမ်းမောင်းတယ်ဆိုတဲ့သတင်းအမှား",
+                "url": "https://www.boommyanmar.com/fake-news/fake-video-about-aung-san-suu-kyi-threatened-the-union-election-commission-to-win-election-10912",
                 "platform": "Facebook",
                 "topic": "Election"
             }

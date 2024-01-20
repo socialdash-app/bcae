@@ -144,7 +144,7 @@ const visualization = {
             .attr("width", this.settings.width + this.settings.margin.left + this.settings.margin.right)
             .attr("height", this.settings.height + this.settings.margin.top + this.settings.margin.bottom)
             .attr("viewBox", [0, 0, this.settings.width, this.settings.height])
-            .attr("style", "max-width: 100%; height: auto;")
+            .attr("style", "max-width: 100%; height: auto;overflow:visible;")
             .attr('id', 'disinformation-viewer')
 
         const approximateWidthInARow = this.settings.radius * 2 + this.settings.gap;
