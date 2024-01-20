@@ -147,9 +147,9 @@ const init = () => {
         .append('g')
 
     Promise.all([
-        d3.json('/assets/states-and-regions.json'),
-        d3.json('/assets/pyithu-lowerhouse.json'),
-        d3.json('/assets/amyotha-upperhouse.json'),
+        d3.json('assets/states-and-regions.json'),
+        d3.json('assets/pyithu-lowerhouse.json'),
+        d3.json('assets/amyotha-upperhouse.json'),
     ]).then(([all, pyithuData, amyothaData]) => {
         pyiThuFeatures = pyithuData.features;
         amyoThaFeatures = amyothaData.features;

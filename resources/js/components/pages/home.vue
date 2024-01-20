@@ -194,10 +194,6 @@ const trigger = () => {
                         filter: `blur(2px)`,
                         easing: 'easeOutQuart',
                         duration: 500,
-                        update: function (anim) {
-                            console.log(anim)
-                            // targetElm.style.filter = 'blur(' + 20 * anim.progress / 100 + 'px)'
-                        }
                     })
                 },
                 onEnterBack: () => {
@@ -206,10 +202,6 @@ const trigger = () => {
                         filter: `blur(0px)`,
                         easing: 'easeOutQuart',
                         duration: 500,
-                        update: function (anim) {
-                            console.log(anim)
-                            // targetElm.style.filter = 'blur(' + 20 * anim.progress / 100 + 'px)'
-                        }
                     })
                 },
                 onUpdate: (_, progress) => {

@@ -16,13 +16,13 @@
                       v-for="(header, index) in headers" v-html="header.icon"></span>
             </div>
         </div>
-        <!--        <chronicle/>-->
-        <!--        <the-election/>-->
-        <!--        <prominent-events/>-->
-        <!--        <party-actions/>-->
-        <!--        <the-military/>-->
+        <chronicle/>
+        <the-election/>
+        <prominent-events/>
+        <party-actions/>
+        <the-military/>
         <correlated-events/>
-        <!--        <beginning-of-the-end/>-->
+        <beginning-of-the-end/>
         <!--        [Home → Chronicles → The Election → Prominent events → Party reactions → The Military → Correlated events → Beginning of The End] Comment end-->
     </main>
 </template>

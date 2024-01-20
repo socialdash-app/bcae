@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return \Inertia\Inertia::render('index');
+    return (new \App\Support\InertiaRenderer)->render('index');
 });
 
 \App\Http\Controllers\CorrelatedEventsController::routes();

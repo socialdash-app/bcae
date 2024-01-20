@@ -1,45 +1,25 @@
 <template>
     <div id="beginning-of-the-end"
          class="flex flex-col w-full bg-[#111827]">
-        <!--        <div-->
-        <!--            class="w-full indicator flex justify-between bg-white z-[100] h-24 items-center px-20 sticky top-0 left-0">-->
-        <!--            <h1 class="text-xl font-semibold">Beginning Of The End</h1>-->
-        <!--            <div class="relative flex items-center justify-center">-->
-        <!--                <svg width="60" height="60" viewBox="0 0 60 60">-->
-        <!--                    <circle id="beginning-of-the-end-progress-indicator" stroke-dashoffset="160" stroke-dasharray="160"-->
-        <!--                            r="25"-->
-        <!--                            fill="none" stroke-width="8"-->
-        <!--                            stroke="#FF7F00" cx="30"-->
-        <!--                            cy="30"></circle>-->
-        <!--                </svg>-->
-        <!--                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"-->
-        <!--                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"-->
-        <!--                             class="lucide absolute w-7 h-7 lucide-history">-->
-        <!--                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>-->
-        <!--                            <path d="M3 3v5h5"/>-->
-        <!--                            <path d="M12 7v5l4 2"/>-->
-        <!--                        </svg>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <intro-beginning-of-the-end/>-->
-        <!--        <div-->
-        <!--            class="drama-section py-10 main-intro w-screen h-screen px-3 md:px-20 flex items-center justify-center text-[#E8544E]">-->
-        <!--            <div class="text-center">-->
-        <!--                <div class="overflow-hidden">-->
-        <!--                    <h1 class="text-5xl sm:text-7xl lg:text-9xl transform font-bold drama-intro">-->
-        <!--                        The-->
-        <!--                        BEGINNING</h1></div>-->
-        <!--                <div class="overflow-hidden">-->
-        <!--                    <h1 class="text-5xl sm:text-7xl lg:text-9xl transform font-bold drama-intro mt-4">-->
-        <!--                        Of</h1>-->
-        <!--                </div>-->
-        <!--                <div class="overflow-hidden">-->
-        <!--                    <h1 class="text-5xl sm:text-7xl lg:text-9xl transform font-bold drama-intro mt-4">-->
-        <!--                        The-->
-        <!--                        END</h1>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
+        <intro-beginning-of-the-end/>
+        <div
+            class="drama-section py-10 main-intro w-screen h-screen px-3 md:px-20 flex items-center justify-center text-[#E8544E]">
+            <div class="text-center">
+                <div class="overflow-hidden">
+                    <h1 class="text-5xl sm:text-7xl lg:text-9xl transform font-bold drama-intro">
+                        The
+                        BEGINNING</h1></div>
+                <div class="overflow-hidden">
+                    <h1 class="text-5xl sm:text-7xl lg:text-9xl transform font-bold drama-intro mt-4">
+                        Of</h1>
+                </div>
+                <div class="overflow-hidden">
+                    <h1 class="text-5xl sm:text-7xl lg:text-9xl transform font-bold drama-intro mt-4">
+                        The
+                        END</h1>
+                </div>
+            </div>
+        </div>
         <first-media-posts/>
         <bcae-summary/>
         <credit-section/>

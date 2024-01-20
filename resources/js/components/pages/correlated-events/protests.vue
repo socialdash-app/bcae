@@ -72,7 +72,7 @@ const init = () => {
     svg.attr('width', width);
     svg.attr('height', height);
     Promise.all([
-        d3.json('/assets/states-and-regions.json'),
+        d3.json('assets/states-and-regions.json'),
     ]).then(([all]) => {
         projection = d3.geoEquirectangular().fitSize([width, height], all)
         const path = d3.geoPath().projection(projection);
