@@ -28,7 +28,7 @@ const data = reactive({
 });
 
 const currentAnimationName = computed(() => {
-    return route.data.component === 'story' ? 'switch' : 'load-carousel';
+    return route.data.component === 'story' ? 'switch' : 'switch';
 })
 
 const paddingBottom = screen.height - window.innerHeight

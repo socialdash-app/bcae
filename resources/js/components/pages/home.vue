@@ -1,51 +1,51 @@
 <template>
     <div id="home"
          :style="{height: height + 'px'}"
-         class="flex relative items-center bg-[#111827] overflow-y-auto overflow-x-hidden shrink-0 flex-col w-screen">
+         class="flex relative items-center bg-[#111827] overflow-hidden shrink-0 flex-col w-screen">
         <div id="home-container"
              class="w-full sticky z-20 shrink-0 top-0 left-0 py-10 md:py-0 overflow-hidden tracking-wide h-full leading-relaxed text-gray-800 justify-between md:!justify-center flex md:!flex-row flex-col items-center">
-                        <div id="home-text" class="w-11/12 md:w-7/12 2xl:w-6/12 relative h-4/6 flex flex-col overflow-hidden">
-                    <div class="h-32 w-full shrink-0">
+            <div id="home-text" class="w-11/12 md:w-7/12 2xl:w-6/12 relative h-4/6 flex flex-col overflow-hidden">
+                <div class="h-32 w-full shrink-0">
 
-                    </div>
-                    <h1 class="sticky title whitespace-nowrap top-0 bg-[#111827] z-10 uppercase text-[#E8544E] font-bold text-4xl xl:text-7xl">
-                        <span class="home-title inline-block pr-4 opacity-0 ">Before </span>
-                        <span class="home-title inline-block pr-4 opacity-0 ">the </span>
-                        <span class="home-title inline-block pr-4 opacity-0 ">coup </span> <br>
-                        <span class="home-title inline-block pr-4 opacity-0 ">After </span>
-                        <span class="home-title inline-block pr-4 opacity-0 ">the </span>
-                        <span class="home-title inline-block pr-4 opacity-0 ">election</span>
-                    </h1>
-                    <div class="h-4/6 w-full shrink-0"></div>
-                    <div class="flex flex-col relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
-                        <p class="description w-full text-gray-700">On the 1st of February 2021 when Vice President Myint
-                            Swe became an Acting President and declared on state-owned media that the results of the
-                            November 2020 general election were invalid, instating a one-year state of emergency, and
-                            handing control of the executive, legislative, and judicial branches of government to the
-                            commander in chief of the armed forces, Senior General Min Aung Hlaing. After years of living
-                            under military rule, the people's hopes for democracy that had been glowing since 2010 were
-                            dashed. The coup has also brought economic turmoil, wiping out modest gains in poverty reduction
-                            made over the past decade. But, this coup was not the first time for Myanmar; it was preceded by
-                            many military coups since 1958.
-                            <br>
-                            Before the coup d'état, the military and other political parties repeatedly announced that the
-                            election was unfair. Do you think the 2020 general election is not fair? Do you want to know the
-                            incidents that happened during the period before the coup and after the election?
-                            In BCAE, you can explore election results, actions of related organizations or parties,
-                            prominent events, and other announcements both before the coup and after the election. BCAE
-                            covered data from social media pages of officials and newsrooms.
-                        </p>
-                        <h1 class="font-semibold text-xl mt-40 description">Interaction and navigation guide</h1>
-                        <p class="description w-full mt-4 text-gray-700">BCAE story is linear and you can scroll vertically
-                            to walk through the story. You can jump to any section in carousel page which can be accessed by
-                            clicking on the section icon in the top-right corner. You can also interact with different
-                            elements in the page. A blinking (i) icon indicates that you can interact with an element, and
-                            it will disappear once you do so. You can click on a static (i) icon to see more information
-                            about an element. Interactable texts are enclosed in [text-box] and you can see more information
-                            by clicking on them.</p>
-                    </div>
                 </div>
-                    <div class="w-11/12 md:w-4/12 2xl:w-5/12 h-2/6 md:h-full flex items-end justify-end ">
+                <h1 class="sticky title whitespace-nowrap top-0 bg-[#111827] z-10 uppercase text-[#E8544E] font-bold text-4xl xl:text-7xl">
+                    <span class="home-title inline-block pr-4 opacity-0 ">Before </span>
+                    <span class="home-title inline-block pr-4 opacity-0 ">the </span>
+                    <span class="home-title inline-block pr-4 opacity-0 ">coup </span> <br>
+                    <span class="home-title inline-block pr-4 opacity-0 ">After </span>
+                    <span class="home-title inline-block pr-4 opacity-0 ">the </span>
+                    <span class="home-title inline-block pr-4 opacity-0 ">election</span>
+                </h1>
+                <div class="h-4/6 w-full shrink-0"></div>
+                <div class="flex flex-col relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
+                    <p class="description w-full text-gray-700">On the 1st of February 2021 when Vice President Myint
+                        Swe became an Acting President and declared on state-owned media that the results of the
+                        November 2020 general election were invalid, instating a one-year state of emergency, and
+                        handing control of the executive, legislative, and judicial branches of government to the
+                        commander in chief of the armed forces, Senior General Min Aung Hlaing. After years of living
+                        under military rule, the people's hopes for democracy that had been glowing since 2010 were
+                        dashed. The coup has also brought economic turmoil, wiping out modest gains in poverty reduction
+                        made over the past decade. But, this coup was not the first time for Myanmar; it was preceded by
+                        many military coups since 1958.
+                        <br>
+                        Before the coup d'état, the military and other political parties repeatedly announced that the
+                        election was unfair. Do you think the 2020 general election is not fair? Do you want to know the
+                        incidents that happened during the period before the coup and after the election?
+                        In BCAE, you can explore election results, actions of related organizations or parties,
+                        prominent events, and other announcements both before the coup and after the election. BCAE
+                        covered data from social media pages of officials and newsrooms.
+                    </p>
+                    <h1 class="font-semibold text-xl mt-40 description">Interaction and navigation guide</h1>
+                    <p class="description w-full mt-4 text-gray-700">BCAE story is linear and you can scroll vertically
+                        to walk through the story. You can jump to any section in carousel page which can be accessed by
+                        clicking on the section icon in the top-right corner. You can also interact with different
+                        elements in the page. A blinking (i) icon indicates that you can interact with an element, and
+                        it will disappear once you do so. You can click on a static (i) icon to see more information
+                        about an element. Interactable texts are enclosed in [text-box] and you can see more information
+                        by clicking on them.</p>
+                </div>
+            </div>
+            <div class="w-11/12 md:w-4/12 2xl:w-5/12 h-2/6 md:h-full flex items-end justify-end ">
                 <img style="transform-origin: center bottom; transform: scale(1);"
                      class="h-[80vh] z-10 home-illustration opacity-0"
                      src="assets/vote_hand.png" alt="vote"/>
@@ -79,21 +79,21 @@
                                     <g id="Group">
                                         <g id="Group_2">
                                             <path id="Vector_2" d="M30 316.5L470.85 354.24V839L30 801.27V316.5Z"
-                                                  fill="#3395FF" stroke="black" stroke-miterlimit="10"
+                                                  fill="#87CEEB" stroke="black" stroke-miterlimit="10"
                                                   stroke-linejoin="round"/>
                                             <path id="Vector_3"
                                                   d="M470.85 354.24L657.07 262.95V747.72L470.85 839V354.24Z"
-                                                  fill="#3395FF" stroke="black" stroke-miterlimit="10"
+                                                  fill="#87CEEB" stroke="black" stroke-miterlimit="10"
                                                   stroke-linejoin="round"/>
                                         </g>
                                         <g id="Group_3">
                                             <path id="Vector_4" d="M204 219L687 260.4L483 360.4L0 319L204 219Z"
-                                                  fill="#3395FF" stroke="black" stroke-miterlimit="10"
+                                                  fill="#87CEEB" stroke="black" stroke-miterlimit="10"
                                                   stroke-linejoin="round"/>
-                                            <path id="Vector_5" d="M0 319L483 360.4V419L0 377.6V319Z" fill="#3395FF"
+                                            <path id="Vector_5" d="M0 319L483 360.4V419L0 377.6V319Z" fill="#87CEEB"
                                                   stroke="black" stroke-miterlimit="10" stroke-linejoin="round"/>
                                             <path id="Vector_6" d="M483 360.4L687 260.4V319L483 419V360.4Z"
-                                                  fill="#3395FF" stroke="black" stroke-miterlimit="10"
+                                                  fill="#87CEEB" stroke="black" stroke-miterlimit="10"
                                                   stroke-linejoin="round"/>
                                         </g>
                                         <path id="Vector_7"
@@ -312,6 +312,7 @@ const init = () => {
                 easing: 'easeOutQuart',
                 duration: 1000,
             })
+            document.getElementById('home').style.overflowY = 'auto'
             trigger();
         }
     })
