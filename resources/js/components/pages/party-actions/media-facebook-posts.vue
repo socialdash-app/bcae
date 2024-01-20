@@ -19,7 +19,7 @@
 <script setup>
 import {reactive, onMounted} from "vue";
 import truncate from "../../../api/truncate.js";
-import AnimeScrollTrigger from "../../../../../../scrollanime/index.js";
+import AnimeScrollTrigger from "anime-scrolltrigger";
 
 const props = defineProps([]);
 

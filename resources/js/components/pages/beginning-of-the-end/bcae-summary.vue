@@ -41,7 +41,7 @@
 
 <script setup>
 import {reactive, onMounted} from "vue";
-import AnimeScrollTrigger from "../../../../../../scrollanime/index.js";
+import AnimeScrollTrigger from "anime-scrolltrigger";
 import anime from "animejs";
 
 const props = defineProps([]);

@@ -36,7 +36,7 @@ import IntroBeginningOfTheEnd from "./intro-beginning-of-the-end.vue";
 import BcaeSummary from "./bcae-summary.vue";
 import CreditSection from "./credit-section.vue";
 import ShareSection from "./share-section.vue";
-import AnimeScrollTrigger from "../../../../../../scrollanime/index.js";
+import AnimeScrollTrigger from "anime-scrolltrigger";
 import route from "../../../api/route.js";
 import anime from "animejs";
 
