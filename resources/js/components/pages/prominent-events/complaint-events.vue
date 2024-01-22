@@ -1,19 +1,21 @@
 <template>
     <div id="complaint-events-trigger"
          class="w-full text-gray-700 relative flex flex-col items-center">
-        <div class="w-full flex flex-col sticky justify-center top-0 h-screen items-center"
-             id="complaint-events-pinner">
+        <div class="w-full flex flex-col sticky justify-center top-0 items-center"
+             :style="{height: height + 'px'}">
             <div @click="expandArticle(index)"
                  v-for="(complaint, index) in complaints"
                  style="will-change: transform;height: 400px;"
                  :id="`complaint-${index}`"
-                 class="complaint overflow-y-auto cursor-pointer absolute border bg-green-300 rounded p-10 w-6/12"
+                 class="complaint overflow-y-auto cursor-pointer absolute border bg-green-300 rounded p-4 md:!p-10 w-11/12 md:!w-6/12"
                  :style="{transform: `translate3d(${ index % 2 === 0 ? 400: -400}px,${index * 800}px,0)`}">
-                <h1 class="font-semibold text-2xl">{{ complaint.title }}</h1>
-                <p class="mt-6">{{ truncate(complaint.description, 800) }}</p>
+                <h1 class="font-semibold text-xl md:text-2xl">{{ complaint.title }}</h1>
+                <p class="mt-3 md:mt-6">{{
+                        truncate(complaint.description, width > 768 ? 800 : 400)
+                    }}</p>
             </div>
         </div>
-        <div :style="{height: `${complaints.length * 400}px`}">
+        <div class="shrink-0 w-full" :style="{height: `${complaints.length * 400}px`}">
 
         </div>
     </div>
@@ -25,9 +27,12 @@ import truncate from "../../../api/truncate.js";
 import AnimeScrollTrigger from 'anime-scrolltrigger';
 import anime from "animejs";
 import {onClickOutside} from "js-utils";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
+const width = window.innerWidth;
+const height = window.innerHeight;
 const complaints = [{
     title: 'On 11.1.2021 blah blah...',
     description: 'orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n' +
@@ -58,7 +63,7 @@ function revertArticle() {
     if (isNaN(currentExpandedArticleIndex)) return;
     currentExpandedArticle.style.zIndex = 'auto'
     currentExpandedArticle.style.overflowY = 'hidden'
-    currentExpandedArticle.querySelector('p').innerText = truncate(complaints[currentExpandedArticleIndex].description, 800);
+    currentExpandedArticle.querySelector('p').innerText = truncate(complaints[currentExpandedArticleIndex].description, width > 768 ? 800 : 400);
     anime({
         targets: currentExpandedArticle,
         translateX: () => {
@@ -74,7 +79,7 @@ function revertArticle() {
         duration: 500,
         complete: () => {
             document.querySelector('main').style.overflowY = 'scroll'
-            currentExpandedArticle.style.overflowY = 'initial'
+            currentExpandedArticle.style.overflowY = 'hidden'
             currentExpandedArticle = null;
             currentExpandedArticleIndex = null;
         }
@@ -95,16 +100,19 @@ const expandArticle = (index) => {
         targets: article,
         translateX: 0,
         translateY: () => {
+            console.log(article.getBoundingClientRect().top, height)
+            return -article.getBoundingClientRect().top + height * 0.2 + matrix.m42;
             return -article.getBoundingClientRect().top + (window.innerHeight * 0.15) + matrix.m42;
         },
         // width: '80%',
-        height: '50%',
+        height: height * 0.8 + 'px',
         borderRadius: 20,
         easing: 'easeOutQuart',
         duration: 500,
         complete: () => {
             currentExpandedArticle = article;
             article.style.overflowY = 'auto';
+            console.log(article.getBoundingClientRect().top)
             // onClickOutside(article, revertArticle)
         }
     })
@@ -139,7 +147,7 @@ onMounted(() => {
 
     setTimeout(() => {
         new AnimeScrollTrigger(document.querySelector('main'), animations)
-    }, 2000)
+    }, settings.animationDuration)
 
     document.addEventListener("click", (e) => {
         if (!currentExpandedArticle) return;

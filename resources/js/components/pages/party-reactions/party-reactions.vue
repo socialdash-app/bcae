@@ -1,11 +1,14 @@
 <template>
     <div id="party-actions"
-         class="w-full flex-col flex items-center py-2 bg-[#EBFFE0]">
-        <party-accusations-facebook-posts/>
-        <media-facebook-posts/>
-        <youtube-video/>
+         class="w-full flex-col flex items-center py-2 bg-[#EBFFE0] relative">
+        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
+            <h1 class="text-xl md:text-3xl font-bold">Party Reactions</h1>
+        </div>
+        <!--        <party-accusations-facebook-posts/>-->
+        <!--        <media-facebook-posts/>-->
+        <!--        <youtube-video/>-->
         <uec-accusation/>
-        <party-signatures/>
+        <!--        <party-signatures/>-->
     </div>
 </template>
 
@@ -26,10 +29,10 @@ const data = reactive({})
 onMounted(() => {
     setTimeout(() => {
         new AnimeScrollTrigger(document.querySelector('main'), [{
-            targets: '#header-party-actions circle',
+            targets: '#header-party-reactions circle',
             strokeDashoffset: 0,
             scrollTrigger: {
-                trigger: '#party-actions',
+                trigger: '#party-reactions',
                 start: 'top top',
                 end: 'bottom top',
                 lerp: true,

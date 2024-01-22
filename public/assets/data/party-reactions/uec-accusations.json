@@ -1,0 +1,128 @@
+{
+    "links": [
+        {
+            "color": "#01665e",
+            "source": "WA NATIONAL PARTY",
+            "target": "Union Solidarity and Development Party",
+            "value": "1"
+        },
+        {
+            "color": "#00FF00",
+            "source": "Union Solidarity and Development Party",
+            "target": "WA NATIONAL PARTY",
+            "value": "2"
+        },
+        {
+            "color": "#00FF00",
+            "source": "Union Solidarity and Development Party",
+            "target": "Danu National Democracy Party ",
+            "value": "1"
+        },
+        {
+            "color": "#00FF00",
+            "source": "Union Solidarity and Development Party",
+            "target": "National League for Democracy",
+            "value": "169"
+        },
+        {
+            "color": null,
+            "source": "Union Pa.O National Organization",
+            "target": "Union Solidarity and Development Party",
+            "value": "1"
+        },
+        {
+            "color": "#f6e8c3",
+            "source": "Mon Unity Party",
+            "target": "National League for Democracy",
+            "value": "1"
+        },
+        {
+            "color": "#fffc1f",
+            "source": "Shan Nationalities League for Democracy",
+            "target": "Ta-Arng (Palaung) National Party",
+            "value": "1"
+        },
+        {
+            "color": "#ccebc5",
+            "source": "Lisu National Development Party(L.N.D.P)",
+            "target": "National League for Democracy",
+            "value": "1"
+        },
+        {
+            "color": "#FF0000",
+            "source": "National League for Democracy",
+            "target": "Union Solidarity and Development Party",
+            "value": "14"
+        },
+        {
+            "color": "#FF0000",
+            "source": "National League for Democracy",
+            "target": "Mon Unity Party",
+            "value": "1"
+        },
+        {
+            "color": "#FF0000",
+            "source": "National League for Democracy",
+            "target": "La Hu National Development Party",
+            "value": "1"
+        },
+        {
+            "color": "#FF0000",
+            "source": "National League for Democracy",
+            "target": "Lisu National Development Party(L.N.D.P)",
+            "value": "1"
+        },
+        {
+            "color": null,
+            "source": "voter",
+            "target": "National League for Democracy",
+            "value": "94"
+        }
+    ],
+    "nodes": [
+        {
+            "name": "WA NATIONAL PARTY",
+            "color": "#01665e"
+        },
+        {
+            "name": "Union Solidarity and Development Party",
+            "color": "#00FF00"
+        },
+        {
+            "name": "Danu National Democracy Party ",
+            "color": null
+        },
+        {
+            "name": "National League for Democracy",
+            "color": "#FF0000"
+        },
+        {
+            "name": "Union Pa.O National Organization",
+            "color": null
+        },
+        {
+            "name": "Mon Unity Party",
+            "color": "#f6e8c3"
+        },
+        {
+            "name": "Shan Nationalities League for Democracy",
+            "color": "#fffc1f"
+        },
+        {
+            "name": "Ta-Arng (Palaung) National Party",
+            "color": "#80cdc1"
+        },
+        {
+            "name": "Lisu National Development Party(L.N.D.P)",
+            "color": "#ccebc5"
+        },
+        {
+            "name": "La Hu National Development Party",
+            "color": "#b3de69"
+        },
+        {
+            "name": "voter",
+            "color": null
+        }
+    ]
+}

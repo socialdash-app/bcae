@@ -1,6 +1,9 @@
 <template>
     <div id="beginning-of-the-end"
-         class="flex flex-col w-full bg-[#111827]">
+         class="flex flex-col w-full py-12 relative items-center">
+        <div class="sticky beginning-of-the-end-title pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
+            <h1 class="text-xl md:text-3xl font-bold">Beginning Of The End</h1>
+        </div>
         <intro-beginning-of-the-end/>
         <div
             class="drama-section py-10 main-intro w-screen h-screen px-3 md:px-20 flex items-center justify-center text-[#E8544E]">
@@ -63,29 +66,7 @@ onMounted(() => {
                     console.log('enter back');
                 },
             }
-        }, {
-            scrollTrigger: {
-                trigger: '.drama-section',
-                start: 'top top',
-                end: 'bottom top',
-                onEnter: () => {
-                    anime({
-                        targets: '.header',
-                        color: '#fff',
-                        easing: 'easeOutQuart',
-                        duration: 600,
-                    })
-                },
-                onLeaveBack: () => {
-                    anime({
-                        targets: '.header',
-                        color: '#131313',
-                        easing: 'easeOutQuart',
-                        duration: 600,
-                    })
-                }
-            }
-        }])
+        },])
     }, 2000)
 })
 </script>

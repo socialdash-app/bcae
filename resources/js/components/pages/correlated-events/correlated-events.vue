@@ -1,6 +1,9 @@
 <template>
     <div id="correlated-events"
          class="w-full flex-col flex relative items-center py-2 bg-[#FDF4E9]">
+        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
+            <h1 class="text-xl md:text-3xl font-bold">Correlated Events</h1>
+        </div>
         <!--        <div class="w-full flex justify-between z-[100] h-24 items-center px-20 sticky top-0 left-0">-->
         <!--            <h1 class="text-xl font-semibold">Party Actions</h1>-->
         <!--            <div class="relative flex items-center justify-center">-->

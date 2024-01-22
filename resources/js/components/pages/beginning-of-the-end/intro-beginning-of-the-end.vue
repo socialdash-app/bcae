@@ -1,6 +1,6 @@
 <template>
     <div
-        class="relative main-drama-container bg-white  w-full h-[200vh] shrink-0">
+        class="relative main-drama-container w-full h-[200vh] shrink-0">
         <div :style="{height: height+ 'px'}"
              class="intro sticky top-0 shrink-0 w-screen flex items-center justify-center">
             <div v-html="protestSvg"
@@ -18,6 +18,7 @@ import {reactive, onMounted} from "vue";
 import protestSvg from "../../../assets/protest-svg.js";
 import voteSvg from "../../../assets/vote-svg.js";
 import AnimeScrollTrigger from "anime-scrolltrigger";
+import anime from "animejs";
 
 const height = window.innerHeight;
 const props = defineProps([]);
@@ -48,7 +49,7 @@ onMounted(() => {
             end: 'bottom top',
         }
     }, {
-        targets: '.main-drama-container',
+        targets: '#beginning-of-the-end',
         background: '#111827',
         duration: 800,
         easing: 'easeInOutQuart',
@@ -56,6 +57,22 @@ onMounted(() => {
             trigger: '.main-drama-container',
             start: '40% top',
             end: 'bottom top',
+            onEnter: () => {
+                anime({
+                    targets: ['.beginning-of-the-end-title', '.header-icon'],
+                    color: '#ffffff',
+                    easing: 'easeOutQuart',
+                    duration: 600,
+                })
+            },
+            onLeaveBack: () => {
+                anime({
+                    targets: ['.beginning-of-the-end-title', '.header-icon'],
+                    color: '#131313',
+                    easing: 'easeOutQuart',
+                    duration: 600,
+                })
+            }
         }
     }])
 })

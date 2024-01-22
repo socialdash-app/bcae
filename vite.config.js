@@ -1,4 +1,4 @@
-import {defineConfig} from 'vite';
+import {defineConfig, splitVendorChunk, splitVendorChunkPlugin} from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue'
 
@@ -15,6 +15,7 @@ export default defineConfig({
                 },
             },
         }),
+        splitVendorChunkPlugin()
     ],
     server: {
         host: true,

@@ -5,7 +5,7 @@
         <div id="home-container"
              class="w-full sticky px-2 z-20 shrink-0 top-0 left-0 overflow-hidden md:tracking-wide h-full leading-relaxed text-gray-800 justify-between md:!justify-center flex md:!flex-row flex-col items-center">
             <div id="home-text"
-                 class="w-full z-10 backdrop-blur md:backdrop-blur-0 p-4 md:p-0 md:!w-7/12 2xl:!w-6/12 relative h-5/6 md:h-4/6 flex flex-col overflow-hidden">
+                 class="w-full z-10  p-4 md:!p-0 md:!w-7/12 2xl:!w-6/12 relative h-5/6 md:h-4/6 flex flex-col overflow-hidden">
                 <div class="h-32 w-full shrink-0">
 
                 </div>
@@ -18,7 +18,8 @@
                     <span class="home-title inline-block pr-2 md:pr-4 opacity-0 ">election</span>
                 </h1>
                 <div class="h-4/6 w-full shrink-0"></div>
-                <div class="flex flex-col relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
+                <div
+                    class="flex flex-col backdrop-blur md:backdrop-blur-0  relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
                     <p class="description w-full text-gray-600">On the 1st of February 2021 when Vice President Myint
                         Swe became an Acting President and declared on state-owned media that the results of the
                         November 2020 general election were invalid, instating a one-year state of emergency, and
@@ -47,12 +48,10 @@
                 </div>
             </div>
             <div class="w-full md:!w-4/12 2xl:!w-5/12 h-1/6 md:h-full flex items-end justify-between md:justify-end ">
-                <img style="transform-origin: center bottom; transform: scale(1);"
-                     class="h-[50vh] md:h-[80vh] home-illustration opacity-0"
-                     src="assets/vote_hand.png" alt="vote"/>
-                <img style="transform-origin: center bottom; transform: scale(0.8);"
-                     class="h-[50vh] md:h-[70vh] home-illustration opacity-0"
-                     src="assets/protest_hand.png" alt="protest"/>
+                <div style="transform-origin: center bottom; transform: scale(1);" v-html="voteHandIllustration"
+                     class="h-[50vh] md:h-[80vh] home-illustration opacity-0"></div>
+                <div style="transform-origin: center bottom; transform: scale(0.8);" v-html="threeFingerIllustration"
+                     class="h-[50vh] md:h-[80vh] home-illustration opacity-0"></div>
             </div>
             <div id="scroll-down-indicator" class="fixed  bottom-8 opacity-0 gap-y-6 flex flex-col items-center">
                 <h1 class="text-xl">Scroll</h1>
@@ -266,10 +265,11 @@
 
             </div>
         </div>
-        <div :style="{height: height * 3 + 'px'}" class="w-full shrink-0">
+        <div :style="{height:(width > 768 ? height * 3 : height * 6) + 'px'}" class="w-full shrink-0">
 
         </div>
-        <div id="home-trigger" :style="{height: height * 3 + 'px'}" class="w-full absolute top-0 shrink-0">
+        <div id="home-trigger" :style="{height: (width > 768 ? height * 3 : height * 6) + 'px'}"
+             class="w-full absolute top-0 shrink-0">
 
         </div>
     </div>
@@ -280,12 +280,16 @@ import {reactive, onMounted, onDeactivated, onActivated} from "vue";
 import anime from "animejs";
 import AnimeScrollTrigger from 'anime-scrolltrigger';
 import route from "../../api/route.js";
+import voteHandIllustration from "../../assets/home/vote-hand-illustration.js";
+import threeFingerIllustration from "../../assets/home/three-finger-illustration.js";
 
 const props = defineProps([]);
 
 const data = reactive({});
 
 const height = window.innerHeight;
+
+const width = window.innerWidth;
 
 let isAnimating = false;
 const clickCard = (cardName) => {
@@ -296,14 +300,13 @@ const clickCard = (cardName) => {
         targets: tickSelector,
         strokeDashoffset: 0,
         easing: 'linear',
-        duration: 1500,
+        duration: 1000,
     })
     anime({
         targets: tickSelector,
         fill: '#000000',
         duration: 500,
         easing: 'linear',
-        delay: 500,
         complete: () => {
             route.changeTo(cardName)
             isAnimating = false;
@@ -319,20 +322,15 @@ const trigger = () => {
     new AnimeScrollTrigger(document.getElementById('home'), [
         {
             targets: '.home-illustration',
-            // translateX: [{
-            //     value: (_, index) => index === 0 ? 300 : -200,
-            //     delay: 1000,
-            // }],
             scale: [{
                 value: (_, index) => index === 0 ? 0.7 : 1.1,
                 // delay: 1000,
             }],
-            // zIndex: (_, index) => index === 0 ? -10 : 10,
             translateY: [0, 0],
             scrollTrigger: {
                 trigger: '#home-trigger',
                 start: '1% top',
-                end: '70% bottom',
+                end: '70% center',
                 lerp: true,
                 onLeaveBack: () => {
                     anime({
@@ -373,7 +371,7 @@ const trigger = () => {
                         targets: body,
                         scrollTop: progress * (bodyHeight + bodyScrollHeight),
                         easing: 'easeOutQuart',
-                        duration: 400,
+                        duration: 50,
                     })
                 }
             }

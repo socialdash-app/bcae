@@ -1,11 +1,12 @@
 <template>
-    <div id="the-election" class="w-full bg-[#F9E2F0] py-10 items-center flex flex-col relative">
-        <div class="sticky pl-12 top-14 w-11/12 z-[100]">
-            <h1 class="text-3xl font-bold">The Election</h1>
+    <div :style="{background: headers[1].primaryColor}" id="the-election"
+         class="w-full pt-10 items-center flex flex-col relative">
+        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[10000]">
+            <h1 class="text-xl md:text-3xl font-bold">The Election</h1>
         </div>
         <div class="w-full flex md:!flex-row flex-col items-center md:!items-start relative justify-evenly">
             <div id="map-container"
-                 class="w-11/12 md:!w-4/12 h-[85vh] sticky top-24 z-[1001] flex flex-col overflow-hidden">
+                 class="w-11/12 md:!w-4/12 sticky top-24 z-[1001] flex flex-col overflow-hidden">
                 <button @click="resetZoom" v-show="data.isDrilldown"
                         class="absolute flex z-10 items-center gap-x-2 top-4 left-4 px-4 py-2 border rounded bg-white">
                     <span> Reset Map</span>
@@ -19,10 +20,14 @@
                 <svg id="map">
                 </svg>
                 <div v-show="!data.loading" class="flex flex-col absolute bottom-0 left-0 gap-y-4">
-                    <button @click="switchHluttawType('PyiThu')" class="w-48 h-12 rounded border bg-[#F2B5B4]">Pyithu
+                    <button @click="switchHluttawType('PyiThu')"
+                            :class="data.currentHluttaw === 'PyiThu'?'bg-[#f788bf]':'bg-[#ffbfdf]'"
+                            class="w-48 h-12 rounded hover:shadow-2xl">Pyithu
                         Hluttaw
                     </button>
-                    <button @click="switchHluttawType('Amyothar')" class="w-48 h-12 rounded border bg-[#F788BF]">
+                    <button @click="switchHluttawType('Amyothar')"
+                            :class="data.currentHluttaw === 'Amyothar'?'bg-[#f788bf]':'bg-[#ffbfdf]'"
+                            class="w-48 h-12 rounded hover:shadow-2xl">
                         Amyothar
                         Hluttaw
                     </button>
@@ -33,14 +38,14 @@
                 <h1 class="font-semibold text-lg">{{ data.details.title }}</h1>
                 <table>
                     <tbody>
-                    <tr class=" flex items-center text-sm" :class="{ 'font-medium border-b': index === 0 }"
+                    <tr class=" flex items-center text-sm" :class="{ 'font-medium border-b border-black': index === 0 }"
                         v-for="(content, index) in data.details.contents">
                         <td class="p-2 w-4/12" v-for="c in content">{{ c }}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="w-11/12 md:!w-1/2 flex flex-col z-10">
+            <div class="w-11/12 md:!w-1/2 flex flex-col z-[1002]">
                 <div class="trigger mb-[90%] md:!mb-[50%] w-full rounded-lg h-[100vh]"></div>
                 <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh]"></div>
                 <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh] relative">
@@ -48,6 +53,10 @@
                 </div>
                 <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh]"></div>
             </div>
+        </div>
+        <div id="the-election-then-section" class="w-screen bg-[#ff9ccd] flex items-center justify-center"
+             :style="{height: height + 'px'}">
+            <h1 class="then-title text-5xl md:text-6xl 2xl:text-7xl font-bold">Then</h1>
         </div>
     </div>
 </template>
@@ -57,11 +66,13 @@ import {onMounted, reactive} from 'vue';
 import * as d3 from 'd3';
 import {PopOver} from "vue-common-components";
 import AnimeScrollTrigger from "anime-scrolltrigger";
-import route from "../../api/route.js";
+import route, {headers} from "../../api/route.js";
 import anime from 'animejs';
 import {placeElementRelativeToScreen} from "../../api/helpers.js";
 
 let results = {}, zoomIntoRegion, path, resetZoom, g, g1, amyoThaFeatures, pyiThuFeatures, currentRegion;
+
+const height = window.innerHeight;
 
 const data = reactive({
     showChart: false,
@@ -309,7 +320,11 @@ const drawSubregions = (features) => {
 
 onMounted(() => {
     setTimeout(() => {
+        const padding = 20;
+        const topOffset = 24;
+        const mapHeight = height - document.querySelector('#the-election').children[0].getBoundingClientRect().bottom - topOffset - padding;
         const mapContainer = document.getElementById('map-container');
+        mapContainer.style.height = mapHeight + 'px'
         const mapContainerRect = mapContainer.getBoundingClientRect();
         const mapTranslateXWidth = (window.innerWidth * 0.5) - mapContainerRect.left - (0.5 * mapContainerRect.width);
         anime({
@@ -367,8 +382,6 @@ onMounted(() => {
                 }
             },
             {
-                targets: '#header-the-election circle',
-                strokeDashoffset: 0,
                 scrollTrigger: {
                     trigger: container,
                     start: 'top top',
@@ -386,9 +399,29 @@ onMounted(() => {
                     },
                     onLeaveBack: () => {
                         if (data.hoverRegion) data.hoverRegion = null;
+                    },
+                    onUpdate: (_, progress) => {
+                        anime({
+                            targets: '#header-the-election circle',
+                            strokeDashoffset: 160 - progress * 160,
+                            easing: 'easeOutQuart',
+                            duration: 400,
+                        })
                     }
                 }
-            }
+            },
+            {
+                targets: '.then-title',
+                scale: [1.5, 1],
+                opacity: [0, 1],
+                easing: 'easeOutQuart',
+                duration: 2000,
+                scrollTrigger: {
+                    trigger: '#the-election-then-section',
+                    start: 'top 40%',
+                    end: 'bottom top',
+                }
+            },
         ]
         new AnimeScrollTrigger(document.querySelector('main'), triggers);
     }, 2000)

@@ -1,8 +1,8 @@
 <template>
     <div id="prominent-events" class="relative bg-[#F1FFF0] w-full flex items-center flex-col"
          style="margin-top: 10px;">
-        <div class="sticky pl-12 top-14 w-11/12 z-[100]">
-            <h1 class="text-3xl font-bold">Prominent events</h1>
+        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
+            <h1 class="text-xl md:text-3xl font-bold">Prominent Events</h1>
         </div>
         <!--            <div class="relative flex items-center justify-center">-->
         <!--                <svg width="60" height="60" viewBox="0 0 60 60">-->

@@ -11,7 +11,7 @@ class PartyActionsController
 {
     public static function routes(): void
     {
-        Route::group(['prefix' => 'party-actions'], function () {
+        Route::group(['prefix' => 'party-reactions'], function () {
             Route::post('party-names', [static::class, 'getPartyNames']);
             Route::post('party-accusations', [static::class, 'getPartyAccusationsData']);
             Route::post('uec-accusations', [static::class, 'getUECAccusationsData']);

@@ -11,14 +11,14 @@ import {
 } from "../assets/icons.js";
 
 export const headers = [{
-    name: 'Chronicle',
-    primaryColor: '#FFF21F',
-    secondaryColor: '#FF7F00',
+    name: 'Chronicles',
+    primaryColor: '#FFFDE0',
+    secondaryColor: '#544f0b',
     icon: chronicle,
 }, {
     name: 'The Election',
-    primaryColor: '#F9E2F0',
-    secondaryColor: '#ff1c8a',
+    primaryColor: '#FFDCF1',
+    secondaryColor: '#F788BF',
     icon: theElection,
 },
     {
@@ -51,7 +51,7 @@ export const headers = [{
 
 export default {
     data: reactive({
-        component: "home",
+        component: "story",
     }),
     changeTo: function (name) {
         this.data.component = name;

@@ -1,45 +1,34 @@
 <template>
-    <div class="w-full p-10 flex items-center flex-col gap-6 h-screen">
-        <h1 class="w-full text-center font-bold text-3xl">Election Incidents</h1>
-        <div class="w-11/12 md:w-8/12 mt-8 mb-12 gap-x-8">
-            <!--            <div class="flex items-center gap-x-4">-->
-            <!--                <span class="w-5 h-5 rounded" :class="getBackgroundColor('party tortious')"></span>-->
-            <!--                <p class="text-gray-700">Party Tortious</p>-->
-            <!--            </div>-->
-            <!--            <div class="flex items-center gap-x-4">-->
-            <!--                <span class="w-5 h-5 rounded" :class="getBackgroundColor('reckless UEC')"></span>-->
-            <!--                <p class="text-gray-700">Reckless UEC</p>-->
-            <!--            </div>-->
-            <!--            <div class="flex items-center gap-x-4">-->
-            <!--                <span class="w-5 h-5 rounded" :class="getBackgroundColor('wrongful act')"></span>-->
-            <!--                <p class="text-gray-700">Wrongful Act</p>-->
-            <!--            </div>-->
+    <div class="w-full p-4 md:p-10 flex items-center flex-col gap-6 relative">
+        <h1 class="w-full text-center font-bold text-2xl md:text-3xl">Election Incidents</h1>
+        <div class="w-11/12 md:!w-8/12 md:mt-8 mb-12 md:gap-x-8">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
             industry's standard <span @click="(e)=>selectTopic('party tortious',e)"
-                                      class="underline decoration-8 cursor-pointer font-semibold"
-                                      :class="getDecorationColor('party tortious')">dummy text</span>
+                                      class="cursor-pointer sticky top-20 md:!top-4 font-semibold"
+                                      :class="getBackgroundColor('party tortious')">dummy text</span>
             ever since the
             1500s, when an unknown printer took a galley of type and
             scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
             electronic typesetting, remaining <span @click="(e)=>selectTopic('reckless UEC',e)"
-                                                    class="underline decoration-8 cursor-pointer font-semibold"
-                                                    :class="getDecorationColor('reckless UEC')">essentially unchanged.</span>
+                                                    class="cursor-pointer sticky top-20 md:!top-4 font-semibold"
+                                                    :class="getBackgroundColor('reckless UEC')">essentially unchanged.</span>
             It was popularised in the 1960s
             with the release of
             Letraset sheets containing Lorem Ipsum <span @click="(e)=>selectTopic('wrongful act',e)"
-                                                         class="underline decoration-8 cursor-pointer font-semibold"
-                                                         :class="getDecorationColor('wrongful act')">passages</span>,
+                                                         class="cursor-pointer sticky top-20 md:!top-4 font-semibold"
+                                                         :class="getBackgroundColor('wrongful act')">passages</span>,
             and more recently with desktop publishing software like
             Aldus PageMaker including versions of Lorem Ipsum.
         </div>
         <div id="election-incidents-container"
              class="w-full flex flex-wrap gap-6 justify-center">
-            <div class="w-64 relative election-incidents-box flex items-center justify-center cursor-pointer h-32"
-                 v-for="(incident,index) in data.incidents">
+            <div
+                class="w-40 md:w-64 relative election-incidents-box flex items-center justify-center cursor-pointer h-32"
+                v-for="(incident,index) in data.incidents">
                 <div
                     :class="getBackgroundColor(incident.topic)"
                     :style="{opacity: data.selectedTopic && data.selectedTopic !== incident.topic ? '0.4': '1'}"
-                    class="absolute w-full top-0 left-0 h-full p-4  rounded-lg font-semibold text-gray-700"
+                    class="absolute text-sm md:!text-base w-full top-0 left-0 h-full p-4  rounded-lg font-semibold text-gray-700"
                     @click="(e)=>expandBox(e,index)">
                     <div
                         class="w-full pointer-events-none h-full flex items-center justify-center absolute top-0 left-0 z-[1000]"
@@ -91,18 +80,6 @@ const getBackgroundColor = (topic) => {
             return 'bg-orange-200';
     }
 }
-
-const getDecorationColor = (topic) => {
-    switch (topic) {
-        case 'party tortious':
-            return 'decoration-blue-200';
-        case 'reckless UEC':
-            return 'decoration-red-200';
-        case 'wrongful act':
-            return 'decoration-orange-200';
-    }
-}
-
 const selectTopic = (topic, e) => {
     e.stopPropagation();
     setTimeout(() => {

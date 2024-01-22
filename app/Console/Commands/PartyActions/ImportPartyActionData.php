@@ -16,7 +16,7 @@ class ImportPartyActionData extends Command
      *
      * @var string
      */
-    protected $signature = 'party-actions';
+    protected $signature = 'party-reactions';
 
     /**
      * The console command description.
