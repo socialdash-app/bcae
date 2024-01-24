@@ -395,8 +395,8 @@ const init = () => {
                     gx.transition().duration(750).ease(easeQuadOut).attr('transform', `translate(-${translateX},${height})`)
                 },
                 onLeave: () => {
-                    if (illustrationAnimations.onLeave) {
-                        illustrationAnimations.onLeave();
+                    if (illustrationAnimation.onLeave) {
+                        illustrationAnimation.onLeave();
                     }
                 },
                 onEnterBack: () => {

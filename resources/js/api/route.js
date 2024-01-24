@@ -13,7 +13,7 @@ import {
 export const headers = [{
     name: 'Chronicles',
     primaryColor: '#FFFDE0',
-    secondaryColor: '#544f0b',
+    secondaryColor: '#fff21f',
     icon: chronicle,
 }, {
     name: 'The Election',
@@ -23,29 +23,29 @@ export const headers = [{
 },
     {
         name: 'Prominent Events',
-        primaryColor: '#F1FFF0',
+        primaryColor: '#E1FFDE',
         icon: prominentEvents,
         secondaryColor: '#44BB33',
     }, {
-        name: 'Party Actions',
-        primaryColor: '#EBFFE0',
+        name: 'Party Reactions',
+        primaryColor: '#f8CCFF',
         icon: partyActions,
-        secondaryColor: '#E9A498',
+        secondaryColor: '#BD33DB',
     }, {
         name: 'The Military',
-        primaryColor: '#FEF5EC',
+        primaryColor: '#FDE0C2',
         icon: theMilitary,
-        secondaryColor: '#ffb976',
+        secondaryColor: '#FF7F00',
     }, {
         name: 'Correlated Events',
-        primaryColor: '#FDF4E9',
+        primaryColor: '#FFE4DE',
         icon: correlatedActions,
         secondaryColor: '#A65628',
     }, {
         name: 'Beginning Of The End',
         primaryColor: '#111827',
         icon: beginningOfTheEnd,
-        secondaryColor: '#FF7F00',
+        secondaryColor: '#f31515',
     }
 ];
 

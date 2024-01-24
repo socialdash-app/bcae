@@ -1,10 +1,11 @@
 <template>
-    <div class="w-7/12 h-screen py-10 mt-10 relative flex items-center justify-center">
-        <span
-            class="absolute top-1/2 -left-6 md:text-md text-sm md:-left-12 z-10 -rotate-90 transform -translate-y-full">Complaint</span>
-        <span
-            class="absolute top-1/2 -right-6 md:text-md text-sm md:-right-12 z-10 -rotate-90 transform -translate-y-full">Defendant</span>
-        <div id="uec-accusations" class="w-full md:px-0 px-2 flex h-full items-center justify-center">
+    <div :style="{height: height + 'px'}" class="w-7/12 relative flex items-center justify-center">
+        <!--        <span-->
+        <!--            class="absolute top-1/2 -left-6 md:text-md text-sm md:-left-12 z-10 -rotate-90 transform -translate-y-full">Complaint</span>-->
+        <!--        <span-->
+        <!--            class="absolute top-1/2 -right-6 md:text-md text-sm md:-right-12 z-10 -rotate-90 transform -translate-y-full">Defendant</span>-->
+        <div :style="{height: height * 0.8 + 'px'}" id="uec-accusations"
+             class="w-full md:px-0 px-2 flex items-center justify-center">
         </div>
     </div>
 </template>
@@ -12,11 +13,15 @@
 <script setup>
 import {reactive, onMounted} from "vue";
 import getPartyColor from "../../../api/getPartyColor.js";
+import Sankeyy from 'highcharts/modules/sankey';
+import Highcharts from 'highcharts'
 import * as Sankey from "d3-sankey-circular";
 import * as d3 from "d3";
-// import Sankey from 'highcharts/modules/sankey';
+import {headers} from "../../../api/route.js";
 
-// Sankey(Highcharts);
+Sankeyy(Highcharts);
+
+const height = window.innerHeight;
 const props = defineProps([]);
 
 const data = reactive({})
@@ -56,89 +61,56 @@ onMounted(() => {
     // });
     fetch('assets/data/party-reactions/uec-accusations.json').then(async (res) => {
         let data = await res.json();
-        let container = document.getElementById('uec-accusations');
-
-        let test = {
-            "nodes": [
-                {"name": "start"},
-                {"name": "bt"},
-                {"name": "pb"},
-                //{ "name": "end" },
-                {"name": "pg"},
-                {"name": "sd"},
-                {"name": "s"}
-            ],
-            "links": [{
-                "source": "s",
-                "target": "s",
-                "value": 16879,
-                "id": "start_search_0",
-                "control": true
-            }, {
-                "source": "sd",
-                "target": "s",
-                "value": 22305,
-                "id": "suggestionDetails_search_0",
-                "control": true
-            }, {
-                "source": "bt",
-                "target": "s",
-                "value": 22305,
-                "id": "browseTitles_search_0",
-                "control": true
-            }, {
-                "source": "pb",
-                "target": "s",
-                "value": 16879,
-                "id": "playback_search_0",
-                "control": true
-            }, {
-                "source": "s",
-                "target": "sd",
-                "value": 6690,
-                "id": "start_suggestionDetails_0",
-                "control": true
-            }, {
-                "source": "pb",
-                "target": "bt",
-                "value": 19207,
-                "id": "playback_browseTitles_0",
-                "control": true
-            }, {
-                "source": "s",
-                "target": "bt",
-                "value": 16393,
-                "id": "search_browseTitles_0",
-                "control": true
-            }, {
-                "source": "start",
-                "target": "bt",
-                "value": 19207,
-                "id": "start_browseTitles_0",
-                "control": true
-            }, {
-                "source": "pg",
-                "target": "bt",
-                "value": 12442,
-                "id": "profilesGate_browseTitles_0",
-                "control": true
-            }, {
-                "source": "start",
-                "target": "pb",
-                "value": 3107,
-                "id": "start_playback_0",
-                "control": true
-            }, {
-                "source": "bt",
-                "target": "pb",
-                "value": 3107,
-                "id": "browseTitles_playback_0",
-                "control": true
-            }, {"source": "bt", "target": "pg", "value": 401, "id": "browseTitles_profilesGate_0", "control": true}]
-        };
-
+        let links = [];
+        data.links.sort((a, b) => a.value > b.value ? -1 : 1).forEach((link) => {
+            link.description = `${link.value} complaints from ${link.source} to ${link.target} `
+            if (links.filter((d) => d.source === link.target || d.target === link.source).length !== 0) {
+                let temp = link.source;
+                link.source = link.target;
+                link.target = temp;
+                console.log('change')
+            }
+            links.push(link)
+        })
+        console.log(data.nodes, links)
+        // Highcharts.chart('uec-accusations', {
+        //     chart: {
+        //         height: height * 0.75 + 'px',
+        //         backgroundColor: headers[3].primaryColor,
+        //     },
+        //     title: {
+        //         text: 'Complaint to UEC'
+        //     },
+        //     accessibility: {
+        //         point: {
+        //             valueDescriptionFormat: '{index}. {point.from} to {point.to}, {point.weight}. '
+        //         }
+        //     },
+        //     plotOptions: {
+        //         series: {
+        //             dataLabels: {
+        //                 enabled: true,
+        //                 // x: -10
+        //                 // textPath: {enabled: false}
+        //             },
+        //             stickyTracking: false
+        //         }
+        //     },
+        //     tooltip: {
+        //         useHTML: true,
+        //     },
+        //     series: [{
+        //         keys: ['color', 'from', 'to', 'weight'],
+        //         name: '',
+        //         type: 'sankey',
+        //         data: links.map((link) => Object.values(link)),
+        //         nodes: data.nodes,
+        //     }],
+        //
+        // });
         // const tooltip = d3.select('#party-accusations-tooltip');
 
+        let container = document.getElementById('uec-accusations')
         const width = container.getBoundingClientRect().width;
         const height = container.getBoundingClientRect().height;
 
@@ -153,18 +125,16 @@ onMounted(() => {
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .attr("viewBox", [0, 0, width, height])
-            .attr("style", "max-width: 100%; height: auto;")
+            .attr("style", "max-width: 100%; height: auto; overflow: visible")
         let current = {
-            nodes: test.nodes.map(d => Object.assign({}, d)),
-            links: test.links.map(d => Object.assign({}, d))
+            nodes: data.nodes.map(d => Object.assign({}, d)),
+            links: links.map(d => Object.assign({}, d))
         };
         const sankey = Sankey.sankeyCircular()
             .nodeId(d => d.name)
             .nodeWidth(36)
-            .nodePadding(40)
+            .nodePadding(10)
             .size([width, height])(current)
-
-        console.log(current)
 
         var g = svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -172,7 +142,6 @@ onMounted(() => {
         var linkG = g.append("g")
             .attr("class", "links")
             .attr("fill", "none")
-            .attr("stroke-opacity", 0.2)
             .selectAll("path");
 
         var nodeG = g.append("g")
@@ -189,7 +158,7 @@ onMounted(() => {
             .attr("x", function (d) {
                 return d.x0;
             })
-            .attr("y", function (d) {
+            .attr("y", function (d, i) {
                 return d.y0;
             })
             .attr("height", function (d) {
@@ -199,9 +168,9 @@ onMounted(() => {
                 return d.x1 - d.x0;
             })
             .style("fill", function (d) {
-                return '#ff5d5d';
+                return getPartyColor(d.name) ?? '#848eff';
             })
-            .style("opacity", 0.5)
+            .style("opacity", 1)
 
         node.append("text")
             .attr("x", function (d) {
@@ -215,69 +184,39 @@ onMounted(() => {
             .text(function (d) {
                 return d.name;
             });
-
         var link = linkG.data(sankey.links)
             .enter()
             .append("g")
+        // .style('transform', (d, i) => `translate(0px,${i * 4}px)`)
 
         link.append("path")
             .attr("class", "sankey-link")
             .attr("d", function (link) {
                 return link.path;
             })
+
             .style("stroke-width", function (d) {
                 return Math.max(1, d.width);
             })
-            .style("opacity", 0.7)
-            .style("stroke", function (link, i) {
-                return link.circular ? "red" : "black"
+            .style("opacity", 0.2)
+            .style("stroke", (d, i) => {
+                return getPartyColor(d.source.name) ?? '#848eff';
+            })
+            .on('mouseover', function (e) {
+                d3.select(this).transition().style('opacity', 0.8)
+            })
+            .on('mouseout', function (e) {
+                d3.select(this).transition().style('opacity', 0.2)
             })
 
         link.append("title")
             .text(function (d) {
-                return d.source.name + " → " + d.target.name;
+                return d.description;
             });
-        container.append(svg.node());
+        container.append(svg.node())
     })
     // console.log(data, nodes)
-    // Highcharts.chart('uec-accusations', {
-    //     chart: {
-    //         height: '800px',
-    //         backgroundColor: '#EBFFE0',
-    //     },
-    //     title: {
-    //         text: 'Complaint to UEC'
-    //     },
-    //     accessibility: {
-    //         point: {
-    //             valueDescriptionFormat: '{index}. {point.from} to {point.to}, {point.weight}. '
-    //         }
-    //     },
-    //     plotOptions: {
-    //         series: {
-    //             dataLabels: {
-    //                 enabled: true,
-    //                 // x: -10
-    //                 // textPath: {enabled: false}
-    //             },
-    //             stickyTracking: false
-    //         }
-    //     },
-    //     tooltip: {
-    //         useHTML: true,
-    //     },
-    //     series: [{
-    //         keys: ['from', 'to', 'weight', 'color'],
-    //         name: '',
-    //         type: 'sankey',
-    //         data: data.sort((a, b) => b.weight > a.weight ? 1 : -1),
-    //         nodes: nodes,
-    //     }],
-    //     credits: {
-    //         enabled: false,
-    //     }
-    //
-    // });
+
     // })
 })
 </script>

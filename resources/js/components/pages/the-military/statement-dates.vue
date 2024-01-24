@@ -1,5 +1,5 @@
 <template>
-    <div class="w-7/12 p-10 h-screen flex items-center">
+    <div class="w-full pt-10 md:!w-7/12 px-6 md:!px-10 flex items-center" :style="{height: height + 'px'}">
         <Calendar
             v-if="!data.loading"
             :attributes="data.attributes"
@@ -11,25 +11,6 @@
                 <div class="px-2">
                     <div class="text-xs relative text-gray-50 font-semibold text-center">
                         <p>{{ dayTitle }}</p>
-                        <svg class="top-0 absolute right-0 w-5 h-5 z-10 text-gray-100 fill-current"
-                             title="Click the text to view detail"
-                             viewBox="0 0 256 256"
-                             xmlns="http://www.w3.org/2000/svg"
-                             @mouseout="reactiveData.showInfo = false"
-                             @mouseover="reactiveData.showInfo = true"
-                        >
-                            <rect fill="none" height="256" width="256"/>
-                            <circle cx="128" cy="128" r="96" stroke="#000" stroke-linecap="round"
-                                    stroke-linejoin="round" stroke-width="8"/>
-                            <polyline points="120 120 128 120 128 176 136 176" stroke="#000" stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="12"/>
-                            <circle cx="128" cy="84" fill="#000" r="12"/>
-                        </svg>
-                        <p v-show="reactiveData.showInfo"
-                           class="absolute text-gray-800 top-5 right-0 p-2 bg-white text-sm">
-                            Click the text to view detail
-                        </p>
                     </div>
                     <ul class="mt-1 mb-1">
                         <li
@@ -54,10 +35,7 @@ import {useScreens} from 'vue-screen-utils';
 
 const {mapCurrent} = useScreens({xs: '0px', sm: '640px', md: '768px', lg: '1024px'});
 const columns = mapCurrent({lg: 2}, 1);
-
-const reactiveData = reactive({
-    showInfo: false,
-})
+const height = window.innerHeight;
 
 const showDetail = (e) => {
     console.log(e)
@@ -126,6 +104,6 @@ onMounted(() => {
 
 <style scoped>
 :deep(.vc-container) {
-    background: #EE7E3333;
+    background: white;
 }
 </style>

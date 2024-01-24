@@ -1,7 +1,8 @@
 <template>
 
     <div id="the-military"
-         class="w-full bg-[#FEF5EC] flex-col flex items-center py-2 relative">
+         :style="{background: headers[4].primaryColor}"
+         class="w-full flex-col flex items-center py-2 relative">
         <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
             <h1 class="text-xl md:text-3xl font-bold">The Military</h1>
         </div>
@@ -18,7 +19,7 @@ import StatementDates from "./statement-dates.vue";
 import FourStatements from "./four-statements.vue";
 import AnimeScrollTrigger from 'anime-scrolltrigger'
 import MilitaryIntro from "./military-intro.vue";
-import route from "../../../api/route.js";
+import route, {headers} from "../../../api/route.js";
 
 const props = defineProps([]);
 

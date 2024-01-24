@@ -1,6 +1,6 @@
 <template>
-    <div id="prominent-events" class="relative bg-[#F1FFF0] w-full flex items-center flex-col"
-         style="margin-top: 10px;">
+    <div :style="{background: headers[2].primaryColor}" id="prominent-events"
+         class="relative w-full flex items-center flex-col">
         <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
             <h1 class="text-xl md:text-3xl font-bold">Prominent Events</h1>
         </div>
@@ -29,7 +29,7 @@ import {reactive, onMounted} from "vue";
 import ElectionIncidents from "./election-incidents.vue";
 import ComplaintEvents from "./complaint-events.vue";
 import AnimeScrollTrigger from "anime-scrolltrigger";
-import route from "../../../api/route.js";
+import route, {headers} from "../../../api/route.js";
 
 const props = defineProps([]);
 

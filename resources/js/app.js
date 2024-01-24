@@ -7,12 +7,10 @@ import {createApp, h, defineAsyncComponent, defineComponent} from 'vue'
 import {createInertiaApp} from '@inertiajs/vue3';
 import {Toaster} from 'js-utils';
 import {DatePicker} from "v-calendar";
-import Highcharts from 'highcharts'
 import Home from "./components/pages/home.vue";
 import Explore from "./components/pages/explore.vue";
 import Story from "./components/pages/story.vue";
 
-window.Highcharts = Highcharts;
 
 createInertiaApp({
     resolve: name => {

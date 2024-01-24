@@ -19,6 +19,7 @@ import protestSvg from "../../../assets/protest-svg.js";
 import voteSvg from "../../../assets/vote-svg.js";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import anime from "animejs";
+import {headers} from "../../../api/route.js";
 
 const height = window.innerHeight;
 const props = defineProps([]);
@@ -50,7 +51,7 @@ onMounted(() => {
         }
     }, {
         targets: '#beginning-of-the-end',
-        background: '#111827',
+        background: headers[6].primaryColor,
         duration: 800,
         easing: 'easeInOutQuart',
         scrollTrigger: {

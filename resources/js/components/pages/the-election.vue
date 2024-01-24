@@ -47,11 +47,14 @@
             </div>
             <div class="w-11/12 md:!w-1/2 flex flex-col z-[1002]">
                 <div class="trigger mb-[90%] md:!mb-[50%] w-full rounded-lg h-[100vh]"></div>
-                <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh]"></div>
-                <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh] relative">
+                <div
+                    class="trigger shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh]"></div>
+                <div
+                    class="trigger shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh] relative">
 
                 </div>
-                <div class="trigger w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh]"></div>
+                <div
+                    class="trigger shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh]"></div>
             </div>
         </div>
         <div id="the-election-then-section" class="w-screen bg-[#ff9ccd] flex items-center justify-center"
@@ -69,6 +72,7 @@ import AnimeScrollTrigger from "anime-scrolltrigger";
 import route, {headers} from "../../api/route.js";
 import anime from 'animejs';
 import {placeElementRelativeToScreen} from "../../api/helpers.js";
+import settings from "../../api/settings.js";
 
 let results = {}, zoomIntoRegion, path, resetZoom, g, g1, amyoThaFeatures, pyiThuFeatures, currentRegion;
 
@@ -320,11 +324,12 @@ const drawSubregions = (features) => {
 
 onMounted(() => {
     setTimeout(() => {
-        const padding = 20;
+        const padding = 60;
         const topOffset = 24;
-        const mapHeight = height - document.querySelector('#the-election').children[0].getBoundingClientRect().bottom - topOffset - padding;
+        const mapHeight = height - document.querySelector('#the-election').children[0].getBoundingClientRect().height - topOffset - padding;
         const mapContainer = document.getElementById('map-container');
         mapContainer.style.height = mapHeight + 'px'
+        console.log(mapHeight, document.querySelector('#the-election').children[0].getBoundingClientRect().bottom)
         const mapContainerRect = mapContainer.getBoundingClientRect();
         const mapTranslateXWidth = (window.innerWidth * 0.5) - mapContainerRect.left - (0.5 * mapContainerRect.width);
         anime({
@@ -424,7 +429,7 @@ onMounted(() => {
             },
         ]
         new AnimeScrollTrigger(document.querySelector('main'), triggers);
-    }, 2000)
+    }, settings.animationDuration)
 })
 
 </script>

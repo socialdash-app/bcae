@@ -22,7 +22,7 @@
         </div>
         <div class="flex flex-col relative w-full items-center" id="disinformation-trigger">
             <div
-                class="disinformation-content-box z-10 my-64 w-full md:!w-6/12 text-gray-900 p-6 md:p-12 flex flex-col items-center rounded bg-[#65958A]"
+                class="disinformation-content-box z-10 my-64 w-full md:!w-6/12 text-gray-900 p-6 md:p-12 flex flex-col items-center rounded bg-white shadow-xl"
                 v-for="(i,index) in [1,2,3,4,5]">
                 <h1 class="font-semibold text-2xl mb-6"> Hey {{ i }}</h1>
                 <p class="tracking-wider leading-relaxed text-md">
@@ -45,15 +45,6 @@
         <div id="disinformation-detail-viewer"
              class="fixed -translate-x-full bg-white gap-y-4 overflow-y-auto flex flex-col py-8 px-6 shadow-2xl left-0 top-0 z-[1000] border border-gray-300 w-[80vw] md:!w-[40vw] 2xl:!w-[30vw]"
              :style="{height: height+'px'}">
-            <!--            <button @click="toggleDetailViewerVisibility" class="outline-none self-end">-->
-            <!--                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"-->
-            <!--                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"-->
-            <!--                     class="lucide w-8 h-8 lucide-x-circle">-->
-            <!--                    <circle cx="12" cy="12" r="10"/>-->
-            <!--                    <path d="m15 9-6 6"/>-->
-            <!--                    <path d="m9 9 6 6"/>-->
-            <!--                </svg>-->
-            <!--            </button>-->
             <div class="flex items-center w-full gap-x-2">
                 <h1 class="font-semibold w-8/12 truncate overflow-hidden text-xl">{{ data.username ?? data.id }}</h1>
                 <span class="text-sm px-2 py-1 text-white rounded"

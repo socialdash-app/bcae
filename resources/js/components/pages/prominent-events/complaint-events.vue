@@ -7,7 +7,7 @@
                  v-for="(complaint, index) in complaints"
                  style="will-change: transform;height: 400px;"
                  :id="`complaint-${index}`"
-                 class="complaint overflow-y-auto cursor-pointer absolute border bg-green-300 rounded p-4 md:!p-10 w-11/12 md:!w-6/12"
+                 class="complaint overflow-y-auto cursor-pointer absolute border bg-[#BEF4B7] rounded p-4 md:!p-10 w-11/12 md:!w-6/12"
                  :style="{transform: `translate3d(${ index % 2 === 0 ? 400: -400}px,${index * 800}px,0)`}">
                 <h1 class="font-semibold text-xl md:text-2xl">{{ complaint.title }}</h1>
                 <p class="mt-3 md:mt-6">{{

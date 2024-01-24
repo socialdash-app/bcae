@@ -94,19 +94,8 @@ const data = [{
 }]
 
 onMounted(() => {
-    // translate
-    let duration = 1500;
     let animations = [];
     for (let i = 0; i < data.length; i++) {
-        // let animation = {
-        //     titles: {
-        //         translateY: [],
-        //     },
-        //     posts: {
-        //         translateX: [],
-        //         translateY: [],
-        //     }
-        // };
         let datum = data[i];
         let summaryId = `summary-${i}`
         animations.push({
@@ -121,15 +110,7 @@ onMounted(() => {
                 lerp: true,
             },
         })
-        // articles.forEach((article, index) => {
-        //     animation.titles.translateY.push(titleTranslateY[Math.max(index + startIndex - i, 0)]);
-        //     animation.posts.translateY.push(postTranslateY[Math.max(index + startIndex - i, 0)])
-        //     animation.posts.translateX.push(postTranslateX[Math.max(index + startIndex - i, 0)])
-        // })
-        // animations.push(animation)
     }
-    let currentIndex = 0;
-    let timeout = null;
     setTimeout(() => {
         new AnimeScrollTrigger(document.querySelector('main'), animations)
     }, 2000)

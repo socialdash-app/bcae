@@ -1,14 +1,15 @@
 <template>
-    <div style="height: 200vh;" id="military-intro" class="w-10/12 relative flex flex-col items-center">
-        <div id="military-intro-pinner"
-             class="relative h-[50vh] flex w-8/12 flex-col justify-center items-center">
-            <h1 style="transform: translateY(200px)" class="opacity-0 text-7xl military-intro-title font-semibold">
+    <div :style="{height: height * 2 + 'px'}" id="military-intro" class="w-full relative flex flex-col items-center">
+        <div :style="{height: height + 'px'}"
+             class="sticky top-16 md:!top-0 flex w-11/12 md:!w-8/12 flex-col justify-center items-center">
+            <h1 style="transform: translateY(200px)"
+                class="opacity-0 text-4xl md:text-7xl military-intro-title font-semibold">
                 Military’s
                 Interference
                 in
                 the election</h1>
             <p style="transform: translateY(200px)"
-               class="w-full mt-24 tracking-wider opacity-0  military-intro-content leading-relaxed">
+               class="w-full mt-12 md:!mt-24 tracking-wider opacity-0 military-intro-content leading-relaxed">
                 Lorem ipsum dolor sit amet consectetur. Nulla eget massa etiam odio faucibus hac sed cursus faucibus.
                 Volutpat praesent tempus placerat vitae. Proin fringilla non dignissim est mi risus vitae. Duis neque
                 eget dui vel. Aliquet adipiscing sapien nulla vel faucibus neque risus arcu. Non et eu non id.
@@ -22,8 +23,11 @@
 <script setup>
 import {reactive, onMounted} from "vue";
 import AnimeScrollTrigger from 'anime-scrolltrigger';
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
+
+const height = window.innerHeight;
 
 const data = reactive({})
 
@@ -37,7 +41,7 @@ onMounted(() => {
                 trigger: '#military-intro',
                 start: 'top top',
                 end: 'center center',
-                smooth: true,
+                // smooth: true,
                 lerp: true,
             }
         }, {
@@ -46,20 +50,13 @@ onMounted(() => {
             opacity: 1,
             scrollTrigger: {
                 trigger: '#military-intro',
-                start: 'center center',
-                end: 'bottom 90%',
-                smooth: true,
+                start: '20% top',
+                end: 'bottom bottom',
+                // smooth: true,
                 lerp: true,
             }
-        }, {
-            scrollTrigger: {
-                trigger: '#military-intro',
-                start: 'top top',
-                end: 'bottom bottom',
-                pin: '#military-intro-pinner',
-            }
         }])
-    }, 2000)
+    }, settings.animationDuration)
 })
 </script>
 

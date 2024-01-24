@@ -83,7 +83,7 @@ const init = () => {
             .enter()
             .append('path')
             .attr('d', path)
-            .style("fill", "#e3e3e3")
+            .style("fill", "#ffffff")
             .style("stroke-width", "1")
             .style("stroke", "#313131");
 

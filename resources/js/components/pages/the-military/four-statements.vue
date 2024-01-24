@@ -1,18 +1,20 @@
 <template>
     <div class="relative w-full flex items-center flex-col"
-         :style="{height: `${fourStatements.length*400}px`}" id="four-statements-trigger">
+         :style="{height: `${height * fourStatements.length}px`}" id="four-statements-trigger">
         <!--            <div id="pin"-->
         <!--                 class="w-[60vw] top-0 transform gap-y-36 flex h-screen justify-center absolute items-center flex-col">-->
         <!--                -->
         <!--            </div>-->
-        <div class="flex flex-col mt-[10vh] w-full items-center" id="four-statements-pinner">
+        <div :style="{height: height + 'px'}" class="flex flex-col sticky top-0 justify-center w-full items-center">
             <div v-for="(statement,index) in fourStatements"
-                 :style="{opacity: index === 0 ? 1: 0}"
-                 class="four-statement flex flex-col p-10 bg-[#AAE998] text-gray-800 border border-gray-600 w-6/12 gap-y-8 h-[600px] absolute rounded-2xl items-center">
+                 :style="{opacity: index === 0 ? 1: 0, height : height * 0.7 + 'px'}"
+                 class="four-statement flex flex-col p-4 md:!p-10 bg-[#AAE998] text-gray-800 border border-gray-600 w-11/12  md:!w-6/12 gap-y-4 md:!gap-y-8 absolute rounded-2xl items-center">
                 <!-- <div class="card w-full h-full"></div>-->
                 <h1 class="text-2xl font-bold">{{ statement.title }}</h1>
                 <h2 class="text-lg font-semibold">{{ statement.subtitle }}</h2>
-                <div class="h-full">{{ truncate(statement.description, 1000) }}</div>
+                <div class="h-[70%] overflow-hidden text-ellipsis">
+                    {{ truncate(statement.description, width > 768 ? 1000 : 600) }}
+                </div>
                 <button class="px-6 self-end py-3 rounded bg-[#EE7E33] text-white">Read More</button>
             </div>
         </div>
@@ -21,11 +23,16 @@
 
 <script setup>
 import truncate from "../../../api/truncate.js";
-import {onMounted, reactive} from "vue";
+import {onMounted} from "vue";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import {fourStatements} from "../beginning-of-the-end/data.js";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
+
+const height = window.innerHeight;
+
+const width = window.innerWidth;
 
 let init = () => {
     let trigger = document.getElementById('four-statements-trigger');
@@ -34,13 +41,14 @@ let init = () => {
 
     let transitionDuration = 1000;
 
+    let transformMultiplier = width > 768 ? 20 : 10;
+
+    let transformValues = [];
+
     cards.forEach((card, index) => {
         card.style.transform = `translateY(${index * card.getBoundingClientRect().height + 'px'})`;
+        transformValues.push((index + 1) * transformMultiplier)
     })
-
-    let transformYValues = [0, 20, 40, 60];
-
-    let transformXValues = [0, 20, 40, 60];
 
     new AnimeScrollTrigger(document.querySelector('main'), [{
         targets: cards,
@@ -58,7 +66,7 @@ let init = () => {
         }, {
             value: (_, index) => {
                 // console.log(index, val)
-                return transformYValues[cards.length - 1 - index];
+                return transformValues[cards.length - 1 - index];
             },
             duration: (_, index) => Math.max(transitionDuration, (cards.length - index) * transitionDuration),
         }],
@@ -67,26 +75,21 @@ let init = () => {
             delay: (_, index) => index * transitionDuration,
             duration: (_, index) => transitionDuration,
         }, {
-            value: (_, index) => {
-                let val = transformXValues[cards.length - 1 - index];
-                return val;
-            },
+            value: (_, index) => transformValues[cards.length - 1 - index],
             duration: (_, index) => Math.max(transitionDuration, (cards.length - index) * transitionDuration),
         }],
         scrollTrigger: {
-            smooth: true,
             trigger: trigger,
-            pin: '#four-statements-pinner',
             lerp: true,
             start: 'top top',
-            end: 'bottom center',
+            end: 'bottom bottom',
         },
     }])
 }
 onMounted(() => {
     setTimeout(() => {
         init();
-    }, 2000)
+    }, settings.animationDuration)
 })
 </script>
 

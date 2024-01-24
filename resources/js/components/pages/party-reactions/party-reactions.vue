@@ -1,14 +1,15 @@
 <template>
-    <div id="party-actions"
-         class="w-full flex-col flex items-center py-2 bg-[#EBFFE0] relative">
+    <div id="party-reactions"
+         :style="{background: headers[3].primaryColor}"
+         class="w-full flex-col flex items-center py-2 relative">
         <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
             <h1 class="text-xl md:text-3xl font-bold">Party Reactions</h1>
         </div>
-        <!--        <party-accusations-facebook-posts/>-->
-        <!--        <media-facebook-posts/>-->
-        <!--        <youtube-video/>-->
+        <party-accusations-facebook-posts/>
+        <media-facebook-posts/>
+        <youtube-video/>
         <uec-accusation/>
-        <!--        <party-signatures/>-->
+        <party-signatures/>
     </div>
 </template>
 
@@ -19,7 +20,7 @@ import YoutubeVideo from "./youtube-video.vue";
 import UecAccusation from "./uec-accusation.vue";
 import PartyAccusationsFacebookPosts from "./party-accusations-facebook-posts.vue";
 import AnimeScrollTrigger from "anime-scrolltrigger";
-import route from "../../../api/route.js";
+import route, {headers} from "../../../api/route.js";
 import PartySignatures from "./party-signatures.vue";
 
 const props = defineProps([]);
@@ -38,11 +39,9 @@ onMounted(() => {
                 lerp: true,
                 onEnter: () => {
                     route.changeSectionHeader(3)
-                    console.log('enter prominent')
                 },
                 onEnterBack: () => {
                     route.changeSectionHeader(3)
-                    console.log('enter back prominent');
                 },
             }
         }])
