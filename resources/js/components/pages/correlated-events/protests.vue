@@ -34,6 +34,7 @@ import * as d3 from "d3";
 import {PopOver} from "vue-common-components";
 import AnimeScrollTrigger from 'anime-scrolltrigger'
 import anime from "animejs";
+import settings from "../../../api/settings.js";
 
 const height = window.innerHeight;
 const props = defineProps([]);
@@ -250,7 +251,7 @@ onMounted(() => {
         setTimeout(() => {
             init();
             listenTriggers()
-        }, 2000)
+        }, settings.animationDuration)
     })
 })
 </script>

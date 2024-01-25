@@ -43,6 +43,7 @@
 import {reactive, onMounted} from "vue";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import anime from "animejs";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
@@ -113,7 +114,7 @@ onMounted(() => {
     }
     setTimeout(() => {
         new AnimeScrollTrigger(document.querySelector('main'), animations)
-    }, 2000)
+    }, settings.animationDuration)
 })
 </script>
 

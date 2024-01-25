@@ -20,6 +20,7 @@ import FourStatements from "./four-statements.vue";
 import AnimeScrollTrigger from 'anime-scrolltrigger'
 import MilitaryIntro from "./military-intro.vue";
 import route, {headers} from "../../../api/route.js";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
@@ -43,7 +44,7 @@ onMounted(() => {
                 },
             }
         }])
-    }, 2000)
+    }, settings.animationDuration)
 
 })
 </script>

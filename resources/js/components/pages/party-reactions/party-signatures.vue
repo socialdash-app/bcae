@@ -64,6 +64,7 @@ import {reactive, onMounted, watch} from "vue";
 import AnimeScrollTrigger from 'anime-scrolltrigger';
 import governmentAccusations from "../../../data/government-accusations.js";
 import anime from "animejs";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
@@ -107,7 +108,7 @@ const init = () => {
 onMounted(() => {
     setTimeout(() => {
         init();
-    }, 2000)
+    }, settings.animationDuration)
 })
 </script>
 

@@ -22,6 +22,7 @@ import PartyAccusationsFacebookPosts from "./party-accusations-facebook-posts.vu
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import route, {headers} from "../../../api/route.js";
 import PartySignatures from "./party-signatures.vue";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
@@ -45,7 +46,7 @@ onMounted(() => {
                 },
             }
         }])
-    }, 2000);
+    }, settings.animationDuration);
 })
 </script>
 

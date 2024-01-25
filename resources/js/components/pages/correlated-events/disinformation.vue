@@ -109,6 +109,7 @@ import {PopOver} from "vue-common-components";
 import AnimeScrollTrigger from 'anime-scrolltrigger';
 import anime from "animejs";
 import {onClickOutside} from "js-utils";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
@@ -366,9 +367,9 @@ onMounted(() => {
         },
     })
 
-    // setTimeout(() => {
-    new AnimeScrollTrigger(main, animations)
-    // }, 2000)
+    setTimeout(() => {
+        new AnimeScrollTrigger(main, animations)
+    }, settings.animationDuration)
 })
 </script>
 

@@ -15,6 +15,7 @@ import ElectionIncidents from "./election-incidents.vue";
 import ComplaintEvents from "./complaint-events.vue";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import route, {headers} from "../../../api/route.js";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
@@ -38,7 +39,7 @@ onMounted(() => {
                 },
             }
         }])
-    }, 2000)
+    }, settings.animationDuration)
 })
 </script>
 

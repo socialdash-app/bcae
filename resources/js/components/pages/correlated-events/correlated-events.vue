@@ -16,6 +16,7 @@ import Protests from "./protests.vue";
 import Disinformation from "./disinformation.vue";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import route, {headers} from "../../../api/route.js";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
@@ -41,7 +42,7 @@ onMounted(() => {
                 },
             }
         }])
-    }, 2000);
+    }, settings.animationDuration);
 })
 </script>
 
