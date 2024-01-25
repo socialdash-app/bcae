@@ -4,7 +4,7 @@ export default {
     data: reactive({
         locale: 'en',
     }),
-    animationDuration: 0,
+    animationDuration: 2000,
     changeLocale: function (locale) {
         this.data.locale = locale;
     }
