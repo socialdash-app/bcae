@@ -1,10 +1,11 @@
 <template>
-    <div id="navigation"
+    <div id="explore"
          :style="{height: height + 'px'}"
-         class="flex w-screen relative overflow-y-auto overscroll-none overflow-x-hidden bg-[#BC6B60] items-center justify-start flex-col">
-        <div id="navigation-container"
+         class="flex w-screen relative select-none text-white overflow-y-auto overscroll-none overflow-x-hidden bg-[#660000] items-center justify-start flex-col">
+        <h1 class="fixed" id="debug"></h1>
+        <div id="explore-container"
              :style="{height: height + 'px'}"
-             class="w-screen sticky top-0 overflow-hidden flex flex-col items-center shrink-0">
+             class="w-screen cursor-grab sticky top-0 overflow-hidden flex flex-col items-center shrink-0">
             <div id="description-container" class="w-11/12 sm:w-10/12 2xl:w-8/12 h-[50vh] flex overflow-hidden">
             </div>
             <ul id="boxes"
@@ -23,11 +24,21 @@
 </template>
 
 <script setup>
-import {reactive, onMounted} from "vue";
+import {reactive, onMounted, onActivated, onDeactivated} from "vue";
 import anime from "animejs";
 import {DragGesture} from "@use-gesture/vanilla";
 import AnimeScrollTrigger from 'anime-scrolltrigger'
 import route from "../../api/route.js";
+import settings from "../../api/settings.js";
+import {
+    beginningOfTheEnd,
+    chronicle,
+    correlatedActions,
+    partyActions,
+    prominentEvents,
+    theElection,
+    theMilitary
+} from "../../assets/icons.js";
 
 const props = defineProps([]);
 
@@ -37,7 +48,7 @@ let data = [
     {
         description:
             "Going back to Home",
-        box: "box1",
+        card: "assets/cards/home.svg",
         icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 lucide lucide-album"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><polyline points="11 3 11 11 14 8 17 11 17 3"/></svg>',
         onClick: () => {
             route.changeTo('home')
@@ -46,62 +57,67 @@ let data = [
     {
         description:
             "Explore the stricken history of military overthrowing people’s power in Myanmar",
-        box: "box2",
+        card: "assets/cards/chronicles.svg",
         onClick: () => {
-            route.changeTo('story')
+            route.changeTo('story', 'chronicles-trigger')
         },
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 lucide lucide-align-center-horizontal"><path d="M2 12h20"/><path d="M10 16v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"/><path d="M10 8V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v4"/><path d="M20 16v1a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-1"/><path d="M14 8V7c0-1.1.9-2 2-2h2a2 2 0 0 1 2 2v1"/></svg>'
+        icon: chronicle,
     },
     {
         description:
             "Explore the insights and results of 2020 election",
-        box: "box3",
+        card: "assets/cards/the_election.svg",
         onClick: () => {
-            route.changeTo('home')
+            route.changeTo('story', 'the-election')
         },
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 lucide lucide-ampersand"><path d="M17.5 12c0 4.4-3.6 8-8 8A4.5 4.5 0 0 1 5 15.5c0-6 8-4 8-8.5a3 3 0 1 0-6 0c0 3 2.5 8.5 12 13"/><path d="M16 12h3"/></svg>'
+        icon: theElection,
     },
     {
         description:
             "Explore incidents during election and back-and-forth letters among different entities",
-        box: "box4",
+        card: "assets/cards/prominent_events.svg",
         onClick: () => {
-            route.changeTo('home')
+            route.changeTo('story', 'prominent-events')
         },
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 lucide lucide-axe"><path d="m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9"/><path d="M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z"/></svg>'
+        icon: prominentEvents,
     },
     {
         description:
             "Explore how political parties respond to the dispute",
-        box: "box5",
+        card: "assets/cards/party_reactions.svg",
         onClick: () => {
-            route.changeTo('home')
+            route.changeTo('story', 'party-reactions')
+
         },
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 lucide lucide-box"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>'
+        icon: partyActions,
     },
     {
         description:
             "Explore how Military intervened the dispute",
-        box: "box6",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rabbit"><path d="M20 8.54V4a2 2 0 1 0-4 0v3"/><path d="M18 21h-8a4 4 0 0 1-4-4 7 7 0 0 1 7-7h.2L9.6 6.4a1.93 1.93 0 1 1 2.8-2.8L15.8 7h.2c3.3 0 6 2.7 6 6v1a2 2 0 0 1-2 2h-1c-1.7 0-3 1.3-3 3"/><path d="M7.61 12.53a3 3 0 1 0-1.6 4.3"/><path d="M13 16a3 3 0 0 1 2.24 5"/><path d="M18 12h.01"/></svg>'
+        card: "assets/cards/the_military.svg",
+        icon: theMilitary,
+        onClick: () => {
+            route.changeTo('story', 'the-military')
+
+        },
     },
     {
         description:
             "Explore the protests and the disinformation outspread",
-        box: "box7",
+        card: "assets/cards/correlated_events.svg",
         onClick: () => {
-            route.changeTo('home')
+            route.changeTo('story', 'correlated-events')
         },
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gitlab"><path d="m22 13.29-3.33-10a.42.42 0 0 0-.14-.18.38.38 0 0 0-.22-.11.39.39 0 0 0-.23.07.42.42 0 0 0-.14.18l-2.26 6.67H8.32L6.1 3.26a.42.42 0 0 0-.1-.18.38.38 0 0 0-.26-.08.39.39 0 0 0-.23.07.42.42 0 0 0-.14.18L2 13.29a.74.74 0 0 0 .27.83L12 21l9.69-6.88a.71.71 0 0 0 .31-.83Z"/></svg>'
+        icon: correlatedActions,
     },
     {
         description:
             "Explore the beginning of the end of people’s power and summary of BCAE",
-        box: "box8",
+        card: "assets/cards/beginning_of_the_end.svg",
         onClick: () => {
-            route.changeTo('home')
+            route.changeTo('story', 'beginning-of-the-end')
         },
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 lucide lucide-bus-front"><path d="M4 6 2 7"/><path d="M10 6h4"/><path d="m22 7-2-1"/><rect width="16" height="16" x="4" y="3" rx="2"/><path d="M4 11h16"/><path d="M8 15h.01"/><path d="M16 15h.01"/><path d="M6 19v2"/><path d="M18 21v-2"/></svg>'
+        icon: beginningOfTheEnd,
     },
 ];
 const init = () => {
@@ -111,7 +127,7 @@ const init = () => {
 
     let iconContainer = document.getElementById('icons');
 
-    let navigation = document.getElementById('navigation');
+    let explore = document.getElementById('explore');
 
     let height = (data.length * window.innerHeight) - window.innerHeight;
 
@@ -119,8 +135,9 @@ const init = () => {
     let boxes = [];
     let icons = [];
     let descriptions = [];
-    let boxHeight = window.innerHeight * 0.35;
-
+    let boxHeight = window.innerHeight * 0.4;
+    let ratio = 9 / 16;
+    let boxWidth = boxHeight * ratio;
     data.forEach((d) => {
         let description = document.createElement("div");
         description.className = "description text-xl sm:text-4xl font-bevietnampro font-bold text-center items-center justify-center  py-4   flex sm:items-center grow-0 sm:p-10 w-full shrink-0";
@@ -129,11 +146,11 @@ const init = () => {
         descriptions.push(description);
 
         let box = document.createElement("li");
-        box.className = "box list-none bg-gray-300 absolute cursor-pointer border-gray-400 border  p-6 flex justify-center";
+        box.className = "box list-none bg-gray-300 absolute cursor-pointer flex justify-center";
         box.style.touchAction = 'none'
         box.style.height = boxHeight + 'px';
-        box.style.width = boxHeight + 'px';
-        box.innerHTML = d.box;
+        box.style.width = boxWidth + 'px';
+        box.innerHTML = `<img src="${d.card}" alt="${d.card}" class="w-full object-cover h-full">`;
         ul.appendChild(box);
         boxes.push(box);
 
@@ -151,8 +168,7 @@ const init = () => {
     let currentRotation = 0;
     let deg = 360 / (boxes.length + 1);
     let isDragging = false;
-
-
+    let shouldTriggerScroll = true;
     let width = descriptionContainer.getBoundingClientRect().width * boxes.length;
 
     let update = function (angle) {
@@ -174,13 +190,36 @@ const init = () => {
                 .sort((a, b) => a.distance >= b.distance ? 1 : -1)[0];
             let index = currentBox.deg / deg;
             let progress = index / boxes.length;
+            shouldTriggerScroll = false;
+            currentRotation = currentBox.deg;
             anime({
                 targets: explore,
                 scrollTop: progress * height,
                 easing: 'easeOutQuart',
                 duration: 400,
+                complete: () => shouldTriggerScroll = true,
             })
-            currentRotation = currentBox.deg;
+            anime({
+                targets: descriptionContainer,
+                scrollLeft: (currentRotation / (360 - deg)) * width,
+                duration: 400,
+                easing: "easeOutQuart"
+            })
+            anime({
+                targets: ul,
+                rotateZ: -currentRotation,
+                duration: 400,
+                easing: "easeOutQuart",
+                // delay: 10
+            });
+            anime({
+                targets: iconContainer,
+                rotateZ: -currentRotation,
+                duration: 400,
+                easing: "easeOutQuart",
+                // delay: 10
+            });
+            container.style.cursor = 'grab'
         }, 800);
         anime({
             targets: descriptionContainer,
@@ -211,37 +250,59 @@ const init = () => {
             deg: rotate,
             box: box.innerText
         });
-        box.style.transform = `rotate(${rotate}deg) translateY(-${(window.innerHeight) * 0.95}px)`;
-        icons[i].style.transform = `rotate(${rotate}deg) translateY(-${(window.innerHeight) * 0.7}px)`;
+        box.style.transform = `rotateZ(${rotate}deg) translateY(-${(window.innerHeight) * 0.95}px)`;
+        icons[i].style.transform = `rotateZ(${rotate}deg) translateY(-${(window.innerHeight) * 0.7}px)`;
         box.addEventListener('click', (e) => {
-            if (isDragging) {
-                isDragging = false;
+            e.stopPropagation();
+            if (currentRotation === rotate) {
+                data[i].onClick();
                 return;
             }
-            data[i].onClick();
+            let index = rotate / deg;
+            let progress = index / boxes.length;
+            anime({
+                targets: explore,
+                scrollTop: progress * height,
+                easing: 'easeOutQuart',
+                duration: 400,
+            })
         })
     }, false);
 
-    new AnimeScrollTrigger(document.getElementById('navigation'), [{
+    new AnimeScrollTrigger(document.getElementById('explore'), [{
         scrollTrigger: {
             trigger: '#navigation-trigger',
             start: 'top top',
             end: 'bottom bottom',
             lerp: true,
             onUpdate: (_, progress) => {
-                update(progress * deg * data.length)
+                if (shouldTriggerScroll) {
+                    update(progress * deg * data.length)
+                }
             }
         }
     }])
 
-    //
-    ul.style.touchAction = 'none'
-    new DragGesture(ul, (state) => {
+    const mobileAndTabletCheck = function () {
+        let check = false;
+        (function (a) {
+            if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+        })(navigator.userAgent || navigator.vendor || window.opera);
+        return check;
+    };
+    let multiplier = mobileAndTabletCheck() ? 3 : 0.3;
+    let container = document.getElementById('explore-container')
+    container.style.touchAction = 'none';
+    new DragGesture(container, (state) => {
+        container.style.cursor = 'grabbing'
         isDragging = true;
-        update(currentRotation - (state.direction[0] < 0 ? -1 : 1) * 3)
+        update(currentRotation - (state.direction[0] <= 0 ? -1 : 1) * multiplier)
     }, {
-        threshold: 0.05,
-        axis: 'x'
+        threshold: 0.2,
+        axis: 'x',
+        pointer: {
+            touch: true,
+        }
     })
 }
 
@@ -249,17 +310,26 @@ onMounted(() => {
     // set timeout to wait animation to finish
     setTimeout(() => {
         init()
-    }, 1000)
+    }, settings.animationDuration)
+})
+
+onActivated(() => {
+    document.querySelector('.brand-icon').src = 'assets/logo_white.png';
+    document.querySelector('.brand-title').style.color = 'white';
+})
+onDeactivated(() => {
+    document.querySelector('.brand-icon').src = 'assets/logo.png';
+    document.querySelector('.brand-title').style.color = 'initial';
 })
 </script>
 
 <style scoped>
-#navigation {
+#explore {
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none; /* Firefox */
 }
 
-#navigation::-webkit-scrollbar {
+#explore::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
 }
 </style>

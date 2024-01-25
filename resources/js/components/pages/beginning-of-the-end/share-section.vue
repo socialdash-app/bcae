@@ -20,19 +20,19 @@
         <div class="py-16 border-b flex flex-col gap-y-6 items-center w-10/12">
             <h3 class="font-semibold text-xl">Want to see more stories like this?</h3>
             <p class="text-gray-300">Subscribe our Newsletter!</p>
-            <div class="flex items-center gap-x-4">
+            <div class="flex items-center gap-x-4 md:!flex-row flex-col">
                 <input type="email" placeholder="Enter your email address"
                        class="bg-gray-700 rounded focus:outline-none border border-transparent focus:border-[#E8544E] px-6 py-4"/>
-                <button class="bg-[#E8544E] px-6 py-4 rounded">Subscribe</button>
+                <button class="mt-4 w-full md:w-auto md:mt-0 bg-[#E8544E] px-6 py-4 rounded">Subscribe</button>
             </div>
         </div>
         <div class="py-16 flex flex-col gap-y-6 items-center w-10/12">
             <h3 class="font-semibold text-xl">Have ideas for new stories?</h3>
             <p class="text-gray-300">Reach out to us and let us touch your thoughts!</p>
-            <div class="flex items-center gap-x-4">
+            <div class="flex items-center gap-x-4 md:!flex-row flex-col">
                 <input type="email" placeholder="Enter your email address"
                        class="bg-gray-700 rounded focus:outline-none border border-transparent focus:border-[#E8544E] px-6 py-4"/>
-                <button class="bg-[#E8544E] px-6 py-4 rounded">Contact</button>
+                <button class="mt-4 w-full md:w-auto md:mt-0 bg-[#E8544E] px-6 py-4 rounded">Contact</button>
             </div>
         </div>
     </div>

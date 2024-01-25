@@ -9,6 +9,9 @@
             </svg>
             <div
                 class="flex flex-col absolute bottom-4 left-0 gap-y-4">
+                <div class="">
+                    <!--                    date range and unknown person-->
+                </div>
                 <div class="w-64 h-4 bg-gradient-to-r from-[#084CFB] to-[#F99500]"></div>
                 <div class="w-full flex justify-between text-sm font-medium text-gray-700">
                     <p>1 person</p>
@@ -22,8 +25,6 @@
             <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-white h-[40vh] relative">
 
             </div>
-            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-white h-[40vh]"></div>
-            <div class="mb-[55%] w-full border rounded bg-white h-[40vh]"></div>
         </div>
     </div>
 </template>
@@ -45,9 +46,9 @@ let protests = [];
 let protestPoints = null;
 let projection = null;
 let colors = null;
-let startDate = new Date('2020-11-01');
+let startDate = new Date('2020-11-10');
 let endDate = new Date('2021-01-30');
-let diffInDays = 15;
+let diffInDays = 5;
 let dateIntervals = (() => {
     let start = (new Date(startDate))
     start.setDate(startDate.getDate() - 1);

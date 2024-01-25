@@ -1,30 +1,34 @@
 <template>
-    <div class="w-7/12 py-10 h-screen relative flex-col flex items-center justify-center">
-        <h1 class="font-semibold text-2xl mb-4">Parties post election complaints on Facebook</h1>
-        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.</p>
-        <div id="party-accusations-facebook-posts" class="w-full md:px-0 px-2 flex h-full items-center justify-center">
+    <div class="w-full md:!w-7/12 py-10 gap-y-4 relative flex-col flex items-center justify-center">
+        <h1 class="px-4 md:px-0 font-semibold text-2xl mb-4">The dispute continues on social media
+        </h1>
+        <p class="px-4 md:px-0 text-gray-700">Many of the political parties that contested the election posted on their
+            Facebook pages about the arguments of fraudulence accusations during the election. USDP posted the highest
+            number of posts on this topic followed by NLD with mostly defending posts.
+        </p>
+        <div id="party-accusations-facebook-posts"
+             :style="{height: height + 'px'}"
+             class="w-full mt-4 md:px-0 px-2 flex items-center justify-center">
         </div>
-        <div :class="{'cursor-pointer': rdata.url}" @click="openUrl" id="party-accusations-tooltip" style="visibility: hidden; display: none; position: fixed"
-            class="border text-sm p-2 border-gray-600 w-96 bg-white rounded">
+        <div :class="{'cursor-pointer': rdata.url}" @click="openUrl" id="party-accusations-tooltip"
+             style="visibility: hidden; display: none; position: fixed"
+             class="border text-sm p-2 border-gray-600 w-96 bg-white rounded">
 
         </div>
     </div>
 </template>
 
-<script setup>  
-import { reactive, onMounted } from "vue";
+<script setup>
+import {reactive, onMounted} from "vue";
 import settings from "../../../api/settings.js";
-import { convertHex, placeElementRelativeToScreen } from "../../../api/helpers.js";
+import {convertHex, placeElementRelativeToScreen} from "../../../api/helpers.js";
 import getPartyColor from "../../../api/getPartyColor.js";
 import * as d3 from "d3";
 import truncate from "../../../api/truncate.js";
 
 const props = defineProps([]);
+
+const height = window.innerHeight;
 
 let isHovering = false;
 
@@ -32,9 +36,9 @@ const rdata = reactive({
     url: '',
 })
 
-const openUrl = ()=>{
-    if(!rdata.url)return;
-    window.open(rdata.url,'_blank')
+const openUrl = () => {
+    if (!rdata.url) return;
+    window.open(rdata.url, '_blank')
 }
 
 const init = (data) => {
@@ -75,11 +79,11 @@ const init = (data) => {
         }
     })
 
-    document.querySelector('main').addEventListener('scroll',()=>{
-        if(isHovering){
-              tooltip.style('display', 'none')
+    document.querySelector('main').addEventListener('scroll', () => {
+        if (isHovering) {
+            tooltip.style('display', 'none')
                 .style('visibility', 'hidden')
-            isHovering = false; 
+            isHovering = false;
         }
     })
     // use this information to add rectangles:
@@ -145,7 +149,7 @@ const init = (data) => {
             let height = d.y1 - d.y0;
             return height > 100 ? '15px' : '10px';
         })
-        .style("color", 'white')
+        .style("color", (d) => ['#ddeb17', '#fffc1f'].includes(d.data.color) ? 'black' : 'white')
         .text(function (d) {
             return d.data.name
         })
@@ -162,8 +166,8 @@ onMounted(() => {
             children: [],
         };
         Object.keys(data).forEach((party) => {
-            console.log(party)
             let color = getPartyColor(party);
+            console.log(party, color)
             let d = data[party].map((datum) => {
                 datum.value = 1;
                 datum.color = color;

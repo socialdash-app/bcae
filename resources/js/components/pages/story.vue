@@ -17,9 +17,9 @@
                       v-for="(header, index) in headers" v-html="header.icon"></span>
             </div>
         </div>
-        <chronicles/>
-        <the-election/>
-        <prominent-events/>
+        <!--        <chronicles/>-->
+        <!--        <the-election/>-->
+        <!--        <prominent-events/>-->
         <party-reactions/>
         <the-military/>
         <correlated-events/>

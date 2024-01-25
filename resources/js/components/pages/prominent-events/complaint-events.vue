@@ -3,21 +3,23 @@
          :style="{perspective: '1000px'}"
          class="w-full text-gray-900 relative flex flex-col items-center">
         <div id="complaint-events-container" class="w-full flex flex-col sticky top-0 pt-[10vh] items-center"
-             style="transform-style: preserve-3d;"
+             style="transform-style: preserve-3d; z-index: 100;"
              :style="{height: height + 'px'}">
-            <div @click="expandArticle(index)"
-                 v-for="(complaint, index) in data.complaints"
+            <div v-for="(complaint, index) in data.complaints"
+                 @click="expandArticle(index)"
                  style="will-change: transform;"
                  :id="`complaint-${index}`"
-                 class="complaint overflow-y-hidden cursor-pointer absolute border border-gray-600 bg-[#BEF4B7] rounded p-4 md:!p-10 "
+                 class="complaint cursor-pointer overflow-y-hidden absolute border border-gray-600 bg-[#BEF4B7] rounded p-4 md:!p-10 "
                  :style="{height: boxHeight + 'px',width: boxWidth + 'px',transform: `translateY(${(index + 1) * boxHeight }px) translateZ(100px)`}">
                 <h1 class="font-semibold text-lg md:text-2xl">{{ complaint.title }}</h1>
-                <p class="text-sm md:!text-base mt-3 md:mt-6">{{
+                <p :style="{height: boxHeight * 0.75 + 'px'}"
+                   class="text-sm overflow-hidden md:!text-base mt-3 md:mt-6">
+                    {{
                         truncate(complaint.description, 800)
                     }}</p>
             </div>
         </div>
-        <div class="shrink-0 w-full" :style="{height: `${data.complaints.length * boxHeight }px`}">
+        <div class="shrink-0 w-full" :style="{height: `${data.complaints.length * boxHeight }px`}" style="z-index: -10">
 
         </div>
     </div>
@@ -45,12 +47,14 @@ const data = reactive({
 })
 
 function revertArticle() {
+    alert('revert')
     if (isNaN(currentExpandedArticleIndex)) return;
     currentExpandedArticle.style.zIndex = 'auto'
     currentExpandedArticle.style.overflowY = 'hidden'
     document.getElementById('complaint-events-container').style.transformStyle = 'preserve-3d'
-
-    currentExpandedArticle.querySelector('p').innerText = truncate(data.complaints[currentExpandedArticleIndex].description, width > 768 ? 800 : 400);
+    let p = currentExpandedArticle.querySelector('p');
+    p.style.height = boxHeight * 0.75 + 'px';
+    p.innerText = truncate(data.complaints[currentExpandedArticleIndex].description, width > 768 ? 800 : 400);
     anime({
         targets: currentExpandedArticle,
         translateZ: () => {
@@ -71,28 +75,32 @@ function revertArticle() {
             currentExpandedArticleIndex = null;
         }
     })
+
 }
 
-const expandArticle = (index) => {
+function expandArticle(index) {
+    alert('click' + index)
     let article = document.getElementById(`complaint-${index}`);
     currentExpandedArticleIndex = index;
     article.style.zIndex = 1000;
-    // article.style.position = 'fixed';
-    article.querySelector('p').innerText = data.complaints[index].description;
+    let p = article.querySelector('p');
+    p.style.height = 'auto';
+    p.innerText = data.complaints[index].description;
     document.querySelector('main').style.overflowY = 'hidden';
-    document.getElementById('complaint-events-container').style.transformStyle = 'initial'
+    let container = document.getElementById('complaint-events-container');
+    container.style.transformStyle = 'initial'
     let matrix = new WebKitCSSMatrix(window.getComputedStyle(article).transform)
-    console.log(matrix)
     article.dataset.currentZOffset = matrix.m43.toString();
     article.dataset.currentYOffset = matrix.m42.toString();
+    console.log(article.getBoundingClientRect().top - matrix.m42)
     anime({
         targets: article,
         translateZ: 0,
         translateY: () => {
-            return height * 0.1;
+            return 0;
         },
         width: width * 0.9,
-        height: height + 'px',
+        height: height * 0.8 + 'px',
         borderRadius: 20,
         easing: 'easeOutQuart',
         duration: 500,
@@ -100,8 +108,6 @@ const expandArticle = (index) => {
         complete: () => {
             currentExpandedArticle = article;
             article.style.overflowY = 'auto';
-            console.log(article.getBoundingClientRect().top)
-            // onClickOutside(article, revertArticle)
         }
     })
 }

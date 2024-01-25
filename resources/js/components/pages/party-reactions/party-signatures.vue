@@ -1,6 +1,7 @@
 <template>
     <div id="party-signatures" class="w-11/12 py-12 lg:!w-9/12 2xl:!w-7/12 flex flex-col relative items-center">
-        <h1 class="font-bold text-2xl py-8">Accusations to Government from Parties</h1>
+        <h1 class="font-bold text-2xl py-8">19 parties sent an open letter to the president demanding action against UEC
+        </h1>
         <div class="flex flex-col relative w-full items-center">
             <div id="party-signatures-scroller"
                  class="grid h-80 overflow-hidden w-full mt-12 sticky grid-flow-col grid-rows-2 items-stretch top-24 gap-4">
@@ -16,13 +17,7 @@
             <div
                 class="flex bg-white flex-col my-[15vh] w-11/12 md:!w-10/12 z-10 rounded p-4 md:!p-20 border border-gray-300 shadow-xl"
                 v-for="_ in descriptions">
-                Lorem ipsum dolor sit amet consectetur. Nunc est felis interdum ultrices sociis feugiat pulvinar. Id
-                gravida
-                volutpat cursus vulputate in. Malesuada egestas velit ultrices ut. In sed vitae dictumst augue in
-                tristique
-                ut morbi dolor. Sed eu gravida sed et eget consequat in. Nisl viverra laoreet tempor volutpat morbi
-                gravida
-                posuere. Purus amet tincidunt a lorem aliquam.
+                {{ _ }}
             </div>
             <div class="h-[90vh] w-full shrink-0">
 
@@ -74,7 +69,7 @@ const data = reactive({
 
 const getNoOfColumns = Math.round(governmentAccusations.length * 0.5)
 
-const descriptions = [1, 2, 3, 4, 5, 6];
+const descriptions = ['On November 24, 2020, representatives from 19 parties jointly sent an open letter to the president of Myanmar, demanding action against the UEC. They accused the UEC of failing to fulfill its responsibilities and violating the constitutional provisions.', 'In the letter, they stated that the 2020 election was not free and fair due to the UEC’s alleged unlawful acts and irregularities during the electoral process, then called for the formation of an independent commission to investigate and expose the UEC’s illegalities and to restore the validity of the election.'];
 
 watch(() => data.progress, (n) => {
     const scroller = document.getElementById('party-signatures-scroller')

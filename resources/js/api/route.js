@@ -9,6 +9,7 @@ import {
     theElection,
     theMilitary
 } from "../assets/icons.js";
+import settings from "./settings.js";
 
 export const headers = [{
     name: 'Chronicles',
@@ -51,10 +52,21 @@ export const headers = [{
 
 export default {
     data: reactive({
-        component: "home",
+        component: "story",
     }),
-    changeTo: function (name) {
+    changeTo: function (name, sectionID) {
         this.data.component = name;
+        if (sectionID) {
+            setTimeout(() => {
+                let sectionRect = document.getElementById(sectionID).getBoundingClientRect();
+                anime({
+                    targets: document.querySelector('main'),
+                    scrollTop: sectionRect.top,
+                    easing: 'easeOutQuart',
+                    duration: 400,
+                })
+            }, settings.animationDuration)
+        }
     },
     scrollTo: function (section) {
     },

@@ -96,100 +96,14 @@ const articles = [{
 
 onMounted(() => {
     let container = document.getElementById('beginning-of-the-end-media-posts')
-    let duration = 1000;
     let articles = document.querySelectorAll('.beginning-of-the-end-media-post');
     let articleRect = articles[0].getBoundingClientRect();
     let articleTitles = document.querySelectorAll('.beginning-of-the-end-media-post-title');
-    let titleTranslateY = [0, boxHeight, boxHeight * 2, boxHeight * 3];
     let postTranslateX = [0, 0, translateDistance, translateDistance * 2];
     let postTranslateY = [-articleRect.height + container.getBoundingClientRect().top - articleRect.top - 96, 0, translateDistance, translateDistance * 2];
-    let animations = [];
-    let divider = Math.round(100 / articles.length);
-    let stopPercentages = [];
     let startIndex = 1;
-    // for (let i = 0; i < articles.length; i++) {
-    //     animations.push([
-    //         {
-    //             targets: articles,
-    //             duration: duration,
-    //             easing: 'easeOutQuart',
-    //             translateX: (el, index) => {
-    //                 return postTranslateX[Math.max(index + startIndex - i, 0)];
-    //             },
-    //             translateY: (el, index) => {
-    //                 return postTranslateY[Math.max(index + startIndex - i, 0)];
-    //             }
-    //         }, {
-    //             targets: articleTitles,
-    //             duration: duration,
-    //             easing: 'easeOutQuart',
-    //             opacity: (el, index) => {
-    //                 return index === i ? 1 : 0.4;
-    //             },
-    //             translateY: (el, index) => {
-    //                 return titleTranslateY[Math.max(index + startIndex - i, 0)]
-    //             }
-    //         }
-    //     ])
-    //     stopPercentages.push(i * divider);
-    // }
-
 
     setTimeout(() => {
-        // [{
-        //     scrollTrigger: {
-        //         trigger: document.querySelector('#beginning-of-the-end-media-posts'),
-        //         lerp: true,
-        //         onUpdate: (_, progress) => {
-        //             if (timeout) clearTimeout(timeout);
-        //             timeout = setTimeout(() => {
-        //                 let percentage = Math.round(progress * 100);
-        //                 let ps = stopPercentages.filter((p) => percentage > p);
-        //                 if (ps.length > 0) {
-        //                     let index = ps.length - 1;
-        //                     if (index !== currentIndex) {
-        //                         currentIndex = index;
-        //                         let animes = animations[currentIndex];
-        //                         anime(animes[0])
-        //                         anime(animes[1])
-        //                     }
-        //                 }
-        //             }, 10)
-        //
-        //         },
-        //         start: 'top top',
-        //         end: 'bottom bottom',
-        //     }
-        // }]
-        let currentIndex = -1;
-
-        let timeout = null;
-        console.log(postTranslateX, postTranslateY)
-        // new AnimeScrollTrigger(document.querySelector('main'), [{
-        //     scrollTrigger: {
-        //         trigger: document.querySelector('#beginning-of-the-end-media-posts'),
-        //         lerp: true,
-        //         onUpdate: (_, progress) => {
-        //             if (timeout) clearTimeout(timeout);
-        //             timeout = setTimeout(() => {
-        //                 let percentage = Math.round(progress * 100);
-        //                 let ps = stopPercentages.filter((p) => percentage > p);
-        //                 if (ps.length > 0) {
-        //                     let index = ps.length - 1;
-        //                     if (index !== currentIndex) {
-        //                         currentIndex = index;
-        //                         let animes = animations[currentIndex];
-        //                         anime(animes[0])
-        //                         anime(animes[1])
-        //                     }
-        //                 }
-        //             }, 10)
-        //
-        //         },
-        //         start: 'top top',
-        //         end: 'bottom bottom',
-        //     }
-        // }])
         new AnimeScrollTrigger(document.querySelector('main'), [{
             targets: articles,
             translateX: [{

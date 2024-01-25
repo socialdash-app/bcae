@@ -1,10 +1,11 @@
 <template>
-    <div :style="{height: height + 'px'}" class="w-7/12 relative flex items-center justify-center">
+    <div class="w-full flex-col md:!w-7/12 relative flex items-center justify-center">
         <!--        <span-->
         <!--            class="absolute top-1/2 -left-6 md:text-md text-sm md:-left-12 z-10 -rotate-90 transform -translate-y-full">Complaint</span>-->
         <!--        <span-->
         <!--            class="absolute top-1/2 -right-6 md:text-md text-sm md:-right-12 z-10 -rotate-90 transform -translate-y-full">Defendant</span>-->
-        <div :style="{height: height * 0.8 + 'px'}" id="uec-accusations"
+        <h1 class="px-4 md:px-0 font-semibold text-2xl mb-8">Parties and voters sent 287 objection letters to UEC</h1>
+        <div :style="{height: height + 'px'}" id="uec-accusations"
              class="w-full md:px-0 px-2 flex items-center justify-center">
         </div>
     </div>

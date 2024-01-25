@@ -3,13 +3,13 @@
          :style="{height: height + 'px'}"
          class="flex relative pt-20 md:pt-0 items-center bg-[#111827] overflow-hidden shrink-0 flex-col w-screen">
         <div id="home-container"
-             class="w-full sticky px-2 z-20 shrink-0 top-0 left-0 overflow-hidden md:tracking-wide h-full leading-relaxed text-gray-800 justify-between md:!justify-center flex md:!flex-row flex-col items-center">
+             class="w-full sticky z-20 shrink-0 top-0 left-0 overflow-hidden md:tracking-wide h-full leading-relaxed text-gray-800 justify-between md:!justify-center flex md:!flex-row flex-col items-center">
             <div id="home-text"
-                 class="w-full z-10  p-4 md:!p-0 md:!w-7/12 2xl:!w-6/12 relative h-5/6 md:h-4/6 flex flex-col overflow-hidden">
-                <div class="h-32 w-full shrink-0">
+                 class="w-full z-10 md:!w-7/12 2xl:!w-6/12 relative h-5/6 md:h-4/6 flex flex-col overflow-hidden">
+                <div class="md:h-32 w-full shrink-0">
 
                 </div>
-                <h1 class="sticky title -top-4 md:top-0 bg-[#111827] z-10 uppercase text-[#E8544E] font-bold text-4xl xl:text-7xl">
+                <h1 class="sticky p-4 title -top-4 md:top-0 bg-[#111827] z-10 uppercase text-[#E8544E] font-bold text-4xl xl:text-7xl">
                     <span class="home-title inline-block pr-2 md:pr-4 opacity-0 ">Before </span>
                     <span class="home-title inline-block pr-2 md:pr-4 opacity-0 ">the </span>
                     <span class="home-title inline-block pr-2 md:pr-4 opacity-0 ">coup </span> <br>
@@ -17,10 +17,11 @@
                     <span class="home-title inline-block pr-2 md:pr-4 opacity-0 ">the </span>
                     <span class="home-title inline-block pr-2 md:pr-4 opacity-0 ">election</span>
                 </h1>
-                <div class="h-4/6 w-full shrink-0"></div>
+                <div class="h-5/6 w-full shrink-0"></div>
                 <div
-                    class="flex flex-col backdrop-blur md:backdrop-blur-0  relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
-                    <p class="description w-full text-gray-600">On the 1st of February 2021 when Vice President Myint
+                    class="flex px-4 flex-col md:backdrop-blur-0  relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
+                    <p class="description w-full text-gray-600 backdrop-blur  md:backdrop-blur-0">On the 1st of February
+                        2021 when Vice President Myint
                         Swe became an Acting President and declared on state-owned media that the results of the
                         November 2020 general election were invalid, instating a one-year state of emergency, and
                         handing control of the executive, legislative, and judicial branches of government to the
@@ -37,8 +38,10 @@
                         prominent events, and other announcements both before the coup and after the election. BCAE
                         covered data from social media pages of officials and newsrooms.
                     </p>
-                    <h1 class="font-semibold text-xl mt-40 description">Interaction and navigation guide</h1>
-                    <p class="description w-full mt-4 text-gray-700">BCAE story is linear and you can scroll vertically
+                    <h1 class="font-semibold text-xl mt-40 description backdrop-blur md:backdrop-blur-0">Interaction
+                        and navigation guide</h1>
+                    <p class="description w-full mt-4 text-gray-700 backdrop-blur md:backdrop-blur-0">BCAE story is
+                        linear and you can scroll vertically
                         to walk through the story. You can jump to any section in carousel page which can be accessed by
                         clicking on the section icon in the top-right corner. You can also interact with different
                         elements in the page. A blinking (i) icon indicates that you can interact with an element, and
@@ -47,11 +50,12 @@
                         by clicking on them.</p>
                 </div>
             </div>
-            <div class="w-full md:!w-4/12 2xl:!w-5/12 h-1/6 md:h-full flex items-end justify-between md:justify-end ">
+            <div
+                class="w-full px-4 md:!px-0 relative md:!w-4/12 2xl:!w-5/12 h-1/6 md:h-full flex items-end justify-between md:justify-end ">
                 <div style="transform-origin: center bottom; transform: scale(1);" v-html="voteHandIllustration"
-                     class="h-[50vh] md:h-[80vh] home-illustration opacity-0"></div>
+                     class="h-[50vh] flex items-end md:h-[80vh] home-illustration opacity-0"></div>
                 <div style="transform-origin: center bottom; transform: scale(0.8);" v-html="threeFingerIllustration"
-                     class="h-[50vh] md:h-[80vh] home-illustration opacity-0"></div>
+                     class="h-[50vh] flex items-end md:h-[80vh] home-illustration opacity-0"></div>
             </div>
             <div id="scroll-down-indicator" class="fixed  bottom-8 opacity-0 flex flex-col items-center">
                 <h1 class="font-semibold md:    text-xl">Scroll</h1>
@@ -62,9 +66,10 @@
                     <path d="m19 12-7 7-7-7"/>
                 </svg>
             </div>
-            <div class="absolute bottom-0 z-20">
+            <div class="absolute bottom-0 z-20" style="perspective: 400px;">
                 <svg id="Ballot" class="h-[50vh] overflow-visible transform translate-y-full" width="687" height="846"
-                     viewBox="0 0 687 846" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     viewBox="0 0 687 846" fill="none" style="transform-style: preserve-3d"
+                     xmlns="http://www.w3.org/2000/svg">
                     <g id="Ballot initial 1">
                         <g id="Clip path group">
                             <mask id="mask0_11_2455" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0"
@@ -112,7 +117,7 @@
                         <g mask="url(#mask1_11_2455)">
                             <g id="story"
                                @click="clickCard('story')"
-                               style="cursor: pointer; -webkit-transform-origin: center; transform-origin: center; transform: rotateY(45deg) translateX(0px) translateY(380px)">
+                               style="cursor: pointer; -webkit-transform-origin: center; transform-origin: center; transform: skewY(5deg) translateX(0px) translateY(380px)">
                                 <g id="Layer-1_2">
                                     <path id="Vector_8" d="M276.5 58.5H445.5V251.5H276.5V58.5Z" fill="#FFF21F"
                                           stroke="black"/>
@@ -179,7 +184,7 @@
                             </g>
                             <g id="explore"
                                @click="clickCard('explore')"
-                               style="  cursor: pointer; -webkit-transform-origin: center; transform-origin: center; transform: rotateY(45deg) translateX(0px) translateY(400px)">
+                               style="  cursor: pointer; -webkit-transform-origin: center; transform-origin: center; transform: skewY(5deg) translateX(0px) translateY(400px)">
                                 <g id="Layer-1_3">
                                     <path id="Vector_23" d="M259.5 0.5H428.5V193.5H259.5V0.5Z" fill="#FFF21F"
                                           stroke="black"/>
@@ -388,7 +393,7 @@ const trigger = () => {
             }
         }, {
             targets: ['#explore', '#story'],
-            rotateY: [{
+            skewY: [{
                 value: 0,
                 delay: 1000,
             }],
@@ -492,7 +497,6 @@ onActivated(() => {
         top: currentScrollOffset,
         behavior: "smooth"
     });
-
 
 })
 </script>

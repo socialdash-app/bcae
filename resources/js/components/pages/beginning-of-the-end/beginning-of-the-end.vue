@@ -60,11 +60,9 @@ onMounted(() => {
                 lerp: true,
                 onEnter: () => {
                     route.changeSectionHeader(6)
-                    console.log('enter')
                 },
                 onEnterBack: () => {
                     route.changeSectionHeader(6)
-                    console.log('enter back');
                 },
             }
         },])

@@ -4,9 +4,17 @@
         <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
             <h1 class="text-xl md:text-3xl font-bold">Chronicles</h1>
         </div>
-        <!--        <div class="w-screen h-screen">-->
-
-        <!--        </div>-->
+        <div id="chronicles-introduction"
+             :style="{height: height - 100 + 'px'}"
+             class="text-center gap-y-10 w-11/12 md:!w-8/12 flex flex-col items-center justify-center">
+            <h1 class="text-4xl opacity-0 font-semibold">Golden land with a rich history of regime changes</h1>
+            <p class="text-gray-700 opacity-0 w-11/12">Since gaining independence in 1948, Myanmar has grappled with
+                chronic state
+                instability and
+                struggled to
+                shape a stable nation. Its aspirations for a taste of freedom have repeatedly been dashed by the
+                military, pushing the country closer to the brink of a failed state.</p>
+        </div>
         <div id="chronicles"
              class="w-11/12 pt-10 items-center md:!items-start md:!w-9/12 md:!flex-row flex-col flex justify-between">
             <div class="w-11/12 md:!w-5/12 h-[50vh] md:!h-[60vh] sticky top-24 left-0">
@@ -52,7 +60,7 @@ import {axisBottom, easeQuadOut, scaleUtc, select, utcYear} from 'd3';
 import settings from "../../api/settings.js";
 
 const props = defineProps([]);
-
+const height = window.innerHeight;
 const data = [{
     title: '1958',
     bg: 'bg-red-300',
@@ -117,7 +125,6 @@ const run = function (fn, intervalInMilliseconds = 1000, autostart = false, maxS
 
     interval = setInterval(_fn, intervalInMilliseconds)
 
-
     return {
         start: () => shouldRun = true,
         pause: () => shouldRun = false,
@@ -151,7 +158,6 @@ const initialiseIllustrationAnimations = () => {
     Section 5 - 2021: hide other sections and show section 5 and start animation.
      */
     const chronicleIllustrations = document.querySelectorAll('.chronicle-illustration')
-    // let duration = 1000;
     const handshakeFrame1 = document.getElementById(`${data[0].title}-0`)
     const handshakeFrame2 = document.getElementById(`${data[0].title}-1`);
     const walkFrame1 = document.getElementById(`${data[0].title}-2`)
@@ -187,12 +193,12 @@ const initialiseIllustrationAnimations = () => {
         })
     }
 
-
     const handshakeAnimation = run((step) => {
         handshakeFrame1.style.visibility = step % 2 === 0 ? 'hidden' : 'visible';
         handshakeFrame2.style.visibility = step % 2 === 0 ? 'visible' : 'hidden';
     }, 400)
 
+    handshakeAnimation.start();
 
     const protest1962Animation = run((step) => {
         protest1962Frame1.style.visibility = step % 2 === 0 ? 'hidden' : 'visible';
@@ -208,7 +214,6 @@ const initialiseIllustrationAnimations = () => {
     let walkFrames = [walkFrame1, walkFrame2, walkFrame3, walkFrame4];
     const walk = run((step) => {
         let currentFrame = step % walkFrames.length;
-        console.log(currentFrame)
         walkFrames.forEach((walkFrame, index) => {
             walkFrame.style.visibility = index === currentFrame ? 'visible' : 'hidden';
         })
@@ -228,7 +233,6 @@ const initialiseIllustrationAnimations = () => {
         })
     })
 
-
     return [{
         onEnter: () => {
             walk.pause();
@@ -243,7 +247,6 @@ const initialiseIllustrationAnimations = () => {
                     },
                     delay: 1000 / 3,
                 }],
-
             })
             hideVisibility([walkFrame1, walkFrame2, walkFrame3, walkFrame4, protest1962Frame1, protest1962Frame2])
             handshakeAnimation.start();
@@ -315,8 +318,14 @@ const initialiseIllustrationAnimations = () => {
     }]
 }
 
-
 const init = () => {
+    anime({
+        targets: ['#chronicles-introduction h1', '#chronicles-introduction p'],
+        delay: (_, i) => i * 400,
+        easing: 'easeOutQuart',
+        opacity: 1,
+        scale: [1.2, 1],
+    })
     const illustrationAnimations = initialiseIllustrationAnimations()
     let chroniclesContents = document.querySelectorAll('.chronicles-content');
     let animations = [{

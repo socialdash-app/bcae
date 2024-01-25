@@ -1,18 +1,22 @@
 <template>
     <div id="party-facebook-media-posts-trigger"
-         class="w-full relative text-white flex flex-col items-center" :style="{height: articles.length * 600 + 'px'}">
-        <div class="w-full flex flex-col overflow-hidden sticky top-0 items-center justify-center"
+         class="w-full relative flex flex-col items-center" :style="{height: articles.length * 600 + 'px'}">
+        <div class="w-full flex flex-col py-4 overflow-hidden sticky top-24 items-center"
              :style="{height: height + 'px'}"
              id="party-facebook-media-posts">
-            <a v-for="(article, index) in articles"
-               style="will-change: transform; "
-               :id="`party-facebook-media-post-${index}`"
-               :href="article.url"
-               target="_blank"
-               class="party-facebook-media-post text-[#240824] cursor-pointer absolute bg-white rounded p-10 w-10/12 md:!w-5/12"
-               :style="{opacity: index === 0 ? 1 : 0, zIndex: index}">
-                <h1 class="md:text-lg font-semibold">{{ article.title }}</h1>
-            </a>
+            <h1 class="px-4 md:px-0 font-semibold text-2xl mb-4">Some of their activities and arguments appeared on
+                local news </h1>
+            <div class="w-full absolute h-full flex items-center justify-center">
+                <a v-for="(article, index) in articles"
+                   style="will-change: transform; "
+                   :id="`party-facebook-media-post-${index}`"
+                   :href="article.url"
+                   target="_blank"
+                   class="party-facebook-media-post text-[#240824] cursor-pointer absolute bg-white rounded p-4 md:!p-10 w-10/12 md:!w-5/12"
+                   :style="{opacity: index === 0 ? 1 : 0, zIndex: index}">
+                    <h1 class="md:text-lg font-semibold">{{ article.title }}</h1>
+                </a>
+            </div>
         </div>
         <div :style="{height: articles.length * 600 + 'px'}"></div>
     </div>
@@ -69,7 +73,6 @@ onMounted(() => {
         if (index === 0) return;
         let x = randomTranslateValue(index % 2 ? 0 : -width / 2, index % 2 ? width / 2 : 0)
         let y = randomTranslateValue(index % 2 ? 0 : -height / 2, index % 2 ? height / 2 : 0)
-        console.log(x, y)
         post.style.transform = `translateX(${x}px) translateY(${y}px)`
     })
     let animations = [{

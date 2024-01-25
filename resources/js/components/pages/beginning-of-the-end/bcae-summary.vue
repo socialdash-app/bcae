@@ -1,16 +1,17 @@
 <template>
     <div id="summary" class="w-full flex items-center justify-center">
-        <div class="w-10/12 flex flex-col pt-24  items-center relative">
+        <div class="w-11/12 md:!w-10/12 flex flex-col pt-24  items-center relative">
             <h1 class="text-3xl text-white w-10/12 sticky top-24 self-start font-bold">Summary</h1>
-            <div :id="`summary-${index}`" class="w-full p-10 shrink-0 mt-10 relative" v-for="(datum,index) in data"
+            <div :id="`summary-${index}`" class="w-full md:!p-10 shrink-0 mt-10 relative"
+                 v-for="(datum,index) in data"
                  :style="{height: 2 * height + 'px'}">
                 <div class="sticky top-32 w-full py-10 flex flex-col">
-                    <div class="w-full flex justify-between">
+                    <div class="w-full flex justify-between md:flex-row flex-col">
                         <h1 :style="{transform: `translateY(${height}px)`}"
                             class="text-5xl summary-index transform inline-block text-white font-bold">
                             0{{ index + 1 }}
                         </h1>
-                        <div class="flex flex-col w-5/12 text-white">
+                        <div class="flex flex-col w-full md:!w-5/12 mt-4 md:mt-0 text-white">
                             <h1 :style="{transform: `translateY(${height}px)`}"
                                 class="text-5xl summary-title transform inline-block font-bold text-[#E8544E]">
                                 {{ datum.name }}
@@ -47,12 +48,8 @@ import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
-// const reactiveData = reactive({
-//     current
-// })
-
 const height = window.innerHeight;
-
+const width = window.innerWidth;
 const data = [{
     name: 'Election Results',
     description: 'Lorem ipsum dolor sit amet consectetur. Laoreet elementum viverra maecenas odio vitae nibh enim varius. Odio a tincidunt arcu malesuada lectus.',
@@ -97,16 +94,28 @@ const data = [{
 onMounted(() => {
     let animations = [];
     for (let i = 0; i < data.length; i++) {
-        let datum = data[i];
         let summaryId = `summary-${i}`
         animations.push({
-            targets: [`#${summaryId} .summary-index`, `#${summaryId} .summary-title`, `#${summaryId} .summary-description`, `#${summaryId} .summary-data`],
+            targets: [`#${summaryId} .summary-index`, `#${summaryId} .summary-title`, `#${summaryId} .summary-description`],
             translateY: '0px',
             easing: 'easeOutQuart',
-            delay: (_, index) => index * 200,
+            duration: 1000,
             scrollTrigger: {
                 trigger: `#${summaryId}`,
                 start: 'top center',
+                end: 'center center',
+                lerp: true,
+            },
+        })
+
+        animations.push({
+            targets: `#${summaryId} .summary-data`,
+            translateY: '0px',
+            delay: (_, index) => index * 200,
+            easing: 'easeOutQuart',
+            scrollTrigger: {
+                trigger: `#${summaryId}`,
+                start: 'center center',
                 end: 'bottom bottom',
                 lerp: true,
             },
