@@ -11,7 +11,7 @@
                 class="flex flex-col absolute bottom-4 left-0 gap-y-4">
                 <div class="w-64 h-4 bg-gradient-to-r from-[#084CFB] to-[#F99500]"></div>
                 <div class="w-full flex justify-between text-sm font-medium text-gray-700">
-                    <p>0 people</p>
+                    <p>1 person</p>
                     <p>3000 people</p>
                 </div>
             </div>
@@ -227,7 +227,6 @@ const listenTriggers = () => {
                 lerp: true,
                 onUpdate: (_, progress) => {
                     let index = Math.round(progress * (dateIntervals.length - 1));
-                    console.log(index, currentIndex)
                     if (index !== currentIndex) {
                         const endDate = dateIntervals[index]
                         plotPoints(new Date(startDate), endDate)

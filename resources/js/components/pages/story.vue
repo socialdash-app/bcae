@@ -24,7 +24,8 @@
         <the-military/>
         <correlated-events/>
         <beginning-of-the-end/>
-        <!--         [Home → Chronicles → The Election → Prominent events → Party reactions → The Military → Correlated events → Beginning of The End] Comment end-->
+        <!--        [Home → Chronicles → The Election → Prominent events → Party reactions → The Military → Correlated events →-->
+        <!--        Beginning of The End] Comment end-->
     </main>
 </template>
 

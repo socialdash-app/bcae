@@ -53,13 +53,13 @@
                 <div style="transform-origin: center bottom; transform: scale(0.8);" v-html="threeFingerIllustration"
                      class="h-[50vh] md:h-[80vh] home-illustration opacity-0"></div>
             </div>
-            <div id="scroll-down-indicator" class="fixed  bottom-8 opacity-0 gap-y-6 flex flex-col items-center">
-                <h1 class="text-xl">Scroll</h1>
+            <div id="scroll-down-indicator" class="fixed  bottom-8 opacity-0 flex flex-col items-center">
+                <h1 class="font-semibold md:    text-xl">Scroll</h1>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="lucide lucide-mouse">
-                    <rect x="5" y="2" width="14" height="20" rx="7"/>
-                    <path d="M12 6v4"/>
+                     class="lucide lucide-arrow-down">
+                    <path d="M12 5v14"/>
+                    <path d="m19 12-7 7-7-7"/>
                 </svg>
             </div>
             <div class="absolute bottom-0 z-20">
@@ -179,7 +179,7 @@
                             </g>
                             <g id="explore"
                                @click="clickCard('explore')"
-                               style="cursor: pointer; -webkit-transform-origin: center; transform-origin: center; transform: rotateY(45deg) translateX(0px) translateY(400px)">
+                               style="  cursor: pointer; -webkit-transform-origin: center; transform-origin: center; transform: rotateY(45deg) translateX(0px) translateY(400px)">
                                 <g id="Layer-1_3">
                                     <path id="Vector_23" d="M259.5 0.5H428.5V193.5H259.5V0.5Z" fill="#FFF21F"
                                           stroke="black"/>
@@ -472,6 +472,15 @@ const init = () => {
 }
 onMounted(() => {
     init();
+
+    anime({
+        targets: '.lucide-arrow-down',
+        translateY: [0, 10],
+        loop: true,
+        easing: 'linear',
+        direction: 'alternate',
+        duration: 800,
+    })
 })
 
 onDeactivated(() => {

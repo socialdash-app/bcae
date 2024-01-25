@@ -1,56 +1,59 @@
 <template>
     <div id="beginning-of-the-end-media-posts"
          class="w-full overflow-visible text-white relative flex flex-col items-center"
-         :style="{height: `${height * articles.length}px`}">
+         :style="{height: `${boxHeight * (articles.length)}px`}">
         <div id="beginning-of-the-end-media-posts-pinner"
-             class="z-10 shrink-0 w-10/12 sticky top-24 md:w-6/12 flex flex-col">
-            <div v-for="(article,index) in articles"
-                 class="beginning-of-the-end-media-post-title absolute font-semibold  text-xl md:text-2xl"
-                 style="color:#E8544E; -webkit-text-fill-color: #E8544E; transform-origin: 0 0; text-align: right"
-                 :style="{width: boxHeight + 'px', transform : `translateX(-${translateDistance * 3}px) translateY(${(index + 1) * boxHeight}px) rotate(-90deg)`, opacity: index === 0 ? 1: 0.4}">
-                {{ article.title }}
-            </div>
+             :style="{height: height + 'px'}"
+             class="z-10 shrink-0 w-10/12 sticky justify-center top-0 md:w-6/12 flex flex-col">
             <div
                 :id="'beginning-of-the-end-media-post-'+index"
                 v-for="(article,index) in articles"
-                class="beginning-of-the-end-media-post w-full justify-between p-4 md:p-10 border-[#E8544E] border flex-col  bg-gray-800 flex absolute overflow-visible"
+                class="beginning-of-the-end-media-post w-full flex-col  flex absolute overflow-visible"
                 style="will-change: transform"
                 :style="{
                     zIndex: -index,
                     height: boxHeight +'px',
                     transform: `translateX(${index * translateDistance}px) translateY(${index * translateDistance}px)`}">
-                <div class="flex justify-between w-full">
-                    <div class="flex">
-                        <div v-html="avatar" class="w-12 h-12 mr-6"></div>
-                        <div class="flex flex-col">
-                            <p class="text-lg md:text-xl font-semibold">{{ article.author }}</p>
-                            <div class="flex items-center gap-x-2">
-                                <time>{{ article.dateTime }}</time>
-                                <div v-html="earth" class="w-5 h-5 mb-1 text-white"></div>
+                <h1 class="beginning-of-the-end-media-post-title mb-4 font-semibold  text-xl md:text-2xl"
+                    style="color:#E8544E; -webkit-text-fill-color: #E8544E;" :style="{opacity: index === 0 ? 1: 0}">
+                    {{ article.title }}
+                </h1>
+                <div
+                    class=" border-[#E8544E] border flex-col  bg-gray-800 flex w-full h-full p-4 md:p-10 justify-between">
+                    <div class="flex justify-between w-full">
+                        <div class="flex">
+                            <div v-html="avatar" class="w-12 h-12 mr-6"></div>
+                            <div class="flex flex-col">
+                                <p class="text-lg md:text-xl font-semibold">{{ article.author }}</p>
+                                <div class="flex items-center gap-x-2">
+                                    <time>{{ article.dateTime }}</time>
+                                    <div v-html="earth" class="w-5 h-5 mb-1 text-white"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="justify-self-end w-8 h-8" v-html="more">
+                        <div class="justify-self-end w-8 h-8" v-html="more">
 
+                        </div>
+                    </div>
+                    <div :title="article.description" class="h-4/6 border-b">
+                        {{ truncate(article.description, width > 768 ? 600 : 300) }}
+                    </div>
+                    <div class="flex h-1/6 items-center w-full justify-between">
+                        <div class="flex items-center justify-center w-4/12 gap-x-2">
+                            <div v-html="like" class="w-8 h-8"></div>
+                            <span>Like</span>
+                        </div>
+                        <div class="flex items-center justify-center w-4/12 gap-x-2">
+                            <div v-html="comment" class="w-8 h-8"></div>
+                            <span>Comment</span>
+                        </div>
+                        <div class="flex items-center justify-center w-4/12 gap-x-2">
+                            <div v-html="share" class="w-8 h-8"></div>
+                            <span>Share</span>
+                        </div>
                     </div>
                 </div>
-                <div :title="article.description" class="h-4/6 border-b">
-                    {{ truncate(article.description, width > 768 ? 600 : 300) }}
-                </div>
-                <div class="flex h-1/6 items-center w-full justify-between">
-                    <div class="flex items-center justify-center w-4/12 gap-x-2">
-                        <div v-html="like" class="w-8 h-8"></div>
-                        <span>Like</span>
-                    </div>
-                    <div class="flex items-center justify-center w-4/12 gap-x-2">
-                        <div v-html="comment" class="w-8 h-8"></div>
-                        <span>Comment</span>
-                    </div>
-                    <div class="flex items-center justify-center w-4/12 gap-x-2">
-                        <div v-html="share" class="w-8 h-8"></div>
-                        <span>Share</span>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -62,6 +65,7 @@ import truncate from "../../../api/truncate.js";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import anime from "animejs";
 import {avatar, comment, earth, like, more, share} from "../../../assets/icons.js";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
@@ -91,90 +95,159 @@ const articles = [{
 },]
 
 onMounted(() => {
+    let container = document.getElementById('beginning-of-the-end-media-posts')
     let duration = 1000;
     let articles = document.querySelectorAll('.beginning-of-the-end-media-post');
     let articleRect = articles[0].getBoundingClientRect();
     let articleTitles = document.querySelectorAll('.beginning-of-the-end-media-post-title');
     let titleTranslateY = [0, boxHeight, boxHeight * 2, boxHeight * 3];
     let postTranslateX = [0, 0, translateDistance, translateDistance * 2];
-    let postTranslateY = [-document.querySelector('main').scrollTop - articleRect.top - articleRect.height - 10, 0, translateDistance, translateDistance * 2];
+    let postTranslateY = [-articleRect.height + container.getBoundingClientRect().top - articleRect.top - 96, 0, translateDistance, translateDistance * 2];
     let animations = [];
     let divider = Math.round(100 / articles.length);
     let stopPercentages = [];
     let startIndex = 1;
-    for (let i = 0; i < articles.length; i++) {
-        animations.push([
-            {
-                targets: articles,
-                duration: duration,
-                easing: 'easeOutQuart',
-                translateX: (el, index) => {
-                    return postTranslateX[Math.max(index + startIndex - i, 0)];
-                },
-                translateY: (el, index) => {
-                    return postTranslateY[Math.max(index + startIndex - i, 0)];
-                }
-            }, {
-                targets: articleTitles,
-                duration: duration,
-                easing: 'easeOutQuart',
-                opacity: (el, index) => {
-                    return index === i ? 1 : 0.4;
-                },
-                translateY: (el, index) => {
-                    return titleTranslateY[Math.max(index + startIndex - i, 0)]
-                }
-            }
-        ])
-        stopPercentages.push(i * divider);
-        // let animation = {
-        //     titles: {
-        //         translateY: [],
-        //     },
-        //     posts: {
-        //         translateX: [],
-        //         translateY: [],
-        //     }
-        // };
-        // articles.forEach((article, index) => {
-        //     animation.titles.translateY.push(titleTranslateY[Math.max(index + startIndex - i, 0)]);
-        //     animation.posts.translateY.push(postTranslateY[Math.max(index + startIndex - i, 0)])
-        //     animation.posts.translateX.push(postTranslateX[Math.max(index + startIndex - i, 0)])
-        // })
-        // animations.push(animation)
-    }
+    // for (let i = 0; i < articles.length; i++) {
+    //     animations.push([
+    //         {
+    //             targets: articles,
+    //             duration: duration,
+    //             easing: 'easeOutQuart',
+    //             translateX: (el, index) => {
+    //                 return postTranslateX[Math.max(index + startIndex - i, 0)];
+    //             },
+    //             translateY: (el, index) => {
+    //                 return postTranslateY[Math.max(index + startIndex - i, 0)];
+    //             }
+    //         }, {
+    //             targets: articleTitles,
+    //             duration: duration,
+    //             easing: 'easeOutQuart',
+    //             opacity: (el, index) => {
+    //                 return index === i ? 1 : 0.4;
+    //             },
+    //             translateY: (el, index) => {
+    //                 return titleTranslateY[Math.max(index + startIndex - i, 0)]
+    //             }
+    //         }
+    //     ])
+    //     stopPercentages.push(i * divider);
+    // }
 
-    let currentIndex = -1;
-
-    let timeout = null;
 
     setTimeout(() => {
+        // [{
+        //     scrollTrigger: {
+        //         trigger: document.querySelector('#beginning-of-the-end-media-posts'),
+        //         lerp: true,
+        //         onUpdate: (_, progress) => {
+        //             if (timeout) clearTimeout(timeout);
+        //             timeout = setTimeout(() => {
+        //                 let percentage = Math.round(progress * 100);
+        //                 let ps = stopPercentages.filter((p) => percentage > p);
+        //                 if (ps.length > 0) {
+        //                     let index = ps.length - 1;
+        //                     if (index !== currentIndex) {
+        //                         currentIndex = index;
+        //                         let animes = animations[currentIndex];
+        //                         anime(animes[0])
+        //                         anime(animes[1])
+        //                     }
+        //                 }
+        //             }, 10)
+        //
+        //         },
+        //         start: 'top top',
+        //         end: 'bottom bottom',
+        //     }
+        // }]
+        let currentIndex = -1;
+
+        let timeout = null;
+        console.log(postTranslateX, postTranslateY)
+        // new AnimeScrollTrigger(document.querySelector('main'), [{
+        //     scrollTrigger: {
+        //         trigger: document.querySelector('#beginning-of-the-end-media-posts'),
+        //         lerp: true,
+        //         onUpdate: (_, progress) => {
+        //             if (timeout) clearTimeout(timeout);
+        //             timeout = setTimeout(() => {
+        //                 let percentage = Math.round(progress * 100);
+        //                 let ps = stopPercentages.filter((p) => percentage > p);
+        //                 if (ps.length > 0) {
+        //                     let index = ps.length - 1;
+        //                     if (index !== currentIndex) {
+        //                         currentIndex = index;
+        //                         let animes = animations[currentIndex];
+        //                         anime(animes[0])
+        //                         anime(animes[1])
+        //                     }
+        //                 }
+        //             }, 10)
+        //
+        //         },
+        //         start: 'top top',
+        //         end: 'bottom bottom',
+        //     }
+        // }])
         new AnimeScrollTrigger(document.querySelector('main'), [{
+            targets: articles,
+            translateX: [{
+                value: (el, index) => {
+                    return postTranslateX[Math.max(index + startIndex - 0, 0)]
+                },
+            }, {
+                value: (el, index) => {
+                    return postTranslateX[Math.max(index + startIndex - 1, 0)]
+                },
+                delay: 400
+            }, {
+                value: (el, index) => {
+                    return postTranslateX[Math.max(index + startIndex - 2, 0)]
+                },
+                delay: 400,
+            }],
+            translateY: [{
+                value: (el, index) => postTranslateY[Math.max(index + startIndex - 0, 0)],
+            }, {
+                value: (el, index) => postTranslateY[Math.max(index + startIndex - 1, 0)],
+                delay: 400,
+            }, {
+                value: (el, index) => postTranslateY[Math.max(index + startIndex - 2, 0)],
+                delay: 400,
+            }],
             scrollTrigger: {
                 trigger: document.querySelector('#beginning-of-the-end-media-posts'),
                 lerp: true,
-                onUpdate: (_, progress) => {
-                    if (timeout) clearTimeout(timeout);
-                    timeout = setTimeout(() => {
-                        let percentage = Math.round(progress * 100);
-                        let ps = stopPercentages.filter((p) => percentage > p);
-                        if (ps.length > 0) {
-                            let index = ps.length - 1;
-                            if (index !== currentIndex) {
-                                currentIndex = index;
-                                let animes = animations[currentIndex];
-                                anime(animes[0])
-                                anime(animes[1])
-                            }
-                        }
-                    }, 10)
+                start: 'top top',
+                end: 'bottom bottom',
+            }
+        }, {
+            targets: articleTitles,
+            opacity: [{
+                value: (el, index) => {
+                    return index === 0 ? 1 : 0;
+                },
+            }, {
+                value: (el, index) => {
+                    return index <= 1 ? 1 : 0;
 
                 },
+                delay: 400,
+            }, {
+                value: (el, index) => {
+                    return index <= 2 ? 1 : 0;
+                },
+                delay: 400,
+            }],
+            scrollTrigger: {
+                trigger: document.querySelector('#beginning-of-the-end-media-posts'),
+                lerp: true,
                 start: 'top top',
                 end: 'bottom bottom',
             }
         }])
-    }, 2000)
+    }, settings.animationDuration)
 })
 </script>
 

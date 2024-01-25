@@ -4,9 +4,9 @@
         <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
             <h1 class="text-xl md:text-3xl font-bold">Chronicles</h1>
         </div>
-        <div class="w-screen h-screen">
+        <!--        <div class="w-screen h-screen">-->
 
-        </div>
+        <!--        </div>-->
         <div id="chronicles"
              class="w-11/12 pt-10 items-center md:!items-start md:!w-9/12 md:!flex-row flex-col flex justify-between">
             <div class="w-11/12 md:!w-5/12 h-[50vh] md:!h-[60vh] sticky top-24 left-0">
@@ -15,7 +15,7 @@
                          :style="{ opacity: i === 0 ? 1 : 0 }"
                          v-for="(datum, i) in data">
                         <div
-                            :style="{opacity: i === 0 && j === 0? 1: 0}"
+                            :style="{visibility: i === 0 && j === 0? 'visible': 'hidden'}"
                             v-for="(illustration,j) in datum.illustrations"
                             class="h-5/6 absolute w-full flex justify-center items-center" :id="datum.title + '-'+ j">
                             <img class="h-full" :src="illustration"
@@ -76,12 +76,16 @@ const data = [{
 }, {
     title: '1988',
     bg: 'bg-gray-300',
-    illustrations: [],
+    illustrations: [
+        'assets/illustrations/chronicles/1988/1988.svg',
+    ],
     description: 'After the 8888 national uprising aka the People Power Uprising against the Burma Socialist Programme Party government, the third military coup was occurred on 18 September, 1988. The uprising ended with the bloody military coup by the State Law and Order Restoration Council. During the uprising, thousands of people have been killed.'
 }, {
     title: '1990',
     bg: 'bg-orange-300',
-    illustrations: [],
+    illustrations: [
+        'assets/illustrations/chronicles/1990/1990.svg',
+    ],
     description: 'The National League for Democracy formed on September 27, 1988, a week after the formation of the State Law and Order Restoration Council, and won 392 of 492 parliamentary seats in the General elections of 1990, but the military council didn\'t handover power to winning party and canceled the election result. After that, it changed its name to State Peace and Development Council in 1997 and ruled until 2010.'
 }, {
     title: '2021',
@@ -92,6 +96,51 @@ const data = [{
     bg: 'bg-orange-300',
     description: 'On 1 February, 2021, the military led by Min Aung Hlaing seized state power from a democratically elected government, by announcing a one-year state of emergency period under the pretext of vote fraud. People resisted the coup with protests and rallies across the country, but faced violent repression by the military, resulting the formation of a parallel government and allied with armed groups to fight the junta.'
 }];
+
+const run = function (fn, intervalInMilliseconds = 1000, autostart = false, maxSteps = null, onComplete = null) {
+    let shouldRun = autostart;
+    let interval = null;
+    let step = 0;
+
+    let _fn = () => {
+        if (!shouldRun) {
+            return
+        }
+        if (maxSteps && step >= maxSteps) {
+            clearInterval(interval);
+            if (onComplete) onComplete();
+            return;
+        }
+        fn(step);
+        step++;
+    }
+
+    interval = setInterval(_fn, intervalInMilliseconds)
+
+
+    return {
+        start: () => shouldRun = true,
+        pause: () => shouldRun = false,
+        stop: () => {
+            if (interval) clearInterval(interval);
+            interval = null;
+            step = 0;
+        },
+        update: (intervalInMilliseconds) => {
+            clearInterval(interval);
+            interval = setInterval(_fn, intervalInMilliseconds);
+        },
+        restart: () => {
+            if (interval) clearInterval(interval)
+            step = 0;
+            shouldRun = true;
+            interval = setInterval(_fn, intervalInMilliseconds);
+        },
+        get step() {
+            return step;
+        },
+    }
+}
 
 const initialiseIllustrationAnimations = () => {
     /*
@@ -110,96 +159,79 @@ const initialiseIllustrationAnimations = () => {
     const walkFrame3 = document.getElementById(`${data[0].title}-4`);
     const walkFrame4 = document.getElementById(`${data[0].title}-5`);
 
-    const protest1962Frame1 = document.getElementById(`${data[1].title}-0`)
-    const protest1962Frame2 = document.getElementById(`${data[1].title}-1`)
+    const protest1962Frame1 = document.getElementById(`${data[1].title}-0`);
+    const protest1962Frame2 = document.getElementById(`${data[1].title}-1`);
+
+    const illustration1988 = document.getElementById(`${data[2].title}-0`);
+    const illustration1990 = document.getElementById(`${data[3].title}-0`);
 
     const protest2021Frame1 = document.getElementById(`${data[4].title}-0`);
     const protest2021Frame2 = document.getElementById(`${data[4].title}-1`);
 
-    const handshakeAnimation = anime({
-        targets: [handshakeFrame1, handshakeFrame2],
-        opacity: (_, index) => index ? [0, 1] : [1, 0],
-        loop: true,
-        autoplay: false,
-        direction: 'alternate',
-        duration: 400,
-        delay: 400,
-        easing: 'easeOutQuart',
-    })
+
+    const hideVisibility = (elements, condition) => {
+        elements.forEach((element, index) => {
+            if (condition && !condition(element, index)) {
+                return;
+            }
+            element.style.visibility = 'hidden';
+        })
+    }
+
+    const showVisibility = (elements, condition) => {
+        elements.forEach((element, index) => {
+            if (condition && !condition(element, index)) {
+                return;
+            }
+            element.style.visibility = 'visible';
+        })
+    }
 
 
-    const protest1962Animation = anime({
-        targets: [protest1962Frame1, protest1962Frame2],
-        opacity: (_, index) => index ? [0, 1] : [1, 0],
-        loop: true,
-        autoplay: false,
-        // direction: 'alternate',
-        duration: 600,
-        delay: 400,
-        easing: 'easeOutQuart',
-    })
+    const handshakeAnimation = run((step) => {
+        handshakeFrame1.style.visibility = step % 2 === 0 ? 'hidden' : 'visible';
+        handshakeFrame2.style.visibility = step % 2 === 0 ? 'visible' : 'hidden';
+    }, 400)
 
-    const protest2021Animation = anime({
-        targets: [protest2021Frame1, protest2021Frame2],
-        opacity: (_, index) => index ? [0, 1] : [1, 0],
-        loop: true,
-        autoplay: false,
-        // direction: 'alternate',
-        duration: 600,
-        delay: 400,
-        easing: 'easeOutQuart',
-    })
 
-    const section1962timeline = anime.timeline({
-        autoplay: false,
-        easing: 'easeOutQuart',
-    })
+    const protest1962Animation = run((step) => {
+        protest1962Frame1.style.visibility = step % 2 === 0 ? 'hidden' : 'visible';
+        protest1962Frame2.style.visibility = step % 2 === 0 ? 'visible' : 'hidden';
+    }, 400)
 
-    section1962timeline.add({
-        targets: chronicleIllustrations,
-        opacity: [{
-            value: (_, index) => {
-                return index === 1 ? 1 : 0;
-            },
-            duration: 400,
-        }],
-        complete: () => {
-            protest1962Animation.play();
-        }
-    })
 
-    section1962timeline.add({
-        targets: [walkFrame1, walkFrame2, walkFrame3, walkFrame4],
-        opacity: 0,
-        duration: 0,
-        autoplay: false,
-    }, '-=800')
+    const protest2021Animation = run((step) => {
+        protest2021Frame1.style.visibility = step % 2 === 0 ? 'hidden' : 'visible';
+        protest2021Frame2.style.visibility = step % 2 === 0 ? 'visible' : 'hidden';
+    }, 400)
 
-    const walkAnimation = anime({
-        targets: [walkFrame1, walkFrame2, walkFrame3, walkFrame4],
-        opacity: [{
-            value: (_, index) => index === 0 ? 1 : 0,
+    let walkFrames = [walkFrame1, walkFrame2, walkFrame3, walkFrame4];
+    const walk = run((step) => {
+        let currentFrame = step % walkFrames.length;
+        console.log(currentFrame)
+        walkFrames.forEach((walkFrame, index) => {
+            walkFrame.style.visibility = index === currentFrame ? 'visible' : 'hidden';
+        })
+    }, 600, false, 4, () => {
+        anime({
+            targets: chronicleIllustrations,
+            opacity: [{
+                value: (_, index) => {
+                    return index === 1 ? 1 : 0;
+                },
+                duration: 400,
+            }],
             delay: 0,
-        }, {
-            value: (_, index) => index === 1 ? 1 : 0,
-            delay: 400,
-        }, {
-            value: (_, index) => index === 2 ? 1 : 0,
-            delay: 400,
-        }, {
-            value: (_, index) => index === 3 ? 1 : 0,
-            delay: 400,
-        }],
-        // direction: 'alternate',
-        autoplay: false,
-        duration: 400 * 4,
-        easing: 'easeOutQuart',
+            complete: () => {
+                protest1962Animation.start();
+            }
+        })
     })
+
 
     return [{
         onEnter: () => {
-            walkAnimation.pause();
-            section1962timeline.pause();
+            walk.pause();
             protest1962Animation.pause();
             anime({
                 targets: chronicleIllustrations,
@@ -210,46 +242,33 @@ const initialiseIllustrationAnimations = () => {
                         return index === 0 ? 1 : 0;
                     },
                     delay: 1000 / 3,
-                }]
-            })
-            anime({
-                targets: [walkFrame1, walkFrame2, walkFrame3, walkFrame4, protest1962Frame1, protest1962Frame2],
-                opacity: 0,
-                duration: 0,
-            })
+                }],
 
-            handshakeAnimation.play();
-        },
-        onLeave: () => {
-            // stop other animation
-            handshakeAnimation.pause();
-            anime({
-                targets: [handshakeFrame1, handshakeFrame2],
-                opacity: 0,
-                // direction: 'alternate',
-                duration: 400,
-                easing: 'easeOutQuart',
             })
-            // start walking animation
-            walkAnimation.restart();
-            walkAnimation.play();
+            hideVisibility([walkFrame1, walkFrame2, walkFrame3, walkFrame4, protest1962Frame1, protest1962Frame2])
+            handshakeAnimation.start();
         },
     }, {
         onEnter: () => {
-            protest2021Animation.pause();
-            // hide other frames
             anime({
-                targets: [protest2021Frame1, protest2021Frame2],
-                opacity: 0,
-                // direction: 'alternate',
-                duration: 400,
-                easing: 'easeOutQuart',
+                targets: chronicleIllustrations,
+                opacity: [{
+                    value: (_, index) => {
+                        return index === 0 ? 1 : 0;
+                    },
+                    duration: 400,
+                }],
             })
-
-            section1962timeline.play();
+            // stop other animation
+            protest2021Animation.pause();
+            handshakeAnimation.pause();
+            hideVisibility([handshakeFrame1, handshakeFrame2, protest2021Frame1, protest2021Frame2, ...walkFrames])
+            // start walking animation
+            walk.restart();
         }
     }, {
         onEnter: () => {
+            walk.stop();
             anime({
                 targets: chronicleIllustrations,
                 easing: 'easeOutQuart',
@@ -260,6 +279,8 @@ const initialiseIllustrationAnimations = () => {
                     duration: 400,
                 }]
             })
+            hideVisibility([illustration1990])
+            showVisibility([illustration1988])
         }
     }, {
         onEnter: () => {
@@ -273,13 +294,12 @@ const initialiseIllustrationAnimations = () => {
                     duration: 400,
                 }]
             })
+            protest2021Animation.pause();
+            hideVisibility([illustration1988, protest2021Frame1, protest2021Frame2])
+            showVisibility([illustration1990])
         }
     }, {
         onEnter: () => {
-            // stop other animation
-            walkAnimation.pause();
-            section1962timeline.pause();
-            protest1962Animation.pause();
             anime({
                 targets: chronicleIllustrations,
                 easing: 'easeOutQuart',
@@ -290,7 +310,7 @@ const initialiseIllustrationAnimations = () => {
                     duration: 400,
                 }]
             })
-            protest2021Animation.play()
+            protest2021Animation.start()
         }
     }]
 }

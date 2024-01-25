@@ -22,23 +22,29 @@
         </div>
         <div class="flex flex-col relative w-full items-center" id="disinformation-trigger">
             <div
-                class="disinformation-content-box z-10 my-64 w-full md:!w-6/12 text-gray-900 p-6 md:p-12 flex flex-col items-center rounded bg-white shadow-xl"
-                v-for="(i,index) in [1,2,3,4,5]">
-                <h1 class="font-semibold text-2xl mb-6"> Hey {{ i }}</h1>
+                class="disinformation-content-box z-10 my-64 w-full md:!w-6/12 text-gray-900 p-6 md:p-12 flex flex-col items-center rounded bg-white shadow-xl">
                 <p class="tracking-wider leading-relaxed text-md">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting
-                    industry. Lorem
-                    Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and
-                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap
-                    into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                    the
-                    release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                    publishing
-                    software like Aldus PageMaker including versions of Lorem Ipsum.
+                    During that period, a total of ** election-related disinformation contents posted by *** individuals
+                    were fact-checked in 92 articles, according to the fact-checked articles from the international
+                    fact-checkers. And, those are
+                </p>
+            </div>
+            <div
+                class="disinformation-content-box z-10 my-64 w-full md:!w-6/12 text-gray-900 p-6 md:p-12 flex flex-col items-center rounded bg-white shadow-xl">
+                <p class="tracking-wider leading-relaxed text-md">
+                    Top 10% of individuals responsible for distributing ***% disinformation content on the internet, and
+                    they shared disinformation contents related to ***, ***, and *** topics.
+                </p>
+            </div>
+            <div
+                class="disinformation-content-box z-10 my-64 w-full md:!w-6/12 text-gray-900 p-6 md:p-12 flex flex-col items-center rounded bg-white shadow-xl">
+                <p class="tracking-wider leading-relaxed text-md">
+                    Please note that it is impossible to fact-check the exhaustive list of flagged content on social
+                    media because of big-data impact and technical difficulties, and those articles only represented a
+                    portion of the disinformation, related to Myanmar, span on the internet despite fact-checkers were
+                    trying their best. Social Dash is working on a new machine-learning model which can detect
+                    coordinated disinformation networks on social media. Reach out to alex@socialdash.app for more
+                    information.
                 </p>
             </div>
         </div>
@@ -50,16 +56,39 @@
                 <span class="text-sm px-2 py-1 text-white rounded"
                       :class="data.type === 'page' ? 'bg-blue-400': 'bg-red-400'">{{ data.type }}</span>
             </div>
+            <p>Spread disinformation related to these topics:</p>
+            <div class="flex w-full flex-wrap gap-2">
+                <button class="text-sm px-2 py-1 text-white rounded"
+                        :style="{background: getTopicColor(topic)}"
+                        v-for="topic in data.topics"
+                        @click="visualization.highlight('topics',topic)">
+                    {{ topic }}
+                </button>
+            </div>
+            <p>And those information are fact-checked by the following fact-checkers:</p>
+            <div class="flex w-full flex-wrap gap-2">
+                <button class="text-sm flex items-center font-semibold px-2 py-1 rounded"
+                        v-for="fact_checker in data.fact_checkers"
+                        @click="visualization.highlight('fact_checkers',fact_checker)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="lucide lucide-dot">
+                        <circle cx="12.1" cy="12.1" r="2"/>
+                    </svg>
+                    {{ fact_checker }}
+                </button>
+            </div>
             <div class="p-4 rounded border border-2 my-2 bg-gray-100 flex flex-col" v-for="content in data.contents">
                 <a target="_blank" :href="content.url"
                    class="font-semibold text-blue-400 underline text-lg">{{ content.title }}</a>
                 <h2 class="text-gray-500">Fact checked on {{ content.date }}</h2>
                 <div class="flex flex-wrap gap-2 mt-2">
-                    <button class="text-sm px-2 py-1 text-white rounded bg-gray-400"
+                    <button class="text-sm px-2 py-1 rounded text-gray-50 bg-gray-400"
                             @click="visualization.highlight('fact_checkers',content.fact_checker)">
                         Fact checked by: {{ content.fact_checker }}
                     </button>
-                    <button class="text-sm px-2 py-1 text-white rounded bg-gray-400"
+                    <button class="text-sm px-2 py-1 text-white rounded"
+                            :style="{background: getTopicColor(content.topic)}"
                             @click="visualization.highlight('topics',content.topic)">
                         Topic: {{ content.topic }}
                     </button>
@@ -92,10 +121,41 @@ const data = reactive({
     type: null,
     username: null,
     id: null,
+    topics: [],
+    fact_checkers: [],
 });
 
 let showViewer = false;
 let currentHighlightAttribute, currentHighlightValue = null;
+
+const getTopicColor = (topic) => {
+    switch (topic) {
+        case"Government":
+            return '#1b4a8d';
+        case "Election":
+            return '#367de3';
+        case "Military":
+            return '#c36e37';
+        case "G.Person":
+            return '#41c38d';
+        case "Individual":
+            return '#a93098';
+        case "Political party":
+            return '#9cae30';
+        case "Religion":
+            return '#ff8a54';
+        case "Other":
+            return '#383838';
+        case "Health":
+            return '#16b071';
+        case "EAQ":
+            return '#b38d2a';
+        case "Coup.relate":
+            return '#be1f1f';
+        case "Financial":
+            return '#4a507f';
+    }
+}
 
 const toggleDetailViewerVisibility = () => {
     anime({
@@ -166,6 +226,8 @@ const visualization = {
                         data.contents = currentItem.contents;
                         data.id = currentItem.id;
                         data.type = currentItem.type;
+                        data.topics = currentItem.contents.map((content) => content.topic).filter((topic, i, array) => array.indexOf(topic) === i)
+                        data.fact_checkers = currentItem.contents.map((content) => content.fact_checker).filter((fact_checker, i, array) => array.indexOf(fact_checker) === i)
                         if (!showViewer) {
                             setTimeout(() => {
                                 toggleDetailViewerVisibility();
@@ -274,37 +336,36 @@ onMounted(() => {
         }
     }];
     // initialise highlight triggers.
-    let highlights = [1, 7, null, 1, null]
     let disinformationContentBoxes = document.querySelectorAll('.disinformation-content-box');
-    disinformationContentBoxes.forEach((box, index) => {
-        animations.push({
-            scrollTrigger: {
-                trigger: box,
-                start: 'top center',
-                end: 'bottom 30%',
-                onEnter: () => {
-                    let highlightCount = highlights[index];
-                    if (!highlightCount) {
-                        visualization.resetHighlight()
-                        return;
-                    }
-                    currentHighlightAttribute = 'count';
-                    currentHighlightValue = highlightCount;
-                    visualization.highlight('count', highlightCount)
-                },
-                onEnterBack: () => {
-                    let highlightCount = highlights[index];
-                    if (!highlightCount) {
-                        visualization.resetHighlight()
-                        return;
-                    }
-                    currentHighlightAttribute = 'count';
-                    currentHighlightValue = highlightCount;
-                    visualization.highlight('count', highlightCount)
-                }
-            }
-        })
+    animations.push({
+        scrollTrigger: {
+            trigger: disinformationContentBoxes[0],
+            start: 'top center',
+            end: 'bottom 10%',
+            onEnter: () => {
+                currentHighlightAttribute = 'topics';
+                currentHighlightValue = 'Election';
+                visualization.highlight(currentHighlightAttribute, currentHighlightValue)
+            },
+            onEnterBack: () => {
+                currentHighlightAttribute = 'topics';
+                currentHighlightValue = 'Election';
+                visualization.highlight(currentHighlightAttribute, currentHighlightValue)
+            },
+        },
     })
+
+    animations.push({
+        scrollTrigger: {
+            trigger: disinformationContentBoxes[1],
+            start: 'top center',
+            end: 'bottom 30%',
+            onEnter: () => {
+                visualization.resetHighlight();
+            },
+        },
+    })
+
     // setTimeout(() => {
     new AnimeScrollTrigger(main, animations)
     // }, 2000)

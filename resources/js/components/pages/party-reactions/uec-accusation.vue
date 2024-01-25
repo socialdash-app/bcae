@@ -62,52 +62,18 @@ onMounted(() => {
     fetch('assets/data/party-reactions/uec-accusations.json').then(async (res) => {
         let data = await res.json();
         let links = [];
+        let gradientColors = [];
         data.links.sort((a, b) => a.value > b.value ? -1 : 1).forEach((link) => {
             link.description = `${link.value} complaints from ${link.source} to ${link.target} `
             if (links.filter((d) => d.source === link.target || d.target === link.source).length !== 0) {
                 let temp = link.source;
                 link.source = link.target;
                 link.target = temp;
-                console.log('change')
             }
+            // populate gradient color if it doesn't exist
+            link.gradientColors = [getPartyColor(link.source) ?? '#848eff', getPartyColor(link.target) ?? '#848eff'];
             links.push(link)
         })
-        console.log(data.nodes, links)
-        // Highcharts.chart('uec-accusations', {
-        //     chart: {
-        //         height: height * 0.75 + 'px',
-        //         backgroundColor: headers[3].primaryColor,
-        //     },
-        //     title: {
-        //         text: 'Complaint to UEC'
-        //     },
-        //     accessibility: {
-        //         point: {
-        //             valueDescriptionFormat: '{index}. {point.from} to {point.to}, {point.weight}. '
-        //         }
-        //     },
-        //     plotOptions: {
-        //         series: {
-        //             dataLabels: {
-        //                 enabled: true,
-        //                 // x: -10
-        //                 // textPath: {enabled: false}
-        //             },
-        //             stickyTracking: false
-        //         }
-        //     },
-        //     tooltip: {
-        //         useHTML: true,
-        //     },
-        //     series: [{
-        //         keys: ['color', 'from', 'to', 'weight'],
-        //         name: '',
-        //         type: 'sankey',
-        //         data: links.map((link) => Object.values(link)),
-        //         nodes: data.nodes,
-        //     }],
-        //
-        // });
         // const tooltip = d3.select('#party-accusations-tooltip');
 
         let container = document.getElementById('uec-accusations')
@@ -189,25 +155,45 @@ onMounted(() => {
             .append("g")
         // .style('transform', (d, i) => `translate(0px,${i * 4}px)`)
 
+
+        var linearGradient = link.append('linearGradient')
+            .attr('id', (d, i) => `gradient-${i}`)
+        // .attr('x1', (d) => d.x0)
+        // .attr('y1', (d) => d.y1)
+        // .attr('x2', (d) => d.x2)
+        // .attr('y2', (d) => d.y2)
+
+
+        linearGradient.append('stop')
+            .attr('offset', '0%')
+            .attr('style', (d) => `stop-color: ${d.gradientColors[0]};  stop-opacity: 1`)
+
+        linearGradient.append('stop')
+            .attr('offset', '100%')
+            .attr('style', (d) => `stop-color: ${d.gradientColors[1]};  stop-opacity: 1`)
+
+
         link.append("path")
             .attr("class", "sankey-link")
             .attr("d", function (link) {
                 return link.path;
             })
-
             .style("stroke-width", function (d) {
+
                 return Math.max(1, d.width);
             })
-            .style("opacity", 0.2)
+            .style("opacity", 0.6)
             .style("stroke", (d, i) => {
+                return `url(#gradient-${i})`;
                 return getPartyColor(d.source.name) ?? '#848eff';
             })
             .on('mouseover', function (e) {
                 d3.select(this).transition().style('opacity', 0.8)
             })
             .on('mouseout', function (e) {
-                d3.select(this).transition().style('opacity', 0.2)
-            })
+                d3.select(this).transition().style('opacity', 0.6)
+            });
+
 
         link.append("title")
             .text(function (d) {

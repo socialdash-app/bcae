@@ -45,22 +45,31 @@
                     </tbody>
                 </table>
             </div>
-            <div class="w-11/12 md:!w-1/2 flex flex-col z-[1002]">
-                <div class="trigger mb-[90%] md:!mb-[50%] w-full rounded-lg h-[100vh]"></div>
+            <div class="w-11/12 md:!w-1/2 flex flex-col items-center relative z-[1002]">
+                <div class="mb-[50%] w-full rounded-lg h-[50vh] md:!h-screen"></div>
                 <div
-                    class="trigger shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh]"></div>
-                <div
-                    class="trigger shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh] relative">
-
+                    class="trigger p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white min-h-[40vh]">
+                    Despite the COVID-19 pandemic and other challenges, the third general election was held on November
+                    8, 2020, per the 2008 Constitution. The domestic and international election observers also observed
+                    the 2020 election and they found some inconsistencies in electoral administration and election
+                    administration amid the ongoing pandemic, but they noted the election results credible, reflecting
+                    the will of the majority of voters.
                 </div>
                 <div
-                    class="trigger shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white h-[40vh]"></div>
+                    class="trigger p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white min-h-[40vh] relative">
+                    National League for Democracy won the majority of constituencies except in some ethnic states with a
+                    total of 396 seats in the national legislation Hluttaw, which was upped by 33 seats from its win in
+                    the 2015 election. Therefore, the NLD party secured a landslide victory in the election, which was
+                    well above the 322 required for a parliamentary majority
+                </div>
+                <div id="the-election-then-section"
+                     class="relative mb-[50vh] w-full flex items-center justify-center">
+                    <h1 class="then-title text-center bg-[#ff9ccd] absolute w-screen transform text-5xl md:text-6xl py-10 font-bold">
+                        Then</h1>
+                </div>
             </div>
         </div>
-        <div id="the-election-then-section" class="w-screen bg-[#ff9ccd] flex items-center justify-center"
-             :style="{height: height + 'px'}">
-            <h1 class="then-title text-5xl md:text-6xl 2xl:text-7xl font-bold">Then</h1>
-        </div>
+
     </div>
 </template>
 
@@ -188,7 +197,6 @@ const init = () => {
             .attr('fill', 'orange');
 
         zoom.on('zoom', (e) => {
-            console.log(e.transform)
             upperGroup.attr('transform', e.transform)
         })
 
@@ -322,14 +330,21 @@ const drawSubregions = (features) => {
         });
 }
 
+const placeThenSection = () => {
+    let section = document.getElementById('the-election-then-section');
+    let left = section.children[0].getBoundingClientRect().left;
+    console.log(section)
+    section.children[0].style.transform = `translateX(-${left}px)`
+}
+
 onMounted(() => {
     setTimeout(() => {
+        placeThenSection();
         const padding = 60;
         const topOffset = 24;
         const mapHeight = height - document.querySelector('#the-election').children[0].getBoundingClientRect().height - topOffset - padding;
         const mapContainer = document.getElementById('map-container');
         mapContainer.style.height = mapHeight + 'px'
-        console.log(mapHeight, document.querySelector('#the-election').children[0].getBoundingClientRect().bottom)
         const mapContainerRect = mapContainer.getBoundingClientRect();
         const mapTranslateXWidth = (window.innerWidth * 0.5) - mapContainerRect.left - (0.5 * mapContainerRect.width);
         anime({
@@ -349,9 +364,9 @@ onMounted(() => {
         let triggers = [
             {
                 scrollTrigger: {
-                    trigger: divs[0],
-                    start: 'bottom 60%',
-                    end: 'bottom -10%',
+                    trigger: container,
+                    start: '1% top',
+                    end: '30% top',
                     debug: true,
                     onEnter: () => {
                         anime({
@@ -372,17 +387,33 @@ onMounted(() => {
                 }
             },
             {
-                targets: divs[2],
                 scrollTrigger: {
-                    trigger: divs[2],
+                    trigger: divs[0],
                     start: 'top 40%',
                     end: 'bottom center',
                     lerp: true,
                     onEnter: () => {
                         if (zoomIntoRegion) zoomIntoRegion('Kachin')
                     },
+                    onEnterBack: () => {
+                        if (zoomIntoRegion) zoomIntoRegion('Kachin')
+                    },
                     onLeaveBack: () => {
                         resetZoom();
+                    },
+                }
+            },
+            {
+                scrollTrigger: {
+                    trigger: divs[1],
+                    start: 'top 40%',
+                    end: 'bottom center',
+                    lerp: true,
+                    onEnter: () => {
+                        if (zoomIntoRegion) zoomIntoRegion('Shan')
+                    },
+                    onEnterBack: () => {
+                        if (zoomIntoRegion) zoomIntoRegion('Shan')
                     }
                 }
             },
@@ -415,18 +446,18 @@ onMounted(() => {
                     }
                 }
             },
-            {
-                targets: '.then-title',
-                scale: [1.5, 1],
-                opacity: [0, 1],
-                easing: 'easeOutQuart',
-                duration: 2000,
-                scrollTrigger: {
-                    trigger: '#the-election-then-section',
-                    start: 'top 40%',
-                    end: 'bottom top',
-                }
-            },
+            // {
+            //     targets: '.then-title',
+            //     scale: [1.5, 1],
+            //     opacity: [0, 1],
+            //     easing: 'easeOutQuart',
+            //     duration: 2000,
+            //     scrollTrigger: {
+            //         trigger: '#the-election-then-section',
+            //         start: 'top 40%',
+            //         end: 'bottom top',
+            //     }
+            // },
         ]
         new AnimeScrollTrigger(document.querySelector('main'), triggers);
     }, settings.animationDuration)

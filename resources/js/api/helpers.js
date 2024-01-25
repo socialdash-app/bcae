@@ -59,3 +59,7 @@ export function placeElementRelativeToScreen(element, shouldCenter = false) {
         resolve(element)
     });
 }
+
+export function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+}

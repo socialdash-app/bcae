@@ -23,13 +23,13 @@
         <div id="election-incidents-container"
              class="w-full flex flex-wrap gap-6 justify-center">
             <div
-                class="w-40 md:w-64 relative election-incidents-box flex items-center justify-center cursor-pointer h-32"
+                class="w-40 md:w-64 relative election-incidents-box flex items-center justify-center cursor-pointer h-24"
                 v-for="(incident,index) in data.incidents">
                 <div
                     :class="getBackgroundColor(incident.topic)"
                     :style="{opacity: data.selectedTopic && data.selectedTopic !== incident.topic ? '0.4': '1'}"
                     class="absolute text-sm md:!text-base w-full top-0 left-0 h-full p-4  rounded-lg font-semibold text-gray-700"
-                    @click="(e)=>expandBox(e,index)">
+                    @click="(e)=>clickBox(e,index)">
                     <div
                         class="w-full pointer-events-none h-full flex items-center justify-center absolute top-0 left-0 z-[1000]"
                         :class="getBackgroundColor(incident.topic)"
@@ -57,6 +57,7 @@ import settings from "../../../api/settings.js";
 import truncate from "../../../api/truncate.js";
 import anime from "animejs";
 import {onClickOutside} from "js-utils";
+import {sleep} from "../../../api/helpers.js";
 
 const props = defineProps([]);
 
@@ -87,9 +88,9 @@ const selectTopic = (topic, e) => {
     }, 50)
 }
 
-let currentExpandedBox = null;
+let currentExpandedBox = null, isAnimating = false;
 
-const closeCurrentExpandedBox = () => {
+const closeCurrentExpandedBox = async () => {
     if (!currentExpandedBox) {
         return
     }
@@ -109,28 +110,31 @@ const closeCurrentExpandedBox = () => {
     currentExpandedBox.querySelector('p').innerText = settings.data.locale === 'en' ? truncate(data.incidents[data.currentExpandedBoxIndex].description_en, 40) : truncate(data.incidents[data.currentExpandedBoxIndex].description_mm, 80);
     currentExpandedBox = null;
     data.currentExpandedBoxIndex = null;
+    return true;
 }
 
-const expandBox = (e, index) => {
-    const containerRect = document.getElementById('election-incidents-container').getBoundingClientRect();
+const expandBox = async (e, index) => {
     const box = e.target;
-    let shouldExpandToRight = true;
-    let shouldExpandToBottom = true;
-    const boxRect = box.getBoundingClientRect();
+    if (isAnimating) await sleep(500);
     // // hide or remove if there is current expanded box
     if (currentExpandedBox) {
         if (currentExpandedBox === box) {
             return;
         }
 
-        closeCurrentExpandedBox()
+        await closeCurrentExpandedBox()
     }
+    isAnimating = true;
+    const containerRect = document.getElementById('election-incidents-container').getBoundingClientRect();
+    let shouldExpandToRight = true;
+    let shouldExpandToBottom = true;
+    const boxRect = box.getBoundingClientRect();
     //
     data.currentExpandedBoxIndex = index;
     data.isExpending = true;
     //
-    const expandedWidth = boxRect.width * 2 + 32; // 16px or 1rem for gap
-    const expandedHeight = boxRect.height * 2 + 32;
+    const expandedWidth = boxRect.width * 2 + 24; // 16px or 1rem for gap
+    const expandedHeight = boxRect.height * 2 + 24;
     const predictedRight = boxRect.left + expandedWidth;
     const predictedBottom = boxRect.top + expandedHeight;
 
@@ -148,17 +152,25 @@ const expandBox = (e, index) => {
         width: expandedWidth,
         height: expandedHeight,
         easing: 'easeOutQuart',
-        translateX: shouldExpandToRight ? 0 : -boxRect.width - 32,
-        translateY: shouldExpandToBottom ? 0 : -boxRect.height - 32,
+        translateX: shouldExpandToRight ? 0 : -boxRect.width - 24,
+        translateY: shouldExpandToBottom ? 0 : -boxRect.height - 24,
         duration: 500,
         complete: () => {
             box.querySelector('p').innerText = settings.data.locale === 'en' ? data.incidents[index].description_en : data.incidents[index].description_mm;
             data.isExpending = false;
             currentExpandedBox = box;
+            isAnimating = false;
         }
     })
+}
 
+const clickBox = (e, index) => {
+    if (data.currentExpandedBoxIndex === index) {
+        window.open(data.incidents[data.currentExpandedBoxIndex].url, '_blank')
+        return;
+    }
 
+    expandBox(e, index)
 }
 
 onMounted(() => {

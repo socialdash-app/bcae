@@ -42,6 +42,7 @@ import ShareSection from "./share-section.vue";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import route from "../../../api/route.js";
 import anime from "animejs";
+import settings from "../../../api/settings.js";
 
 const props = defineProps([]);
 
@@ -67,7 +68,7 @@ onMounted(() => {
                 },
             }
         },])
-    }, 2000)
+    }, settings.animationDuration)
 })
 </script>
 

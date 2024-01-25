@@ -1,5 +1,5 @@
 <template>
-    <div id="main-container" class="flex font-poppins flex-col w-full">
+    <div id="main-container" class="flex font-poppins antialiased flex-col w-full">
         <!--        <navigation/>-->
         <div
             class="w-full md:!bg-transparent header py-4 flex justify-between  z-[100] px-4 md:!px-20 fixed top-0 left-0">
