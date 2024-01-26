@@ -33,7 +33,7 @@
                     </button>
                 </div>
             </div>
-            <div id="election-result-detail" class="fixed border-gray-800 z-[1002] bg-[#FFC3E0] p-4 rounded border"
+            <div id="election-result-detail" class="fixed border-gray-800 z-[10000] bg-[#FFC3E0] p-4 rounded border"
                  v-show="data.hoverRegion">
                 <h1 class="font-semibold text-lg">{{ data.details.title }}</h1>
                 <table>
@@ -48,7 +48,7 @@
             <div class="w-11/12 md:!w-1/2 flex flex-col items-center relative z-[1002]">
                 <div class="mb-[50%] w-full rounded-lg h-[50vh] md:!h-screen"></div>
                 <div
-                    class="trigger p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white min-h-[40vh]">
+                    class="trigger p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white">
                     Despite the COVID-19 pandemic and other challenges, the third general election was held on November
                     8, 2020, per the 2008 Constitution. The domestic and international election observers also observed
                     the 2020 election and they found some inconsistencies in electoral administration and election
@@ -56,7 +56,7 @@
                     the will of the majority of voters.
                 </div>
                 <div
-                    class="trigger p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white min-h-[40vh] relative">
+                    class="trigger p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white relative">
                     National League for Democracy won the majority of constituencies except in some ethnic states with a
                     total of 396 seats in the national legislation Hluttaw, which was upped by 33 seats from its win in
                     the 2015 election. Therefore, the NLD party secured a landslide victory in the election, which was
@@ -308,7 +308,7 @@ const drawSubregions = (features) => {
                 data.hoverRegion = null;
                 return;
             }
-            data.details.title = result.name;
+            data.details.title = result.name + ' ( Top 3 parties )';
             data.details.contents = [];
             data.details.contents.push(['Party', 'Candidate', 'Votes']);
 

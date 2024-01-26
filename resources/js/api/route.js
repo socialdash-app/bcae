@@ -39,7 +39,7 @@ export const headers = [{
         secondaryColor: '#FF7F00',
     }, {
         name: 'Correlated Events',
-        primaryColor: '#FFE4DE',
+        primaryColor: '#FFE4DE', //#FFE4DE
         icon: correlatedActions,
         secondaryColor: '#A65628',
     }, {

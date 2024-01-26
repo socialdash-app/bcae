@@ -1,7 +1,8 @@
 <template>
     <main :style="{ height: height + 'px' }"
           class="w-screen overscroll-none leading-7 shrink-0  overflow-y-auto overflow-x-hidden flex items-center flex-col">
-        <div class="fixed right-6 md:right-20 top-5 md:top-8 flex z-[10000] items-center justify-center">
+        <div @click="route.changeTo('home')"
+             class="fixed right-6 md:right-20 cursor-pointer top-5 md:top-8 flex z-[10000] items-center justify-center">
             <div class="absolute w-10 md:!w-14 h-10 md:!h-14 flex items-center justify-center">
                 <svg :id="'header-' + separateWordByDash(header.name)" :style="{ zIndex: index }"
                      class="absolute w-full h-full"

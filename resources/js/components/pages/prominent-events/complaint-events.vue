@@ -47,7 +47,6 @@ const data = reactive({
 })
 
 function revertArticle() {
-    alert('revert')
     if (isNaN(currentExpandedArticleIndex)) return;
     currentExpandedArticle.style.zIndex = 'auto'
     currentExpandedArticle.style.overflowY = 'hidden'
@@ -79,7 +78,6 @@ function revertArticle() {
 }
 
 function expandArticle(index) {
-    alert('click' + index)
     let article = document.getElementById(`complaint-${index}`);
     currentExpandedArticleIndex = index;
     article.style.zIndex = 1000;

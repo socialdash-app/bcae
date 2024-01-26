@@ -36,10 +36,6 @@ const paddingBottom = screen.height - window.innerHeight
 const height = window.innerHeight
 
 onMounted(() => {
-    // alert(window.innerWidth)
-    // setTimeout(() => {
-    //     route.changeTo('navigation')
-    // }, 1000)
 })
 </script>
 

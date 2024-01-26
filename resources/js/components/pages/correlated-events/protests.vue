@@ -7,10 +7,12 @@
                 <g class="map" fill="#b3b3b3" stroke="black" stroke-width="0.01"></g>
                 <g class="protests" fill="orange" stroke="black" stroke-width="0.01"></g>
             </svg>
-            <div
-                class="flex flex-col absolute bottom-4 left-0 gap-y-4">
-                <div class="">
-                    <!--                    date range and unknown person-->
+            <div v-show="!data.loading"
+                 class="flex flex-col absolute bottom-4 left-0 gap-y-4">
+                <p>{{ data.currentDateRange }}</p>
+                <div class="flex gap-x-2 items-center">
+                    <span class="w-4 h-4 bg-black rounded-full"></span>
+                    <span>Unknown People</span>
                 </div>
                 <div class="w-64 h-4 bg-gradient-to-r from-[#084CFB] to-[#F99500]"></div>
                 <div class="w-full flex justify-between text-sm font-medium text-gray-700">
@@ -19,10 +21,19 @@
                 </div>
             </div>
         </div>
+        <div id="protest-detail"
+             class="fixed md:!w-[40vw] w-[80vw] border-gray-800 z-[10000] bg-[#fab3a2] p-4 rounded border"
+             v-show="data.hoverTownship">
+            <h1 class="font-semibold text-lg">{{ data.details.title }}</h1>
+            <p> {{ data.details.content }}</p>
+        </div>
         <div class="w-11/12 md:w-1/2 py-10 gap-y-24 flex flex-col z-10">
             <div class="protest-map-trigger mb-[90%] md:!mb-[50%] w-full rounded-lg h-[100vh]"></div>
             <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-white h-[40vh]"></div>
             <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-white h-[40vh] relative">
+
+            </div>
+            <div class="mb-[90%] md:!mb-[50%] w-full h-[40vh] relative">
 
             </div>
         </div>
@@ -36,11 +47,22 @@ import {PopOver} from "vue-common-components";
 import AnimeScrollTrigger from 'anime-scrolltrigger'
 import anime from "animejs";
 import settings from "../../../api/settings.js";
+import {placeElementRelativeToScreen} from "../../../api/helpers.js";
 
 const height = window.innerHeight;
 const props = defineProps([]);
 
 let protests = [];
+
+const data = reactive({
+    hoverTownship: null,
+    details: {
+        title: '',
+        content: '',
+    },
+    loading: true,
+    currentDateRange: '',
+});
 
 
 let protestPoints = null;
@@ -58,15 +80,10 @@ let dateIntervals = (() => {
 })();
 let currentIndex = 0;
 
-const computeYPos = (offset) => {
-    let innerHeight = window.innerHeight;
-    offset = offset > innerHeight * 0.55 ? innerHeight / 2 : offset;
-    return offset;
-};
-const computeXPos = (offset) => {
-    let innerWidth = window.innerWidth;
-    return innerWidth < 768 ? innerWidth * 0.05 : offset;
-};
+console.log(dateIntervals)
+
+data.currentDateRange = `from ${startDate.toDateString()} to ${endDate.toDateString()}`
+
 const init = () => {
     const svg = d3.select('svg#protests-map');
     const width = svg.node().getBoundingClientRect().width;
@@ -77,6 +94,18 @@ const init = () => {
         d3.json('assets/states-and-regions.json'),
     ]).then(([all]) => {
         projection = d3.geoEquirectangular().fitSize([width, height], all)
+
+        svg.on('mousemove', (e, d) => {
+            if (e.target === svg.node() && data.hoverTownship) {
+                data.hoverTownship = null;
+            }
+        })
+
+        document.querySelector('main').addEventListener('scroll', () => {
+            if (data.hoverTownship) {
+                data.hoverTownship = null;
+            }
+        })
         const path = d3.geoPath().projection(projection);
         const g = svg.select('g.map');
         protestPoints = svg.select('g.protests');
@@ -90,11 +119,15 @@ const init = () => {
             .style("stroke", "#313131");
 
         plotPoints(new Date(dateIntervals[0]), new Date(dateIntervals[1]))
+
+        data.loading = false;
     });
 }
 
 
 const plotPoints = (startDate, endDate) => {
+    let detailBox = document.getElementById('protest-detail');
+
     startDate.setDate(startDate.getDate() - 1)
     let protestsBetween = protests.filter((protest) => {
         let date = new Date(protest.date)
@@ -107,7 +140,7 @@ const plotPoints = (startDate, endDate) => {
                 .attr('class', 'point cursor-pointer')
                 .attr('fill', (d) => {
                     if (d.numberOfPeople === 'NA') {
-                        return '#4176ff';
+                        return '#040404';
                     }
                     return colors(parseInt(d.numberOfPeople));
                 })
@@ -120,55 +153,87 @@ const plotPoints = (startDate, endDate) => {
                     parseFloat(d.lon), // long
                     parseFloat(d.lat) // lat
                 ])[1])
-
+            e.style('cursor', 'pointer')
             e.transition()
                 .duration(400)
                 .attr('r', 5)
 
             e.on('touchstart', (e, d) => {
-                if (d.township !== this.detail.township) {
-                    this.detail.affiliations = [];
-                    Object.keys(d).filter((t) => /^affiliation/.test(t)).forEach((affiliation) => {
-                        if (d[affiliation] !== 'NA') {
-                            this.detail.affiliations.push(d[affiliation]);
-                        }
-                    })
-                    this.detail.place = d.place;
-                    this.detail.approx = d.approx;
-                    this.detail.numberOfPeople = d.numberOfPeople;
-                    this.detail.stateOrRegion = d.stateOrRegion;
-                    this.detail.township = d.township;
-                    this.detail.date = d.date;
-                    this.detail.top = computeYPos(e.pageY) + 'px';
-                    this.detail.left = computeXPos(e.pageX) + 'px';
-                    this.detail.isHovering = true;
+                let hoverTownship = d.date + d.township;
+                if (hoverTownship === data.hoverTownship) {
+                    return;
                 }
+                data.details.content = '';
+                data.details.title = d.township + ` (${d.date})`
+
+                if (d.numberOfPeople !== 'NA') {
+                    data.details.content += `Approximately ${d.numberOfPeople} of `
+                }
+                data.details.content += `people from `;
+                Object.keys(d).filter((t) => /^affiliation/.test(t)).forEach((affiliation) => {
+                    if (d[affiliation] !== 'NA') {
+                        data.details.content += ` ${d[affiliation]}`
+                    }
+                })
+
+                data.details.content += ` protested`
+
+                if (d.against !== 'NA') {
+                    data.details.content += ` against ${d.against}`
+                }
+
+                data.details.content += ` at ${d.place} on ${d.date}`;
+                data.hoverTownship = hoverTownship;
+                detailBox.style.top = e.clientY + 'px';
+                detailBox.style.left = e.clientX + 'px';
+                detailBox.style.opacity = 0;
+                setTimeout(() => {
+                    placeElementRelativeToScreen(detailBox).then((element) => {
+                        element.style.opacity = 1;
+                    });
+                }, 100)
             })
             e.on('mouseover', (e, d) => {
-                if (d.township !== this.detail.township) {
-                    this.detail.affiliations = [];
-                    Object.keys(d).filter((t) => /^affiliation/.test(t)).forEach((affiliation) => {
-                        if (d[affiliation] !== 'NA') {
-                            this.detail.affiliations.push(d[affiliation]);
-                        }
-                    })
-                    this.detail.place = d.place;
-                    this.detail.approx = d.approx;
-                    this.detail.numberOfPeople = d.numberOfPeople;
-                    this.detail.stateOrRegion = d.stateOrRegion;
-                    this.detail.township = d.township;
-                    this.detail.date = d.date;
-                    this.detail.top = computeYPos(e.pageY) + 'px';
-                    this.detail.left = computeXPos(e.pageX) + 'px';
-                    this.detail.isHovering = true;
+                let hoverTownship = d.date + d.township;
+                if (hoverTownship === data.hoverTownship) {
+                    return;
                 }
+                data.details.content = '';
+                data.details.title = d.township + ` (${d.date})`
+
+                if (d.numberOfPeople !== 'NA') {
+                    data.details.content += `Approximately ${d.numberOfPeople} of `
+                }
+                data.details.content += `people from `;
+                Object.keys(d).filter((t) => /^affiliation/.test(t)).forEach((affiliation) => {
+                    if (d[affiliation] !== 'NA') {
+                        data.details.content += ` ${d[affiliation]}`
+                    }
+                })
+
+                data.details.content += ` protested`
+
+                if (d.against !== 'NA') {
+                    data.details.content += ` against ${d.against}`
+                }
+
+                data.details.content += ` at ${d.place} on ${d.date}`;
+                data.hoverTownship = hoverTownship;
+                detailBox.style.top = e.clientY + 'px';
+                detailBox.style.left = e.clientX + 'px';
+                detailBox.style.opacity = 0;
+                setTimeout(() => {
+                    placeElementRelativeToScreen(detailBox).then((element) => {
+                        element.style.opacity = 1;
+                    });
+                }, 100)
             })
             return e;
         },
 
         update => update.transition().duration(500).attr('fill', (d) => {
             if (d.numberOfPeople === 'NA') {
-                return '#4176ff';
+                return '#040404';
             }
             return colors(parseInt(d.numberOfPeople));
         }).attr('cx', d => projection([
@@ -229,10 +294,12 @@ const listenTriggers = () => {
                 lerp: true,
                 onUpdate: (_, progress) => {
                     let index = Math.round(progress * (dateIntervals.length - 1));
-                    if (index !== currentIndex) {
-                        const endDate = dateIntervals[index]
-                        plotPoints(new Date(startDate), endDate)
+                    const endDate = dateIntervals[index]
+                    const startDateClone = new Date(startDate);
+                    if (index !== currentIndex && startDateClone !== endDate) {
+                        plotPoints(startDateClone, endDate)
                         currentIndex = index;
+                        data.currentDateRange = `from ${startDateClone.toDateString()} to ${endDate.toDateString()}`
                     }
 
                 }
