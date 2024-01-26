@@ -11,7 +11,7 @@
         </div>
         <div id="explore-container"
              :style="{height: height + 'px'}"
-             class="w-screen sticky top-0 overflow-hidden flex flex-col items-center shrink-0">
+             class="w-screen cursor-grab sticky top-0 overflow-hidden flex flex-col items-center shrink-0">
             <div id="description-container" class="w-11/12 sm:w-10/12 2xl:w-8/12 h-[50vh] flex overflow-hidden">
             </div>
             <ul id="boxes"
@@ -283,7 +283,6 @@ const init = () => {
                 end: 'bottom bottom',
                 lerp: true,
                 onUpdate: (_, progress) => {
-                    console.log(shouldTriggerScroll)
                     if (shouldTriggerScroll) {
                         update(progress * deg * data.length)
                     }

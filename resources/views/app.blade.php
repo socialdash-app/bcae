@@ -21,9 +21,9 @@
         @vite(['resources/js/app.js','resources/css/app.css'])
     @endproduction
     @env('local')
-        <script type="module" src="http://172.18.0.1:5173/@@vite/client"></script>
-        <script type="module" src="http://172.18.0.1:5173/resources/js/app.js"></script>
-        <link rel="stylesheet" href="http://172.18.0.1:5173/resources/css/app.css"/>
+        <script type="module" src="http://192.168.1.111:5173/@@vite/client"></script>
+        <script type="module" src="http://192.168.1.111:5173/resources/js/app.js"></script>
+        <link rel="stylesheet" href="http://192.168.1.111:5173/resources/css/app.css"/>
     @endenv
     {{--       <script type="module" src="http://192.168.110.234:5173/@@vite/client"></script>--}}
     {{--       <script type="module" src="http://192.168.110.234:5173/resources/js/app.js"></script>--}}
