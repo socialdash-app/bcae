@@ -2,10 +2,16 @@
     <div id="explore"
          :style="{height: height + 'px'}"
          class="flex w-screen relative select-none text-white overflow-y-auto overscroll-none overflow-x-hidden bg-[#660000] items-center justify-start flex-col">
-        <h1 class="fixed" id="debug"></h1>
+        <div
+            class="w-full md:!bg-transparent header py-4 flex justify-between  z-[100] px-4 md:!px-20 fixed top-0 left-0">
+            <div class="flex w-full gap-x-2 items-center">
+                <img class="w-8 brand-icon h-8 md:!w-12 md:!h-12" src="assets/logo_white.svg" alt="logo"/>
+                <h1 class="font-bevietnampro brand-title text-white font-bold text-lg md:text-2xl">Social Dash</h1>
+            </div>
+        </div>
         <div id="explore-container"
              :style="{height: height + 'px'}"
-             class="w-screen cursor-grab sticky top-0 overflow-hidden flex flex-col items-center shrink-0">
+             class="w-screen sticky top-0 overflow-hidden flex flex-col items-center shrink-0">
             <div id="description-container" class="w-11/12 sm:w-10/12 2xl:w-8/12 h-[50vh] flex overflow-hidden">
             </div>
             <ul id="boxes"
@@ -15,7 +21,7 @@
                 class="w-[300px] h-[70vh] absolute bottom-[-100%] flex justify-center items-center">
             </ul>
         </div>
-        <div class="shrink-0 absolute -z-10 w-full" id="navigation-trigger"
+        <div class="shrink-0 absolute -z-10 w-full" id="explore-trigger"
              :style="{ height: data.length * height + 'px' }">
         </div>
         <div class="shrink-0" :style="{ height: (data.length - 1) * height + 'px' }">
@@ -269,19 +275,23 @@ const init = () => {
         })
     }, false);
 
-    new AnimeScrollTrigger(document.getElementById('explore'), [{
-        scrollTrigger: {
-            trigger: '#navigation-trigger',
-            start: 'top top',
-            end: 'bottom bottom',
-            lerp: true,
-            onUpdate: (_, progress) => {
-                if (shouldTriggerScroll) {
-                    update(progress * deg * data.length)
+    setTimeout(() => {
+        new AnimeScrollTrigger(document.getElementById('explore'), [{
+            scrollTrigger: {
+                trigger: '#explore-trigger',
+                start: 'top top',
+                end: 'bottom bottom',
+                lerp: true,
+                onUpdate: (_, progress) => {
+                    console.log(shouldTriggerScroll)
+                    if (shouldTriggerScroll) {
+                        update(progress * deg * data.length)
+                    }
                 }
             }
-        }
-    }])
+        }])
+    }, 100)
+
 
     const mobileAndTabletCheck = function () {
         let check = false;
@@ -292,7 +302,6 @@ const init = () => {
     };
     let multiplier = mobileAndTabletCheck() ? 3 : 0.3;
     let container = document.getElementById('explore-container')
-    container.style.touchAction = 'none';
     new DragGesture(container, (state) => {
         container.style.cursor = 'grabbing'
         isDragging = true;
@@ -311,15 +320,6 @@ onMounted(() => {
     setTimeout(() => {
         init()
     }, settings.animationDuration)
-})
-
-onActivated(() => {
-    document.querySelector('.brand-icon').src = 'assets/logo_white.png';
-    document.querySelector('.brand-title').style.color = 'white';
-})
-onDeactivated(() => {
-    document.querySelector('.brand-icon').src = 'assets/logo.png';
-    document.querySelector('.brand-title').style.color = 'initial';
 })
 </script>
 

@@ -167,7 +167,6 @@ onMounted(() => {
         };
         Object.keys(data).forEach((party) => {
             let color = getPartyColor(party);
-            console.log(party, color)
             let d = data[party].map((datum) => {
                 datum.value = 1;
                 datum.color = color;

@@ -2,7 +2,7 @@
     <div id="party-reactions"
          :style="{background: headers[3].primaryColor}"
          class="w-full flex-col flex pt-4 md:!pt-6 items-center relative">
-        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
+        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[10000]">
             <h1 class="text-xl md:text-3xl font-bold">Party Reactions</h1>
         </div>
         <party-accusations-facebook-posts/>
@@ -23,6 +23,7 @@ import AnimeScrollTrigger from "anime-scrolltrigger";
 import route, {headers} from "../../../api/route.js";
 import PartySignatures from "./party-signatures.vue";
 import settings from "../../../api/settings.js";
+import anime from "animejs";
 
 const props = defineProps([]);
 
@@ -40,9 +41,21 @@ onMounted(() => {
                 lerp: true,
                 onEnter: () => {
                     route.changeSectionHeader(3)
+                    anime({
+                        targets: '#section-indicator-section',
+                        background: headers[3].primaryColor,
+                        duration: 300,
+                        easing: 'linear'
+                    })
                 },
                 onEnterBack: () => {
                     route.changeSectionHeader(3)
+                    anime({
+                        targets: '#section-indicator-section',
+                        background: headers[3].primaryColor,
+                        duration: 300,
+                        easing: 'linear'
+                    })
                 },
             }
         }])

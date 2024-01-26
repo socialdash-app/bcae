@@ -1,7 +1,7 @@
 <template>
     <div id="beginning-of-the-end"
          class="flex flex-col w-full py-12 relative items-center">
-        <div class="sticky beginning-of-the-end-title pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
+        <div class="sticky beginning-of-the-end-title pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[10000]">
             <h1 class="text-xl md:text-3xl font-bold">Beginning Of The End</h1>
         </div>
         <intro-beginning-of-the-end/>
@@ -40,7 +40,7 @@ import BcaeSummary from "./bcae-summary.vue";
 import CreditSection from "./credit-section.vue";
 import ShareSection from "./share-section.vue";
 import AnimeScrollTrigger from "anime-scrolltrigger";
-import route from "../../../api/route.js";
+import route, {headers} from "../../../api/route.js";
 import anime from "animejs";
 import settings from "../../../api/settings.js";
 
@@ -60,9 +60,21 @@ onMounted(() => {
                 lerp: true,
                 onEnter: () => {
                     route.changeSectionHeader(6)
+                    anime({
+                        targets: '#section-indicator-section',
+                        background: '#ffffff',
+                        duration: 300,
+                        easing: 'linear'
+                    })
                 },
                 onEnterBack: () => {
                     route.changeSectionHeader(6)
+                    anime({
+                        targets: '#section-indicator-section',
+                        background: '#ffffff',
+                        duration: 300,
+                        easing: 'linear'
+                    })
                 },
             }
         },])

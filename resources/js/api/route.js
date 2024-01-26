@@ -68,8 +68,6 @@ export default {
             }, settings.animationDuration)
         }
     },
-    scrollTo: function (section) {
-    },
     changeSectionHeader: function (index) {
         let translateYOffsets = [];
         for (let i = 0; i < headers.length; i++) {

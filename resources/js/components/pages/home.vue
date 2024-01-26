@@ -2,6 +2,13 @@
     <div id="home"
          :style="{height: height + 'px'}"
          class="flex relative pt-20 md:pt-0 items-center bg-[#111827] overflow-hidden shrink-0 flex-col w-screen">
+        <div
+            class="w-full md:!bg-transparent header py-4 flex justify-between  z-[100] px-4 md:!px-20 fixed top-0 left-0">
+            <div class="flex w-full gap-x-2 items-center">
+                <img class="w-8 brand-icon h-8 md:!w-12 md:!h-12" src="assets/logo.svg" alt="logo"/>
+                <h1 class="font-bevietnampro brand-title text-[#5309dd] font-bold text-lg md:text-2xl">Social Dash</h1>
+            </div>
+        </div>
         <div id="home-container"
              class="w-full sticky z-20 shrink-0 top-0 left-0 overflow-hidden md:tracking-wide h-full leading-relaxed text-gray-800 justify-between md:!justify-center flex md:!flex-row flex-col items-center">
             <div id="home-text"
@@ -20,7 +27,7 @@
                 <div class="h-5/6 w-full shrink-0"></div>
                 <div
                     class="flex px-4 flex-col md:backdrop-blur-0  relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
-                    <p class="description w-full text-gray-600 backdrop-blur  md:backdrop-blur-0">On the 1st of February
+                    <p class="description w-full text-gray-600 backdrop-blur md:backdrop-blur-0">On the 1st of February
                         2021 when Vice President Myint
                         Swe became an Acting President and declared on state-owned media that the results of the
                         November 2020 general election were invalid, instating a one-year state of emergency, and
@@ -30,7 +37,7 @@
                         dashed. The coup has also brought economic turmoil, wiping out modest gains in poverty reduction
                         made over the past decade. But, this coup was not the first time for Myanmar; it was preceded by
                         many military coups since 1958.
-                        <br>
+                        <br/><br/>
                         Before the coup d'état, the military and other political parties repeatedly announced that the
                         election was unfair. Do you think the 2020 general election is not fair? Do you want to know the
                         incidents that happened during the period before the coup and after the election?

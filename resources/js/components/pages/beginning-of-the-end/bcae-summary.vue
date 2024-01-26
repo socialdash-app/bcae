@@ -6,7 +6,7 @@
                  v-for="(datum,index) in data"
                  :style="{height: 2 * height + 'px'}">
                 <div class="sticky top-32 w-full py-10 flex flex-col">
-                    <div class="w-full flex justify-between md:flex-row flex-col">
+                    <div class="w-full flex justify-between md:!flex-row flex-col">
                         <h1 :style="{transform: `translateY(${height}px)`}"
                             class="text-5xl summary-index transform inline-block text-white font-bold">
                             0{{ index + 1 }}

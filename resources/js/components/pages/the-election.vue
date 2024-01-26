@@ -45,10 +45,10 @@
                     </tbody>
                 </table>
             </div>
-            <div class="w-11/12 md:!w-1/2 flex flex-col items-center relative z-[1002]">
+            <div class="w-11/12 md:!w-1/2 flex flex-col items-center relative ">
                 <div class="mb-[50%] w-full rounded-lg h-[50vh] md:!h-screen"></div>
                 <div
-                    class="trigger p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white">
+                    class="trigger z-[1002] p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white">
                     Despite the COVID-19 pandemic and other challenges, the third general election was held on November
                     8, 2020, per the 2008 Constitution. The domestic and international election observers also observed
                     the 2020 election and they found some inconsistencies in electoral administration and election
@@ -56,7 +56,7 @@
                     the will of the majority of voters.
                 </div>
                 <div
-                    class="trigger p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white relative">
+                    class="trigger z-[1002] p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white relative">
                     National League for Democracy won the majority of constituencies except in some ethnic states with a
                     total of 396 seats in the national legislation Hluttaw, which was upped by 33 seats from its win in
                     the 2015 election. Therefore, the NLD party secured a landslide victory in the election, which was
@@ -64,8 +64,8 @@
                 </div>
                 <div id="the-election-then-section"
                      class="relative mb-[50vh] w-full flex items-center justify-center">
-                    <h1 class="then-title text-center bg-[#ff9ccd] absolute w-screen transform text-5xl md:text-6xl py-10 font-bold">
-                        Then</h1>
+                    <h1 class="then-title z-[1002] text-center bg-[#ff9ccd] absolute w-screen transform text-5xl md:text-6xl py-6 font-bold">
+                        Afterwards…</h1>
                 </div>
             </div>
         </div>
@@ -367,7 +367,6 @@ onMounted(() => {
                     trigger: container,
                     start: '1% top',
                     end: '30% top',
-                    debug: true,
                     onEnter: () => {
                         anime({
                             targets: mapContainer,
@@ -426,9 +425,21 @@ onMounted(() => {
                     smooth: true,
                     onEnter: () => {
                         route.changeSectionHeader(1)
+                        anime({
+                            targets: '#section-indicator-section',
+                            background: headers[1].primaryColor,
+                            duration: 300,
+                            easing: 'linear'
+                        })
                     },
                     onEnterBack: () => {
                         route.changeSectionHeader(1)
+                        anime({
+                            targets: '#section-indicator-section',
+                            background: headers[1].primaryColor,
+                            duration: 300,
+                            easing: 'linear'
+                        })
                     },
                     onLeave: () => {
                         if (data.hoverRegion) data.hoverRegion = null;

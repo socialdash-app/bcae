@@ -9,7 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <title>Document</title>
+    <title>Before the Coup, After the Election</title>
+    <meta name="keywords"
+          content="before the coup, after the election, myanmar, 2021 coup, myanmar election">
+    <meta itemprop="name" content="Before The Coup, After The Election">
+    <meta itemprop="description" content="Data Story from Frontier Myanmar's Social Dash">
+    <link rel="canonical" href="https://public.socialdash.app/bcae">
+    <link rel="social dash icon" type="image/jpg" href="https://socialdash.app/images/logo.png">
+    <link rel="apple-touch-icon" href="https://socialdash.app/images/logo.png">
     @production
         @vite(['resources/js/app.js','resources/css/app.css'])
     @endproduction

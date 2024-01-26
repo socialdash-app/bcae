@@ -1,13 +1,5 @@
 <template>
     <div id="main-container" class="flex font-poppins antialiased flex-col w-full">
-        <!--        <navigation/>-->
-        <div
-            class="w-full md:!bg-transparent header py-4 flex justify-between  z-[100] px-4 md:!px-20 fixed top-0 left-0">
-            <div class="flex w-full gap-x-2 items-center">
-                <img class="w-8 brand-icon h-8 md:!w-12 md:!h-12" src="assets/logo.png" alt="logo"/>
-                <h1 class="font-bevietnampro brand-title text-[#5309dd] font-bold text-lg md:text-2xl">Social Dash</h1>
-            </div>
-        </div>
         <Transition :name="currentAnimationName">
             <KeepAlive>
                 <component :key="route.data.component" :is="route.data.component"/>

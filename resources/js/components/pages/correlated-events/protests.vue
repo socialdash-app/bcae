@@ -27,10 +27,10 @@
             <h1 class="font-semibold text-lg">{{ data.details.title }}</h1>
             <p> {{ data.details.content }}</p>
         </div>
-        <div class="w-11/12 md:w-1/2 py-10 gap-y-24 flex flex-col z-10">
-            <div class="protest-map-trigger mb-[90%] md:!mb-[50%] w-full rounded-lg h-[100vh]"></div>
-            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-white h-[40vh]"></div>
-            <div class="mb-[90%] md:!mb-[50%] w-full border rounded bg-white h-[40vh] relative">
+        <div class="w-11/12 md:w-1/2 py-10 gap-y-24 flex flex-col ">
+            <div class="protest-map-trigger mb-[90%] md:!mb-[50%] w-full rounded-lg h-[50vh] md:!h-screen"></div>
+            <div class="mb-[90%] z-10 md:!mb-[50%] w-full border rounded bg-white h-[40vh]"></div>
+            <div class="mb-[90%] z-10 md:!mb-[50%] w-full border rounded bg-white h-[40vh] relative">
 
             </div>
             <div class="mb-[90%] md:!mb-[50%] w-full h-[40vh] relative">
@@ -79,8 +79,6 @@ let dateIntervals = (() => {
     return d3.timeDays(start, end, diffInDays);
 })();
 let currentIndex = 0;
-
-console.log(dateIntervals)
 
 data.currentDateRange = `from ${startDate.toDateString()} to ${endDate.toDateString()}`
 
@@ -267,7 +265,6 @@ const listenTriggers = () => {
                 trigger: '.protest-map-trigger',
                 start: 'bottom 60%',
                 end: 'bottom -10%',
-                debug: true,
                 onEnter: () => {
                     anime({
                         targets: mapContainer,

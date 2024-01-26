@@ -39,18 +39,18 @@
                         {{ truncate(article.description, width > 768 ? 600 : 300) }}
                     </div>
                     <div class="flex h-1/6 items-center w-full justify-between">
-                        <div class="flex items-center justify-center w-4/12 gap-x-2">
+                        <a :href="article.url" target="_blank" class="flex items-center justify-center w-4/12 gap-x-2">
                             <div v-html="like" class="w-8 h-8"></div>
                             <span>Like</span>
-                        </div>
-                        <div class="flex items-center justify-center w-4/12 gap-x-2">
+                        </a>
+                        <a :href="article.url" target="_blank" class="flex items-center justify-center w-4/12 gap-x-2">
                             <div v-html="comment" class="w-8 h-8"></div>
                             <span>Comment</span>
-                        </div>
-                        <div class="flex items-center justify-center w-4/12 gap-x-2">
+                        </a>
+                        <a :href="article.url" target="_blank" class="flex items-center justify-center w-4/12 gap-x-2">
                             <div v-html="share" class="w-8 h-8"></div>
                             <span>Share</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
@@ -81,16 +81,19 @@ const articles = [{
     dateTime: '2/1/2021 2:51:25',
     author: 'Myo Yan Naung Thein',
     title: 'First Post Related To Coup',
+    url: 'https://www.facebook.com/MyoYanNaungThein/photos/a.10153281836274241/10159104155624241/?type=3',
     description: '"Emergency Tip" If your Internet connection is down, you can use your phone to connect to each other through a mesh network. Available Mesh Network Apps are: "FireChat" for android and apple iOS; "The Serval Mesh" for android; "Signal Offline Messenger" for android; "Vojer" for apple iOS; "Bridgefy" for android and apple iOS; and "Briar" for android. Here is an example of "Bridgefy" app. You can use the "Bridgefy" app in case of sudden internet outage. This app was used by pro-revolutionaries during the Hong Kong protests. Its advantage is that it can send text messages via bluetooth without internet connection, which is very useful. The Chinese Government\'s advanced technology could not prevent the use of this apk during the protests in Hong Kong. Using this apk, you can connect up to 100 meters (about 330 feet) from one phone to another. If there is a telephone within every 100 meters, and by connecting, it can be connect to even the most distant places. You can use this apk to send individual messages or you can share your message to everyone nearby with the Broadcast function. That app can be used on both iPhone and Android. We encourage you to download and install it because it need internet connection for first time to log in. You can easily search and download it in Play Store or App Store by typing "Bridgefy". (Note: We want you to start using it while you have access to use the internet). Here is the link: https://www.facebook.com/100005014158392/posts/1763764217134033/?d=n',
 }, {
     dateTime: '2/1/2021 3:43:03',
     author: 'လူငယ့်အသံလူငယ့်ဟန',
     title: 'First Post About Coup',
+    url: 'https://www.facebook.com/529864767534927/posts/1019468761907856',
     description: "Shan State Planning and Finance Minister U Soe Nyunt Lwin was reportedly taken away; Cann't contact with Government offices in Nay Pyi Taw; Phone lines have been cut off."
 }, {
     dateTime: '2/1/2021 5:44:52',
     author: 'DVB TV News',
     title: 'First Media Post About Coup',
+    url: 'https://www.facebook.com/DVBTVNews/posts/3984924851545985',
     description: 'Tatmadaw seizes power, detains all the chief ministers of states and regions. The Tatmadaw seized power earlier this morning and detained all the chief ministers of the states and regions, including the Yangon Region chief minister.',
 },]
 

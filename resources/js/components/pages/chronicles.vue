@@ -1,7 +1,7 @@
 <template>
     <div id="chronicles-trigger" :style="{background: headers[0].primaryColor}"
-         class="w-full flex relative py-12 flex-col items-center">
-        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[100]">
+         class="w-full flex relative py-6 flex-col items-center">
+        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[10000]">
             <h1 class="text-xl md:text-3xl font-bold">Chronicles</h1>
         </div>
         <div id="chronicles-introduction"
@@ -36,7 +36,7 @@
                 </svg>
             </div>
             <div class="w-full md:!w-5/12 flex flex-col z-10">
-                <div class="shrink-0 h-[100vh] w-full">
+                <div class="shrink-0 h-[50vh]  md:!h-[100vh] w-full">
                 </div>
                 <div
                     class="flex chronicles-content rounded border shrink-0 gap-y-4 px-4 py-6 md:!px-8 md:!py-12 bg-white  flex-col w-full"
@@ -109,39 +109,63 @@ const run = function (fn, intervalInMilliseconds = 1000, autostart = false, maxS
     let shouldRun = autostart;
     let interval = null;
     let step = 0;
+    let _intervalInMilliseconds = intervalInMilliseconds;
+    let _maxSteps = maxSteps;
+    let _onComplete = onComplete;
 
     let _fn = () => {
         if (!shouldRun) {
             return
         }
-        if (maxSteps && step >= maxSteps) {
+        if (_maxSteps && step >= _maxSteps) {
             clearInterval(interval);
-            if (onComplete) onComplete();
+            if (_onComplete && typeof _onComplete === 'function') _onComplete();
             return;
         }
         fn(step);
         step++;
     }
-
-    interval = setInterval(_fn, intervalInMilliseconds)
+    if (autostart) {
+        interval = setInterval(_fn, _intervalInMilliseconds)
+    }
 
     return {
-        start: () => shouldRun = true,
+        start: () => {
+            shouldRun = true
+            if (!interval) {
+                _fn();
+                interval = setInterval(_fn, _intervalInMilliseconds)
+            }
+        },
         pause: () => shouldRun = false,
         stop: () => {
             if (interval) clearInterval(interval);
             interval = null;
             step = 0;
+            shouldRun = false;
         },
-        update: (intervalInMilliseconds) => {
+        update: (intervalInMilliseconds = null, autostart = null, maxSteps = null, onComplete = null) => {
             clearInterval(interval);
-            interval = setInterval(_fn, intervalInMilliseconds);
+            if (intervalInMilliseconds) {
+                _intervalInMilliseconds = intervalInMilliseconds;
+            }
+            if (autostart) {
+                shouldRun = autostart;
+            }
+            if (maxSteps) {
+                _maxSteps = maxSteps;
+            }
+            if (onComplete) {
+                _onComplete = onComplete;
+            }
+            interval = setInterval(_fn, _intervalInMilliseconds);
         },
         restart: () => {
             if (interval) clearInterval(interval)
             step = 0;
             shouldRun = true;
-            interval = setInterval(_fn, intervalInMilliseconds);
+            _fn();
+            interval = setInterval(_fn, _intervalInMilliseconds);
         },
         get step() {
             return step;
@@ -259,14 +283,13 @@ const initialiseIllustrationAnimations = () => {
                     value: (_, index) => {
                         return index === 0 ? 1 : 0;
                     },
-                    duration: 400,
+                    delay: 1000 / 3,
                 }],
             })
-            // stop other animation
+            // // stop other animation
             protest2021Animation.pause();
             handshakeAnimation.pause();
             hideVisibility([handshakeFrame1, handshakeFrame2, protest2021Frame1, protest2021Frame2, ...walkFrames])
-            // start walking animation
             walk.restart();
         }
     }, {
@@ -279,7 +302,7 @@ const initialiseIllustrationAnimations = () => {
                     value: (_, index) => {
                         return index === 2 ? 1 : 0;
                     },
-                    duration: 400,
+                    delay: 1000 / 3,
                 }]
             })
             hideVisibility([illustration1990])
@@ -337,9 +360,21 @@ const init = () => {
             lerp: true,
             onEnter: () => {
                 route.changeSectionHeader(0)
+                anime({
+                    targets: '#section-indicator-section',
+                    background: headers[0].primaryColor,
+                    duration: 300,
+                    easing: 'linear'
+                })
             },
             onEnterBack: () => {
                 route.changeSectionHeader(0)
+                anime({
+                    targets: '#section-indicator-section',
+                    background: headers[0].primaryColor,
+                    duration: 300,
+                    easing: 'linear'
+                })
             },
             onUpdate: (_, progress) => {
                 anime({
@@ -349,30 +384,6 @@ const init = () => {
                     duration: 400,
                 })
             }
-        }
-    }, {
-        scrollTrigger: {
-            trigger: '#chronicles-trigger',
-            start: '2% top',
-            end: 'bottom top',
-            onEnter: () => {
-                // hide logo
-                anime({
-                    targets: '.header',
-                    translateY: ['0%', '-100%'],
-                    easing: 'easeOutQuart',
-                    duration: 600,
-                })
-            },
-            onLeaveBack: () => {
-                // show logo
-                anime({
-                    targets: '.header',
-                    translateY: ['-100%', '0%'],
-                    easing: 'easeOutQuart',
-                    duration: 600,
-                })
-            },
         }
     }];
 
