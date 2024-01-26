@@ -52,7 +52,7 @@ export const headers = [{
 
 export default {
     data: reactive({
-        component: "story",
+        component: "home",
     }),
     changeTo: function (name, sectionID) {
         this.data.component = name;
