@@ -16,7 +16,7 @@
                 <div class="md:h-32 w-full shrink-0">
 
                 </div>
-                <h1 class="sticky p-4 title -top-4 md:top-0 bg-[#111827] z-10 uppercase text-[#E8544E] font-bold text-4xl xl:text-7xl">
+                <h1 class="sticky p-4 title -top-4 md:top-0 bg-transparent z-10 uppercase text-[#E8544E] font-bold text-4xl xl:text-7xl">
                     <span class="home-title inline-block pr-2 md:pr-4 opacity-0 ">Before </span>
                     <span class="home-title inline-block pr-2 md:pr-4 opacity-0 ">the </span>
                     <span class="home-title inline-block pr-2 md:pr-4 opacity-0 ">coup </span> <br>
@@ -58,11 +58,12 @@
                 </div>
             </div>
             <div
-                class="w-full px-4 md:!px-0 relative md:!w-4/12 2xl:!w-5/12 h-1/6 md:h-full flex items-end justify-between md:justify-end ">
-                <div style="transform-origin: center bottom; transform: scale(1);" v-html="voteHandIllustration"
-                     class="h-[50vh] flex items-end md:h-[80vh] home-illustration opacity-0"></div>
-                <div style="transform-origin: center bottom; transform: scale(0.8);" v-html="threeFingerIllustration"
-                     class="h-[50vh] flex items-end md:h-[80vh] home-illustration opacity-0"></div>
+                id="illustration-container"
+                class="w-full px-4 md:!px-0 relative md:!w-5/12 lg:!w-4/12 3xl:!w-3/12 h-1/6 md:h-full flex items-end justify-between md:justify-end ">
+                <div style="transform-origin: center bottom;" v-html="voteHandIllustration"
+                     class="flex items-end h-[50vh] md:!h-[70vh] home-illustration opacity-0"></div>
+                <div style="transform-origin: center bottom;" v-html="threeFingerIllustration"
+                     class="flex items-end h-[40vh] md:!h-[50vh] home-illustration opacity-0"></div>
             </div>
             <div id="scroll-down-indicator" class="fixed  bottom-8 opacity-0 flex flex-col items-center">
                 <h1 class="font-semibold md:    text-xl">Scroll</h1>
@@ -280,7 +281,7 @@
         <div :style="{height:(width > 768 ? height * 3 : height * 6) + 'px'}" class="w-full shrink-0">
 
         </div>
-        <div id="home-trigger" :style="{height: (width > 768 ? height * 3 : height * 6) + 'px'}"
+        <div id="home-trigger" :style="{height: (width > 768 ? height * 4 : height * 7) + 'px'}"
              class="w-full absolute top-0 shrink-0">
 
         </div>
@@ -335,7 +336,7 @@ const trigger = () => {
         {
             targets: '.home-illustration',
             scale: [{
-                value: (_, index) => index === 0 ? 0.7 : 1.1,
+                value: (_, i) => (i === 0 ? 0.8 : 1.5),
                 // delay: 1000,
             }],
             translateY: [0, 0],
@@ -379,6 +380,7 @@ const trigger = () => {
                     })
                 },
                 onUpdate: (_, progress) => {
+                    document.querySelector('.title').style.background = progress > 0.25 ? '#ffffff' : 'transparent';
                     anime({
                         targets: body,
                         scrollTop: progress * (bodyHeight + bodyScrollHeight),
@@ -442,13 +444,6 @@ const init = () => {
         complete: () => {
             anime({
                 targets: '#home',
-                background: '#fff',
-                easing: 'easeOutQuart',
-                duration: 1000,
-            })
-
-            anime({
-                targets: '.title',
                 background: '#fff',
                 easing: 'easeOutQuart',
                 duration: 1000,

@@ -1,23 +1,25 @@
 <template>
     <div id="complaint-events-trigger"
-         :style="{perspective: '1000px'}"
          class="w-full text-gray-900 relative flex flex-col items-center">
         <div id="complaint-events-container" class="w-full flex flex-col sticky top-0 pt-[10vh] items-center"
-             style="transform-style: preserve-3d; z-index: 100;"
+             style=" z-index: 100;"
              :style="{height: height + 'px'}">
             <div v-for="(complaint, index) in data.complaints"
-                 @click="expandArticle(index)"
                  style="will-change: transform;"
                  :id="`complaint-${index}`"
                  :data-index="index"
-                 class="complaint cursor-pointer overflow-y-hidden absolute border border-gray-600 bg-[#BEF4B7] rounded p-4 md:!p-10 "
-                 :style="{zIndex: index * 10, height: boxHeight + 'px',width: boxWidth + 'px',transform: `translateY(${(index + 1) * boxHeight }px) translateZ(100px)`}">
+                 class="complaint flex flex-col cursor-pointer overflow-y-hidden absolute border border-gray-600 bg-[#BEF4B7] rounded p-4 md:!p-10"
+                 :style="{zIndex: index * 10,height: boxHeight + 'px',width: boxWidth + 'px',transform: `translateY(${(index + 1) * boxHeight }px) scale(1)`}">
                 <h1 class="font-semibold text-lg md:text-2xl">{{ complaint.title }}</h1>
-                <p :style="{height: boxHeight * 0.75 + 'px'}"
-                   class="text-sm overflow-hidden md:!text-base mt-3 md:mt-6">
+                <p :style="{height: boxHeight * 0.6 + 'px'}"
+                   class="text-sm overflow-hidden text-ellipsis md:!text-base mt-3 md:mt-6">
                     {{
-                        truncate(complaint.description, 800)
+                        truncate(complaint.description, width > 768 ? 1200 : 600)
                     }}</p>
+                <button class="px-6 mt-auto self-end py-3 rounded bg-[#EE7E33] text-white"
+                        @click="clickArticle(index)">
+                    Read More
+                </button>
             </div>
         </div>
         <div class="shrink-0 w-full" :style="{height: `${data.complaints.length * boxHeight }px`}" style="z-index: -10">
@@ -37,42 +39,47 @@ const props = defineProps([]);
 
 const width = window.innerWidth;
 const height = window.innerHeight;
-const boxHeight = width > 768 ? height * 0.5 : height * 0.7;
+const boxHeight = width > 768 ? height * 0.6 : height * 0.7;
 // w-10/12 md:!w-6/12
 const boxWidth = width > 768 ? width * 0.5 : width * 0.8;
-let currentExpandedArticleIndex = null;
 let currentExpandedArticle = null;
+let currentExpandedArticleIndex = null;
 
 const data = reactive({
     complaints: [],
 })
 
+const clickArticle = (index) => {
+    setTimeout(() => {
+        if (currentExpandedArticleIndex === index) {
+            revertArticle();
+            return;
+        }
+        expandArticle(index)
+    }, 100)
+
+}
+
 function revertArticle() {
-    if (isNaN(currentExpandedArticleIndex)) return;
-    currentExpandedArticle.style.zIndex = 'auto'
-    currentExpandedArticle.style.overflowY = 'hidden'
-    document.getElementById('complaint-events-container').style.transformStyle = 'preserve-3d'
+    if (currentExpandedArticleIndex === null) return;
     let p = currentExpandedArticle.querySelector('p');
-    p.style.height = boxHeight * 0.75 + 'px';
-    p.innerText = truncate(data.complaints[currentExpandedArticleIndex].description, width > 768 ? 800 : 400);
+    p.innerText = truncate(data.complaints[currentExpandedArticleIndex].description, width > 768 ? 1200 : 600);
+    currentExpandedArticle.querySelector('button').innerText = 'Read More';
     anime({
         targets: currentExpandedArticle,
-        translateZ: () => {
-            return parseInt(currentExpandedArticle.dataset.currentZOffset);
-        },
-        translateY: () => {
-            return parseInt(currentExpandedArticle.dataset.currentYOffset);
-        },
+        translateY: currentExpandedArticle.dataset.currentYOffset + 'px',
+        scale: parseFloat(currentExpandedArticle.dataset.currentScale),
         width: boxWidth,
         height: boxHeight,
-        borderRadius: 4,
         easing: 'easeOutQuart',
         duration: 500,
+        zIndex: currentExpandedArticleIndex * 10,
         complete: () => {
             document.querySelector('main').style.overflowY = 'scroll'
-            currentExpandedArticle.style.overflowY = 'hidden'
             currentExpandedArticle = null;
             currentExpandedArticleIndex = null;
+            p.style.height = boxHeight * 0.6 + 'px';
+            p.style.overflowY = 'hidden';
         }
     })
 
@@ -82,29 +89,26 @@ function expandArticle(index) {
     let article = document.getElementById(`complaint-${index}`);
     currentExpandedArticleIndex = index;
     article.style.zIndex = 1000;
+    let expandedHeight = height * 0.8
     let p = article.querySelector('p');
-    p.style.height = 'auto';
     p.innerText = data.complaints[index].description;
     document.querySelector('main').style.overflowY = 'hidden';
-    let container = document.getElementById('complaint-events-container');
-    container.style.transformStyle = 'initial'
     let matrix = new WebKitCSSMatrix(window.getComputedStyle(article).transform)
-    article.dataset.currentZOffset = matrix.m43.toString();
     article.dataset.currentYOffset = matrix.m42.toString();
+    article.dataset.currentScale = matrix.a.toString();
     anime({
         targets: article,
-        translateZ: 0,
-        translateY: () => {
-            return 0;
-        },
+        translateY: 0,
+        scale: 1,
         width: width * 0.9,
-        height: height * 0.8 + 'px',
-        borderRadius: 20,
+        height: expandedHeight + 'px',
         easing: 'easeOutQuart',
         duration: 500,
         complete: () => {
             currentExpandedArticle = article;
-            article.style.overflowY = 'auto';
+            p.style.height = expandedHeight * 0.7 + 'px'
+            p.style.overflowY = 'auto';
+            currentExpandedArticle.querySelector('button').innerText = 'Close';
         }
     })
 }
@@ -124,14 +128,24 @@ onMounted(() => {
                     delay: (_, index) => (index) * 400,
                     duration: 400,
                 }, {
-                    value: (_, index) => (complaintBoxes.length - index) * 100,
+                    value: (_, index) => (complaintBoxes.length - index) * height * 0.05,
                     duration: 400,
                     delay: 200,
                 }],
-                translateZ: {
-                    value: (_, index) => -(complaintBoxes.length - index) * 75,
+                scale: [{
+                    value: (_, index) => index !== complaintBoxes.length - 1 ? 1.05 : 1,
                     delay: (_, index) => (index) * 400,
-                },
+                    duration: 400,
+                }, {
+                    value: (_, index) => index !== complaintBoxes.length - 1 ? 1 - (complaintBoxes.length - index) * 0.02 : 1,
+                    duration: 400,
+                }, {
+                    value: (_, index) => index !== complaintBoxes.length - 1 ? 1 - (complaintBoxes.length - index) * 0.03 : 1,
+                    duration: 400,
+                }, {
+                    value: (_, index) => index !== complaintBoxes.length - 1 ? 1 - (complaintBoxes.length - index) * 0.04 : 1,
+                    duration: 400,
+                }],
                 scrollTrigger: {
                     trigger: document.querySelector('#complaint-events-trigger'),
                     lerp: true,
@@ -140,8 +154,8 @@ onMounted(() => {
                 }
             }])
 
-            const clickOutside = (e) => {
-                if (!currentExpandedArticle) {
+            document.addEventListener("click", (e) => {
+                if (!currentExpandedArticle || e.target.tagName === 'button') {
                     return
                 }
                 const elementRect = currentExpandedArticle.getBoundingClientRect();
@@ -155,20 +169,7 @@ onMounted(() => {
                 ) {
                     revertArticle()
                 }
-            }
-
-            // if (width < 768) {
-            //     // mobile touch
-            //     document.addEventListener('touchstart', (e) => {
-            //         if (!currentExpandedArticle && e.target.classList.contains('complaint')) {
-            //             alert(parseInt(e.target.dataset.id))
-            //             return;
-            //         }
-            //         clickOutside(e)
-            //     })
-            // } else {
-            document.addEventListener("click", clickOutside);
-            // }
+            });
 
 
         }, settings.animationDuration)

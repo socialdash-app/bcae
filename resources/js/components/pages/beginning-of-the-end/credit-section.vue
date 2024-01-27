@@ -1,8 +1,8 @@
 <template>
     <div
-        class="drama-section py-10 main-intro w-screen h-64 px-3 md:px-20 flex items-center justify-center">
+        class="drama-section py-10 bg-[#FFEB37] main-intro w-screen h-64 px-3 md:px-20 flex items-center justify-center">
         <button @click="showPopup"
-                class="text-center bg-[#FFEB37] text-lg font-semibold px-12 py-3 rounded">
+                class="text-center bg-[#101728] text-white  text-lg font-semibold px-14 py-5 rounded">
             Credits
         </button>
         <pop-over @click-outside="data.showCreditPopup = false" v-show="data.showCreditPopup">
@@ -14,9 +14,9 @@
                 <ul class="list-disc pl-4">
                     <li>Thomas Brillion</li>
                     <li>Avaline Nephilim</li>
-                    <li>and others</li>
+                    <li>And, others</li>
                 </ul>
-                <p>And, inspired by the stories from The Pudding and other creators</p>
+                <p>"Inspired by the stories from The Pudding and other creators"</p>
             </div>
         </pop-over>
     </div>

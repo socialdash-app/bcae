@@ -4,7 +4,7 @@
         </h1>
         <div class="flex flex-col relative w-full items-center">
             <div id="party-signatures-scroller"
-                 class="grid h-80 overflow-hidden w-full mt-12 sticky grid-flow-col grid-rows-2 items-stretch top-24 gap-4">
+                 class="grid h-80 overflow-y-hidden overflow-x-scroll w-full mt-12 sticky grid-flow-col grid-rows-2 items-stretch top-24 gap-4">
                 <div
                     class="flex bg-white border-[#92261C] border flex-col shrink-0 w-48 md:w-64 gap-y-2"
                     v-for="accusation in governmentAccusations">
@@ -67,15 +67,14 @@ const data = reactive({
     progress: 100,
 })
 
-const getNoOfColumns = Math.round(governmentAccusations.length * 0.5)
-
 const descriptions = ['On November 24, 2020, representatives from 19 parties jointly sent an open letter to the president of Myanmar, demanding action against the UEC. They accused the UEC of failing to fulfill its responsibilities and violating the constitutional provisions.', 'In the letter, they stated that the 2020 election was not free and fair due to the UEC’s alleged unlawful acts and irregularities during the electoral process, then called for the formation of an independent commission to investigate and expose the UEC’s illegalities and to restore the validity of the election.'];
 
 watch(() => data.progress, (n) => {
     const scroller = document.getElementById('party-signatures-scroller')
+    const scrollerWidth = scroller.scrollWidth - scroller.clientWidth;
     anime({
         targets: scroller,
-        scrollLeft: (n / 100) * scroller.scrollWidth,
+        scrollLeft: (n / 100) * scrollerWidth,
         easing: 'easeOutQuart',
         duration: 400,
     })
@@ -83,6 +82,7 @@ watch(() => data.progress, (n) => {
 
 const init = () => {
     const scroller = document.getElementById('party-signatures-scroller')
+    const scrollerWidth = scroller.scrollWidth - scroller.clientWidth;
     new AnimeScrollTrigger(document.querySelector('main'), [{
         scrollTrigger: {
             trigger: '#party-signatures',
@@ -92,7 +92,7 @@ const init = () => {
             onUpdate: (_, progress) => {
                 anime({
                     targets: scroller,
-                    scrollLeft: progress * scroller.scrollWidth,
+                    scrollLeft: progress * scrollerWidth,
                     easing: 'easeOutQuart',
                     duration: 400,
                 })
@@ -108,5 +108,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
+#party-signatures-scroller {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+}
 
+#party-signatures-scroller::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
 </style>

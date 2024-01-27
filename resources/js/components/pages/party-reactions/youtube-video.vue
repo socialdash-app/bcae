@@ -1,5 +1,6 @@
 <template>
-    <div class="w-11/12 md:!w-7/12 py-8 md:h-screen flex flex-col" id="party-action-youtube-video">
+    <div class="w-11/12 sm:!w-10/12 lg:!w-9/12 2xl:!w-7/12 md:h-screen flex flex-col"
+         id="party-action-youtube-video">
         <div class="w-full gap-x-6 mt-8 flex">
             <div
                 class="hidden md:!flex w-4/12 rounded-lg h-full p-6 tracking-wider leading-relaxed text-gray-700 bg-[#F4A8FF]">

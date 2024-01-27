@@ -12,7 +12,7 @@
                 <p>{{ data.currentDateRange }}</p>
                 <div class="flex gap-x-2 items-center">
                     <span class="w-4 h-4 bg-black rounded-full"></span>
-                    <span>Unknown People</span>
+                    <span class="text-sm">Unknown People</span>
                 </div>
                 <div class="w-64 h-4 bg-gradient-to-r from-[#084CFB] to-[#F99500]"></div>
                 <div class="w-full flex justify-between text-sm font-medium text-gray-700">

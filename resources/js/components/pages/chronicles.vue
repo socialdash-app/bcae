@@ -184,10 +184,14 @@ const initialiseIllustrationAnimations = () => {
     const chronicleIllustrations = document.querySelectorAll('.chronicle-illustration')
     const handshakeFrame1 = document.getElementById(`${data[0].title}-0`)
     const handshakeFrame2 = document.getElementById(`${data[0].title}-1`);
-    const walkFrame1 = document.getElementById(`${data[0].title}-2`)
-    const walkFrame2 = document.getElementById(`${data[0].title}-3`);
-    const walkFrame3 = document.getElementById(`${data[0].title}-4`);
-    const walkFrame4 = document.getElementById(`${data[0].title}-5`);
+    const turnFrame1 = document.getElementById(`${data[0].title}-2`)
+    const turnFrame2 = document.getElementById(`${data[0].title}-3`);
+    const walkFrame1 = document.getElementById(`${data[0].title}-4`);
+    const walkFrame2 = document.getElementById(`${data[0].title}-5`);
+
+    // need to place walk frames at higher z index
+    walkFrame1.style.zIndex = 10;
+    walkFrame2.style.zIndex = 10;
 
     const protest1962Frame1 = document.getElementById(`${data[1].title}-0`);
     const protest1962Frame2 = document.getElementById(`${data[1].title}-1`);
@@ -235,26 +239,37 @@ const initialiseIllustrationAnimations = () => {
         protest2021Frame2.style.visibility = step % 2 === 0 ? 'visible' : 'hidden';
     }, 400)
 
-    let walkFrames = [walkFrame1, walkFrame2, walkFrame3, walkFrame4];
+    let NWTurnFrames = [turnFrame1, turnFrame2]
+
+    let walkFrames = [walkFrame1, walkFrame2];
+
     const walk = run((step) => {
         let currentFrame = step % walkFrames.length;
         walkFrames.forEach((walkFrame, index) => {
             walkFrame.style.visibility = index === currentFrame ? 'visible' : 'hidden';
         })
-    }, 600, false, 4, () => {
-        anime({
-            targets: chronicleIllustrations,
-            opacity: [{
-                value: (_, index) => {
-                    return index === 1 ? 1 : 0;
-                },
-                duration: 400,
-            }],
-            delay: 0,
-            complete: () => {
-                protest1962Animation.start();
-            }
+    }, 600)
+    
+    const turnAnimation = run((step) => {
+        let currentFrame = step % NWTurnFrames.length;
+        NWTurnFrames.forEach((turnFrame, index) => {
+            turnFrame.style.visibility = index === currentFrame ? 'visible' : 'hidden';
         })
+    }, 600, false, 2, () => {
+        hideVisibility(NWTurnFrames)
+        walk.start();
+        setTimeout(() => {
+            protest1962Animation.start();
+            anime({
+                targets: chronicleIllustrations[1],
+                easing: 'easeOutQuart',
+                duration: 2000,
+                scale: [0, 0.7],
+                begin: () => {
+                    chronicleIllustrations[1].style.opacity = 1;
+                },
+            })
+        }, 1200)
     })
 
     return [{
@@ -272,7 +287,7 @@ const initialiseIllustrationAnimations = () => {
                     delay: 1000 / 3,
                 }],
             })
-            hideVisibility([walkFrame1, walkFrame2, walkFrame3, walkFrame4, protest1962Frame1, protest1962Frame2])
+            hideVisibility([turnFrame1, turnFrame2, walkFrame1, walkFrame2, protest1962Frame1, protest1962Frame2])
             handshakeAnimation.start();
         },
     }, {
@@ -289,8 +304,9 @@ const initialiseIllustrationAnimations = () => {
             // // stop other animation
             protest2021Animation.pause();
             handshakeAnimation.pause();
+            walk.pause();
             hideVisibility([handshakeFrame1, handshakeFrame2, protest2021Frame1, protest2021Frame2, ...walkFrames])
-            walk.restart();
+            turnAnimation.restart();
         }
     }, {
         onEnter: () => {

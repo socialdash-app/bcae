@@ -1,12 +1,15 @@
 <template>
-    <div class="w-full flex-col md:!w-7/12 relative flex items-center justify-center">
-        <!--        <span-->
-        <!--            class="absolute top-1/2 -left-6 md:text-md text-sm md:-left-12 z-10 -rotate-90 transform -translate-y-full">Complaint</span>-->
-        <!--        <span-->
-        <!--            class="absolute top-1/2 -right-6 md:text-md text-sm md:-right-12 z-10 -rotate-90 transform -translate-y-full">Defendant</span>-->
-        <h1 class="px-4 md:px-0 font-semibold text-2xl mb-8">Parties and voters sent 287 objection letters to UEC</h1>
+    <div class="w-full py-4 flex-col md:!w-7/12 relative flex items-center justify-center">
+                <span
+                    class="absolute top-1/2 -left-6 md:text-md text-sm md:-left-12 z-10 -rotate-90 transform -translate-y-full">Complaint</span>
+        <span
+            class="absolute top-1/2 -right-6 md:text-md text-sm md:-right-12 z-10 -rotate-90 transform -translate-y-full">Defendant</span>
+        <h1 class="px-4 md:px-0 font-semibold text-2xl mb-12">Parties and voters sent 287 objection letters to UEC</h1>
         <div :style="{height: height + 'px'}" id="uec-accusations"
              class="w-full md:px-0 px-2 flex items-center justify-center">
+        </div>
+        <div class="shrink-0 w-full h-[20vh]">
+
         </div>
     </div>
 </template>
@@ -63,7 +66,6 @@ onMounted(() => {
     fetch('assets/data/party-reactions/uec-accusations.json').then(async (res) => {
         let data = await res.json();
         let links = [];
-        let gradientColors = [];
         data.links.sort((a, b) => a.value > b.value ? -1 : 1).forEach((link) => {
             link.description = `${link.value} complaints from ${link.source} to ${link.target} `
             if (links.filter((d) => d.source === link.target || d.target === link.source).length !== 0) {

@@ -58,20 +58,23 @@ export default {
         this.data.component = name;
         if (sectionID) {
             setTimeout(() => {
-                if (index) {
-                    anime({
-                        targets: '#section-indicator-section',
-                        background: headers[index].primaryColor,
-                        duration: 300,
-                        easing: 'linear'
-                    })
-                }
+
                 let sectionRect = document.getElementById(sectionID).getBoundingClientRect();
                 anime({
                     targets: document.querySelector('main'),
                     scrollTop: sectionRect.top,
                     easing: 'easeOutQuart',
                     duration: 400,
+                    complete: () => {
+                        if (index) {
+                            anime({
+                                targets: '#section-indicator-section',
+                                background: headers[index].primaryColor,
+                                duration: 300,
+                                easing: 'linear'
+                            })
+                        }
+                    }
                 })
             }, settings.animationDuration)
         }

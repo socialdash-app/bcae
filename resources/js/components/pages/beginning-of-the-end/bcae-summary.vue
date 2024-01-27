@@ -1,19 +1,20 @@
 <template>
     <div id="summary" class="w-full flex items-center justify-center">
         <div class="w-11/12 md:!w-10/12 flex flex-col pt-24  items-center relative">
-            <h1 class="text-3xl text-white w-10/12 sticky top-24 self-start font-bold">Summary</h1>
+            <h1 :style="{background: headers[6].primaryColor}"
+                class="text-3xl text-white w-full sticky md:!pt-24 z-10 pt-20 top-0 self-start font-bold">Summary</h1>
             <div :id="`summary-${index}`" class="w-full md:!p-10 shrink-0 mt-10 relative"
                  v-for="(datum,index) in data"
                  :style="{height: 2 * height + 'px'}">
-                <div class="sticky top-32 w-full py-10 flex flex-col">
+                <div class="sticky top-28 md:!top-32 w-full py-10 flex flex-col">
                     <div class="w-full flex justify-between md:!flex-row flex-col">
                         <h1 :style="{transform: `translateY(${height}px)`}"
-                            class="text-5xl summary-index transform inline-block text-white font-bold">
+                            class="text-3xl md:!text-5xl summary-index transform inline-block text-white font-bold">
                             0{{ index + 1 }}
                         </h1>
                         <div class="flex flex-col w-full md:!w-5/12 mt-4 md:mt-0 text-white">
                             <h1 :style="{transform: `translateY(${height}px)`}"
-                                class="text-5xl summary-title transform inline-block font-bold text-[#E8544E]">
+                                class="text-3xl md:!text-5xl summary-title transform inline-block font-bold text-[#E8544E]">
                                 {{ datum.name }}
                             </h1>
                             <p :style="{transform: `translateY(${height}px)`}"
@@ -45,6 +46,7 @@ import {reactive, onMounted} from "vue";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import anime from "animejs";
 import settings from "../../../api/settings.js";
+import {headers} from "../../../api/route.js";
 
 const props = defineProps([]);
 
@@ -52,7 +54,7 @@ const height = window.innerHeight;
 const width = window.innerWidth;
 const data = [{
     name: 'Election Results',
-    description: 'Lorem ipsum dolor sit amet consectetur. Laoreet elementum viverra maecenas odio vitae nibh enim varius. Odio a tincidunt arcu malesuada lectus.',
+    description: 'Explore the insights and results of 2020 election',
     data: [
         ['Amyotha Hluttaw', 'Total Votes', '26702406'],
         ['Pyithu Hluttaw', 'Total Votes', '26669636'],

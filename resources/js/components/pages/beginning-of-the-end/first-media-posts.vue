@@ -31,9 +31,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="justify-self-end w-8 h-8" v-html="more">
-
-                        </div>
                     </div>
                     <div :title="article.description" class="h-4/6 border-b">
                         {{ truncate(article.description, width > 768 ? 600 : 300) }}

@@ -29,6 +29,18 @@
     {{--       <script type="module" src="http://192.168.110.234:5173/resources/js/app.js"></script>--}}
     {{--       <link rel="stylesheet" href="http://192.168.110.234:5173/resources/css/app.css"/>--}}
     @inertiaHead
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () {
+                (c[a].q = c[a].q || []).push(arguments)
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "ksc25v9a6c");
+    </script>
 </head>
 
 <body>

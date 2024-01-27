@@ -64,7 +64,7 @@
                 </div>
                 <div id="the-election-then-section"
                      class="relative mb-[50vh] w-full flex items-center justify-center">
-                    <h1 class="then-title z-[1002] text-center bg-[#ff9ccd] absolute w-screen transform text-5xl md:text-6xl py-6 font-bold">
+                    <h1 class="then-title opacity-75 z-[1002] text-center bg-[#ff9ccd] absolute w-screen transform text-5xl md:text-6xl py-4 font-bold">
                         Afterwards…</h1>
                 </div>
             </div>
@@ -257,7 +257,7 @@ const init = () => {
             .on('mouseenter', (e, d) => {
                 if (data.isDrilldown || data.hoverRegion === d.properties.ST_PCODE) return;
                 let result = results[data.currentHluttaw].mapData.overviewData.filter((datum) => datum.SR_PCode === d.properties.ST_PCODE)[0];
-                data.details.title = result.name;
+                data.details.title = result.name + ' ( Top 3 parties )';
                 data.details.contents = [];
                 data.details.contents.push(['Party', 'Votes', 'Proportions']);
 

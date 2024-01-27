@@ -4,9 +4,10 @@
           class="w-screen overscroll-none leading-7 shrink-0  overflow-y-auto overflow-x-hidden flex items-center flex-col">
         <div id="section-indicator-section"
              class="fixed z-[9999] pr-6 md:!pr-20 py-4 md:!py-6 top-0 left-0 w-screen flex justify-end">
-            <div @click="route.changeTo('home')"
-                 class="cursor-pointer flex items-center justify-center">
-                <div class="absolute w-10 md:!w-14 h-10 md:!h-14 flex items-center justify-center">
+            <div
+                class="flex items-center justify-center">
+                <div @click="route.changeTo('home')"
+                     class="absolute cursor-pointer  w-10 md:!w-14 h-10 md:!h-14 flex items-center justify-center">
                     <svg :id="'header-' + separateWordByDash(header.name)" :style="{ zIndex: index }"
                          class="absolute w-full h-full"
                          v-for="(header, index) in headers" width="100%" height="100%" viewBox="0 0 60 60">
@@ -16,7 +17,7 @@
                     </svg>
                 </div>
                 <div class="relative w-5 md:!w-7 h-5 md:!h-7 overflow-hidden">
-                <span class="w-full header-icon h-full absolute"
+                <span @click="route.changeTo('home')" class="w-full cursor-pointer  header-icon h-full absolute"
                       :style="{ transform: `translateY(${index * 100}%)` }"
                       v-for="(header, index) in headers" v-html="header.icon"></span>
                 </div>

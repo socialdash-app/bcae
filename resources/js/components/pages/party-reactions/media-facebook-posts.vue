@@ -4,7 +4,8 @@
         <div class="w-full flex flex-col py-4 overflow-hidden sticky top-24 items-center"
              :style="{height: height + 'px'}"
              id="party-facebook-media-posts">
-            <h1 class="px-4 md:px-0 font-semibold text-2xl mb-4">Some of their activities and arguments appeared on
+            <h1 class="px-4 mt-12 md:px-0 font-semibold text-2xl mb-4">Some of their activities and arguments appeared
+                on
                 local news </h1>
             <div class="w-full absolute h-full flex items-center justify-center">
                 <a v-for="(article, index) in articles"
@@ -12,8 +13,8 @@
                    :id="`party-facebook-media-post-${index}`"
                    :href="article.url"
                    target="_blank"
-                   class="party-facebook-media-post text-[#240824] cursor-pointer absolute bg-white rounded p-4 md:!p-10 w-10/12 md:!w-5/12"
-                   :style="{opacity: index === 0 ? 1 : 0, zIndex: index}">
+                   class="party-facebook-media-post text-ellipsis text-[#240824] cursor-pointer absolute bg-white rounded p-4 md:!p-10 w-10/12 md:!w-5/12"
+                   :style="{opacity: index === 0 ? 1 : 0, zIndex: index, height: height * 0.25 + 'px'}">
                     <h1 class="md:text-lg font-semibold">{{ article.title }}</h1>
                 </a>
             </div>

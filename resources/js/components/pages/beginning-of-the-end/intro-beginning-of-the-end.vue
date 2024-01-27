@@ -38,7 +38,7 @@ onMounted(() => {
             easing: 'easeInOutQuart',
             scrollTrigger: {
                 trigger: '.main-drama-container',
-                start: '40% top',
+                start: '10% top',
                 end: 'bottom top',
             }
         }, {
@@ -49,7 +49,7 @@ onMounted(() => {
             easing: 'easeInOutQuart',
             scrollTrigger: {
                 trigger: '.main-drama-container',
-                start: '40% top',
+                start: '10% top',
                 end: 'bottom top',
             }
         }, {
