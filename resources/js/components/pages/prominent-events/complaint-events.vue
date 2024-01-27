@@ -9,8 +9,9 @@
                  @click="expandArticle(index)"
                  style="will-change: transform;"
                  :id="`complaint-${index}`"
+                 :data-index="index"
                  class="complaint cursor-pointer overflow-y-hidden absolute border border-gray-600 bg-[#BEF4B7] rounded p-4 md:!p-10 "
-                 :style="{height: boxHeight + 'px',width: boxWidth + 'px',transform: `translateY(${(index + 1) * boxHeight }px) translateZ(100px)`}">
+                 :style="{zIndex: index * 10, height: boxHeight + 'px',width: boxWidth + 'px',transform: `translateY(${(index + 1) * boxHeight }px) translateZ(100px)`}">
                 <h1 class="font-semibold text-lg md:text-2xl">{{ complaint.title }}</h1>
                 <p :style="{height: boxHeight * 0.75 + 'px'}"
                    class="text-sm overflow-hidden md:!text-base mt-3 md:mt-6">
@@ -90,7 +91,6 @@ function expandArticle(index) {
     let matrix = new WebKitCSSMatrix(window.getComputedStyle(article).transform)
     article.dataset.currentZOffset = matrix.m43.toString();
     article.dataset.currentYOffset = matrix.m42.toString();
-    console.log(article.getBoundingClientRect().top - matrix.m42)
     anime({
         targets: article,
         translateZ: 0,
@@ -102,7 +102,6 @@ function expandArticle(index) {
         borderRadius: 20,
         easing: 'easeOutQuart',
         duration: 500,
-        zIndex: 10000,
         complete: () => {
             currentExpandedArticle = article;
             article.style.overflowY = 'auto';
@@ -141,8 +140,13 @@ onMounted(() => {
                 }
             }])
 
-            document.addEventListener("click", (e) => {
-                if (!currentExpandedArticle) return;
+            const clickOutside = (e) => {
+                if (e.target.classList.contains('complaint')) {
+                    alert('complaint')
+                }
+                if (!currentExpandedArticle) {
+                    return
+                }
                 const elementRect = currentExpandedArticle.getBoundingClientRect();
                 let targetElement = e.target;
                 const targetElementRect = targetElement.getBoundingClientRect();
@@ -154,7 +158,22 @@ onMounted(() => {
                 ) {
                     revertArticle()
                 }
-            });
+            }
+
+            if (width < 768) {
+                // mobile touch
+                document.addEventListener('touchstart', (e) => {
+                    if (!currentExpandedArticle && e.target.classList.contains('complaint')) {
+                        alert(parseInt(e.target.dataset.id))
+                        return;
+                    }
+                    clickOutside(e)
+                })
+            } else {
+                document.addEventListener("click", clickOutside);
+            }
+
+
         }, settings.animationDuration)
 
 
