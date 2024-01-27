@@ -1,7 +1,8 @@
 <template>
     <div id="complaint-events-trigger"
          class="w-full text-gray-900 relative flex flex-col items-center">
-        <div id="complaint-events-container" class="w-full flex flex-col sticky top-0 pt-[10vh] items-center"
+        <div id="complaint-events-container"
+             class="w-full overflow-hidden flex flex-col sticky top-0 pt-[10vh] items-center"
              style=" z-index: 100;"
              :style="{height: height + 'px'}">
             <div v-for="(complaint, index) in data.complaints"
@@ -170,11 +171,7 @@ onMounted(() => {
                     revertArticle()
                 }
             });
-
-
         }, settings.animationDuration)
-
-
     })
 
 })

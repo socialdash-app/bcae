@@ -380,7 +380,7 @@ const trigger = () => {
                     })
                 },
                 onUpdate: (_, progress) => {
-                    document.querySelector('.title').style.background = progress > 0.25 ? '#ffffff' : 'transparent';
+                    document.querySelector('.title').style.background = width <= 768 || progress > 0.25 ? '#ffffff' : 'transparent';
                     anime({
                         targets: body,
                         scrollTop: progress * (bodyHeight + bodyScrollHeight),

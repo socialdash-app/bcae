@@ -2,7 +2,7 @@
     <div class="relative w-full flex items-center flex-col"
          :style="{height: `${height * fourStatements.length}px`}" id="four-statements-trigger">
         <div id="four-statements-container" :style="{height: height + 'px'}"
-             class="flex flex-col sticky top-0 justify-center w-full items-center">
+             class="flex flex-col sticky top-0 justify-center overflow-hidden  w-full items-center">
             <div v-for="(statement,index) in fourStatements"
                  :style="{height : boxHeight + 'px', width: boxWidth + 'px', transform: `translateY(${index * height}px)`}"
                  :id="`four-statements-${index}`"
