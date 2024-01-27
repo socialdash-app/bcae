@@ -54,10 +54,18 @@ export default {
     data: reactive({
         component: "home",
     }),
-    changeTo: function (name, sectionID) {
+    changeTo: function (name, sectionID, index) {
         this.data.component = name;
         if (sectionID) {
             setTimeout(() => {
+                if (index) {
+                    anime({
+                        targets: '#section-indicator-section',
+                        background: headers[index].primaryColor,
+                        duration: 300,
+                        easing: 'linear'
+                    })
+                }
                 let sectionRect = document.getElementById(sectionID).getBoundingClientRect();
                 anime({
                     targets: document.querySelector('main'),

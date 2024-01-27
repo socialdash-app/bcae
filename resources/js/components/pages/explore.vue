@@ -65,7 +65,7 @@ let data = [
             "Explore the stricken history of military overthrowing people’s power in Myanmar",
         card: "assets/cards/chronicles.svg",
         onClick: () => {
-            route.changeTo('story', 'chronicles-trigger')
+            route.changeTo('story', 'chronicles-trigger', 0)
         },
         icon: chronicle,
     },
@@ -74,7 +74,7 @@ let data = [
             "Explore the insights and results of 2020 election",
         card: "assets/cards/the_election.svg",
         onClick: () => {
-            route.changeTo('story', 'the-election')
+            route.changeTo('story', 'the-election', 1)
         },
         icon: theElection,
     },
@@ -83,7 +83,7 @@ let data = [
             "Explore incidents during election and back-and-forth letters among different entities",
         card: "assets/cards/prominent_events.svg",
         onClick: () => {
-            route.changeTo('story', 'prominent-events')
+            route.changeTo('story', 'prominent-events', 2)
         },
         icon: prominentEvents,
     },
@@ -92,7 +92,7 @@ let data = [
             "Explore how political parties respond to the dispute",
         card: "assets/cards/party_reactions.svg",
         onClick: () => {
-            route.changeTo('story', 'party-reactions')
+            route.changeTo('story', 'party-reactions', 3)
 
         },
         icon: partyActions,
@@ -103,7 +103,7 @@ let data = [
         card: "assets/cards/the_military.svg",
         icon: theMilitary,
         onClick: () => {
-            route.changeTo('story', 'the-military')
+            route.changeTo('story', 'the-military', 4)
 
         },
     },
@@ -112,7 +112,7 @@ let data = [
             "Explore the protests and the disinformation outspread",
         card: "assets/cards/correlated_events.svg",
         onClick: () => {
-            route.changeTo('story', 'correlated-events')
+            route.changeTo('story', 'correlated-events', 5)
         },
         icon: correlatedActions,
     },
@@ -121,7 +121,7 @@ let data = [
             "Explore the beginning of the end of people’s power and summary of BCAE",
         card: "assets/cards/beginning_of_the_end.svg",
         onClick: () => {
-            route.changeTo('story', 'beginning-of-the-end')
+            route.changeTo('story', 'beginning-of-the-end', 6)
         },
         icon: beginningOfTheEnd,
     },

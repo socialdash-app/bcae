@@ -141,9 +141,6 @@ onMounted(() => {
             }])
 
             const clickOutside = (e) => {
-                if (e.target.classList.contains('complaint')) {
-                    alert('complaint')
-                }
                 if (!currentExpandedArticle) {
                     return
                 }
@@ -160,18 +157,18 @@ onMounted(() => {
                 }
             }
 
-            if (width < 768) {
-                // mobile touch
-                document.addEventListener('touchstart', (e) => {
-                    if (!currentExpandedArticle && e.target.classList.contains('complaint')) {
-                        alert(parseInt(e.target.dataset.id))
-                        return;
-                    }
-                    clickOutside(e)
-                })
-            } else {
-                document.addEventListener("click", clickOutside);
-            }
+            // if (width < 768) {
+            //     // mobile touch
+            //     document.addEventListener('touchstart', (e) => {
+            //         if (!currentExpandedArticle && e.target.classList.contains('complaint')) {
+            //             alert(parseInt(e.target.dataset.id))
+            //             return;
+            //         }
+            //         clickOutside(e)
+            //     })
+            // } else {
+            document.addEventListener("click", clickOutside);
+            // }
 
 
         }, settings.animationDuration)
