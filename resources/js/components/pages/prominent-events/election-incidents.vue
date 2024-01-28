@@ -1,40 +1,37 @@
 <template>
-    <div class="w-full flex items-center flex-col gap-6 relative">
+    <div class="w-full flex items-center flex-col gap-6 pt-6 relative">
         <h1 class="w-full text-center font-bold text-2xl md:text-3xl">Election Incidents</h1>
         <div class="w-11/12 md:!w-8/12 md:mt-8 mb-12 md:gap-x-8">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard <span @click="(e)=>selectTopic('party tortious',e)"
-                                      class="cursor-pointer left-0 font-semibold"
-                                      :class="getBackgroundColor('party tortious')">dummy text</span>
-            ever since the
-            1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining <span @click="(e)=>selectTopic('reckless UEC',e)"
-                                                    class="cursor-pointer font-semibold"
-                                                    :class="getBackgroundColor('reckless UEC')">essentially unchanged.</span>
-            It was popularised in the 1960s
-            with the release of
-            Letraset sheets containing Lorem Ipsum <span @click="(e)=>selectTopic('wrongful act',e)"
-                                                         class="cursor-pointer font-semibold"
-                                                         :class="getBackgroundColor('wrongful act')">passages</span>,
-            and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
+            The Union Election Commission (UEC) encountered some <span @click="(e)=>selectTopic('wrongful act',e)"
+                                                                       class="cursor-pointer font-semibold px-1"
+                                                                       :class="getBackgroundColor('wrongful act')">wrongful act</span>
+            by an individual, apart from their
+            <span @click="(e)=>selectTopic('reckless UEC',e)"
+                  class="cursor-pointer font-semibold px-1"
+                  :class="getBackgroundColor('reckless UEC')">Recklessness</span>, during the election. And, there were
+            also concerns raised about
+            <span
+                @click="(e)=>selectTopic('party tortious',e)"
+                class="cursor-pointer left-0 font-semibold px-1"
+                :class="getBackgroundColor('party tortious')">party wrongdoing</span> such as
+            bringing the fake stamp and ballot paper, that surfaced a confusion. These incidents have prompted
+            investigations by relevant authorities to ensure the integrity of the electoral process.
         </div>
         <div :style="{background: headers[2].primaryColor}"
              id="election-incidents-button-container"
              v-show="data.showButtonContainer"
              class="w-full md:!w-11/12 lg:!w-10/12 2xl:!w-9/12 py-2 sticky top-12 md:!top-[4.6rem] z-10 flex flex-wrap justify-center gap-2 md:!gap-4">
-            <button @click="(e)=>selectTopic('party tortious',e)"
+            <button @click="(e)=>selectTopic('wrongful act',e)"
                     class="cursor-pointer px-2 py-1 rounded left-0 font-semibold"
-                    :class="getBackgroundColor('party tortious')">dummy text
+                    :class="getBackgroundColor('wrongful act')">wrongful act
             </button>
             <button @click="(e)=>selectTopic('reckless UEC',e)"
                     class="cursor-pointer px-2 py-1 rounded font-semibold"
-                    :class="getBackgroundColor('reckless UEC')">essentially unchanged.
+                    :class="getBackgroundColor('reckless UEC')">Recklessness
             </button>
-            <button @click="(e)=>selectTopic('wrongful act',e)"
+            <button @click="(e)=>selectTopic('party tortious',e)"
                     class="cursor-pointer px-2 py-1 rounded font-semibold"
-                    :class="getBackgroundColor('wrongful act')">passages
+                    :class="getBackgroundColor('party tortious')">party wrongdoing
             </button>
         </div>
         <div id="election-incidents-container"
@@ -201,7 +198,7 @@ const initTriggers = () => {
     new AnimeScrollTrigger(document.querySelector('main'), [{
         scrollTrigger: {
             trigger: '#election-incidents-container',
-            start: 'top 20%',
+            start: '15% top',
             end: 'bottom top',
             onEnter: () => {
                 data.showButtonContainer = true;

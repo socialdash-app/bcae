@@ -37,15 +37,15 @@
                     </div>
                     <div class="flex h-1/6 items-center w-full justify-between">
                         <a :href="article.url" target="_blank" class="flex items-center justify-center w-4/12 gap-x-2">
-                            <div v-html="like" class="w-8 h-8"></div>
+                            <div v-html="like" class="w-5 h-5 md:!w-8 md:!h-8"></div>
                             <span>Like</span>
                         </a>
                         <a :href="article.url" target="_blank" class="flex items-center justify-center w-4/12 gap-x-2">
-                            <div v-html="comment" class="w-8 h-8"></div>
+                            <div v-html="comment" class="w-5 h-5 md:!w-8 md:!h-8"></div>
                             <span>Comment</span>
                         </a>
                         <a :href="article.url" target="_blank" class="flex items-center justify-center w-4/12 gap-x-2">
-                            <div v-html="share" class="w-8 h-8"></div>
+                            <div v-html="share" class="w-5 h-5 md:!w-8 md:!h-8"></div>
                             <span>Share</span>
                         </a>
                     </div>

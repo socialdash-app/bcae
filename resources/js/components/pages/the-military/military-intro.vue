@@ -4,17 +4,16 @@
              class="sticky top-16 md:!top-0 flex w-11/12 md:!w-8/12 flex-col justify-center items-center">
             <h1 style="transform: translateY(200px)"
                 class="opacity-0 text-4xl md:text-7xl military-intro-title font-semibold">
-                Military’s
-                Interference
-                in
-                the election</h1>
+                Military interference in the election</h1>
             <p style="transform: translateY(200px)"
                class="w-full mt-12 md:!mt-24 tracking-wider opacity-0 military-intro-content leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur. Nulla eget massa etiam odio faucibus hac sed cursus faucibus.
-                Volutpat praesent tempus placerat vitae. Proin fringilla non dignissim est mi risus vitae. Duis neque
-                eget dui vel. Aliquet adipiscing sapien nulla vel faucibus neque risus arcu. Non et eu non id.
-                Adipiscing ultrices facilisi augue neque turpis lacinia dui. Pellentesque nunc netus aliquet enim massa
-                neque integer. Facilisi nulla facilisi morbi ipsum. Massa fringilla tellus urna nisi pellentesque.
+                The carefully orchestrated campaign of doubt over the 2020 election, culminating in the February 2021
+                coup d'état, laid bare the Myanmar military's true intentions. Their meticulously constructed narrative
+                hinged on publishing 29 damning statements about supposedly flawed voter lists and issuing repeated
+                pronouncements, culminating in the ominous "Such law must be revoked". These weren't simply challenges
+                to the election, they were calculated steps toward seizing power. This brazen power grab, disguised as
+                concern for electoral integrity, shattered the hope of democracy and cemented the military's unwavering
+                grip on the nation.
             </p>
         </div>
     </div>

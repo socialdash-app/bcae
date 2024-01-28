@@ -58,7 +58,6 @@ export default {
         this.data.component = name;
         if (sectionID) {
             setTimeout(() => {
-
                 let sectionRect = document.getElementById(sectionID).getBoundingClientRect();
                 anime({
                     targets: document.querySelector('main'),

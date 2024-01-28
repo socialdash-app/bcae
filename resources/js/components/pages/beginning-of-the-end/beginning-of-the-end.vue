@@ -66,16 +66,7 @@ onMounted(() => {
                         duration: 300,
                         easing: 'linear'
                     })
-                },
-                onEnterBack: () => {
-                    route.changeSectionHeader(6)
-                    anime({
-                        targets: '#section-indicator-section',
-                        background: '#ffffff',
-                        duration: 300,
-                        easing: 'linear'
-                    })
-                },
+                }
             }
         },])
     }, settings.animationDuration)

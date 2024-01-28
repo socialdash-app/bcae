@@ -1,28 +1,43 @@
 <template>
-    <div class="w-full pt-10 md:!w-7/12 px-6 md:!px-10 flex items-center" :style="{height: height + 'px'}">
-        <Calendar
-            v-if="!data.loading"
-            :attributes="data.attributes"
-            :columns="columns"
-            :max-date="new Date('2021-01-31')"
-            :min-date="new Date('2020-11-30')"
-            :rows="2" expanded>
-            <template #day-popover="{ day, dayTitle, attributes }">
-                <div class="px-2">
-                    <div class="text-xs relative text-gray-50 font-semibold text-center">
-                        <p>{{ dayTitle }}</p>
+    <div class="w-full pt-10 md:!w-7/12 px-6 flex-col md:!px-10 flex items-center">
+        <h1 class="w-full text-center font-bold text-xl mb-12 md:text-2xl">
+            Calendar of Military activities in response to the Election Dispute
+        </h1>
+        <div class="bg-white w-full items-center flex flex-col p-4 md:!p-12 rounded">
+            <Calendar
+                v-if="!data.loading"
+                :attributes="data.attributes"
+                :columns="columns"
+                :max-date="new Date('2021-01-31')"
+                :min-date="new Date('2020-11-30')"
+                :rows="2" expanded>
+                <template #day-popover="{ day, dayTitle, attributes }">
+                    <div class="px-2">
+                        <div class="text-xs relative text-gray-50 font-semibold text-center">
+                            <p>{{ dayTitle }}</p>
+                        </div>
+                        <ul class="mt-1 mb-1">
+                            <li
+                                v-for="{key, customData} in attributes"
+                                :key="key"
+                                class="cursor-pointer w-64">
+                                {{ customData.find((d) => d.date.toDateString() === day.date.toDateString()).message }}
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="mt-1 mb-1">
-                        <li
-                            v-for="{key, customData} in attributes"
-                            :key="key"
-                            class="cursor-pointer w-64">
-                            {{ customData.find((d) => d.date.toDateString() === day.date.toDateString()).message }}
-                        </li>
-                    </ul>
+                </template>
+            </Calendar>
+            <div class="flex flex-col justify-center gap-4 pt-8">
+                <div class="flex items-center gap-x-2">
+                    <span style="background: red" class="p-2 rounded-full"></span>
+                    <span class="text-sm">Statements related to the election</span>
                 </div>
-            </template>
-        </Calendar>
+                <div class="flex items-center gap-x-2">
+                    <span style="background: blue" class="p-2 rounded-full"></span>
+                    <span class="text-sm">Findings in scrutiny of voter lists</span>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -87,6 +102,7 @@ onMounted(() => {
 
 <style scoped>
 :deep(.vc-container) {
-    background: white;
+    background: transparent;
+    border: none;
 }
 </style>

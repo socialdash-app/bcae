@@ -1,20 +1,13 @@
 <template>
     <div id="disinformation" class="w-full p-4 md:p-12 flex-col items-center flex relative">
         <div class="w-11/12 md:!w-7/12 flex flex-col gap-y-4 items-center md:!text-center h-screen justify-center">
-            <h1 class="font-semibold text-3xl mb-4">Title</h1>
-            <p class="tracking-wider leading-relaxed text-gray-700">Lorem Ipsum is simply dummy text of the printing and
-                typesetting
-                industry. Lorem
-                Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                leap
-                into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                the
-                release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                publishing
-                software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <h1 class="font-semibold text-3xl mb-4">Rally the crowd X web of disinformation</h1>
+            <p class="tracking-wider leading-relaxed text-gray-700">As protests erupted across Myanmar demanding
+                accountability for alleged election irregularities, a parallel storm of coordinated disinformation raged
+                on social media platforms. A network of fake accounts emerged, sharing fabricated reports of misconduct
+                during the election and manipulated claims of voter fraud. This online echo chamber of disinformation
+                not only amplified the existing dispute but also sowed the seeds of doubt and distrust, ultimately
+                serving as the "Beginning of the End" for the fragile hope of people's power in Myanmar.</p>
         </div>
         <div
             class="w-full md:!w-10/12 2xl:!w-9/12 flex items-center justify-center z-10 h-screen sticky top-16 md:top-24"
@@ -24,16 +17,19 @@
             <div
                 class="disinformation-content-box z-10 my-64 w-full md:!w-6/12 text-gray-900 p-6 md:p-12 flex flex-col items-center rounded bg-white shadow-xl">
                 <p class="tracking-wider leading-relaxed text-md">
-                    During that period, a total of ** election-related disinformation contents posted by *** individuals
-                    were fact-checked in 92 articles, according to the fact-checked articles from the international
-                    fact-checkers. And, those are
+                    Waging another battle in the shadows of social media, a network of 125 individuals, some of whom
+                    were operating in a coordinated behavior, unleashed a barrage of 177 election-related disinformation
+                    posts aimed to sow discord, and undermine public trust in the democratic process. These digital
+                    Falsehoods were meticulously debunked by international fact-checkers in 91 articles.
                 </p>
             </div>
             <div
                 class="disinformation-content-box z-10 my-64 w-full md:!w-6/12 text-gray-900 p-6 md:p-12 flex flex-col items-center rounded bg-white shadow-xl">
                 <p class="tracking-wider leading-relaxed text-md">
-                    Top 10% of individuals responsible for distributing ***% disinformation content on the internet, and
-                    they shared disinformation contents related to ***, ***, and *** topics.
+                    The study revealed that a mere 10% of individuals online were responsible for spreading over 100
+                    disinformation content. These digital puppeteers of falsehoods didn't discriminate, targeting
+                    sensitive topics at that time like the election, government personnel, and even the political party,
+                    potentially causing widespread confusion and mistrust.
                 </p>
             </div>
             <div
@@ -43,13 +39,15 @@
                     media because of big-data impact and technical difficulties, and those articles only represented a
                     portion of the disinformation, related to Myanmar, span on the internet despite fact-checkers were
                     trying their best. Social Dash is working on a new machine-learning model which can detect
-                    coordinated disinformation networks on social media. Reach out to alex@socialdash.app for more
+                    coordinated disinformation networks on social media. Reach out to
+                    <a target="_blank" class="underline" href="mailto:alex@socialdash.app">alex@socialdash.app</a> for
+                    more
                     information.
                 </p>
             </div>
         </div>
         <div id="disinformation-detail-viewer"
-             class="fixed -translate-x-full bg-white gap-y-4 overflow-y-auto flex flex-col py-8 px-6 shadow-2xl left-0 top-0 z-[1000] border border-gray-300 w-[80vw] md:!w-[40vw] 2xl:!w-[30vw]"
+             class="fixed -translate-x-full bg-white gap-y-4 overflow-y-auto flex flex-col py-8 px-6 shadow-2xl left-0 top-0 z-[200000] border border-gray-300 w-[80vw] md:!w-[40vw] 2xl:!w-[30vw]"
              :style="{height: height+'px'}">
             <div class="flex items-center w-full gap-x-2">
                 <h1 class="font-semibold w-8/12 truncate overflow-hidden text-xl">{{ data.username ?? data.id }}</h1>
