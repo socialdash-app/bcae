@@ -1,8 +1,8 @@
 <template>
     <div
-        class="drama-section py-10 bg-[#FFEB37] main-intro w-screen h-64 px-3 md:px-20 flex items-center justify-center">
+        class="drama-section py-10 bg-[#FFEB37] main-intro w-screen py-10 px-3 md:px-20 flex items-center justify-center">
         <button @click="showPopup"
-                class="text-center bg-[#101728] text-white  text-lg font-semibold px-14 py-5 rounded">
+                class="text-center bg-[#101728] text-white text-lg font-semibold px-14 py-5">
             Credits
         </button>
         <pop-over @click-outside="data.showCreditPopup = false" v-show="data.showCreditPopup">
@@ -19,9 +19,10 @@
                     <li>Avaline Nephilim</li>
                     <li>And, others</li>
                 </ul>
-                <p>"Inspired by the stories from <a href="https://pudding.cool/" target="_blank" class="underline">The
+                <p class="italic">Inspired by the stories from <a href="https://pudding.cool/" target="_blank"
+                                                                  class="underline">The
                     Pudding</a> and
-                    other creators"</p>
+                    other creators</p>
             </div>
         </pop-over>
     </div>

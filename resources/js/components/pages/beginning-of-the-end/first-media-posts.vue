@@ -15,11 +15,12 @@
                     height: boxHeight +'px',
                     transform: `translateX(${index * translateDistance}px) translateY(${index * translateDistance}px)`}">
                 <h1 class="beginning-of-the-end-media-post-title mb-4 font-semibold  text-xl md:text-2xl"
-                    style="color:#E8544E; -webkit-text-fill-color: #E8544E;" :style="{opacity: index === 0 ? 1: 0}">
+                    :style="{color: headers[6].secondaryColor,opacity: index === 0 ? 1: 0}">
                     {{ article.title }}
                 </h1>
                 <div
-                    class=" border-[#E8544E] border flex-col  bg-gray-800 flex w-full h-full p-4 md:p-10 justify-between">
+                    :style="{borderColor: headers[6].secondaryColor}"
+                    class="border flex-col  bg-gray-800 flex w-full h-full p-4 md:p-10 justify-between">
                     <div class="flex justify-between w-full">
                         <div class="flex">
                             <div v-html="avatar" class="w-12 h-12 mr-6"></div>
@@ -32,20 +33,20 @@
                             </div>
                         </div>
                     </div>
-                    <div :title="article.description" class="h-4/6 border-b">
+                    <div :title="article.description" class="h-4/6 border-b text-ellipsis">
                         {{ truncate(article.description, width > 768 ? 600 : 300) }}
                     </div>
                     <div class="flex h-1/6 items-center w-full justify-between">
                         <a :href="article.url" target="_blank" class="flex items-center justify-center w-4/12 gap-x-2">
-                            <div v-html="like" class="w-5 h-5 md:!w-8 md:!h-8"></div>
+                            <div v-html="like" class="w-5 h-5 2xl:!w-8 md:!h-8"></div>
                             <span>Like</span>
                         </a>
                         <a :href="article.url" target="_blank" class="flex items-center justify-center w-4/12 gap-x-2">
-                            <div v-html="comment" class="w-5 h-5 md:!w-8 md:!h-8"></div>
+                            <div v-html="comment" class="w-5 h-5 2xl:!w-8 md:!h-8"></div>
                             <span>Comment</span>
                         </a>
                         <a :href="article.url" target="_blank" class="flex items-center justify-center w-4/12 gap-x-2">
-                            <div v-html="share" class="w-5 h-5 md:!w-8 md:!h-8"></div>
+                            <div v-html="share" class="w-5 h-5 2xl:!w-8 md:!h-8"></div>
                             <span>Share</span>
                         </a>
                     </div>
@@ -63,6 +64,7 @@ import AnimeScrollTrigger from "anime-scrolltrigger";
 import anime from "animejs";
 import {avatar, comment, earth, like, more, share} from "../../../assets/icons.js";
 import settings from "../../../api/settings.js";
+import {headers} from "../../../api/route.js";
 
 const props = defineProps([]);
 
@@ -70,7 +72,7 @@ const props = defineProps([]);
 const width = window.innerWidth;
 const height = window.innerHeight;
 
-const boxHeight = width > 768 ? height * 0.6 : height * 0.8;
+const boxHeight = width > 1300 ? height * 0.6 : height * 0.8;
 const translateDistance = width > 768 ? 20 : 10;
 
 const data = reactive({})

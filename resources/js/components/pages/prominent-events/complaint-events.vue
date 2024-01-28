@@ -125,17 +125,16 @@ onMounted(() => {
             new AnimeScrollTrigger(document.querySelector('main'), [{
                 targets: complaintBoxes,
                 translateY: [{
-                    value: 0,
+                    value: 10,
                     delay: (_, index) => (index) * 400,
                     duration: 400,
                 }, {
-                    value: (_, index) => (complaintBoxes.length - index) * height * 0.05,
+                    value: (_, index) => index === complaintBoxes.length - 1 ? (complaintBoxes.length - index) * height * 0.035 : (complaintBoxes.length - index) * height * 0.05,
                     duration: 400,
                     delay: 200,
                 }],
                 scale: [{
                     value: (_, index) => index !== complaintBoxes.length - 1 ? 1.05 : 1,
-                    delay: (_, index) => (index) * 400,
                     duration: 400,
                 }, {
                     value: (_, index) => index !== complaintBoxes.length - 1 ? 1 - (complaintBoxes.length - index) * 0.02 : 1,

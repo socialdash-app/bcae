@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex items-center flex-col gap-6 pt-6 relative">
+    <div class="w-full flex items-center flex-col gap-6 pt-10 relative">
         <h1 class="w-full text-center font-bold text-2xl md:text-3xl">Election Incidents</h1>
         <div class="w-11/12 md:!w-8/12 md:mt-8 mb-12 md:gap-x-8">
             The Union Election Commission (UEC) encountered some <span @click="(e)=>selectTopic('wrongful act',e)"
@@ -42,7 +42,7 @@
                 <div
                     :class="getBackgroundColor(incident.topic)"
                     :style="{opacity: data.selectedTopic && data.selectedTopic !== incident.topic ? '0.4': '1'}"
-                    class="absolute text-sm md:!text-base w-full top-0 left-0 h-full p-4  rounded-lg font-semibold text-gray-700"
+                    class="absolute flex flex-col text-sm md:!text-base w-full top-0 left-0 h-full p-4  rounded-lg font-semibold text-gray-700"
                     @click="(e)=>clickBox(e,index)">
                     <div
                         class="w-full pointer-events-none h-full flex items-center justify-center absolute top-0 left-0 z-[1000]"
@@ -59,6 +59,10 @@
                             settings.data.locale === 'en' ? truncate(incident.description_en, 40) : truncate(incident.description_mm, 80)
                         }}
                     </p>
+                    <button @click="(e)=>goToPost(e,incident.url)" v-show="index === data.currentExpandedBoxIndex"
+                            class="px-4 py-2 bg-white rounded ml-auto mt-auto">
+                        Go To Post
+                    </button>
                 </div>
             </div>
         </div>
@@ -90,7 +94,14 @@ const data = reactive({
 })
 
 let boxWidth = null,
-    boxHeight = null;
+    boxHeight = null,
+    expandedBoxWidth = null,
+    expandedBoxHeight = null;
+
+const goToPost = (e, url) => {
+    e.stopPropagation();
+    window.open(url, '_blank')
+}
 
 const getBackgroundColor = (topic) => {
     switch (topic) {
@@ -115,8 +126,11 @@ const closeCurrentExpandedBox = async () => {
     if (!currentExpandedBox) {
         return
     }
+
+    currentExpandedBox.querySelector('p').innerText = settings.data.locale === 'en' ? truncate(data.incidents[data.currentExpandedBoxIndex].description_en, 40) : truncate(data.incidents[data.currentExpandedBoxIndex].description_mm, 80);
     currentExpandedBox.style.zIndex = null;
     currentExpandedBox.style.position = null;
+    data.currentExpandedBoxIndex = null;
 
     anime({
         targets: currentExpandedBox,
@@ -127,10 +141,9 @@ const closeCurrentExpandedBox = async () => {
         translateY: 0,
         duration: 500,
     })
+    await sleep(500)
 
-    currentExpandedBox.querySelector('p').innerText = settings.data.locale === 'en' ? truncate(data.incidents[data.currentExpandedBoxIndex].description_en, 40) : truncate(data.incidents[data.currentExpandedBoxIndex].description_mm, 80);
     currentExpandedBox = null;
-    data.currentExpandedBoxIndex = null;
     return true;
 }
 
@@ -153,11 +166,8 @@ const expandBox = async (e, index) => {
     //
     data.currentExpandedBoxIndex = index;
     data.isExpending = true;
-    //
-    const expandedWidth = boxRect.width * 2 + 24; // 16px or 1rem for gap
-    const expandedHeight = boxRect.height * 2 + 24;
-    const predictedRight = boxRect.left + expandedWidth;
-    const predictedBottom = boxRect.top + expandedHeight;
+    const predictedRight = boxRect.left + expandedBoxWidth;
+    const predictedBottom = boxRect.top + expandedBoxHeight;
 
     if (predictedRight >= containerRect.right) {
         shouldExpandToRight = false;
@@ -166,12 +176,11 @@ const expandBox = async (e, index) => {
     if (predictedBottom >= containerRect.bottom) {
         shouldExpandToBottom = false;
     }
-
     box.style.zIndex = 100;
     anime({
         targets: box,
-        width: expandedWidth,
-        height: expandedHeight,
+        width: expandedBoxWidth,
+        height: expandedBoxHeight,
         easing: 'easeOutQuart',
         translateX: shouldExpandToRight ? 0 : -boxRect.width - 24,
         translateY: shouldExpandToBottom ? 0 : -boxRect.height - 24,
@@ -186,11 +195,10 @@ const expandBox = async (e, index) => {
 }
 
 const clickBox = (e, index) => {
-    if (data.currentExpandedBoxIndex === index) {
-        window.open(data.incidents[data.currentExpandedBoxIndex].url, '_blank')
+    if (index === data.currentExpandedBoxIndex) {
+        closeCurrentExpandedBox();
         return;
     }
-
     expandBox(e, index)
 }
 
@@ -198,7 +206,7 @@ const initTriggers = () => {
     new AnimeScrollTrigger(document.querySelector('main'), [{
         scrollTrigger: {
             trigger: '#election-incidents-container',
-            start: '15% top',
+            start: 'top top',
             end: 'bottom top',
             onEnter: () => {
                 data.showButtonContainer = true;
@@ -210,6 +218,14 @@ const initTriggers = () => {
     }])
 }
 
+const calculateTranslationValues = () => {
+    let boxes = document.querySelectorAll('.election-incidents-box');
+    boxWidth = boxes[0].getBoundingClientRect().width;
+    boxHeight = boxes[0].getBoundingClientRect().height;
+    expandedBoxWidth = boxWidth * 2 + 24; // 16px or 1rem for gap
+    expandedBoxHeight = boxHeight * 2 + 24;
+}
+
 onMounted(() => {
     onClickOutside(document.getElementById('election-incidents-container'), function () {
         closeCurrentExpandedBox();
@@ -219,8 +235,7 @@ onMounted(() => {
         data.incidents = await res.json();
 
         setTimeout(() => {
-            boxWidth = document.querySelector('.election-incidents-box').getBoundingClientRect().width;
-            boxHeight = document.querySelector('.election-incidents-box').getBoundingClientRect().height;
+            calculateTranslationValues()
         }, 300)
 
         setTimeout(() => {

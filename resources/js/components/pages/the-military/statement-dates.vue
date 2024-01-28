@@ -13,7 +13,7 @@
                 :rows="2" expanded>
                 <template #day-popover="{ day, dayTitle, attributes }">
                     <div class="px-2">
-                        <div class="text-xs relative text-gray-50 font-semibold text-center">
+                        <div class="text-xs relative text-gray-50 text-center">
                             <p>{{ dayTitle }}</p>
                         </div>
                         <ul class="mt-1 mb-1">

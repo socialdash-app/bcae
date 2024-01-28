@@ -184,7 +184,7 @@ const visualization = {
         }
     },
     init: function (container) {
-        this.settings.total = Object.keys(this.data).length;
+        this.settings.total = Object.keys(this.data.data).length;
 
         // Declare the chart dimensions and margins.
         this.settings.width = container.getBoundingClientRect().width;
@@ -204,10 +204,10 @@ const visualization = {
 
         let rowIndex = 0;
         let currentItemIndex = 0;
-        let maxCount = this.data[0].count;
+        let maxCount = this.data.data[0].count;
         do {
             for (let j = 0; j < this.settings.columns; j++) {
-                let currentItem = this.data[currentItemIndex];
+                let currentItem = this.data.data[currentItemIndex];
                 this.settings.svg.append('circle')
                     .attr('r', this.settings.radius)
                     .attr('stroke', 'black')
@@ -268,15 +268,10 @@ const visualization = {
             .attr('cy', () => this.settings.height)
             .easeVarying((_) => d3.easeExpIn)
     },
-    highlight: function (attribute, value) {
+    customHighlight: function (fn) {
         // need to reset because if it is already filtered, there is a bug where it selects all circles
-        this.resetHighlight();
-        value = value.toString()
         this.settings.svg.selectAll('circle')
-            .filter(function () {
-                let data = d3.select(this).node().dataset[attribute];
-                return !(data.includes(value) || data === value);
-            })
+            .filter(fn)
             .attr('cy', function (_, i) {
                 return d3.select(this).attr('data-cy')
                 // return (Math.floor(i / this.settings.columns) * this.settings.radius * 2) + Math.floor(i / this.settings.columns) * this.settings.gap + this.settings.margin.top
@@ -285,6 +280,15 @@ const visualization = {
             .duration(500)
             .delay((_, i) => Math.max(i * 1, 50))
             .style('opacity', 0.4).easeVarying((_) => d3.easeExpIn)
+    },
+    highlight: function (attribute, value) {
+        this.resetHighlight();
+        value = value.toString()
+        // need to reset because if it is already filtered, there is a bug where it selects all circles
+        this.customHighlight(function () {
+            let data = d3.select(this).node().dataset[attribute];
+            return !(data.includes(value) || data === value);
+        })
     },
     resetHighlight: function () {
         this.settings.svg.selectAll('circle')
@@ -353,14 +357,16 @@ onMounted(() => {
             },
         },
     })
-
+    let c = 0;
     animations.push({
         scrollTrigger: {
             trigger: disinformationContentBoxes[1],
             start: 'top center',
             end: 'bottom 30%',
             onEnter: () => {
-                visualization.resetHighlight();
+                visualization.customHighlight(function () {
+                    return visualization.data.top44.includes(d3.select(this).node().id);
+                });
             },
         },
     })

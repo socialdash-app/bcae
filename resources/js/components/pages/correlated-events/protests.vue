@@ -15,8 +15,8 @@
                     <span class="w-4 h-4 bg-black rounded-full"></span>
                     <span class="text-sm">Unknown People</span>
                 </div>
-                <div class="w-full h-4 bg-gradient-to-r from-[#084CFB] to-[#F99500]"></div>
-                <div class="w-full flex justify-between text-sm font-medium text-gray-700">
+                <div class="w-10/12 md:!w-7/12 h-4 bg-gradient-to-r from-[#084CFB] to-[#F99500]"></div>
+                <div class="w-10/12 md:!w-7/12 flex justify-between text-sm font-medium text-gray-700">
                     <p>1 person</p>
                     <p>3000 people</p>
                 </div>
@@ -229,7 +229,7 @@ const plotPoints = (startDate, endDate) => {
                 parseFloat(d.lon), // long
                 parseFloat(d.lat) // lat
             ])[1]),
-        exit => exit.transition().duration(500).attr('r', 0)
+        exit => exit.attr('r', 0)
     )
 
     points.exit().transition().duration(400).attr('r', 0).remove();

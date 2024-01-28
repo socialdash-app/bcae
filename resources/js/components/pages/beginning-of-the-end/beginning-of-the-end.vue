@@ -6,20 +6,24 @@
         </div>
         <intro-beginning-of-the-end/>
         <div
-            class="drama-section py-10 main-intro w-screen h-screen px-3 md:px-20 flex items-center justify-center text-[#E8544E]">
-            <div class="text-center">
+            :style="{color: headers[6].secondaryColor}"
+            class="drama-section py-10 main-intro w-screen h-screen px-3 md:px-20 flex items-center justify-center">
+            <div class="text-center font-lato">
                 <div class="overflow-hidden">
                     <h1 class="text-5xl sm:text-7xl lg:text-9xl transform font-bold drama-intro">
-                        The
-                        BEGINNING</h1></div>
+                        The BEGINNING
+                    </h1>
+                </div>
                 <div class="overflow-hidden">
                     <h1 class="text-5xl sm:text-7xl lg:text-9xl transform font-bold drama-intro mt-4">
-                        Of</h1>
+                        Of
+                    </h1>
                 </div>
                 <div class="overflow-hidden">
                     <h1 class="text-5xl sm:text-7xl lg:text-9xl transform font-bold drama-intro mt-4">
                         The
-                        END</h1>
+                        END
+                    </h1>
                 </div>
             </div>
         </div>

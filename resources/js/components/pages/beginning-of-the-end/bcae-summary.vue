@@ -13,8 +13,8 @@
                             0{{ index + 1 }}
                         </h1>
                         <div class="flex flex-col w-full md:!w-5/12 mt-4 md:mt-0 text-white">
-                            <h1 :style="{transform: `translateY(${height}px)`}"
-                                class="text-3xl md:!text-5xl summary-title transform inline-block font-bold text-[#E8544E]">
+                            <h1 :style="{transform: `translateY(${height}px)`, color: headers[6].secondaryColor}"
+                                class="text-3xl md:!text-5xl summary-title transform inline-block font-bold">
                                 {{ datum.name }}
                             </h1>
                             <p :style="{transform: `translateY(${height}px)`}"

@@ -1,139 +1,203 @@
 {
-    "links": [
-        {
-            "color": "#01665e",
-            "source": "WA NATIONAL PARTY",
-            "target": "Union Solidarity and Development Party",
-            "value": 1
-        },
-        {
-            "color": "#00FF00",
-            "source": "Union Solidarity and Development Party",
-            "target": "WA NATIONAL PARTY",
-            "value": 2
-        },
-        {
-            "color": "#00FF00",
-            "source": "Union Solidarity and Development Party",
-            "target": "Danu National Democracy Party",
-            "value": 1
-        },
-        {
-            "color": "#00FF00",
-            "source": "Union Solidarity and Development Party",
-            "target": "National League for Democracy",
-            "value": 169
-        },
-        {
-            "color": null,
-            "source": "Union Pa.O National Organization",
-            "target": "Union Solidarity and Development Party",
-            "value": 1
-        },
-        {
-            "color": "#f6e8c3",
-            "source": "Mon Unity Party",
-            "target": "National League for Democracy",
-            "value": 1
-        },
-        {
-            "color": "#fffc1f",
-            "source": "Shan Nationalities League for Democracy",
-            "target": "Ta-Arng (Palaung) National Party",
-            "value": 1
-        },
-        {
-            "color": "#ccebc5",
-            "source": "Lisu National Development Party(L.N.D.P)",
-            "target": "National League for Democracy",
-            "value": 1
-        },
-        {
-            "color": "#FF0000",
-            "source": "National League for Democracy",
-            "target": "Union Solidarity and Development Party",
-            "value": 14
-        },
-        {
-            "color": "#FF0000",
-            "source": "National League for Democracy",
-            "target": "Mon Unity Party",
-            "value": 1
-        },
-        {
-            "color": "#FF0000",
-            "source": "National League for Democracy",
-            "target": "La Hu National Development Party",
-            "value": 1
-        },
-        {
-            "color": "#FF0000",
-            "source": "National League for Democracy",
-            "target": "Lisu National Development Party(L.N.D.P)",
-            "value": 1
-        },
-        {
-            "color": null,
-            "source": "voter",
-            "target": "National League for Democracy",
-            "value": 94
-        }
-    ],
     "nodes": [
         {
+            "id": 0,
             "name": "WA NATIONAL PARTY",
-            "color": "#01665e",
-            "id": "WA NATIONAL PARTY"
+            "color": "#01665e"
         },
         {
+            "id": 1,
             "name": "Union Solidarity and Development Party",
-            "color": "#00FF00",
-            "id": "Union Solidarity and Development Party"
+            "color": "#00FF00"
         },
         {
+            "id": 2,
+            "name": "Union Solidarity and Development Party",
+            "color": "#00FF00"
+        },
+        {
+            "id": 3,
+            "name": "WA NATIONAL PARTY",
+            "color": "#01665e"
+        },
+        {
+            "id": 4,
             "name": "Danu National Democracy Party",
-            "color": null,
-            "id": "Danu National Democracy Party"
+            "color": "#848eff"
         },
         {
+            "id": 5,
             "name": "National League for Democracy",
-            "color": "#FF0000",
-            "id": "National League for Democracy"
+            "color": "#FF0000"
         },
         {
+            "id": 6,
             "name": "Union Pa.O National Organization",
-            "color": null,
-            "id": "Union Pa.O National Organization"
+            "color": "#848eff"
         },
         {
+            "id": 7,
             "name": "Mon Unity Party",
-            "color": "#f6e8c3",
-            "id": "Mon Unity Party"
+            "color": "#f6e8c3"
         },
         {
+            "id": 8,
             "name": "Shan Nationalities League for Democracy",
-            "color": "#fffc1f",
-            "id": "Shan Nationalities League for Democracy"
+            "color": "#fffc1f"
         },
         {
+            "id": 9,
             "name": "Ta-Arng (Palaung) National Party",
-            "color": "#80cdc1",
-            "id": "Ta-Arng (Palaung) National Party"
+            "color": "#80cdc1"
         },
         {
+            "id": 10,
             "name": "Lisu National Development Party(L.N.D.P)",
-            "color": "#ccebc5",
-            "id": "Lisu National Development Party(L.N.D.P)"
+            "color": "#ccebc5"
         },
         {
+            "id": 11,
+            "name": "National League for Democracy",
+            "color": "#FF0000"
+        },
+        {
+            "id": 12,
+            "name": "Mon Unity Party",
+            "color": "#f6e8c3"
+        },
+        {
+            "id": 13,
             "name": "La Hu National Development Party",
-            "color": "#b3de69",
-            "id": "La Hu National Development Party"
+            "color": "#b3de69"
         },
         {
+            "id": 14,
+            "name": "Lisu National Development Party(L.N.D.P)",
+            "color": "#ccebc5"
+        },
+        {
+            "id": 15,
             "name": "voter",
-            "color": null,
-            "id": "voter"
+            "color": "#848eff"
+        }
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 1,
+            "value": 1,
+            "gradientColors": [
+                "#01665e",
+                "#00FF00"
+            ]
+        },
+        {
+            "source": 2,
+            "target": 3,
+            "value": 2,
+            "gradientColors": [
+                "#00FF00",
+                "#01665e"
+            ]
+        },
+        {
+            "source": 2,
+            "target": 4,
+            "value": 1,
+            "gradientColors": [
+                "#00FF00",
+                "#848eff"
+            ]
+        },
+        {
+            "source": 2,
+            "target": 5,
+            "value": 169,
+            "gradientColors": [
+                "#00FF00",
+                "#FF0000"
+            ]
+        },
+        {
+            "source": 6,
+            "target": 1,
+            "value": 1,
+            "gradientColors": [
+                "#848eff",
+                "#00FF00"
+            ]
+        },
+        {
+            "source": 7,
+            "target": 5,
+            "value": 1,
+            "gradientColors": [
+                "#f6e8c3",
+                "#FF0000"
+            ]
+        },
+        {
+            "source": 8,
+            "target": 9,
+            "value": 1,
+            "gradientColors": [
+                "#fffc1f",
+                "#80cdc1"
+            ]
+        },
+        {
+            "source": 10,
+            "target": 5,
+            "value": 1,
+            "gradientColors": [
+                "#ccebc5",
+                "#FF0000"
+            ]
+        },
+        {
+            "source": 11,
+            "target": 1,
+            "value": 14,
+            "gradientColors": [
+                "#FF0000",
+                "#00FF00"
+            ]
+        },
+        {
+            "source": 15,
+            "target": 5,
+            "value": 94,
+            "gradientColors": [
+                "#848eff",
+                "#FF0000"
+            ]
+        },
+        {
+            "source": 11,
+            "target": 12,
+            "value": 1,
+            "gradientColors": [
+                "#FF0000",
+                "#f6e8c3"
+            ]
+        },
+        {
+            "source": 11,
+            "target": 13,
+            "value": 1,
+            "gradientColors": [
+                "#FF0000",
+                "#b3de69"
+            ]
+        },
+        {
+            "source": 11,
+            "target": 14,
+            "value": 1,
+            "gradientColors": [
+                "#FF0000",
+                "#ccebc5"
+            ]
         }
     ]
 }

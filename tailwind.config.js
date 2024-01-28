@@ -5,7 +5,8 @@ export default {
         extend: {
             fontFamily: {
                 poppins: ['Poppins'],
-                bevietnampro: ['Be Vietnam Pro']
+                bevietnampro: ['Be Vietnam Pro'],
+                lato: ['Lato'],
             }
         },
     },

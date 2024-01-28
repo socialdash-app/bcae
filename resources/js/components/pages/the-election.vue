@@ -50,10 +50,10 @@
                 <div
                     class="trigger z-[1002] p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white">
                     Despite the COVID-19 pandemic and other challenges, the third general election was held on November
-                    8, 2020, per the 2008 Constitution. The domestic and international election observers also observed
-                    the 2020 election and they found some inconsistencies in electoral administration and election
-                    administration amid the ongoing pandemic, but they noted the election results credible, reflecting
-                    the will of the majority of voters.
+                    8, 2020, per the 2008 Constitution. Domestic and international election observers also monitored the
+                    2020 election and found some inconsistencies in electoral and election administration amid the
+                    ongoing pandemic. However, they noted that the election results were credible and reflected the will
+                    of the majority of voters.
                 </div>
                 <div
                     class="trigger z-[1002] p-4 md:!p-8 shadow-xl md:!shadow-none w-full mb-[90%] md:!mb-[50%] border rounded-lg bg-white relative">

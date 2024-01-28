@@ -11,7 +11,7 @@
                     <img class="h-8 md:h-16 object-fill" :alt="accusation.partyName"
                          :src="'assets/party-images/'+accusation.img"/>
                     <h2 class="text-lg px-4 py-2 font-semibold">{{ accusation.name }}</h2>
-                    <p class="text-[#92261C] px-4">{{ accusation.partyName }}</p>
+                    <p class="text-[#92261C] px-2 md:!px-4 text-sm md:text-base">{{ accusation.partyName }}</p>
                 </div>
             </div>
             <div

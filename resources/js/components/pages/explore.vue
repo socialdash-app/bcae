@@ -71,7 +71,7 @@ let data = [
     },
     {
         description:
-            "Explore the insights and results of 2020 election",
+            "Explore insights and results of 2020 election",
         card: "assets/cards/the_election.svg",
         onClick: () => {
             route.changeTo('story', 'the-election', 1)
@@ -109,7 +109,7 @@ let data = [
     },
     {
         description:
-            "Explore the protests and the disinformation outspread",
+            "Exploring protests and disinformation outspread",
         card: "assets/cards/correlated_events.svg",
         onClick: () => {
             route.changeTo('story', 'correlated-events', 5)
@@ -226,7 +226,7 @@ const init = () => {
                 // delay: 10
             });
             container.style.cursor = 'grab'
-        }, 800);
+        }, 400);
         anime({
             targets: descriptionContainer,
             scrollLeft: (currentRotation / (360 - deg)) * width,
@@ -299,11 +299,17 @@ const init = () => {
         })(navigator.userAgent || navigator.vendor || window.opera);
         return check;
     };
-    let multiplier = mobileAndTabletCheck() ? 3 : 0.3;
+    let multiplier = mobileAndTabletCheck() ? 2 : 0.3;
     let container = document.getElementById('explore-container')
+    let dragTimeout = null;
     new DragGesture(container, (state) => {
         container.style.cursor = 'grabbing'
+        explore.style.overflowY = 'hidden'
         isDragging = true;
+        if (dragTimeout) clearTimeout(dragTimeout)
+        dragTimeout = setTimeout(() => {
+            explore.style.overflowY = 'auto'
+        }, 300)
         update(currentRotation - (state.direction[0] <= 0 ? -1 : 1) * multiplier)
     }, {
         threshold: 0.2,
@@ -319,6 +325,16 @@ onMounted(() => {
     setTimeout(() => {
         init()
     }, settings.animationDuration)
+})
+
+onActivated(() => {
+    document.getElementById('explore').scrollTop = 1;
+    anime({
+        targets: document.getElementById('explore'),
+        scrollTop: 0,
+        easing: 'easeOutQuart',
+        duration: 400,
+    })
 })
 </script>
 

@@ -7,7 +7,7 @@
         <div id="chronicles-introduction"
              :style="{height: height - 100 + 'px'}"
              class="text-center gap-y-10 w-11/12 md:!w-8/12 flex flex-col items-center justify-center">
-            <h1 class="text-4xl opacity-0 font-semibold">Golden land with a rich history of regime changes</h1>
+            <h1 class="text-4xl opacity-0 font-semibold">Golden land, with a rich history of regime changes</h1>
             <p class="text-gray-700 opacity-0 w-11/12">Since gaining independence in 1948, Myanmar has grappled with
                 chronic state
                 instability and
@@ -21,6 +21,7 @@
                 <div class="relative w-full h-full chronicle-illustration-container">
                     <div class="justify-between chronicle-illustration flex flex-col w-full absolute h-full"
                          :style="{ opacity: i === 0 ? 1 : 0 }"
+                         style="transform-origin: top left;"
                          v-for="(datum, i) in data">
                         <div
                             :style="{visibility: i === 0 && j === 0? 'visible': 'hidden'}"
@@ -72,7 +73,7 @@ const data = [{
         'assets/illustrations/chronicles/1958/1958_NW_frame_3.svg',
         'assets/illustrations/chronicles/1958/1958_NW_frame_4.svg',
     ],
-    description: 'The story starts with the military coup-as-per-the-constitution that took place in 1958 when the military pressured a civilian government, which was dealing with divisions within the ruling party, to relinquish state power to the military. Prime Minister U Nu and his cabinet resigned on 28 October, 1958, and handed over power to General Ne Win, who formed a caretaker government to preserve the country.'
+    description: 'The story starts with the military coup-as-per-the-constitution that took place in 1958 when the military pressured a civilian government, which was dealing with divisions within the ruling party, to relinquish state power to the military. Prime Minister U Nu and his cabinet resigned on October 28, 1958, and handed over power to General Ne Win, who formed a caretaker government to preserve the country.'
 }, {
     title: '1962',
     bg: 'bg-blue-300',
@@ -80,14 +81,14 @@ const data = [{
         'assets/illustrations/chronicles/1962/1962_frame_1.svg',
         'assets/illustrations/chronicles/1962/1962_frame_2.svg',
     ],
-    description: 'On 2 March, 1962, General Ne Win and a group of military officers overthrew the Government of Premier U Nu in a swift bloodless coup d\'etat, and established the period of direct military rule and held power for the next twenty-six years. After the coup, General Ne Win formed Revolutionary Council to act as interim government, and the RC has declared that it intends to continue a "neutral" foreign policy.'
+    description: 'On March 2, 1962, General Ne Win and a group of military officers overthrew the Government of Premier U Nu in a swift bloodless coup d\'etat and established the period of direct military rule and held power for the next twenty-six years. After the coup, General Ne Win formed Revolutionary Council to act as interim government, and the RC has declared that it intends to continue a "neutral" foreign policy.'
 }, {
     title: '1988',
     bg: 'bg-gray-300',
     illustrations: [
         'assets/illustrations/chronicles/1988/1988.svg',
     ],
-    description: 'After the 8888 national uprising aka the People Power Uprising against the Burma Socialist Programme Party government, the third military coup was occurred on 18 September, 1988. The uprising ended with the bloody military coup by the State Law and Order Restoration Council. During the uprising, thousands of people have been killed.'
+    description: 'After the 8888 national uprising aka the People Power Uprising against the Burma Socialist Programme Party government, the third military coup occurred on September 18, 1988. The uprising ended with a bloody military coup by the State Law and Order Restoration Council. During the uprising, thousands of people were killed.'
 }, {
     title: '1990',
     bg: 'bg-orange-300',
@@ -102,7 +103,7 @@ const data = [{
         'assets/illustrations/chronicles/2021/2021_frame2.svg',
     ],
     bg: 'bg-orange-300',
-    description: 'On 1 February, 2021, the military led by Min Aung Hlaing seized state power from a democratically elected government, by announcing a one-year state of emergency period under the pretext of vote fraud. People resisted the coup with protests and rallies across the country, but faced violent repression by the military, resulting the formation of a parallel government and allied with armed groups to fight the junta.'
+    description: 'On February 1, 2021, the military led by Min Aung Hlaing seized state power from a democratically elected government, by announcing a one-year state of emergency period under the pretext of vote fraud. People resisted the coup with protests and rallies across the country, but faced violent repression by the military, resulting the formation of a parallel government and allied with armed groups to fight the junta.'
 }];
 
 const run = function (fn, intervalInMilliseconds = 1000, autostart = false, maxSteps = null, onComplete = null) {
@@ -249,7 +250,7 @@ const initialiseIllustrationAnimations = () => {
             walkFrame.style.visibility = index === currentFrame ? 'visible' : 'hidden';
         })
     }, 600)
-    
+
     const turnAnimation = run((step) => {
         let currentFrame = step % NWTurnFrames.length;
         NWTurnFrames.forEach((turnFrame, index) => {
@@ -263,8 +264,10 @@ const initialiseIllustrationAnimations = () => {
             anime({
                 targets: chronicleIllustrations[1],
                 easing: 'easeOutQuart',
-                duration: 2000,
-                scale: [0, 0.7],
+                duration: 1500,
+                scale: [0.2, 0.7],
+                // translateX: ['0%', '-25%'],
+                // translateY: ['0%', '-10%'],
                 begin: () => {
                     chronicleIllustrations[1].style.opacity = 1;
                 },
@@ -274,6 +277,7 @@ const initialiseIllustrationAnimations = () => {
 
     return [{
         onEnter: () => {
+            turnAnimation.pause();
             walk.pause();
             protest1962Animation.pause();
             anime({

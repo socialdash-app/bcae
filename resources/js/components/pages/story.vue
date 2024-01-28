@@ -3,11 +3,11 @@
           id="story"
           class="w-screen overscroll-none leading-7 shrink-0  overflow-y-auto overflow-x-hidden flex items-center flex-col">
         <div id="section-indicator-section"
-             class="fixed z-[9999] pr-6 md:!pr-20 py-4 md:!py-6 top-0 left-0 w-screen flex justify-end">
+             class="fixed z-[10001] pr-6 md:!pr-20 py-4 md:!py-6 top-0 left-0 w-screen flex justify-end">
             <div
                 class="flex items-center justify-center">
-                <div @click="route.changeTo('home')"
-                     class="absolute cursor-pointer  w-10 md:!w-14 h-10 md:!h-14 flex items-center justify-center">
+                <div @click="route.changeTo('explore')"
+                     class="absolute z-[10001] cursor-pointer  w-10 md:!w-14 h-10 md:!h-14 flex items-center justify-center">
                     <svg :id="'header-' + separateWordByDash(header.name)" :style="{ zIndex: index }"
                          class="absolute w-full h-full"
                          v-for="(header, index) in headers" width="100%" height="100%" viewBox="0 0 60 60">
@@ -17,7 +17,8 @@
                     </svg>
                 </div>
                 <div class="relative w-5 md:!w-7 h-5 md:!h-7 overflow-hidden">
-                <span @click="route.changeTo('home')" class="w-full cursor-pointer  header-icon h-full absolute"
+                <span @click="route.changeTo('explore')"
+                      class="w-full z-[10001] cursor-pointer  header-icon h-full absolute"
                       :style="{ transform: `translateY(${index * 100}%)` }"
                       v-for="(header, index) in headers" v-html="header.icon"></span>
                 </div>
@@ -30,13 +31,11 @@
         <the-military/>
         <correlated-events/>
         <beginning-of-the-end/>
-        <!--        [Home → Chronicles → The Election → Prominent events → Party reactions → The Military → Correlated events →-->
-        <!--        Beginning of The End] Comment end-->
     </main>
 </template>
 
 <script setup>
-import {reactive, onMounted, onDeactivated, onActivated} from "vue";
+import {reactive} from "vue";
 import Chronicles from "./chronicles.vue";
 import TheElection from "./the-election.vue";
 import ProminentEvents from "./prominent-events/prominent-events.vue";
@@ -55,19 +54,15 @@ const data = reactive({})
 
 const height = window.innerHeight;
 
-let currentScrollOffset = 0;
-
-onMounted(() => {
-
-})
-
-onDeactivated(() => {
-    currentScrollOffset = document.querySelector('main').scrollTop;
-})
-
-onActivated(() => {
-    document.querySelector('main').scrollTop = currentScrollOffset;
-})
 </script>
 
-<style scoped></style>
+<style scoped>
+main {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+
+main::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+</style>

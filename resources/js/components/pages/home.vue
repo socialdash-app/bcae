@@ -28,33 +28,32 @@
                 <div
                     class="flex px-4 flex-col md:backdrop-blur-0  relative h-5/6 w-full leading-relaxed md:leading-8 tracking-wider">
                     <p class="description w-full text-gray-600 backdrop-blur md:backdrop-blur-0">On the 1st of February
-                        2021 when Vice President Myint
-                        Swe became an Acting President and declared on state-owned media that the results of the
-                        November 2020 general election were invalid, instating a one-year state of emergency, and
-                        handing control of the executive, legislative, and judicial branches of government to the
-                        commander in chief of the armed forces, Senior General Min Aung Hlaing. After years of living
-                        under military rule, the people's hopes for democracy that had been glowing since 2010 were
-                        dashed. The coup has also brought economic turmoil, wiping out modest gains in poverty reduction
-                        made over the past decade. But, this coup was not the first time for Myanmar; it was preceded by
-                        many military coups since 1958.
-                        <br/><br/>
-                        Before the coup d'état, the military and other political parties repeatedly announced that the
-                        election was unfair. Do you think the 2020 general election is not fair? Do you want to know the
+                        2021, Vice President Myint Swe became an Acting President and declared on state-owned media that
+                        the results of the November 2020 general election were invalid. He instated a one-year state of
+                        emergency and handed control of the executive, legislative, and judicial branches of government
+                        to the commander in chief of the armed forces, Senior General Min Aung Hlaing. People’s hopes
+                        for democracy that had been glowing since 2010 were dashed. The coup has also brought economic
+                        turmoil, wiping out modest gains in poverty reduction made over the past decade. However, this
+                        coup was not the first time for Myanmar; it was preceded by many military coups since 1958.
+                        <br/>
+                        Before the coup d’état, the military and other political parties repeatedly announced that the
+                        election was unfair. Do you think the 2020 general election was unfair? Do you want to know the
                         incidents that happened during the period before the coup and after the election?
+                        <br/>
                         In BCAE, you can explore election results, actions of related organizations or parties,
                         prominent events, and other announcements both before the coup and after the election. BCAE
-                        covered data from social media pages of officials and newsrooms.
+                        covers data from the social media pages of officials and newsrooms.
                     </p>
-                    <h1 class="font-semibold text-xl mt-40 description backdrop-blur md:backdrop-blur-0">Interaction
-                        and navigation guide</h1>
-                    <p class="description w-full mt-4 text-gray-700 backdrop-blur md:backdrop-blur-0">BCAE story is
-                        linear and you can scroll vertically
-                        to walk through the story. You can jump to any section in carousel page which can be accessed by
-                        clicking on the section icon in the top-right corner. You can also interact with different
-                        elements in the page. A blinking (i) icon indicates that you can interact with an element, and
-                        it will disappear once you do so. You can click on a static (i) icon to see more information
-                        about an element. Interactable texts are enclosed in [text-box] and you can see more information
-                        by clicking on them.</p>
+                    <h1 class="font-semibold text-xl mt-40 description backdrop-blur md:backdrop-blur-0">
+                        Interaction and navigation guide</h1>
+                    <p class="description w-full mt-4 text-gray-700 backdrop-blur md:backdrop-blur-0">
+                        BCAE story is linear and you can scroll vertically to explore the story. You can jump to any
+                        section in the carousel page which can be accessed by clicking on the section icon in the
+                        top-right corner. You can also interact with different elements on the page. A blinking (i) icon
+                        indicates that you can interact with an element, and it will disappear once you do so. You can
+                        click on a static (i) icon to see more information about an element. Interactable texts are
+                        enclosed in [text-box] and you can see more information by clicking them.
+                    </p>
                 </div>
             </div>
             <div
@@ -65,7 +64,7 @@
                 <div style="transform-origin: center bottom;" v-html="threeFingerIllustration"
                      class="flex items-end h-[40vh] md:!h-[50vh] home-illustration opacity-0"></div>
             </div>
-            <div id="scroll-down-indicator" class="fixed  bottom-8 opacity-0 flex flex-col items-center">
+            <div id="scroll-down-indicator" class="fixed z-30 bottom-8 opacity-0 flex flex-col items-center">
                 <h1 class="font-semibold md:    text-xl">Scroll</h1>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -305,6 +304,9 @@ const height = window.innerHeight;
 const width = window.innerWidth;
 
 let isAnimating = false;
+let showDownwardArrowTimeout = null;
+
+let downwardArrowAnimation = null
 const clickCard = (cardName) => {
     if (isAnimating) return;
     isAnimating = true;
@@ -327,6 +329,7 @@ const clickCard = (cardName) => {
     })
 }
 
+
 const trigger = () => {
     const body = document.getElementById('home-text');
     const bodyHeight = body.getBoundingClientRect().height;
@@ -345,24 +348,6 @@ const trigger = () => {
                 start: '1% top',
                 end: '70% center',
                 lerp: true,
-                onLeaveBack: () => {
-                    anime({
-                        targets: '#scroll-down-indicator',
-                        easing: 'easeOutQuart',
-                        opacity: 1,
-                        translateY: [100, 0],
-                        duration: 1000,
-                    })
-                },
-                onEnter: () => {
-                    anime({
-                        targets: '#scroll-down-indicator',
-                        easing: 'easeOutQuart',
-                        opacity: 0,
-                        translateY: [0, 100],
-                        duration: 1000,
-                    })
-                },
                 onLeave: () => {
                     anime({
                         targets: ['.home-illustration', '.description'],
@@ -428,10 +413,41 @@ const trigger = () => {
                 lerp: true,
                 // smooth: true,
             },
+        }, {
+            scrollTrigger: {
+                trigger: '#home-trigger',
+                start: 'top top',
+                end: 'bottom bottom',
+                lerp: true,
+                onUpdate: (_, progress) => {
+                    anime({
+                        targets: '#scroll-down-indicator',
+                        easing: 'easeOutQuart',
+                        opacity: 0,
+                        translateY: [100, 0],
+                        duration: 100,
+                    })
+                    downwardArrowAnimation.pause();
+                    if (showDownwardArrowTimeout) clearTimeout(showDownwardArrowTimeout);
+                    if (progress > 0.9) {
+                        return;
+                    }
+                    showDownwardArrowTimeout = setTimeout(() => {
+                        anime({
+                            targets: '#scroll-down-indicator',
+                            easing: 'easeOutQuart',
+                            opacity: 1,
+                            translateY: [100, 0],
+                            duration: 100,
+                        })
+                        downwardArrowAnimation.restart();
+                    }, 2000)
+                }
+                // smooth: true,
+            },
         },
     ]);
 }
-let currentScrollOffset = 0;
 
 const init = () => {
     anime({
@@ -464,6 +480,8 @@ const init = () => {
                 duration: 100,
             })
 
+            downwardArrowAnimation.play();
+
             anime({
                 targets: '.home-illustration',
                 opacity: 1,
@@ -478,25 +496,22 @@ const init = () => {
     })
 }
 onMounted(() => {
-    init();
-
-    anime({
+    downwardArrowAnimation = anime({
         targets: '.lucide-arrow-down',
         translateY: [0, 10],
         loop: true,
+        autoplay: false,
         easing: 'linear',
         direction: 'alternate',
         duration: 800,
     })
-})
+    init();
 
-onDeactivated(() => {
-    currentScrollOffset = document.querySelector('#home').scrollTop;
 })
 
 onActivated(() => {
     document.querySelector('#home').scrollTo({
-        top: currentScrollOffset,
+        top: 0,
         behavior: "smooth"
     });
 
@@ -507,5 +522,14 @@ onActivated(() => {
 
 .home-title {
     transform: translateY(100%);
+}
+
+#home {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+
+#home::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
 }
 </style>

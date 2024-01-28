@@ -13,7 +13,7 @@
                    :id="`party-facebook-media-post-${index}`"
                    :href="article.url"
                    target="_blank"
-                   class="party-facebook-media-post text-ellipsis text-[#240824] cursor-pointer absolute bg-white rounded p-4 md:!p-10 w-10/12 md:!w-5/12"
+                   class="party-facebook-media-post text-center text-ellipsis text-[#240824] cursor-pointer absolute bg-white rounded p-4 md:!p-10 w-10/12 md:!w-5/12"
                    :style="{opacity: index === 0 ? 1 : 0, zIndex: index, height: height * 0.25 + 'px'}">
                     <h1 class="md:text-lg font-semibold">{{ article.title }}</h1>
                 </a>
