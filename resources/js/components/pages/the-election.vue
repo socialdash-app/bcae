@@ -83,6 +83,7 @@ import route, {headers} from "../../api/route.js";
 import anime from 'animejs';
 import {placeElementRelativeToScreen} from "../../api/helpers.js";
 import settings from "../../api/settings.js";
+import getPartyColor from "../../api/getPartyColor.js";
 
 let results = {}, zoomIntoRegion, path, resetZoom, g, g1, amyoThaFeatures, pyiThuFeatures, currentRegion;
 
@@ -100,53 +101,6 @@ const data = reactive({
     loading: true,
 });
 
-
-const getPartyColor = (party) => {
-    switch (party) {
-        case 'Union Solidarity and Development Party':
-            return '#00FF00';
-        case 'National League for Democracy':
-            return '#FF0000';
-        case 'Kachin State People\'s Party ':
-            return '#8c510a';
-        case 'Kayah State Democratic Party':
-            return '#bf812d';
-        case 'Zomi Congress for Democracry':
-            return '#dfc27d';
-        case 'Mon Unity Party':
-            return '#f6e8c3';
-        case 'Arakan National Party':
-            return '#f5f5f5';
-        case 'Shan Nationalities League for Democracy':
-            return '#c7eae5';
-        case 'Ta-Arng (Palaung) National Party':
-            return '#80cdc1';
-        case 'Pao National Organization (PNO)':
-            return '#35978f';
-        case 'WA NATIONAL PARTY':
-            return '#01665e';
-        case 'Arakan Front Party (AFP)':
-            return '#003c30';
-        case 'Public of Labour Party':
-            return '#214198';
-        case 'Union Betterment Party':
-            return '#f55b65';
-        case 'New Democracy Party (Kachin)':
-            return '#bc80bd';
-        case 'Lisu National Development Party(L.N.D.P)':
-            return '#ccebc5';
-        case 'တစ်သီးပုဂ္ဂလ':
-            return '#FFFFFF';
-        case 'Kayin Peoples Party':
-            return '#80b1d3';
-        case 'Chin National League for Democracy Party':
-            return '#fdb462';
-        case 'La Hu National Development Party':
-            return '#b3de69';
-        default:
-            return '#121212';
-    }
-};
 
 const switchHluttawType = (hluttaw) => {
     if (data.currentHluttaw === hluttaw) return;
@@ -334,7 +288,6 @@ const drawSubregions = (features) => {
 const placeThenSection = () => {
     let section = document.getElementById('the-election-then-section');
     let left = section.children[0].getBoundingClientRect().left;
-    console.log(section)
     section.children[0].style.transform = `translateX(-${left}px)`
 }
 

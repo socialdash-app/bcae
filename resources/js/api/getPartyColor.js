@@ -1,23 +1,23 @@
 export default (party) => {
     switch (party.trim()) {
         case 'Union Solidarity and Development Party':
-            return '#00FF00';
+            return '#006b44';
         case 'Democratic Party For a New Society':
             return '#ff3f3f';
         case 'National League for Democracy':
-            return '#FF0000';
+            return '#ec1b23';
         case 'People\'s Pioneer Party':
-            return '#0550a1';
+            return '#0e51a0';
         case 'National Democratic Force(NDF)':
-            return '#ff0c61';
+            return '#ec1b5a';
         case "Kachin State People's Party":
             return '#8c510a';
         case 'Kayah State Democratic Party ':
             return '#bf812d';
         case 'Democratic Party of National Politics':
-            return '#ffb105';
+            return '#008ce6';
         case 'Kachin National Congress(KNC)':
-            return '#ff970e';
+            return '#088108';
         case 'Shan Nationalities League for Democracy':
             return '#fffc1f';
         case 'Zo National Region Development Party':
@@ -25,11 +25,11 @@ export default (party) => {
         case 'Mon Unity Party':
             return '#f6e8c3';
         case 'National Development Party':
-            return '#ddeb17';
+            return '#ffb00d';
         case 'Rakhine State National United Party':
             return '#f5f5f5';
         case 'Shan Nationalities Democratic Party':
-            return '#c7eae5';
+            return '#f8de01';
         case 'Ta-Arng (Palaung) National Party':
             return '#80cdc1';
         case 'Pao National Organization (PNO)':

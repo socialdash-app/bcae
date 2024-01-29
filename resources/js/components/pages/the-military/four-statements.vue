@@ -9,8 +9,9 @@
                  class="four-statement z-10 flex flex-col p-4 md:!p-10 bg-[#AAE998] text-gray-800 border border-gray-600 gap-y-4 md:!gap-y-8 absolute rounded-2xl items-center">
                 <h1 class="text-2xl font-bold">{{ statement.title }}</h1>
                 <h2 class="text-lg font-semibold">{{ statement.subtitle }}</h2>
-                <div class="h-[70%] overflow-hidden text-ellipsis">
-                    {{ truncate(statement.description, width > 768 ? 1000 : 600) }}
+                <div class="h-[70%] overflow-hidden text-ellipsis"
+                     v-html="truncate(statement.description, width > 768 ? 1000 : 600)">
+
                 </div>
                 <button v-text="data.currentExpandedArticleIndex === index ? 'Close' : 'Read More'"
                         class="px-6 self-end py-3 rounded bg-[#EE7E33] text-white" @click="clickArticle(index)">
@@ -93,7 +94,7 @@ function expandArticle(index) {
     article.style.zIndex = 1000;
     let p = article.querySelector('div');
     p.style.height = 'auto';
-    p.innerText = fourStatements[index].description;
+    p.innerHTML = fourStatements[index].description;
     p.style.overflowY = 'auto';
     document.querySelector('main').style.overflowY = 'hidden';
     let matrix = new WebKitCSSMatrix(window.getComputedStyle(article).transform)

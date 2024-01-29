@@ -228,7 +228,7 @@ const plotPoints = (startDate, endDate) => {
             .attr('cy', d => projection([
                 parseFloat(d.lon), // long
                 parseFloat(d.lat) // lat
-            ])[1]),
+            ])[1]).attr('r', 5),
         exit => exit.attr('r', 0)
     )
 

@@ -184,6 +184,7 @@
                                 <g>
                                     <path stroke-width="2"
                                           stroke="black"
+                                          class="tick"
                                           style="stroke-dasharray: 256; stroke-dashoffset: 256;" id="story-check"
                                           d="M356.583 122.623C357.478 122.623 358.184 122.288 358.702 121.618L378.53 94.8956C378.712 94.6444 378.845 94.4139 378.929 94.2044C379.013 93.9948 379.055 93.7824 379.055 93.5667C379.055 93.0759 378.88 92.6808 378.53 92.3817C378.18 92.0823 377.719 91.9326 377.145 91.9326C376.726 91.9326 376.383 92.0015 376.117 92.1392C375.851 92.277 375.593 92.5133 375.341 92.8486L356.499 118.547L346.721 107.592C346.217 107.006 345.616 106.713 344.917 106.713C344.329 106.713 343.846 106.871 343.469 107.188C343.091 107.506 342.902 107.909 342.902 108.401C342.902 108.616 342.951 108.835 343.049 109.056C343.147 109.278 343.301 109.496 343.511 109.711L354.4 121.582C355.03 122.276 355.757 122.623 356.583 122.623Z"
                                           fill="none"/>
@@ -265,6 +266,7 @@
                                 <g>
                                     <path id="explore-check"
                                           stroke-width="2"
+                                          class="tick"
                                           stroke="black"
                                           style="stroke-dasharray: 256; stroke-dashoffset: 256;"
                                           d="M339.583 64.6234C340.478 64.6234 341.184 64.2884 341.702 63.6179L361.53 36.8956C361.712 36.6444 361.845 36.4139 361.929 36.2044C362.013 35.9948 362.055 35.7824 362.055 35.5667C362.055 35.0759 361.88 34.6808 361.53 34.3817C361.18 34.0823 360.719 33.9326 360.145 33.9326C359.726 33.9326 359.383 34.0015 359.117 34.1392C358.851 34.277 358.593 34.5133 358.341 34.8486L339.499 60.5468L329.721 49.5923C329.217 49.0058 328.616 48.7125 327.917 48.7125C327.329 48.7125 326.846 48.8709 326.469 49.1881C326.091 49.5056 325.902 49.9095 325.902 50.4006C325.902 50.616 325.951 50.8345 326.049 51.056C326.147 51.2775 326.301 51.4961 326.511 51.7114L337.4 63.582C338.03 64.2765 338.757 64.6234 339.583 64.6234Z"
@@ -294,6 +296,7 @@ import AnimeScrollTrigger from 'anime-scrolltrigger';
 import route from "../../api/route.js";
 import voteHandIllustration from "../../assets/home/vote-hand-illustration.js";
 import threeFingerIllustration from "../../assets/home/three-finger-illustration.js";
+import settings from "../../api/settings.js";
 
 const props = defineProps([]);
 
@@ -397,6 +400,10 @@ const trigger = () => {
                 },
             }],
             translateX: [{
+                // 380 : 400
+                value: 0,
+                duration: 0,
+            }, {
                 value: (el, index) => {
                     return index === 0 ? -348 + additive : 326 - additive;
                 },
@@ -449,7 +456,10 @@ const trigger = () => {
     ]);
 }
 
+
 const init = () => {
+
+    // set initial values
     anime({
         targets: '.title',
         background: 'rgba(255,255,255,0)',
@@ -458,7 +468,8 @@ const init = () => {
     anime({
         targets: '.home-title',
         color: '#E8544E',
-        translateY: '100%',
+        opacity: 0,
+        translateY: '100px',
         duration: 0,
     })
     anime({
@@ -468,70 +479,85 @@ const init = () => {
         translateY: 100,
     })
     anime({
-        targets: '.home-title',
-        delay: anime.stagger(100),
-        duration: 1000,
-        opacity: [0, 1],
-        translateY: ['100%', '0%'],
-        easing: 'easeOutQuart',
-        complete: () => {
-            anime({
-                targets: '#home',
-                background: ['#111827', '#fff'],
-                easing: 'easeOutQuart',
-                duration: 1000,
-            })
-
-            anime({
-                targets: '.home-title',
-                color: '#111827',
-                easing: 'easeOutQuart',
-                duration: 1000,
-            })
-
-            anime({
-                targets: '#scroll-down-indicator',
-                easing: 'easeOutQuart',
-                opacity: [0, 1],
-                translateY: [100, 0],
-                duration: 100,
-            })
-
-            downwardArrowAnimation.play();
-
-            anime({
-                targets: '.home-illustration',
-                opacity: [0, 1],
-                translateY: [100, 0],
-                delay: (_, index) => index * 400,
-                easing: 'easeOutQuart',
-                duration: 1000,
-            })
-            document.getElementById('home').style.overflowY = 'auto'
-            trigger();
-        }
+        targets: ['#story', '#explore'],
+        skewY: 5,
+        duration: 0,
+        translateX: 0,
+        translateY: (_, i) => i === 0 ? 380 : 400,
     })
+    anime({
+        targets: '.tick',
+        strokeDashoffset: 256,
+        duration: 0,
+    })
+    anime({
+        targets: ['.home-illustration', '.description'],
+        filter: `blur(0px)`,
+        duration: 0,
+    })
+    setTimeout(() => {
+        downwardArrowAnimation = anime({
+            targets: '.lucide-arrow-down',
+            translateY: [0, 10],
+            loop: true,
+            autoplay: false,
+            easing: 'linear',
+            direction: 'alternate',
+            duration: 800,
+        })
+        anime({
+            targets: '.home-title',
+            delay: anime.stagger(100),
+            duration: 1000,
+            opacity: [0, 1],
+            translateY: ['100px', '0px'],
+            easing: 'easeOutQuart',
+            complete: () => {
+                anime({
+                    targets: '#home',
+                    background: ['#111827', '#fff'],
+                    easing: 'easeOutQuart',
+                    duration: 1000,
+                })
+
+                anime({
+                    targets: '.home-title',
+                    color: '#111827',
+                    easing: 'easeOutQuart',
+                    duration: 1000,
+                })
+
+                anime({
+                    targets: '#scroll-down-indicator',
+                    easing: 'easeOutQuart',
+                    opacity: [0, 1],
+                    translateY: [100, 0],
+                    duration: 100,
+                })
+
+                downwardArrowAnimation.play();
+
+                anime({
+                    targets: '.home-illustration',
+                    opacity: [0, 1],
+                    translateY: [100, 0],
+                    delay: (_, index) => index * 400,
+                    easing: 'easeOutQuart',
+                    duration: 1000,
+                })
+                document.getElementById('home').style.overflowY = 'auto';
+                trigger();
+                route.data.hasHomeRendered = true;
+            }
+        })
+    }, route.data.hasHomeRendered ? settings.animationDuration : 0)
+
+    // start title animation
 }
+
 onMounted(() => {
-    document.querySelector('#home').scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-    downwardArrowAnimation = anime({
-        targets: '.lucide-arrow-down',
-        translateY: [0, 10],
-        loop: true,
-        autoplay: false,
-        easing: 'linear',
-        direction: 'alternate',
-        duration: 800,
-    })
+
     init();
-
-})
-
-onActivated(() => {
-
 })
 </script>
 

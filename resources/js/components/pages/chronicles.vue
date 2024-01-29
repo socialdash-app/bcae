@@ -86,7 +86,8 @@ const data = [{
     title: '1988',
     bg: 'bg-gray-300',
     illustrations: [
-        'assets/illustrations/chronicles/1988/1988.svg',
+        'assets/illustrations/chronicles/1988/1988_Frame_1.svg',
+        'assets/illustrations/chronicles/1988/1988_Frame_2.svg',
     ],
     description: 'After the 8888 national uprising aka the People Power Uprising against the Burma Socialist Programme Party government, the third military coup occurred on September 18, 1988. The uprising ended with a bloody military coup by the State Law and Order Restoration Council. During the uprising, thousands of people were killed.'
 }, {
@@ -198,7 +199,9 @@ const initialiseIllustrationAnimations = () => {
     const protest1962Frame1 = document.getElementById(`${data[1].title}-0`);
     const protest1962Frame2 = document.getElementById(`${data[1].title}-1`);
 
-    const illustration1988 = document.getElementById(`${data[2].title}-0`);
+    const illustration1988Frame1 = document.getElementById(`${data[2].title}-0`);
+    const illustration1988Frame2 = document.getElementById(`${data[2].title}-1`);
+
     const illustration1990 = document.getElementById(`${data[3].title}-0`);
     const illustration1990Stamp = document.getElementById(`${data[3].title}-1`);
 
@@ -236,6 +239,11 @@ const initialiseIllustrationAnimations = () => {
         protest1962Frame2.style.visibility = step % 2 === 0 ? 'visible' : 'hidden';
     }, 400)
 
+
+    const protest1988Animation = run((step) => {
+        illustration1988Frame1.style.visibility = step % 2 === 0 ? 'hidden' : 'visible';
+        illustration1988Frame2.style.visibility = step % 2 === 0 ? 'visible' : 'hidden';
+    }, 600)
 
     const protest2021Animation = run((step) => {
         protest2021Frame1.style.visibility = step % 2 === 0 ? 'hidden' : 'visible';
@@ -313,6 +321,7 @@ const initialiseIllustrationAnimations = () => {
             // stop other animation
             protest2021Animation.pause();
             handshakeAnimation.pause();
+            protest1988Animation.pause();
             walk.pause();
             hideVisibility([handshakeFrame1, handshakeFrame2, protest2021Frame1, protest2021Frame2, ...walkFrames])
             turnAnimation.restart();
@@ -321,6 +330,8 @@ const initialiseIllustrationAnimations = () => {
         onEnter: () => {
             if (protest1962Timeout) clearTimeout(protest1962Timeout)
             walk.stop();
+            protest1962Animation.pause();
+            hideVisibility([illustration1990, protest1962Frame1, protest1962Frame2])
             anime({
                 targets: chronicleIllustrations,
                 easing: 'easeOutQuart',
@@ -332,8 +343,7 @@ const initialiseIllustrationAnimations = () => {
                 }]
             })
             illustration1990Stamp.style.opacity = 0;
-            hideVisibility([illustration1990])
-            showVisibility([illustration1988])
+            protest1988Animation.start();
         }
     }, {
         onEnter: () => {
@@ -347,8 +357,9 @@ const initialiseIllustrationAnimations = () => {
                     duration: 400,
                 }]
             })
+            protest1988Animation.pause();
             protest2021Animation.pause();
-            hideVisibility([illustration1988, protest2021Frame1, protest2021Frame2])
+            hideVisibility([illustration1988Frame1, illustration1988Frame2, protest2021Frame1, protest2021Frame2])
             showVisibility([illustration1990, illustration1990Stamp])
             anime({
                 targets: illustration1990Stamp,

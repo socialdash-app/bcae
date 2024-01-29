@@ -43,7 +43,7 @@
         <!--        </div>-->
         <div class="pt-16 flex flex-col gap-y-6 items-center w-11/12 md:!w-10/12">
             <h3 class="font-semibold text-xl">Fuel Our Passion – Support Us on Patreon!</h3>
-            <p class="text-gray-300">Help us keep the creative fire burning – become a patreon now!</p>
+            <p class="text-gray-300">Help us keep the creative fire burning!</p>
             <div class="flex items-center w-full md:!w-auto gap-x-4 md:!flex-row flex-col">
                 <a href="https://www.patreon.com/SocialDash" target="_blank"
                    class="mt-4 text-center w-full md:!w-auto md:mt-0 bg-[#E8544E] px-6 py-4 rounded">Support Us On

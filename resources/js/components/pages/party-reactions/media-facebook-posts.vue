@@ -25,7 +25,6 @@
 
 <script setup>
 import {reactive, onMounted} from "vue";
-import truncate from "../../../api/truncate.js";
 import AnimeScrollTrigger from "anime-scrolltrigger";
 import settings from "../../../api/settings.js";
 
@@ -48,7 +47,7 @@ const articles = [{
     title: 'The USDP chairman said that the election results were not final as they were controversial',
     url: 'https://www.facebook.com/LivingColorMediaCoLtd/posts/739450853322862',
 }, {
-    title: 'The USDP confirms that it has been instructed to members not to sign the election results form (19)',
+    title: 'USDP confirms that it has been instructed to its members not to sign the election results form (19)',
     url: 'https://www.facebook.com/DVBTVNews/posts/3756496257722180',
 }, {
     title: 'USDP calls on UEC to hold elections again in collaboration with the Tatmadaw',
@@ -63,7 +62,7 @@ const articles = [{
     title: 'SNLD does not sign the election results form (19) due to the Shan Amyotha Hluttaw No.1 vote count is uncertain',
     url: 'https://www.facebook.com/shannewsburmese/posts/3500392473386504',
 }, {
-    title: 'DNP left Aye Thayar town for Taunggyi town to protest against UEC',
+    title: 'DNP party started leaving from Aye Tharyar to Taunggyi to rally against UEC',
     url: 'https://www.facebook.com/kanbawzatai/posts/1448525925355069',
 }]
 

@@ -19,7 +19,7 @@ export default [{
     "name": "ဦးထွန်းအောင်ကျော်",
     "img": "5.jpg"
 }, {
-    "partyName": "National Political Alliance",
+    "partyName": "National Political Alliance League",
     "name": "ဦးသိမ်းကြည်",
     "img": "6.jpg"
 }, {

@@ -53,8 +53,24 @@ export const headers = [{
 export default {
     data: reactive({
         component: "home",
+        hasHomeRendered: false,
+        hasStoryRendered: false,
+        hasExploreRendered: false,
     }),
     changeTo: function (name, sectionID, index) {
+        switch (this.data.component) {
+            case 'home':
+                this.data.hasHomeRendered = true;
+                break;
+            case 'explore':
+                this.data.hasExploreRendered = true;
+                break;
+            case 'story':
+                this.data.hasStoryRendered = true;
+                break;
+            default:
+                break;
+        }
         this.data.component = name;
         if (sectionID) {
             setTimeout(() => {

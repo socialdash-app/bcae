@@ -19,7 +19,11 @@
                             Thomas Brillion
                         </a>
                     </li>
-                    <li>Avaline Nephilim</li>
+                    <li>
+                        <a href="https://www.behance.net/avaline_nephilim" class="underline" target="_blank">
+                            Avaline Nephilim
+                        </a>
+                    </li>
                     <li>And, others</li>
                 </ul>
                 <p class="italic">Inspired by the stories from <a href="https://pudding.cool/" target="_blank"
