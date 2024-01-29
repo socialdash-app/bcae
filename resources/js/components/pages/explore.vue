@@ -39,7 +39,7 @@ import settings from "../../api/settings.js";
 import {
     beginningOfTheEnd,
     chronicle,
-    correlatedActions,
+    correlatedActions, home,
     partyActions,
     prominentEvents,
     theElection,
@@ -55,7 +55,7 @@ let data = [
         description:
             "Going back to Home",
         card: "assets/cards/home.svg",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 lucide lucide-album"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><polyline points="11 3 11 11 14 8 17 11 17 3"/></svg>',
+        icon: home,
         onClick: () => {
             route.changeTo('home')
         }
@@ -161,7 +161,7 @@ const init = () => {
         boxes.push(box);
 
         let icon = document.createElement('li');
-        icon.className = "icon list-none absolute cursor-pointer p-6 flex justify-center rounded-[50%]";
+        icon.className = "icon w-8 h-8 md:!w-14 md:!h-14 list-none absolute cursor-pointer flex justify-center";
         icon.innerHTML = d.icon;
         iconContainer.appendChild(icon);
         icons.push(icon)
@@ -299,18 +299,18 @@ const init = () => {
         })(navigator.userAgent || navigator.vendor || window.opera);
         return check;
     };
-    let multiplier = mobileAndTabletCheck() ? 2 : 0.3;
+    let multiplier = mobileAndTabletCheck() ? 3 : 0.3;
     let container = document.getElementById('explore-container')
     let dragTimeout = null;
     new DragGesture(container, (state) => {
         container.style.cursor = 'grabbing'
         explore.style.overflowY = 'hidden'
         isDragging = true;
+        update(currentRotation - (state.direction[0] <= 0 ? -1 : 1) * multiplier)
         if (dragTimeout) clearTimeout(dragTimeout)
         dragTimeout = setTimeout(() => {
             explore.style.overflowY = 'auto'
         }, 300)
-        update(currentRotation - (state.direction[0] <= 0 ? -1 : 1) * multiplier)
     }, {
         threshold: 0.2,
         axis: 'x',

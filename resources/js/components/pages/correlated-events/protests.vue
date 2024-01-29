@@ -50,7 +50,7 @@
                 While Yangon and Naypyidaw became the flashpoints, the spirit of dissent quickly spread, igniting over
                 87 protests across the nation. Fueled by allegations of election fraud and a deep-seated frustration
                 with the results, these demonstrations drew a diverse spectrum of participants. USDP supporters,
-                emboldened by their initial spark in Helgu, marched alongside pro-military groups, while a wave of
+                emboldened by their initial spark in Hlegu, marched alongside pro-military groups, while a wave of
                 saffron-robed monks added their voices to the call for transparency and accountability. The sheer
                 number, exceeding 20,000 individuals, showcased the depth of public discontent and the growing momentum
                 of the movement, foreshadowing the dramatic events that would soon unfold.

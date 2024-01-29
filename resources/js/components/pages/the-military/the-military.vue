@@ -2,8 +2,8 @@
 
     <div id="the-military"
          :style="{background: headers[4].primaryColor}"
-         class="w-full flex-col flex items-center pt-4 md:!pt-6 relative">
-        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[10000]">
+         class="w-full flex-col flex items-center py-4 md:!py-6 relative">
+        <div class="sticky ml-[4%] sm:!ml-[8%] self-start top-3 md:!top-6 z-[10002]">
             <h1 class="text-xl md:text-3xl font-bold">The Military</h1>
         </div>
         <military-intro/>

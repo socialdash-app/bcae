@@ -1,7 +1,7 @@
 <template>
     <div id="chronicles-trigger" :style="{background: headers[0].primaryColor}"
          class="w-full flex relative py-6 flex-col items-center">
-        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[10000]">
+        <div class="sticky ml-[4%] sm:!ml-[8%] self-start top-3 md:!top-6 z-[10002]">
             <h1 class="text-xl md:text-3xl font-bold">Chronicles</h1>
         </div>
         <div id="chronicles-introduction"
@@ -94,6 +94,7 @@ const data = [{
     bg: 'bg-orange-300',
     illustrations: [
         'assets/illustrations/chronicles/1990/1990.svg',
+        'assets/illustrations/chronicles/1990/1990_reject_stamp.svg',
     ],
     description: 'The National League for Democracy formed on September 27, 1988, a week after the formation of the State Law and Order Restoration Council, and won 392 of 492 parliamentary seats in the General elections of 1990, but the military council didn\'t handover power to winning party and canceled the election result. After that, it changed its name to State Peace and Development Council in 1997 and ruled until 2010.'
 }, {
@@ -199,6 +200,7 @@ const initialiseIllustrationAnimations = () => {
 
     const illustration1988 = document.getElementById(`${data[2].title}-0`);
     const illustration1990 = document.getElementById(`${data[3].title}-0`);
+    const illustration1990Stamp = document.getElementById(`${data[3].title}-1`);
 
     const protest2021Frame1 = document.getElementById(`${data[4].title}-0`);
     const protest2021Frame2 = document.getElementById(`${data[4].title}-1`);
@@ -251,6 +253,8 @@ const initialiseIllustrationAnimations = () => {
         })
     }, 600)
 
+    let protest1962Timeout = null;
+
     const turnAnimation = run((step) => {
         let currentFrame = step % NWTurnFrames.length;
         NWTurnFrames.forEach((turnFrame, index) => {
@@ -259,7 +263,7 @@ const initialiseIllustrationAnimations = () => {
     }, 600, false, 2, () => {
         hideVisibility(NWTurnFrames)
         walk.start();
-        setTimeout(() => {
+        protest1962Timeout = setTimeout(() => {
             protest1962Animation.start();
             anime({
                 targets: chronicleIllustrations[1],
@@ -277,6 +281,7 @@ const initialiseIllustrationAnimations = () => {
 
     return [{
         onEnter: () => {
+            if (protest1962Timeout) clearTimeout(protest1962Timeout);
             turnAnimation.pause();
             walk.pause();
             protest1962Animation.pause();
@@ -305,7 +310,7 @@ const initialiseIllustrationAnimations = () => {
                     delay: 1000 / 3,
                 }],
             })
-            // // stop other animation
+            // stop other animation
             protest2021Animation.pause();
             handshakeAnimation.pause();
             walk.pause();
@@ -314,6 +319,7 @@ const initialiseIllustrationAnimations = () => {
         }
     }, {
         onEnter: () => {
+            if (protest1962Timeout) clearTimeout(protest1962Timeout)
             walk.stop();
             anime({
                 targets: chronicleIllustrations,
@@ -325,6 +331,7 @@ const initialiseIllustrationAnimations = () => {
                     delay: 1000 / 3,
                 }]
             })
+            illustration1990Stamp.style.opacity = 0;
             hideVisibility([illustration1990])
             showVisibility([illustration1988])
         }
@@ -342,7 +349,15 @@ const initialiseIllustrationAnimations = () => {
             })
             protest2021Animation.pause();
             hideVisibility([illustration1988, protest2021Frame1, protest2021Frame2])
-            showVisibility([illustration1990])
+            showVisibility([illustration1990, illustration1990Stamp])
+            anime({
+                targets: illustration1990Stamp,
+                opacity: [0, 1],
+                scale: [0.8, 0.4],
+                duration: 1000,
+                easing: 'easeOutBack',
+                delay: 1000,
+            })
         }
     }, {
         onEnter: () => {

@@ -451,16 +451,33 @@ const trigger = () => {
 
 const init = () => {
     anime({
+        targets: '.title',
+        background: 'rgba(255,255,255,0)',
+        duration: 0,
+    })
+    anime({
+        targets: '.home-title',
+        color: '#E8544E',
+        translateY: '100%',
+        duration: 0,
+    })
+    anime({
+        targets: '.home-illustration',
+        opacity: 0,
+        duration: 0,
+        translateY: 100,
+    })
+    anime({
         targets: '.home-title',
         delay: anime.stagger(100),
         duration: 1000,
-        opacity: 1,
+        opacity: [0, 1],
         translateY: ['100%', '0%'],
         easing: 'easeOutQuart',
         complete: () => {
             anime({
                 targets: '#home',
-                background: '#fff',
+                background: ['#111827', '#fff'],
                 easing: 'easeOutQuart',
                 duration: 1000,
             })
@@ -475,7 +492,7 @@ const init = () => {
             anime({
                 targets: '#scroll-down-indicator',
                 easing: 'easeOutQuart',
-                opacity: 1,
+                opacity: [0, 1],
                 translateY: [100, 0],
                 duration: 100,
             })
@@ -484,7 +501,7 @@ const init = () => {
 
             anime({
                 targets: '.home-illustration',
-                opacity: 1,
+                opacity: [0, 1],
                 translateY: [100, 0],
                 delay: (_, index) => index * 400,
                 easing: 'easeOutQuart',
@@ -496,6 +513,10 @@ const init = () => {
     })
 }
 onMounted(() => {
+    document.querySelector('#home').scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
     downwardArrowAnimation = anime({
         targets: '.lucide-arrow-down',
         translateY: [0, 10],
@@ -510,10 +531,6 @@ onMounted(() => {
 })
 
 onActivated(() => {
-    document.querySelector('#home').scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
 
 })
 </script>

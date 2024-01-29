@@ -1,7 +1,7 @@
 <template>
     <div id="beginning-of-the-end"
          class="flex flex-col w-full py-12 relative items-center">
-        <div class="sticky beginning-of-the-end-title pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[10000]">
+        <div class="sticky ml-[4%] sm:!ml-[8%] self-start top-3 md:!top-6 z-[10002] beginning-of-the-end-title">
             <h1 class="text-xl md:text-3xl font-bold">Beginning Of The End</h1>
         </div>
         <intro-beginning-of-the-end/>

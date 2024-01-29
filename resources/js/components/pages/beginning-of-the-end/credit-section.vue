@@ -1,6 +1,6 @@
 <template>
     <div
-        class="drama-section py-10 bg-[#FFEB37] main-intro w-screen py-10 px-3 md:px-20 flex items-center justify-center">
+        class="drama-section bg-[#FFEB37] main-intro w-screen py-6 px-3 md:px-20 flex items-center justify-center">
         <button @click="showPopup"
                 class="text-center bg-[#101728] text-white text-lg font-semibold px-14 py-5">
             Credits
@@ -14,8 +14,11 @@
                    href="https://www.researchgate.net/profile/Alexander-Beatson">By Alexander Beatson</a>
                 <p>With the support of,</p>
                 <ul class="list-disc pl-4">
-                    <li><a href="https://twitter.com/thomasbrillion" class="underline" target="_blank">Thomas
-                        Brillion</a></li>
+                    <li>
+                        <a href="https://twitter.com/thomasbrillion" class="underline" target="_blank">
+                            Thomas Brillion
+                        </a>
+                    </li>
                     <li>Avaline Nephilim</li>
                     <li>And, others</li>
                 </ul>

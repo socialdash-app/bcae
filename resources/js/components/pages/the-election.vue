@@ -1,7 +1,7 @@
 <template>
     <div :style="{background: headers[1].primaryColor}" id="the-election"
          class="w-full pt-10 items-center flex flex-col relative">
-        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[10000]">
+        <div class="sticky ml-[4%] sm:!ml-[8%] self-start top-3 md:!top-6 z-[10002]">
             <h1 class="text-xl md:text-3xl font-bold">The Election</h1>
         </div>
         <div class="w-full flex md:!flex-row flex-col items-center md:!items-start relative justify-evenly">
@@ -64,7 +64,8 @@
                 </div>
                 <div id="the-election-then-section"
                      class="relative mb-[50vh] w-full flex items-center justify-center">
-                    <h1 class="then-title opacity-75 z-[1002] text-center bg-[#ff9ccd] absolute w-screen transform text-5xl md:text-6xl py-4 font-bold">
+                    <h1 style="background-color: rgb(255 156 205 / 0.75);"
+                        class="then-title z-[1002] text-center absolute w-screen transform text-5xl md:text-6xl py-4 font-bold">
                         Afterwards…</h1>
                 </div>
             </div>

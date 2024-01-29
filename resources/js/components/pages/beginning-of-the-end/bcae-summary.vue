@@ -54,42 +54,40 @@ const height = window.innerHeight;
 const width = window.innerWidth;
 const data = [{
     name: 'Election Results',
-    description: 'Explore the insights and results of 2020 election',
+    description: 'Total votes cast to take the seats in the national legislature',
     data: [
         ['Amyotha Hluttaw', 'Total Votes', '26702406'],
         ['Pyithu Hluttaw', 'Total Votes', '26669636'],
-        ['State & Regions Hluttaw', 'Total Votes', '26181274'],
-        ['Ethnic Affairs Ministers', 'Total Votes', '3522883'],
-        ['', 'Total Winning Parties Vs Total parties', '19/88']
+        ['', 'Total Winning Parties Vs Total parties', '14/88']
     ]
 }, {
-    name: 'Party Complaints',
-    description: 'Lorem ipsum dolor sit amet consectetur. Laoreet elementum viverra maecenas odio vitae nibh enim varius. Odio a tincidunt arcu malesuada lectus.',
+    name: 'Prominent events',
+    description: ' Incidents during the election and key events between two standing grounds',
     data: [
-        ['Parties', 'to UEC', '7'],
-        ['Parties', 'to MAL', '34'],
-        ['Parties', 'to government', '19'],
+        ['Total MPs demand to convene a special session', '', '203'],
+        ['Major incidents during the election', '', 'three boxes of election incidents colored accordingly'],
     ]
 }, {
-    name: 'DS-Info Announcement',
-    description: 'Lorem ipsum dolor sit amet consectetur. Laoreet elementum viverra maecenas odio vitae nibh enim varius. Odio a tincidunt arcu malesuada lectus.',
+    name: 'Party reactions',
+    description: 'How do the parties respond to the dispute about the election',
     data: [
-        ['Series', '', '29'],
-        ['Fraud Votes', '', '200000'],
+        ['Total posts circulating on Facebook', '', '97'],
+        ['Total objection letters from parties', '', '194'],
+        ['Total parties that sent an open letter to the government', '', '19'],
     ]
 }, {
-    name: 'Party Actions',
-    description: 'Lorem ipsum dolor sit amet consectetur. Laoreet elementum viverra maecenas odio vitae nibh enim varius. Odio a tincidunt arcu malesuada lectus.',
+    name: 'The Military',
+    description: 'Military constructed narrative of voter fraud and allegation',
     data: [
-        ['Number of parties', '', '9'],
-        ['Posted about election fraud', '', '97'],
+        ['Total response statements', '', '5'],
+        ['Statements of findings in scrutiny of voter lists', '', '29'],
     ]
 }, {
     name: 'Correlated Actions',
-    description: 'Lorem ipsum dolor sit amet consectetur. Laoreet elementum viverra maecenas odio vitae nibh enim varius. Odio a tincidunt arcu malesuada lectus.',
+    description: 'Rally the crowd X web of disinformation',
     data: [
-        ['Protest', '', '88'],
-        ['Disinformation', '', '215'],
+        ['Total protest', '', '88'],
+        ['Total disinformation content', '', '604'],
     ]
 }]
 

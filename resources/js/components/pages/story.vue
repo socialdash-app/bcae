@@ -16,7 +16,7 @@
                                 cx="30" cy="30"></circle>
                     </svg>
                 </div>
-                <div class="relative w-5 md:!w-7 h-5 md:!h-7 overflow-hidden">
+                <div class="relative w-5 md:!w-8 h-5 md:!h-8 overflow-hidden">
                 <span @click="route.changeTo('explore')"
                       class="w-full z-[10001] cursor-pointer  header-icon h-full absolute"
                       :style="{ transform: `translateY(${index * 100}%)` }"

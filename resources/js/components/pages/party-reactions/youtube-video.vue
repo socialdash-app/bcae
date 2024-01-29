@@ -5,11 +5,10 @@
             <div
                 class="hidden lg:!flex w-4/12 rounded-lg h-full p-6 tracking-wider leading-relaxed text-gray-700 bg-[#F4A8FF]">
                 At the press conference on November 11, 2020, USDP demanded to hold a joint election with UEC and the
-                military expressing that they would entirely win if it was a free and fair election. They accused the
-                teachers on duty at the polling stations were not neutral, the overage voting process was taking longer
-                than usual, advanced votes were not being stored securely and possessed unsealed advanced votes, and
-                voter turnout exceeded the voter list.
-
+                military, expressing that they would entirely win if it were a free and fair election. They accused the
+                teachers on duty at the polling stations of not being neutral, the overage voting process of taking
+                longer than usual, advanced votes of not being stored securely and possessing unsealed advanced votes,
+                and voter turnout of exceeding the voter list.
             </div>
             <div class="w-full h-full lg:!w-8/12 rounded-lg flex flex-col gap-y-6">
                 <iframe class="aspect-video rounded-lg w-full h-full"
@@ -39,10 +38,14 @@
                     </svg>
                     <div v-show="data.showDetail" class="w-full">
                         At the press conference on November 11, 2020, USDP demanded to hold a joint election with UEC
-                        and the military expressing that they would entirely win if it was a free and fair election.
-                        They accused the teachers on duty at the polling stations were not neutral, the overage voting
-                        process was taking longer than usual, advanced votes were not being stored securely and
-                        possessed unsealed advanced votes, and voter turnout exceeded the voter list.
+                        and the
+                        military, expressing that they would entirely win if it were a free and fair election. They
+                        accused the
+                        teachers on duty at the polling stations of not being neutral, the overage voting process of
+                        taking
+                        longer than usual, advanced votes of not being stored securely and possessing unsealed advanced
+                        votes,
+                        and voter turnout of exceeding the voter list.
                     </div>
                 </div>
             </div>

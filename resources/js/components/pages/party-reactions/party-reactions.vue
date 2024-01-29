@@ -2,7 +2,7 @@
     <div id="party-reactions"
          :style="{background: headers[3].primaryColor}"
          class="w-full flex-col flex pt-4 md:!pt-6 items-center relative">
-        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[10000]">
+        <div class="sticky ml-[4%] sm:!ml-[8%] self-start top-3 md:!top-6 z-[10002]">
             <h1 class="text-xl md:text-3xl font-bold">Party Reactions</h1>
         </div>
         <party-accusations-facebook-posts/>

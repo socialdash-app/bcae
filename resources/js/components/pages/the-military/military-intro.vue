@@ -1,12 +1,13 @@
 <template>
-    <div :style="{height: height * 2 + 'px'}" id="military-intro" class="w-full relative flex flex-col items-center">
+    <div :style="{height: height * 2 + 'px'}" id="military-intro"
+         class="w-full shrink-0 relative flex flex-col items-center">
         <div :style="{height: height + 'px'}"
-             class="sticky top-16 md:!top-0 flex w-11/12 md:!w-8/12 flex-col justify-center items-center">
+             class="sticky text-center top-16 md:!top-0 flex w-11/12 md:!w-10/12 2xl:!w-8/12 flex-col justify-center items-center">
             <h1 style="transform: translateY(200px)"
                 class="opacity-0 text-4xl md:text-7xl military-intro-title font-semibold">
                 Military interference in the election</h1>
             <p style="transform: translateY(200px)"
-               class="w-full mt-12 md:!mt-24 tracking-wider opacity-0 military-intro-content leading-relaxed">
+               class="w-full mt-12 md:!mt-16 2xl:!mt-24 tracking-wider opacity-0 military-intro-content leading-relaxed">
                 The carefully orchestrated campaign of doubt over the 2020 election, culminating in the February 2021
                 coup d'état, laid bare the Myanmar military's true intentions. Their meticulously constructed narrative
                 hinged on publishing 29 damning statements about supposedly flawed voter lists and issuing repeated
@@ -49,7 +50,7 @@ onMounted(() => {
             opacity: 1,
             scrollTrigger: {
                 trigger: '#military-intro',
-                start: '20% top',
+                start: '10% top',
                 end: 'bottom bottom',
                 // smooth: true,
                 lerp: true,

@@ -1,9 +1,10 @@
 <template>
-    <div class="w-full pt-10 md:!w-7/12 px-6 flex-col md:!px-10 flex items-center">
+    <div class="w-full pt-10 md:!w-7/12 py-12 px-6 flex-col md:!px-10 flex items-center">
         <h1 class="w-full text-center font-bold text-xl mb-12 md:text-2xl">
             Calendar of Military activities in response to the Election Dispute
         </h1>
-        <div class="bg-white w-full items-center flex flex-col p-4 md:!p-12 rounded">
+        <div style="background-color: rgb(255 237 218);"
+             class="w-full items-center flex flex-col p-4 md:!p-12 rounded">
             <Calendar
                 v-if="!data.loading"
                 :attributes="data.attributes"
@@ -46,6 +47,7 @@ import {reactive, onMounted} from "vue";
 import {Calendar} from "v-calendar";
 
 import {useScreens} from 'vue-screen-utils';
+import {headers} from "../../../api/route.js";
 
 const {mapCurrent} = useScreens({xs: '0px', sm: '640px', md: '768px', lg: '1024px'});
 const columns = mapCurrent({lg: 2}, 1);

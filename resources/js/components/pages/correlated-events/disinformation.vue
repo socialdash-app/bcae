@@ -7,7 +7,7 @@
                 on social media platforms. A network of fake accounts emerged, sharing fabricated reports of misconduct
                 during the election and manipulated claims of voter fraud. This online echo chamber of disinformation
                 not only amplified the existing dispute but also sowed the seeds of doubt and distrust, ultimately
-                serving as the "Beginning of the End" for the fragile hope of people's power in Myanmar.</p>
+                leaning toward the "Beginning of the End" for the fragile hope of people's power in Myanmar.</p>
         </div>
         <div
             class="w-full md:!w-10/12 2xl:!w-9/12 flex items-center justify-center z-10 h-screen sticky top-16 md:top-24"
@@ -26,10 +26,10 @@
             <div
                 class="disinformation-content-box z-10 my-64 w-full md:!w-6/12 text-gray-900 p-6 md:p-12 flex flex-col items-center rounded bg-white shadow-xl">
                 <p class="tracking-wider leading-relaxed text-md">
-                    The study revealed that a mere 10% of individuals online were responsible for spreading over 100
-                    disinformation content. These digital puppeteers of falsehoods didn't discriminate, targeting
-                    sensitive topics at that time like the election, government personnel, and even the political party,
-                    potentially causing widespread confusion and mistrust.
+                    The study revealed that a mere 10% of actors, who spread disinformation content, were responsible
+                    for spreading over 100 disinformation content. These digital puppeteers of falsehoods didn't
+                    discriminate, targeting sensitive topics at that time like the election, government personnel, and
+                    even the political party, potentially causing widespread confusion and mistrust.
                 </p>
             </div>
             <div

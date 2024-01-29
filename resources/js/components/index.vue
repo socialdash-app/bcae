@@ -1,9 +1,9 @@
 <template>
     <div id="main-container" class="flex font-poppins antialiased flex-col w-full">
         <Transition :name="currentAnimationName">
-            <KeepAlive>
-                <component :key="route.data.component" :is="route.data.component"/>
-            </KeepAlive>
+            <!--            <KeepAlive>-->
+            <component :key="route.data.component" :is="route.data.component"/>
+            <!--            </KeepAlive>-->
         </Transition>
     </div>
 

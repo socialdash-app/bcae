@@ -9,8 +9,8 @@
                  style="will-change: transform;"
                  :id="`complaint-${index}`"
                  :data-index="index"
-                 class="complaint flex flex-col cursor-pointer overflow-y-hidden absolute border border-gray-600 bg-[#BEF4B7] rounded p-4 md:!p-10"
-                 :style="{zIndex: index * 10,height: boxHeight + 'px',width: boxWidth + 'px',transform: `translateY(${(index + 1) * boxHeight }px) scale(1)`}">
+                 class="complaint flex flex-col cursor-pointer overflow-y-hidden absolute border border-gray-600 rounded p-4 md:!p-10"
+                 :style="{zIndex: index * 10,height: boxHeight + 'px',width: boxWidth + 'px',transform: `translateY(${(index + 1) * boxHeight }px) scale(1)`, background: index % 2 ? '#95e66f':'#BEF4B7'}">
                 <h1 class="font-semibold text-lg md:text-2xl">{{ complaint.title }}</h1>
                 <p :style="{height: boxHeight * 0.6 + 'px'}"
                    class="text-sm overflow-hidden text-ellipsis md:!text-base mt-3 md:mt-6">

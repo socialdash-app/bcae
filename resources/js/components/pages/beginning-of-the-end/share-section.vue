@@ -46,7 +46,8 @@
             <p class="text-gray-300">Help us keep the creative fire burning – become a patreon now!</p>
             <div class="flex items-center w-full md:!w-auto gap-x-4 md:!flex-row flex-col">
                 <a href="https://www.patreon.com/SocialDash" target="_blank"
-                   class="mt-4 w-full md:!w-auto md:mt-0 bg-[#E8544E] px-6 py-4 rounded">Support Us On Patreon
+                   class="mt-4 text-center w-full md:!w-auto md:mt-0 bg-[#E8544E] px-6 py-4 rounded">Support Us On
+                    Patreon
                 </a>
             </div>
         </div>

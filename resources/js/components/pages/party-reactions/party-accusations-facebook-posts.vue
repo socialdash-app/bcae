@@ -15,7 +15,7 @@
              class="border text-sm p-2 border-gray-600 w-96 bg-white rounded">
 
         </div>
-        <div class="shrink-0 w-full h-[10vh]">
+        <div class="shrink-0 w-full h-32 md:!h-[10vh]">
 
         </div>
     </div>

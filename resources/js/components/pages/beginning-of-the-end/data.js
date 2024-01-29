@@ -1,5 +1,5 @@
 export const fourStatements = [{
-    title: 'Military’s very first instruction on election',
+    title: 'Military’s very first statement about the election',
     subtitle: 'Statement on Stance, November 30, 2020',
     description: 'The Union Election Commission is an “organization formed by the President in accord with the provisions on appointment of the Union Ministers prescribed in this Constitution mentioned in Sub-section (a) of Section 398 of the Constitution (2008) of the Republic of the Union of Myanmar and the organization which shall make final and conclusive resolutions on election functions, appeals and revisions relating to the resolutions and orders of the election tribunals and matters taken under the law relating to political party in accord with Section 402 of the Constitution”. As Union Ministers shall be responsible to the President in accord with Sub-section (h) of the Section 232, it is considered that the Union Election Commission formed in accord with these provision should also be responsible to the President. As such, the President should necessarily supervise and control functions of the Union Election Commission to be legal, righteous, justice and fair.\n' +
         '\n' +

@@ -2,7 +2,7 @@
     <div id="correlated-events"
          :style="{background: headers[5].primaryColor}"
          class="w-full flex-col flex relative items-center py-6">
-        <div class="sticky pl-4 md:pl-14 top-4 md:!top-6 w-11/12 z-[10000]">
+        <div class="sticky ml-[4%] sm:!ml-[8%] self-start top-3 md:!top-6 z-[10002]">
             <h1 class="text-xl md:text-3xl font-bold">Correlated Events</h1>
         </div>
         <protests/>
