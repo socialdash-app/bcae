@@ -17,10 +17,10 @@ Route::get('/', function () {
     return (new \App\Support\InertiaRenderer)->render('index');
 });
 
-\App\Http\Controllers\CorrelatedEventsController::routes();
-
-\App\Http\Controllers\ProminentEventsController::routes();
-
-\App\Http\Controllers\PartyActionsController::routes();
-
-\App\Http\Controllers\TheMilitaryController::routes();
+//\App\Http\Controllers\CorrelatedEventsController::routes();
+//
+//\App\Http\Controllers\ProminentEventsController::routes();
+//
+//\App\Http\Controllers\PartyActionsController::routes();
+//
+//\App\Http\Controllers\TheMilitaryController::routes();
