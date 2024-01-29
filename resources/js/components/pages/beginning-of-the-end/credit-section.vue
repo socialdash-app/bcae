@@ -15,7 +15,7 @@
                 <p>With the support of,</p>
                 <ul class="list-disc pl-4">
                     <li>
-                        <a href="https://twitter.com/thomasbrillion" class="underline" target="_blank">
+                        <a href="https://github.com/w99910" class="underline" target="_blank">
                             Thomas Brillion
                         </a>
                     </li>
