@@ -6,7 +6,7 @@
             <!--            </KeepAlive>-->
         </Transition>
         <div id="cookies"
-             class="fixed bottom-4 gap-y-4 right-4 pt-6 pb-4 px-8 border bg-white rounded shadow-2xl flex flex-col"
+             class="fixed bottom-4 z-[1000000] gap-y-4 right-4 pt-6 pb-4 px-8 border bg-white rounded shadow-2xl flex flex-col"
              v-show="shouldShowCookie">
             <div class="flex gap-x-2 items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
